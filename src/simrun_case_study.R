@@ -86,6 +86,7 @@ Dilution_growth = as.numeric(treatment_csv$Dilution_growth[row_number])
 Dilution_conjugation = as.numeric(treatment_csv$Dilution_conjugation[row_number])
 Dilution_t_selection = as.numeric(treatment_csv$Dilution_t_selection[row_number])
 
+F1_migrants = as.numeric(treatment_csv$F1_migrants[row_number])
 F2_migrants = as.numeric(treatment_csv$F2_migrants[row_number])
 
 
@@ -231,11 +232,14 @@ if(Growout == "yes"){
     # Maintain nutrient levels
     C = tail(results$C, 1)
   }
-  results <- unique(results)
+  results <- unique(results) %>%
+    mutate(Phase = "growout")
   
 } else if(Growout == "no"){
   # Start with initial densities
-  results <- data.frame(time = 0, A1 = A1_0, M1 = M1_0, F1 = F1_0, A2 = A2_0, M2 = M2_0, F2 = F2_0, C = C_0)
+  results <- data.frame(time = 0, A1 = A1_0, M1 = M1_0, F1 = F1_0,
+                        A2 = A2_0, M2 = M2_0, F2 = F2_0, C = C_0,
+                        Cycle = NA, Phase = NA)
   
 }
 
@@ -246,6 +250,8 @@ protocol <- c(rep("growth", Phases_growth),
 
 ## Set densities for each phase ----
 for (c in 1:Cycles){
+  cycle_df <- tail(results, 1) %>%
+    select(-Cycle)
   for (p in 1:length(protocol)){
     # Set phase of protocol
     phase = protocol[p]
@@ -254,17 +260,17 @@ for (c in 1:Cycles){
     if (phase == "growth"){
       ### Growth phase ----
       # Set time period
-      time_start = tail(results$time, 1)
+      time_start = tail(cycle_df$time, 1)
       time_end = time_start + Hours_growth
       times = seq(time_start, time_end, by = Timestep)
       
       # Set densities for the start of the phase
-      A1 = tail(results$A1, 1)
-      M1 = tail(results$M1, 1)
-      F1 = tail(results$F1, 1)
-      A2 = tail(results$A2, 1)
-      M2 = tail(results$M2, 1)
-      F2 = tail(results$F2, 1)
+      A1 = tail(cycle_df$A1, 1)
+      M1 = tail(cycle_df$M1, 1)
+      F1 = tail(cycle_df$F1, 1)
+      A2 = tail(cycle_df$A2, 1)
+      M2 = tail(cycle_df$M2, 1)
+      F2 = tail(cycle_df$F2, 1)
       
       if (time_start == 0){
         # If simulation is starting with a growth phase, do not dilute strains
@@ -294,24 +300,25 @@ for (c in 1:Cycles){
                  C  = C)
       
       out <- ode(y = state, times = times, func = model, parms = parameters, method = "euler", hini = Timestep)
-      out_df <- as.data.frame(out)
+      out_df <- as.data.frame(out) %>%
+        mutate(Phase = "growth")
       #out_df <- out_df %>% slice(seq(1, n(), by = 1/Timestep*0.01))
-      results <- rbind(results, out_df)
+      cycle_df <- rbind(cycle_df, out_df)
       
     } else if (phase == "conjugation"){
       ### Conjugation phase ----
       # Set time period
-      time_start = tail(results$time, 1)
+      time_start = tail(cycle_df$time, 1)
       time_end = time_start + Hours_conjugation
       times = seq(time_start, time_end, by = Timestep)
       
       # Set densities for the start of the phase
-      A1 = tail(results$A1, 1)
-      M1 = tail(results$M1, 1)
-      F1 = tail(results$F1, 1)
-      A2 = tail(results$A2, 1)
-      M2 = tail(results$M2, 1)
-      F2 = tail(results$F2, 1)
+      A1 = tail(cycle_df$A1, 1)
+      M1 = tail(cycle_df$M1, 1)
+      F1 = tail(cycle_df$F1, 1)
+      A2 = tail(cycle_df$A2, 1)
+      M2 = tail(cycle_df$M2, 1)
+      F2 = tail(cycle_df$F2, 1)
       
       if (last_phase == "growth"){
         # If entering from a growth phase, perform a dilution
@@ -323,7 +330,13 @@ for (c in 1:Cycles){
         F2 = ifelse((F2 * Dilution_conjugation) < Dilution_cutoff, 0, F2 * Dilution_conjugation)
       }
       # Add plasmid-free migrants
-      F2 = F2_migrants
+      if(c %% 2 == 0){
+        # For even cycles, add F1
+        F1 = F1_migrants
+      } else {
+        # For odd cycles, add F2
+        F2 = F2_migrants
+      }
       
       # Euler simulation
       C  = as.numeric(treatment_csv$C[row_number])
@@ -337,27 +350,46 @@ for (c in 1:Cycles){
                  C  = C)
       
       out <- ode(y = state, times = times, func = model, parms = parameters, method = "euler", hini = Timestep)
-      out_df <- as.data.frame(out)
+      out_df <- as.data.frame(out) %>%
+        mutate(Phase = "conj")
       #out_df <- out_df %>% slice(seq(1, n(), by = 1/Timestep*0.01))
-      results <- rbind(results, out_df)
+      cycle_df <- rbind(cycle_df, out_df)
       
     } else if (phase == "transconjugant_selection"){
-      # Transconjugant selection phase: simulate until target density is reached
+      ### Transconjugant selection phase: simulate until target density is reached ----
       # Set densities for the start of the phase
-      A1 = tail(results$A2, 1)
-      M1 = tail(results$M2, 1)
-      F1 = 0
-      A2 = 0
-      M2 = 0
-      F2 = 0
-      C  = as.numeric(treatment_csv$C[row_number])
+      if(c %% 2 == 0){
+        # For even cycles, select for F1 transconjugants
+        A1 = tail(cycle_df$A1, 1)
+        M1 = tail(cycle_df$M1, 1)
+        F1 = 0
+        A2 = 0
+        M2 = 0
+        F2 = 0
+        C  = as.numeric(treatment_csv$C[row_number])
+      } else {
+        # For odd cycles, select for F2 transconjugants
+        A1 = 0
+        M1 = 0
+        F1 = 0
+        A2 = tail(cycle_df$A2, 1)
+        M2 = tail(cycle_df$M2, 1)
+        F2 = 0
+        C  = as.numeric(treatment_csv$C[row_number])
+      }
       
       # Perform dilution
       A1 = ifelse((A1 * Dilution_t_selection) < Dilution_cutoff, 0, A1 * Dilution_t_selection)
       M1 = ifelse((M1 * Dilution_t_selection) < Dilution_cutoff, 0, M1 * Dilution_t_selection)
+      F1 = ifelse((F1 * Dilution_t_selection) < Dilution_cutoff, 0, F1 * Dilution_t_selection)
+      A2 = ifelse((A2 * Dilution_t_selection) < Dilution_cutoff, 0, A2 * Dilution_t_selection)
+      M2 = ifelse((M2 * Dilution_t_selection) < Dilution_cutoff, 0, M2 * Dilution_t_selection)
+      F2 = ifelse((F2 * Dilution_t_selection) < Dilution_cutoff, 0, F2 * Dilution_t_selection)
       
-      total_density = A1 + M1
-      t_out <- tail(results, 1)
+      # Calculate total density of plasmid-containing types
+      total_density = A1 + M1 + A2 + M2
+      t_out <- tail(cycle_df, 1) %>%
+        select(-Phase)
       while (total_density < Final_density_t_selection){
         # Perform step by step simulation until target density is reached
         time_start = tail(t_out$time, 1)
@@ -378,10 +410,12 @@ for (c in 1:Cycles){
         #out_df <- out_df %>% slice(seq(1, n(), by = 1/Timestep*0.01))
         t_out <- rbind(t_out, out_df)
         
-        # Re-calculate total density
+        # Re-calculate total density of plasmid-containing types
         A1 = tail(t_out$A1, 1)
         M1 = tail(t_out$M1, 1)
-        total_density = A1 + M1
+        A2 = tail(t_out$A2, 1)
+        M2 = tail(t_out$M2, 1)
+        total_density = A1 + M1 + A2 + M2
         
         # Maintain nutrient levels
         C = tail(t_out$C, 1)
@@ -389,31 +423,38 @@ for (c in 1:Cycles){
       # Remove the first row of the dataframe (repeat of results)
       t_out <- t_out[-1,]
       # Remove repeat rows from iterations
-      t_out <- unique(t_out)
+      t_out <- unique(t_out) %>%
+        mutate(Phase = "tselect")
       # Merge with main dataframe
-      results <- rbind(results, t_out)
+      cycle_df <- rbind(cycle_df, t_out)
     }
   }
+  cycle_df <- cycle_df %>%
+    mutate(Cycle = c)
+  results <- rbind(results, cycle_df)
   print(paste("Cycle",c,"complete."))
 }
 
-# Plot the results ####
+
+# Plot the results ----
 plot_out <- results %>% 
   drop_na() %>%
+  rename(Time = time) %>%
   pivot_longer(
-    cols = -time,  # Select all columns except 'time'
-    names_to = "cell_types",  # New column to hold the former column names
-    values_to = "density") %>% # New column to hold the values
-  mutate(host = ifelse(cell_types == "C", "C", substr(cell_types, 2, 2)), 
-         genotype = substr(cell_types, 1, 1)) %>%
-  mutate(density = ifelse(density < 1, 0, density))
+    cols = -c(Time, Cycle, Phase),  # Select all columns except 'time'
+    names_to = "Cell_types",  # New column to hold the former column names
+    values_to = "Density") %>% # New column to hold the values
+  mutate(Host = ifelse(Cell_types == "C", "C", substr(Cell_types, 2, 2)), 
+         Genotype = substr(Cell_types, 1, 1)) %>%
+  mutate(Density = ifelse(Density < 1, 0, Density))
+
 write.csv(x = results, file = paste(treatment_folder, paste(treatment, '_data.csv', sep = ""), sep = '/'))
 write.csv(x = plot_out, file = paste(treatment_folder, paste(treatment, '_data_long.csv', sep = ""), sep = '/'))
 
-gg <- ggplot(data = plot_out, aes(x = time, y = density, group = interaction(host, genotype), color = genotype)) + 
-  geom_line(aes(linetype = host), size = 1) +
+gg <- ggplot(data = plot_out, aes(x = Time, y = Density, group = interaction(Host, Genotype), color = Genotype)) + 
+  geom_line(aes(linetype = Host), size = 1) +
   scale_color_manual(values = c("A" = "red", "M" = "blue", "F" = "grey"))+
-  scale_linetype_manual(values = c("1" = "dashed", "2" = "dotted", "C" = "solid")) +
+  scale_linetype_manual(values = c("1" = "solid", "2" = "dashed", "C" = "dotted")) +
   scale_y_continuous(trans = "log10",breaks=c(1e1,1e3,1e5,1e7,1e9)) +
   geom_hline(yintercept = 1)
 ggsave(paste(treatment_folder, paste(treatment, '_plot.pdf', sep = ""), sep = '/'), gg, width = 30, height = 7, units = "in")
