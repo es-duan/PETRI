@@ -5,7 +5,6 @@ library(deSolve)
 library(tidyverse)
 library(cowplot)
 library(argparse)
-theme_set(theme_cowplot())
 
 # Set arguments parser inputs ----
 parser <- ArgumentParser()
@@ -13,6 +12,11 @@ parser$add_argument("-t","--treatment", type = "character", help = "Specify Trea
 args <- parser$parse_args()
 
 treatment <- args$treatment
+
+# Set plot colors
+p_Anc <- "#8394F6"
+p_Mut <- "#8A407A"
+p_F <- "gray40"
 
 # Load treatment file ----
 treatment_csv <- read.csv("input_data/Treatments.csv", header = F)
@@ -186,6 +190,9 @@ parameters <- c(gamma_A1.F1_max = Gamma_A1.F1_max,
 
 
 # Simulation ----
+# Dataframe for saving start and end points of phases
+phases <- data.frame()
+
 ## Initial settings ----
 if(Growout == "yes"){
   # For full invasion experiments, include a growout phase that assumes the
@@ -233,14 +240,24 @@ if(Growout == "yes"){
     C = tail(results$C, 1)
   }
   results <- unique(results) %>%
-    mutate(Phase = "growout")
+    mutate(Cycle = 0) %>%
+    mutate(Phase = "growout") 
+  
+  # Save start and end times of the phase
+  df_start <- head(results, 1) %>%
+    mutate(Type = "start")
+  df_end <- tail(results, 1) %>%
+    mutate(Type = "end")
+  
+  phases <- rbind(phases,
+                  df_start,
+                  df_end)
   
 } else if(Growout == "no"){
   # Start with initial densities
   results <- data.frame(time = 0, A1 = A1_0, M1 = M1_0, F1 = F1_0,
                         A2 = A2_0, M2 = M2_0, F2 = F2_0, C = C_0,
                         Cycle = NA, Phase = NA)
-  
 }
 
 ## Define protocol ----
@@ -252,6 +269,8 @@ protocol <- c(rep("growth", Phases_growth),
 for (c in 1:Cycles){
   cycle_df <- tail(results, 1) %>%
     select(-Cycle)
+  
+  c_phases <- data.frame()
   for (p in 1:length(protocol)){
     # Set phase of protocol
     phase = protocol[p]
@@ -303,6 +322,18 @@ for (c in 1:Cycles){
       out_df <- as.data.frame(out) %>%
         mutate(Phase = "growth")
       #out_df <- out_df %>% slice(seq(1, n(), by = 1/Timestep*0.01))
+      
+      # Save start and end times of the phase
+      df_start <- head(out_df, 1) %>%
+        mutate(Type = "start")
+      df_end <- tail(out_df, 1) %>%
+        mutate(Type = "end")
+      
+      c_phases <- rbind(c_phases,
+                        df_start,
+                        df_end)
+      
+      # Add output to cycle dataframe
       cycle_df <- rbind(cycle_df, out_df)
       
     } else if (phase == "conjugation"){
@@ -353,6 +384,18 @@ for (c in 1:Cycles){
       out_df <- as.data.frame(out) %>%
         mutate(Phase = "conj")
       #out_df <- out_df %>% slice(seq(1, n(), by = 1/Timestep*0.01))
+      
+      # Save start and end times of the phase
+      df_start <- head(out_df, 1) %>%
+        mutate(Type = "start")
+      df_end <- tail(out_df, 1) %>%
+        mutate(Type = "end")
+      
+      c_phases <- rbind(c_phases,
+                        df_start,
+                        df_end)
+      
+      # Add output to cycle dataframe
       cycle_df <- rbind(cycle_df, out_df)
       
     } else if (phase == "transconjugant_selection"){
@@ -425,13 +468,29 @@ for (c in 1:Cycles){
       # Remove repeat rows from iterations
       t_out <- unique(t_out) %>%
         mutate(Phase = "tselect")
-      # Merge with main dataframe
+      
+      # Save start and end times of the phase
+      df_start <- head(t_out, 1) %>%
+        mutate(Type = "start")
+      df_end <- tail(t_out, 1) %>%
+        mutate(Type = "end")
+      
+      c_phases <- rbind(c_phases,
+                        df_start,
+                        df_end)
+      
+      # Add output to cycle dataframe
       cycle_df <- rbind(cycle_df, t_out)
     }
   }
   cycle_df <- cycle_df %>%
     mutate(Cycle = c)
+  c_phases <- c_phases %>%
+    mutate(Cycle = c)
+  
+  # Save results to main dataframes
   results <- rbind(results, cycle_df)
+  phases <- rbind(phases, c_phases)
   print(paste("Cycle",c,"complete."))
 }
 
@@ -448,15 +507,28 @@ plot_out <- results %>%
          Genotype = substr(Cell_types, 1, 1)) %>%
   mutate(Density = ifelse(Density < 1, 0, Density))
 
-write.csv(x = results, file = paste(treatment_folder, paste(treatment, '_data.csv', sep = ""), sep = '/'))
-write.csv(x = plot_out, file = paste(treatment_folder, paste(treatment, '_data_long.csv', sep = ""), sep = '/'))
-
 gg <- ggplot(data = plot_out, aes(x = Time, y = Density, group = interaction(Host, Genotype), color = Genotype)) + 
   geom_line(aes(linetype = Host), size = 1) +
-  scale_color_manual(values = c("A" = "red", "M" = "blue", "F" = "grey"))+
+  scale_color_manual(values = c("A" = p_Anc,
+                                "M" = p_Mut,
+                                "F" = p_F))+
   scale_linetype_manual(values = c("1" = "solid", "2" = "dashed", "C" = "dotted")) +
   scale_y_continuous(trans = "log10",breaks=c(1e1,1e3,1e5,1e7,1e9)) +
-  geom_hline(yintercept = 1)
-ggsave(paste(treatment_folder, paste(treatment, '_plot.pdf', sep = ""), sep = '/'), gg, width = 30, height = 7, units = "in")
+  geom_hline(yintercept = 1) +
+  theme_bw()
+ggsave(paste(treatment_folder, paste(treatment, '_plot.pdf', sep = ""), sep = '/'), gg, width = 20, height = 5, units = "in")
 
+
+# Save the final dataframes ----
+results_out <- results %>%
+  drop_na() %>%
+  rename(Time = time)
+
+phases_out <- phases %>%
+  drop_na() %>%
+  rename(Time = time)
+
+write.csv(x = results_out, file = paste(treatment_folder, paste(treatment, '_data.csv', sep = ""), sep = '/'))
+write.csv(x = plot_out, file = paste(treatment_folder, paste(treatment, '_data_long.csv', sep = ""), sep = '/'))
+write.csv(x = phases_out, file = paste(treatment_folder, paste(treatment, '_phases.csv', sep = ""), sep = '/'))
 
