@@ -1,8 +1,10 @@
 # Script to run invasion experiments of the case study model
+# V1 without growth differences in transconjugant media
 
 # Load packages ----
 library(deSolve)
 library(tidyverse)
+library(cowplot)
 library(argparse)
 
 # Set arguments parser inputs ----
@@ -10,14 +12,15 @@ parser <- ArgumentParser()
 parser$add_argument("-t","--treatment", type = "character", help = "Specify Treatment ID")
 args <- parser$parse_args()
 
-# Parse arguments
-args <- parser$parse_args()
-
-# Get treatment
 treatment <- args$treatment
 
+# Set plot colors
+p_Anc <- "#8394F6"
+p_Mut <- "#8A407A"
+p_F <- "gray40"
+
 # Load treatment file ----
-treatment_csv <- read.csv("input_data/Treatments_case_study.csv", header = F)
+treatment_csv <- read.csv("input_data/Treatments.csv", header = F)
 
 ## Transpose data to make it easier for reading in parameters ----
 tr_colnames <- treatment_csv[[1]]
@@ -507,14 +510,14 @@ plot_out <- results %>%
 
 gg <- ggplot(data = plot_out, aes(x = Time, y = Density, group = interaction(Host, Genotype), color = Genotype)) + 
   geom_line(aes(linetype = Host), size = 1) +
-  scale_color_manual(values = c("A" = "red",
-                                "M" = "blue",
-                                "F" = "gray30"))+
+  scale_color_manual(values = c("A" = p_Anc,
+                                "M" = p_Mut,
+                                "F" = p_F))+
   scale_linetype_manual(values = c("1" = "solid", "2" = "dashed", "C" = "dotted")) +
   scale_y_continuous(trans = "log10",breaks=c(1e1,1e3,1e5,1e7,1e9)) +
   geom_hline(yintercept = 1) +
   theme_bw()
-ggsave(paste(treatment_folder, paste(treatment, '_sim_plot.pdf', sep = ""), sep = '/'), gg, width = 20, height = 5, units = "in")
+ggsave(paste(treatment_folder, paste(treatment, '_plot.pdf', sep = ""), sep = '/'), gg, width = 20, height = 5, units = "in")
 
 
 # Save the final dataframes ----

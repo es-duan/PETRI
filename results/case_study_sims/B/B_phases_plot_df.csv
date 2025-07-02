@@ -1,0 +1,7 @@
+Cycle,Phase,T_start,T_end
+1,Conjugation,0,7
+1,Transconjugant selection,7,28.5800000000018
+2,Conjugation,28.5800000000018,35.5800000000018
+2,Transconjugant selection,35.5800000000018,57.1499999999975
+3,Conjugation,57.1499999999975,64.1499999999975
+3,Transconjugant selection,64.1499999999975,85.7300000000085

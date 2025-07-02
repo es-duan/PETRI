@@ -3,18 +3,27 @@
 # Load packages ----
 library(deSolve)
 library(tidyverse)
+library(cowplot)
 library(argparse)
+library(jsonlite)
 
 # Set arguments parser inputs ----
 parser <- ArgumentParser()
 parser$add_argument("-t","--treatment", type = "character", help = "Specify Treatment ID")
-args <- parser$parse_args()
+parser$add_argument("-c","--colors", help = "JSON string of plot colors")
 
 # Parse arguments
 args <- parser$parse_args()
 
 # Get treatment
 treatment <- args$treatment
+
+# Load global variables ----
+## Colors ----
+plot_colors <- fromJSON(args$colors)
+p_Anc <- plot_colors[["p_Anc"]]
+p_Mut <- plot_colors[["p_Mut"]]
+p_F <- plot_colors[["p_F"]]
 
 # Load treatment file ----
 treatment_csv <- read.csv("input_data/Treatments_case_study.csv", header = F)
@@ -507,14 +516,14 @@ plot_out <- results %>%
 
 gg <- ggplot(data = plot_out, aes(x = Time, y = Density, group = interaction(Host, Genotype), color = Genotype)) + 
   geom_line(aes(linetype = Host), size = 1) +
-  scale_color_manual(values = c("A" = "red",
-                                "M" = "blue",
-                                "F" = "gray30"))+
+  scale_color_manual(values = c("A" = p_Anc,
+                                "M" = p_Mut,
+                                "F" = p_F))+
   scale_linetype_manual(values = c("1" = "solid", "2" = "dashed", "C" = "dotted")) +
   scale_y_continuous(trans = "log10",breaks=c(1e1,1e3,1e5,1e7,1e9)) +
   geom_hline(yintercept = 1) +
   theme_bw()
-ggsave(paste(treatment_folder, paste(treatment, '_sim_plot.pdf', sep = ""), sep = '/'), gg, width = 20, height = 5, units = "in")
+ggsave(paste(treatment_folder, paste(treatment, '_plot.pdf', sep = ""), sep = '/'), gg, width = 20, height = 5, units = "in")
 
 
 # Save the final dataframes ----
