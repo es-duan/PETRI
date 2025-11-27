@@ -34,6 +34,8 @@ p_F <- plot_colors[["p_F"]]
 p_growth <- plot_colors[["p_growth"]]
 p_conj <- plot_colors[["p_conj"]]
 p_tselect <- plot_colors[["p_tselect"]]
+p_imm <- plot_colors[["p_imm"]]
+p_select <- plot_colors[["p_select"]]
 
 ## Lines ----
 plot_lines <- fromJSON(args$lines)
@@ -50,7 +52,9 @@ p1 <- ggplot() +
   scale_fill_manual(values = c("Growout" = "white",
                                "Growth" = p_growth,
                                "Conjugation" = p_conj,
-                               "Transconjugant selection" = p_tselect)) +
+                               "Transconjugant selection" = p_tselect,
+                               "Immigration" = p_imm,
+                               "Plasmid selection" = p_select)) +
   geom_line(data = sim_dens,
             mapping = aes(x = Time, y = Density,
                           color = Genotype_plot, linetype = Host),
@@ -89,14 +93,18 @@ p2 <- ggplot() +
   scale_fill_manual(values = c("Growout" = "white",
                                "Growth" = p_growth,
                                "Conjugation" = p_conj,
-                               "Transconjugant selection" = p_tselect)) +
+                               "Transconjugant selection" = p_tselect,
+                               "Immigration" = p_imm,
+                               "Plasmid selection" = p_select)) +
   geom_line(data = sim_freq,
             mapping = aes(Time, Frequency, color = Genotype),
             size = 2) +
   scale_color_manual(values = c("Ancestor" = p_Anc,
                                 "Mutant" = p_Mut)) +
-  scale_y_continuous(breaks=c(0, 0.5, 1),
-                     expand = c(0.01, 0.01)) +
+  scale_y_continuous(breaks=c(0, 0.000001,0.0001, 0.01, 1),
+                     labels=c(0,sapply(c(-6,-4,-2),function(i){parse(text = sprintf("10^%d",i))}),1),
+                     expand = c(0.01, 0.01),
+                     trans = "log10") +
   scale_x_continuous(expand = c(0.001, 0.001)) +
   fig_aes
 

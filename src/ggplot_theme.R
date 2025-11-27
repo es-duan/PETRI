@@ -11,3 +11,11 @@ fig_aes <- theme_bw() +
         axis.title.y = element_text(size=30),
         axis.text.x = element_text(size=24),
         axis.text.y = element_text(size=24))
+
+# Settings for parameter sweep plots
+axes_aes <- theme_bw() +
+  theme(text = element_text(size=24),
+        axis.line = element_line(color = "black",linewidth = 1.5),
+        axis.title = element_text(color = "black"),
+        axis.text = element_text(size=1,color="black"),
+        panel.border = element_blank())

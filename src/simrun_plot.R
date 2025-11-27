@@ -28,9 +28,13 @@ p_Anc <- "#8394F6"
 p_Mut <- "#8A407A"
 p_F <- "gray40"
 p_C <- "gray80"
-p_batch <- lighten(lighten("#FFEEBD",0.4),0.6)
-p_conj <- lighten(lighten("#526AB4",0.4),0.6)
-p_T <- lighten(lighten("#E6C5EE",0.15),0.6)
+p_growth <- "#FFFBEF"
+p_conj <- "#D0D9FF"
+p_tselect <- "#FBE9FF"
+p_imm <- "#d0ffeb"
+
+rifR_l <- "solid"
+nalR_l <- "dashed"
 
 # Retrieve ggplot theme
 source("src/ggplot_theme.R")

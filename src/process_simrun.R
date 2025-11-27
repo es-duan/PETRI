@@ -19,7 +19,7 @@ sim_results_long <- read_csv(paste0(treatment_folder, "/", treatment, "_data_lon
 sim_phases <- read_csv(paste0(treatment_folder, "/", treatment, "_phases.csv"))
 
 # Factor to reduce temporal resolution for better plot visualization
-vf <- 0.05
+vf <- 0.01
 
 # Reformat data for plotting ----
 ## Density plot ----
@@ -36,11 +36,11 @@ sim_dens <- sim_results_long %>%
                               Genotype == "C" ~ "C")) %>%
   mutate(Genotype = factor(Genotype, levels = c("Ancestor", "Mutant", "Plasmid-free", "C"))) %>%
   mutate(Genotype_plot = fct_rev(Genotype)) %>%
-  mutate(Host = factor(Host, levels = c("rifR", "nalR", "C"))) %>%
+  mutate(Host = factor(Host, levels = c("rifR", "nalR", "C")))
   # Decrease number of points for smoother plotting
-  group_by(Cycle, Phase, Cell_types, Host, Genotype) %>%
-  slice(seq(1, n(), by = 1/0.01*vf)) %>%
-  ungroup()
+  # group_by(Cycle, Phase, Cell_types, Host, Genotype) %>%
+  # slice(seq(1, n(), by = 1/0.01*vf)) %>%
+  # ungroup()
 
 ## Phase colors ----
 phases_rect <- sim_phases %>%
@@ -52,7 +52,9 @@ phases_rect <- sim_phases %>%
   mutate(Phase = case_when(Phase == "conj" ~ "Conjugation",
                            Phase == "growth" ~ "Growth",
                            Phase == "growout" ~ "Growout",
-                           Phase == "tselect" ~ "Transconjugant selection"))
+                           Phase == "tselect" ~ "Transconjugant selection",
+                           Phase == "immigration" ~ "Immigration",
+                           Phase == "selection" ~ "Plasmid selection"))
 
 ## Ratio plots ----
 
@@ -125,16 +127,25 @@ assign_mut <- function(Cycle, Phase, Type, M1, M2){
   return(mut_out)
 }
 
-sim_phases2 <- sim_phases %>%
-  mutate(Anc = assign_anc(Cycle, Phase, Type, A1, A2)) %>%
-  mutate(Mut = assign_mut(Cycle, Phase, Type, M1, M2)) %>%
+# Do not change host identities for protocols without a host switch
+if(! treatment %in% c("E")){
+  sim_phases2 <- sim_phases %>%
+    mutate(Anc = assign_anc(Cycle, Phase, Type, A1, A2)) %>%
+    mutate(Mut = assign_mut(Cycle, Phase, Type, M1, M2))
+} else{
+  sim_phases2 <- sim_phases %>%
+    mutate(Anc = A1 + A2) %>%
+    mutate(Mut = M1 + M2)
+}
+
+sim_phases3 <- sim_phases2 %>%
   mutate(A_M = Anc/Mut,
          M_A = Mut/Anc) %>%
   mutate(Total_plasmid = Anc + Mut) %>%
   mutate(Por_A = Anc/Total_plasmid,
          Por_M = Mut/Total_plasmid)
 
-sim_freq <- sim_phases2 %>%
+sim_freq <- sim_phases3 %>%
   select(Cycle, Phase, Time, Por_A, Por_M) %>%
   pivot_longer(cols = -c(Cycle, Phase, Time),
                names_to = "Genotype",
