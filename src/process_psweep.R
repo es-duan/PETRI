@@ -42,7 +42,8 @@ sweep_plot <- sweep_out %>%
   mutate(Mut_freq_change = ifelse(Mut_freq > Mut_freq0, "Increase", "Decrease")) %>%
   mutate(Invasion = case_when(Anc == 0 ~ "Displaced",
                               Mut== 0 ~ "Excluded",
+                              # Designate situations where plasmid was outcompeted as NA
+                              Anc == 0 & Mut == 0 ~ "NA",
                               TRUE ~ "Partial"))
-
 # Save file
 write_csv(sweep_plot, paste0(sweep_folder, "/", t_s, "_plot.csv"))

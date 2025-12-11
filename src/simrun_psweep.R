@@ -57,6 +57,8 @@ Cycles = as.numeric(treatment_csv$Cycles[row_number])
 Volume = as.numeric(treatment_csv$Volume[row_number])
 Dilution_cutoff = 1/Volume
 T_volume = as.numeric(treatment_csv$T_volume[row_number])
+Colony_bottleneck = as.numeric(treatment_csv$Colony_bottleneck[row_number])
+Colony_selection = as.character(treatment_csv$Colony_selection[row_number])
 
 Protocol = str_split_1(toString(treatment_csv$Protocol[row_number]), pattern = ",")
 Protocol_phases = as.numeric(str_split_1(toString(treatment_csv$Protocol_phases[row_number]), pattern = ","))
@@ -443,13 +445,34 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
           cycle_df <- rbind(cycle_df, t_out)
         } else if (Selection_type == "solid"){
           #### Solid selection: Plate a certain volume of the culture on selective media, then estimate colony size from each cell ----
-          # Start with the number of cells in the media (colony number)
           time_start = tail(cycle_df, 1)$time
           
-          A1_start = ifelse(A1 * T_volume < 1, 0, A1 * T_volume)
-          M1_start = ifelse(M1 * T_volume < 1, 0, M1 * T_volume)
-          A2_start = ifelse(A2 * T_volume < 1, 0, A2 * T_volume)
-          M2_start = ifelse(M2 * T_volume < 1, 0, M2 * T_volume)
+          if(Colony_selection == "proportion"){
+            ##### Take a proportion of a certain colony number ----
+            # Calculate the proportion of each transconjugant type
+            A1_por = A1/(A1 + M1)
+            A2_por = A2/(A2 + M2)
+            M1_por = M1/(A1 + M1)
+            M2_por = M2/(A2 + M2)
+            
+            # Multiple the proportions by x colonies plated
+            A1_col = ifelse(is.nan(A1_por), 0, A1_por*Colony_bottleneck)
+            A2_col = ifelse(is.nan(A2_por), 0, A2_por*Colony_bottleneck)
+            M1_col = ifelse(is.nan(M1_por), 0, M1_por*Colony_bottleneck)
+            M2_col = ifelse(is.nan(M2_por), 0, M2_por*Colony_bottleneck)
+            
+            # Round down to a whole number
+            A1_start = ifelse(A1_col < 1, 0, floor(A1_col))/Volume
+            A2_start = ifelse(A2_col < 1, 0, floor(A2_col))/Volume
+            M1_start = ifelse(M1_col < 1, 0, floor(M1_col))/Volume
+            M2_start = ifelse(M2_col < 1, 0, floor(M2_col))/Volume
+          } else if(Colony_selection == "volume"){
+            ##### Plate out a certain volume ----
+            A1_start = ifelse(A1 * T_volume < 1, 0, floor(A1 * T_volume))
+            M1_start = ifelse(M1 * T_volume < 1, 0, floor(M1 * T_volume))
+            A2_start = ifelse(A2 * T_volume < 1, 0, floor(A2 * T_volume))
+            M2_start = ifelse(M2 * T_volume < 1, 0, floor(M2 * T_volume))
+          }
           
           # End with the number of cells in all the colonies
           time_end = time_start + Hours_t_selection

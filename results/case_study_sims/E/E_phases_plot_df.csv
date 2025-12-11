@@ -1,0 +1,11 @@
+Cycle,Phase,T_start,T_end
+1,Immigration,0,24
+2,Immigration,24,48
+3,Immigration,48,72
+4,Immigration,72,96
+5,Immigration,96,120
+6,Immigration,120,144
+7,Immigration,144,168
+8,Immigration,168,192
+9,Immigration,192,216
+10,Immigration,216,240

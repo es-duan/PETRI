@@ -1,0 +1,9 @@
+Cycle,Phase,Time,Genotype,Frequency
+1,conj,0,Ancestor,0.009900990099009901
+1,conj,0,Mutant,0.9900990099009901
+1,conj,5,Ancestor,0.8057473197509992
+1,conj,5,Mutant,0.19425268024900078
+1,tselect,5,Ancestor,0.8061538461538461
+1,tselect,5,Mutant,0.19384615384615383
+1,tselect,77,Ancestor,0.225473321858864
+1,tselect,77,Mutant,0.774526678141136

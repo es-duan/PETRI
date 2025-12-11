@@ -1,0 +1,15 @@
+Cycle,Phase,T_start,T_end
+1,Conjugation,0,5
+1,Transconjugant selection,5,77
+2,Conjugation,77,82
+2,Transconjugant selection,82,154
+3,Conjugation,154,159
+3,Transconjugant selection,159,231
+4,Conjugation,231,236
+4,Transconjugant selection,236,308
+5,Conjugation,308,313
+5,Transconjugant selection,313,385
+6,Conjugation,385,390
+6,Transconjugant selection,390,462
+7,Conjugation,462,467
+7,Transconjugant selection,467,539

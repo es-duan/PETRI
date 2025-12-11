@@ -52,11 +52,12 @@ psi_change_min = min(sweep_plot$psi_change)
 # Generate dataset for axes labels
 axes_label <- sweep_plot %>%
   filter(gamma_fold %% 1 == 0) %>%
+  filter(psi_change %% 0.1 == 0) %>%
   filter(gamma_fold == 0 | psi_change == 0) %>%
   filter(!(gamma_fold == 0 & psi_change == 0)) %>%
   select(gamma_fold, psi_change) %>%
-  mutate(x = ifelse(gamma_fold == 0, gamma_fold - 0.2, gamma_fold),
-         y = ifelse(psi_change == 0, psi_change - 0.01, psi_change)) %>%
+  mutate(x = ifelse(gamma_fold == 0, gamma_fold - 0.25, gamma_fold),
+         y = ifelse(psi_change == 0, psi_change - 0.015, psi_change)) %>%
   mutate(label = ifelse(gamma_fold == 0, psi_change, gamma_fold))
 
 ## Plot with invasion status ----
@@ -71,7 +72,7 @@ i1 <- ggplot() +
   geom_vline(xintercept = 0, color = "black", linewidth = 1.5) +
   geom_text(data = axes_label,
             mapping = aes(x, y, label = label),
-            size = 8) +
+            size = 6) +
   scale_fill_gradient(low=p_lowI,high=p_highI) +
   scale_x_continuous(expand = c(0.01, 0.01),
                      labels = ~ ifelse(.x == 0, "", .x)) +
@@ -98,7 +99,7 @@ i2 <- ggplot() +
   geom_vline(xintercept = 0, color = "black", linewidth = 1.5) +
   geom_text(data = axes_label,
             mapping = aes(x, y, label = label),
-            size = 8) +
+            size = 6) +
   scale_fill_manual(values = c("Increase" = p_Dis,
                                "Decrease" = p_Exc,
                                "NA" = "gray")) +

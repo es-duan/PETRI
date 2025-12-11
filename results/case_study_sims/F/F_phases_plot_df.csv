@@ -1,0 +1,32 @@
+Cycle,Phase,T_start,T_end
+0,Growout,0,0
+1,Immigration,0,24
+1,Plasmid selection,24,48
+1,Growth,48,72
+2,Immigration,72,96
+2,Plasmid selection,96,120
+2,Growth,120,144
+3,Immigration,144,168
+3,Plasmid selection,168,192
+3,Growth,192,216
+4,Immigration,216,240
+4,Plasmid selection,240,264
+4,Growth,264,288
+5,Immigration,288,312
+5,Plasmid selection,312,336
+5,Growth,336,360
+6,Immigration,360,384
+6,Plasmid selection,384,408
+6,Growth,408,432
+7,Immigration,432,456
+7,Plasmid selection,456,480
+7,Growth,480,504
+8,Immigration,504,528
+8,Plasmid selection,528,552
+8,Growth,552,576
+9,Immigration,576,600
+9,Plasmid selection,600,624
+9,Growth,624,648
+10,Immigration,648,672
+10,Plasmid selection,672,696
+10,Growth,696,720

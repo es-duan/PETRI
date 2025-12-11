@@ -4,9 +4,11 @@
 import json
 
 ## Specify treatments
-TREATMENTS = ["A.2","C.2","O","E","F"]
-SETTINGS = ["test"]
-PSWEEPS = ["pO_test","pHFC_test","pLFC_test","pE_test","pF_test"]
+#TREATMENTS = ["A.2","C.2","O","E","F"]
+TREATMENTS = ["A.2_full", "C.2_full"]
+SETTINGS = ["test", "testmut", "DimF"]
+#PSWEEPS = ["pO_test","pHFC_test","pLFC_test","pE_test","pF_test"]
+PSWEEPS = ["pE_DimF"]
 
 ## Specify global variables
 ### Colors
@@ -120,7 +122,7 @@ rule psweep_sims:
   output:
     "results/parameter_sweeps/{psweep}/{psweep}_out.csv"
   threads:
-    3
+    5
   shell:
     """
     Rscript src/simrun_psweep.R \
