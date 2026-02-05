@@ -32,6 +32,7 @@ p_growth <- "#FFFBEF"
 p_conj <- "#D0D9FF"
 p_tselect <- "#FBE9FF"
 p_imm <- "#d0ffeb"
+p_select <- "#ffe9fc"
 
 rifR_l <- "solid"
 nalR_l <- "dashed"

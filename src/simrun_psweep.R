@@ -83,6 +83,7 @@ F1_migrants = as.numeric(treatment_csv$F1_migrants[row_number])
 A2_migrants = as.numeric(treatment_csv$A2_migrants[row_number])
 M2_migrants = as.numeric(treatment_csv$M2_migrants[row_number])
 F2_migrants = as.numeric(treatment_csv$F2_migrants[row_number])
+Immigration_ratio = as.numeric(treatment_csv$Immigration_ratio[row_number])
 
 
 # Define the model ----
@@ -317,7 +318,7 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
         M2 = tail(cycle_df$M2, 1)
         F2 = tail(cycle_df$F2, 1)
         
-        if (last_phase == "growth"){
+        if (last_phase == "growth" | last_phase == "transconjugant_selection" & Selection_type == "liquid"){
           # If entering from a growth phase, perform a dilution
           A1 = ifelse((A1 * Dilution_conjugation) < Dilution_cutoff, 0, A1 * Dilution_conjugation)
           M1 = ifelse((M1 * Dilution_conjugation) < Dilution_cutoff, 0, M1 * Dilution_conjugation)
@@ -395,39 +396,28 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
           F2 = ifelse((F2 * Dilution_t_selection) < Dilution_cutoff, 0, F2 * Dilution_t_selection)
           
           # Calculate total density of plasmid-containing types
-          total_density = A1 + M1 + A2 + M2
+          #total_density = A1 + M1 + A2 + M2
+          
           t_out <- tail(cycle_df, 1) %>%
             select(-Phase)
-          while (total_density < Final_density_t_selection){
-            # Perform step by step simulation until target density is reached
-            time_start = tail(t_out$time, 1)
-            time_end = time_start + Timestep
-            times <- c(time_start, time_end)
-            
-            # Euler simulation
-            state <- c(A1 = A1, 
-                       M1 = M1, 
-                       F1 = F1, 
-                       A2 = A2, 
-                       M2 = M2, 
-                       F2 = F2, 
-                       C  = C)
-            
-            out <- ode(y = state, times = times, func = model, parms = parameters, method = "euler", hini = Timestep)
-            out_df <- as.data.frame(out)
-            #out_df <- out_df %>% slice(seq(1, n(), by = 1/Timestep*0.01))
-            t_out <- rbind(t_out, out_df)
-            
-            # Re-calculate total density of plasmid-containing types
-            A1 = tail(t_out$A1, 1)
-            M1 = tail(t_out$M1, 1)
-            A2 = tail(t_out$A2, 1)
-            M2 = tail(t_out$M2, 1)
-            total_density = A1 + M1 + A2 + M2
-            
-            # Maintain nutrient levels
-            C = tail(t_out$C, 1)
-          }
+          time_start = tail(t_out$time, 1)
+          time_end = time_start + Hours_t_selection
+          times <- seq(time_start, time_end, by = Timestep)
+          
+          # Euler simulation
+          state <- c(A1 = A1, 
+                     M1 = M1, 
+                     F1 = F1, 
+                     A2 = A2, 
+                     M2 = M2, 
+                     F2 = F2, 
+                     C  = C)
+          
+          out <- ode(y = state, times = times, func = model, parms = parameters, method = "euler", hini = Timestep)
+          out_df <- as.data.frame(out)
+          #out_df <- out_df %>% slice(seq(1, n(), by = 1/Timestep*0.01))
+          t_out <- rbind(t_out, out_df)
+          
           # Remove the first row of the dataframe (repeat of results)
           t_out <- t_out[-1,]
           # Remove repeat rows from iterations
@@ -544,13 +534,33 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
         F2 = tail(cycle_df$F2, 1)
         
         if (c == 1 & p == 1){
-          # Do not dilute strains if this is the first phase of the protocol
+          # Do not dilute strains or add migrants if this is the first phase of the protocol
           
         } else if (last_phase == "transconjugant_selection"){
           # If transitioning from a transconjugant selection phase, do not dilute strains
+          # Only relevant for Turner protocol
+          
+          # Add migrants
+          A1 = A1 + A1_migrants
+          M1 = M1 + M1_migrants
+          F1 = F1 + F1_migrants
+          A2 = A2 + A2_migrants
+          M2 = M2 + M2_migrants
+          F2 = F2 + F2_migrants
           
         } else {
           # Else, dilute strains first
+          # Only relevant for Dimitriu protocol
+          
+          # Add migrants
+          A1 = A1*(1 - Immigration_ratio) + A1_migrants*(Immigration_ratio)
+          M1 = M1*(1 - Immigration_ratio) + M1_migrants*(Immigration_ratio)
+          F1 = F1*(1 - Immigration_ratio) + F1_migrants*(Immigration_ratio)
+          A2 = A2*(1 - Immigration_ratio) + A2_migrants*(Immigration_ratio)
+          M2 = M2*(1 - Immigration_ratio) + M2_migrants*(Immigration_ratio)
+          F2 = F2*(1 - Immigration_ratio) + F2_migrants*(Immigration_ratio)
+          
+          # Dilute strains
           A1 = ifelse((A1 * Dilution_growth) < Dilution_cutoff, 0, A1 * Dilution_growth)
           M1 = ifelse((M1 * Dilution_growth) < Dilution_cutoff, 0, M1 * Dilution_growth)
           F1 = ifelse((F1 * Dilution_growth) < Dilution_cutoff, 0, F1 * Dilution_growth)
@@ -559,13 +569,6 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
           F2 = ifelse((F2 * Dilution_growth) < Dilution_cutoff, 0, F2 * Dilution_growth)
         }
         
-        # Add migrants
-        A1 = A1 + A1_migrants
-        M1 = M1 + M1_migrants
-        F1 = F1 + F1_migrants
-        A2 = A2 + A2_migrants
-        M2 = M2 + M2_migrants
-        F2 = F2 + F2_migrants
         
         # Euler simulation
         C  = as.numeric(treatment_csv$C[row_number])
@@ -653,12 +656,22 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
         # Add output to cycle dataframe
         cycle_df <- rbind(cycle_df, out_df)
       }
+      # End simulation if ancestor or mutant density is 0
+      final_A = tail(cycle_df$A1, 1) + tail(cycle_df$A2, 1)
+      final_M = tail(cycle_df$M1, 1) + tail(cycle_df$M2, 1)
+      
+      if(final_A == 0 | final_M == 0){
+        break
+      }
     }
+    ### Cycle wrap up ----
     cycle_df <- cycle_df %>%
-      mutate(Cycle = c)
+      mutate(Cycle = c) %>%
+      slice(-1)
     
     # Save results to main dataframes
-    results <- rbind(results, cycle_df)
+    results <- rbind(results, cycle_df) %>%
+      drop_na()
     
     # End simulation if ancestor or mutant density is 0
     final_A = tail(results$A1, 1) + tail(results$A2, 1)

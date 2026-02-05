@@ -5,10 +5,14 @@ import json
 
 ## Specify treatments
 #TREATMENTS = ["A.2","C.2","O","E","F"]
-TREATMENTS = ["A.2_full", "C.2_full"]
-SETTINGS = ["test", "testmut", "DimF"]
-#PSWEEPS = ["pO_test","pHFC_test","pLFC_test","pE_test","pF_test"]
-PSWEEPS = ["pE_DimF"]
+TREATMENTS = ["E.R1"]
+SETTINGS = ["test", "testmut", "DimR1", "DimR1finO"]
+#PSWEEPS = ["pHFC.l_DimR1","pHFC.l_DimR1finO","pHFC.l_test"]
+#PSWEEPS = ["pLFC.l_DimR1finO","pLFC.l_DimR1","pLFC.l_test"]
+#PSWEEPS = ["pF_test","pF_DimR1finO","pF_DimR1","pE_test","pE_DimR1finO","pE_DimR1"]
+PSWEEPS = ["pE_DimR1"]
+#PSWEEPS = ["pHFC.l_DimR1","pHFC.l_DimR1finO","pHFC.l_test","pLFC.l_DimR1finO","pLFC.l_DimR1","pLFC.l_test","pF_test","pF_DimR1finO","pF_DimR1"]
+
 
 ## Specify global variables
 ### Colors
@@ -27,7 +31,10 @@ plot_colors_psweep = {
   "p_Exc": "gray95",
   "p_Dis": "#140433",
   "p_lowI": "#d2c5eb",
-  "p_highI": "#2b1457"
+  "p_highI": "#2b1457",
+  "p_parI": "#b7bde8",
+  "p_parD": "gray80",
+  "p_lowD": "#a38cd1"
 }
 
 ### Linetypes
@@ -43,7 +50,8 @@ rule all:
     expand("results/case_study_sims/{treatment}/{treatment}_frequency_plot.pdf", treatment = TREATMENTS),
     expand("results/parameter_sets/{parameters}_sweep_param.csv", parameters = SETTINGS),
     expand("results/parameter_sweeps/{psweep}/{psweep}_change_plot.pdf", psweep = PSWEEPS),
-    expand("results/parameter_sweeps/{psweep}/{psweep}_inv_plot.pdf", psweep = PSWEEPS)
+    expand("results/parameter_sweeps/{psweep}/{psweep}_inv_plot.pdf", psweep = PSWEEPS),
+    expand("results/parameter_sweeps/{psweep}/{psweep}_inv_time_plot.pdf", psweep = PSWEEPS)
 
 # Define rule for running case study invasion simulations
 rule case_study_sims:
@@ -150,7 +158,8 @@ rule plot_psweep:
     "results/parameter_sweeps/{psweep}/{psweep}_plot.csv"
   output:
     "results/parameter_sweeps/{psweep}/{psweep}_change_plot.pdf",
-    "results/parameter_sweeps/{psweep}/{psweep}_inv_plot.pdf"
+    "results/parameter_sweeps/{psweep}/{psweep}_inv_plot.pdf",
+    "results/parameter_sweeps/{psweep}/{psweep}_inv_time_plot.pdf"
   params:
     plot_colors_psweep = json.dumps(plot_colors_psweep)
   shell:

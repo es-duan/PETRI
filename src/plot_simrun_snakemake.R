@@ -101,10 +101,11 @@ p2 <- ggplot() +
             size = 2) +
   scale_color_manual(values = c("Ancestor" = p_Anc,
                                 "Mutant" = p_Mut)) +
-  scale_y_continuous(breaks=c(0, 0.000001,0.0001, 0.01, 1),
-                     labels=c(0,sapply(c(-6,-4,-2),function(i){parse(text = sprintf("10^%d",i))}),1),
+  scale_y_continuous(limits = c(0.00001,1),
+                     breaks=c(0, 0.0001, 0.01, 1),
+                     labels=c(0,sapply(c(-4,-2),function(i){parse(text = sprintf("10^%d",i))}),1),
                      expand = c(0.01, 0.01),
-                     trans = "log10") +
+                     trans = "log10", name = "Frequency") +
   scale_x_continuous(expand = c(0.001, 0.001)) +
   fig_aes
 

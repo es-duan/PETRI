@@ -111,6 +111,7 @@ F1_migrants = as.numeric(treatment_csv$F1_migrants[row_number])
 A2_migrants = as.numeric(treatment_csv$A2_migrants[row_number])
 M2_migrants = as.numeric(treatment_csv$M2_migrants[row_number])
 F2_migrants = as.numeric(treatment_csv$F2_migrants[row_number])
+Immigration_ratio = as.numeric(treatment_csv$Immigration_ratio[row_number])
 
 
 ## Variables ----
@@ -609,13 +610,30 @@ for (c in 1:Cycles){
       F2 = tail(cycle_df$F2, 1)
       
       if (c == 1 & p == 1){
-        # Do not dilute strains if this is the first phase of the protocol
+        # Do not dilute strains or add immigrants if this is the first phase of the protocol
         
       } else if (last_phase == "transconjugant_selection"){
         # If transitioning from a transconjugant selection phase, do not dilute strains
         
+        # Add migrants
+        A1 = A1 + A1_migrants
+        M1 = M1 + M1_migrants
+        F1 = F1 + F1_migrants
+        A2 = A2 + A2_migrants
+        M2 = M2 + M2_migrants
+        F2 = F2 + F2_migrants
+        
       } else {
-        # Else, dilute strains first
+        # Else, add migrants at the specified ratio, then dilute strains
+        # Add migrants
+        A1 = A1*(1 - Immigration_ratio) + A1_migrants*(Immigration_ratio)
+        M1 = M1*(1 - Immigration_ratio) + M1_migrants*(Immigration_ratio)
+        F1 = F1*(1 - Immigration_ratio) + F1_migrants*(Immigration_ratio)
+        A2 = A2*(1 - Immigration_ratio) + A2_migrants*(Immigration_ratio)
+        M2 = M2*(1 - Immigration_ratio) + M2_migrants*(Immigration_ratio)
+        F2 = F2*(1 - Immigration_ratio) + F2_migrants*(Immigration_ratio)
+        
+        # Dilute strains
         A1 = ifelse((A1 * Dilution_growth) < Dilution_cutoff, 0, A1 * Dilution_growth)
         M1 = ifelse((M1 * Dilution_growth) < Dilution_cutoff, 0, M1 * Dilution_growth)
         F1 = ifelse((F1 * Dilution_growth) < Dilution_cutoff, 0, F1 * Dilution_growth)
@@ -624,13 +642,6 @@ for (c in 1:Cycles){
         F2 = ifelse((F2 * Dilution_growth) < Dilution_cutoff, 0, F2 * Dilution_growth)
       }
       
-      # Add migrants
-      A1 = A1 + A1_migrants
-      M1 = M1 + M1_migrants
-      F1 = F1 + F1_migrants
-      A2 = A2 + A2_migrants
-      M2 = M2 + M2_migrants
-      F2 = F2 + F2_migrants
       
       # Euler simulation
       C  = as.numeric(treatment_csv$C[row_number])

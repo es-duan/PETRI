@@ -44,6 +44,7 @@ sweep_plot <- sweep_out %>%
                               Mut== 0 ~ "Excluded",
                               # Designate situations where plasmid was outcompeted as NA
                               Anc == 0 & Mut == 0 ~ "NA",
-                              TRUE ~ "Partial"))
+                              Mut_freq > Mut_freq0 & Anc != 0 ~ "P_increase",
+                              Mut_freq < Mut_freq0 & Anc != 0 ~ "P_decrease"))
 # Save file
 write_csv(sweep_plot, paste0(sweep_folder, "/", t_s, "_plot.csv"))

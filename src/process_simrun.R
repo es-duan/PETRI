@@ -128,7 +128,7 @@ assign_mut <- function(Cycle, Phase, Type, M1, M2){
 }
 
 # Do not change host identities for protocols without a host switch
-if(! treatment %in% c("E")){
+if(str_detect(treatment, "E") == FALSE){
   sim_phases2 <- sim_phases %>%
     mutate(Anc = assign_anc(Cycle, Phase, Type, A1, A2)) %>%
     mutate(Mut = assign_mut(Cycle, Phase, Type, M1, M2))

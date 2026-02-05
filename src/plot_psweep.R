@@ -4,6 +4,7 @@
 library(tidyverse)
 library(argparse)
 library(ggh4x)
+library(ggnewscale)
 library(jsonlite)
 
 # Set arguments parser inputs ----
@@ -30,13 +31,19 @@ plot_colors <- fromJSON(args$colors)
 p_Exc <- plot_colors[["p_Exc"]]
 p_Dis <- plot_colors[["p_Dis"]]
 p_lowI <- plot_colors[["p_lowI"]]
+p_parI <- plot_colors[["p_parI"]]
+p_parD <- plot_colors[["p_parD"]]
+p_lowD <- plot_colors[["p_lowD"]]
 p_highI <- plot_colors[["p_highI"]]
 
 # Non-snakemake
-# p_Exc <- "gray95"
-# p_Dis <- "#140433"
-# p_lowI <- "#d2c5eb"
-# p_highI <- "#2b1457"
+p_Exc <- "gray95"
+p_Dis <- "#140433"
+p_lowI <- "#d2c5eb"
+p_parI <- "#b7bde8"
+p_parD <- "gray80"
+p_lowD <- "#a38cd1"
+p_highI <- "#2b1457"
 
 ## Retrieve ggplot theme ----
 source("src/ggplot_theme.R")
@@ -118,4 +125,36 @@ i2 <- ggplot() +
 # Save plot
 ggsave(paste0(sweep_folder, "/", t_s, "_change_plot.pdf"),
        i2, height = 5, width = 6.75, units = "in")
+
+## Plot by time to displacement ----
+i3 <- ggplot() +
+  geom_tile(data = filter(sweep_plot,Invasion %in% c("Excluded", "P_increase", "P_decrease")),
+            mapping = aes(gamma_fold,psi_change, fill = Invasion)) +
+  scale_fill_manual(values = c("Excluded" = p_Exc,
+                               "P_increase" = p_parI,
+                               "P_decrease" = p_parD)) +
+  new_scale_fill() +
+  geom_tile(data = filter(sweep_plot,Invasion=="Displaced"),
+            mapping = aes(gamma_fold,psi_change, fill = end_time)) +
+  geom_hline(yintercept = 0, color = "black", linewidth = 1.5) + 
+  geom_vline(xintercept = 0, color = "black", linewidth = 1.5) +
+  geom_text(data = axes_label,
+            mapping = aes(x, y, label = label),
+            size = 6) +
+  scale_fill_gradient(low=p_highI, high=p_lowD) +
+  scale_x_continuous(expand = c(0.01, 0.01),
+                     labels = ~ ifelse(.x == 0, "", .x)) +
+  scale_y_continuous(expand = c(0.01, 0.01),
+                     labels = ~ ifelse(.x == 0, "", .x)) +
+  coord_axes_inside(labels_inside = TRUE,
+                    xlim=c(gamma_fold_min,gamma_fold_max),
+                    ylim=c(psi_change_min,psi_change_max)) +
+  labs(x = expression(Delta*"Conjugation Rate"),
+       y = expression(Delta*"Host Fitness"),
+       fill = "Displace-\nment time") +
+  axes_aes
+
+# Save plot
+ggsave(paste0(sweep_folder, "/", t_s, "_inv_time_plot.pdf"),
+       i3, height = 5, width = 6.75, units = "in")
 
