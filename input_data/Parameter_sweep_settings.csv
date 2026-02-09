@@ -1,4 +1,0 @@
-SetID,Ref_gamma,Ref_psi,Range_gamma,Range_psi,Resolution
-test,9.50E-12,0.29,2,0.2,5
-testmut,1.40E-14,0.39,2,0.2,5
-DimF,2.00E-11,1,2,0.2,5

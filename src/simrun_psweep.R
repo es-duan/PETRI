@@ -9,81 +9,56 @@ library(doParallel)
 
 # Set arguments parser inputs ----
 parser <- ArgumentParser()
-parser$add_argument("-p","--psweepsetting", type = "character", help = "Specify Treatment and parameter sweep setting")
+parser$add_argument("-p","--psweepsetting", type = "character", help = "Specify parameter sweep setting")
 parser$add_argument("-t","--threads", type = "numeric", help = "Specify number of cores given to the script")
 
 # Parse arguments
 args <- parser$parse_args()
-
-# Get treatment
-t_s <- args$psweepsetting
-
-treatment <- str_extract(t_s, ".*?(?=_)")
-setting <- str_extract(t_s, "(?<=_).*")
-
-# Detect the number of cores available
+ps <- args$psweepsetting
 n_cores <- args$threads
 
-# Create folder to store results ----
-sweep_folder <- paste("results/parameter_sweeps", t_s, sep = "/")
-
-if (!dir.exists(sweep_folder)) {
-  dir.create(sweep_folder, recursive = TRUE)
-} else{
-  print(paste(t_s,"folder exists. Rewriting previous run."))
-}
-
 # Read in files ----
-setting_csv <- read_csv("input_data/Parameter_sweep_settings.csv")
-treatment_csv <- read.csv("input_data/Treatments_parameter_sweep.csv", header = F)
-sweep_param <- read_csv(paste0("results/parameter_sets", "/", setting, "_sweep_param.csv"))
+# Specify output folder
+output_folder <- paste("results", "parameter_sweeps", ps, sep = "/")
 
-## Transpose data to make it easier for reading in parameters ----
-tr_colnames <- treatment_csv[[1]]
-treatment_csv <- as.data.frame(t(treatment_csv[,-1]))
-colnames(treatment_csv) <- tr_colnames
-
-## Specify data row to use ----
-set_row <- which(setting_csv$SetID == setting)
-row_number <- which(treatment_csv$Treatment_ID == treatment)
+setting_list <- readRDS(paste0(output_folder, "/", ps, "_settings.rds"))
+sweep_param <- read_csv(paste0(output_folder, "/", ps, "_params.csv"))
 
 # Set values for experiment settings ----
 
 ## Experimental settings ----
-Growout = as.character(treatment_csv$Growout[row_number])
-Final_density_growout = as.numeric(treatment_csv$Final_density_growout[row_number])
-Timestep = as.numeric(treatment_csv$Timestep[row_number])
-Cycles = as.numeric(treatment_csv$Cycles[row_number])
-Volume = as.numeric(treatment_csv$Volume[row_number])
+Timestep = as.numeric(setting_list$Timestep)
+Cycles = as.numeric(setting_list$Cycles)
+Volume = as.numeric(setting_list$Volume)
 Dilution_cutoff = 1/Volume
-T_volume = as.numeric(treatment_csv$T_volume[row_number])
-Colony_bottleneck = as.numeric(treatment_csv$Colony_bottleneck[row_number])
-Colony_selection = as.character(treatment_csv$Colony_selection[row_number])
+T_volume = as.numeric(setting_list$T_volume)
+Colony_bottleneck = as.numeric(setting_list$Colony_bottleneck)
+Colony_selection = as.character(setting_list$Colony_selection)
 
-Protocol = str_split_1(toString(treatment_csv$Protocol[row_number]), pattern = ",")
-Protocol_phases = as.numeric(str_split_1(toString(treatment_csv$Protocol_phases[row_number]), pattern = ","))
-Selection_type = as.character(treatment_csv$Selection_type[row_number])
+Protocol = str_split_1(toString(setting_list$Protocol), pattern = ",")
+Protocol_phases = as.numeric(str_split_1(toString(setting_list$Protocol_phases), pattern = ","))
+Selection_type = as.character(setting_list$Selection_type)
 
-Hours_growth = as.numeric(treatment_csv$Hours_growth[row_number])
-Hours_conjugation = as.numeric(treatment_csv$Hours_conjugation[row_number])
-Hours_t_selection = as.numeric(treatment_csv$Hours_t_selection[row_number])
+Hours_growth = as.numeric(setting_list$Hours_growth)
+Hours_conjugation = as.numeric(setting_list$Hours_conjugation)
+Hours_t_selection = as.numeric(setting_list$Hours_t_selection)
 
-A_colony = as.numeric(treatment_csv$A_colony[row_number])
-M_colony = as.numeric(treatment_csv$M_colony[row_number])
+A_colony = as.numeric(setting_list$A_colony)
+M_colony = as.numeric(setting_list$M_colony)
 
-Final_density_t_selection = as.numeric(treatment_csv$Final_density_t_selection[row_number])
+Final_density_t_selection = as.numeric(setting_list$Final_density_t_selection)
 
-Dilution_growth = as.numeric(treatment_csv$Dilution_growth[row_number])
-Dilution_conjugation = as.numeric(treatment_csv$Dilution_conjugation[row_number])
-Dilution_t_selection = as.numeric(treatment_csv$Dilution_t_selection[row_number])
+Dilution_growth = as.numeric(setting_list$Dilution_growth)
+Dilution_conjugation = as.numeric(setting_list$Dilution_conjugation)
+Dilution_t_selection = as.numeric(setting_list$Dilution_t_selection)
 
-A1_migrants = as.numeric(treatment_csv$A1_migrants[row_number])
-M1_migrants = as.numeric(treatment_csv$M1_migrants[row_number])
-F1_migrants = as.numeric(treatment_csv$F1_migrants[row_number])
-A2_migrants = as.numeric(treatment_csv$A2_migrants[row_number])
-M2_migrants = as.numeric(treatment_csv$M2_migrants[row_number])
-F2_migrants = as.numeric(treatment_csv$F2_migrants[row_number])
-Immigration_ratio = as.numeric(treatment_csv$Immigration_ratio[row_number])
+A1_migrants = as.numeric(setting_list$A1_migrants)
+M1_migrants = as.numeric(setting_list$M1_migrants)
+F1_migrants = as.numeric(setting_list$F1_migrants)
+A2_migrants = as.numeric(setting_list$A2_migrants)
+M2_migrants = as.numeric(setting_list$M2_migrants)
+F2_migrants = as.numeric(setting_list$F2_migrants)
+Immigration_ratio = as.numeric(setting_list$Immigration_ratio)
 
 
 # Define the model ----
@@ -143,43 +118,43 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
         .packages = c("tidyverse", "deSolve"),
         .combine = rbind) %dopar% {
   ## Set parameters ----
-  Gamma_A1.F1_max  = as.numeric(setting_csv$Ref_gamma[set_row])
-  Gamma_A1.F1_base = as.numeric(treatment_csv$gammaA1.F1_base[row_number])
+  Gamma_A1.F1_max  = as.numeric(setting_list$Ref_gamma)
+  Gamma_A1.F1_base = as.numeric(setting_list$gammaA1.F1_base)
   Gamma_M1.F1_max  = as.numeric(sweep_param$gamma_M[i])
-  Gamma_M1.F1_base = as.numeric(treatment_csv$gammaM1.F1_base[row_number])
-  Gamma_A2.F2_max  = as.numeric(setting_csv$Ref_gamma[set_row])
-  Gamma_A2.F2_base = as.numeric(treatment_csv$gammaA2.F2_base[row_number])
+  Gamma_M1.F1_base = as.numeric(setting_list$gammaM1.F1_base)
+  Gamma_A2.F2_max  = as.numeric(setting_list$Ref_gamma)
+  Gamma_A2.F2_base = as.numeric(setting_list$gammaA2.F2_base)
   Gamma_M2.F2_max  = as.numeric(sweep_param$gamma_M[i])
-  Gamma_M2.F2_base = as.numeric(treatment_csv$gammaM2.F2_base[row_number])
-  Gamma_A1.F2_max  = as.numeric(setting_csv$Ref_gamma[set_row])
-  Gamma_A1.F2_base = as.numeric(treatment_csv$gammaA1.F2_base[row_number])
+  Gamma_M2.F2_base = as.numeric(setting_list$gammaM2.F2_base)
+  Gamma_A1.F2_max  = as.numeric(setting_list$Ref_gamma)
+  Gamma_A1.F2_base = as.numeric(setting_list$gammaA1.F2_base)
   Gamma_M1.F2_max  = as.numeric(sweep_param$gamma_M[i])
-  Gamma_M1.F2_base = as.numeric(treatment_csv$gammaM1.F2_base[row_number])
-  Gamma_A2.F1_max  = as.numeric(setting_csv$Ref_gamma[set_row])
-  Gamma_A2.F1_base = as.numeric(treatment_csv$gammaA2.F1_base[row_number])
+  Gamma_M1.F2_base = as.numeric(setting_list$gammaM1.F2_base)
+  Gamma_A2.F1_max  = as.numeric(setting_list$Ref_gamma)
+  Gamma_A2.F1_base = as.numeric(setting_list$gammaA2.F1_base)
   Gamma_M2.F1_max  = as.numeric(sweep_param$gamma_M[i])
-  Gamma_M2.F1_base = as.numeric(treatment_csv$gammaM2.F1_base[row_number])
-  Psi_A1_max = as.numeric(setting_csv$Ref_psi[set_row])
+  Gamma_M2.F1_base = as.numeric(setting_list$gammaM2.F1_base)
+  Psi_A1_max = as.numeric(setting_list$Ref_psi)
   Psi_M1_max = as.numeric(sweep_param$psi_M[i])
-  Psi_F1_max = as.numeric(treatment_csv$psiF1[row_number])
-  Psi_A2_max = as.numeric(setting_csv$Ref_psi[set_row])
+  Psi_F1_max = as.numeric(setting_list$psiF1)
+  Psi_A2_max = as.numeric(setting_list$Ref_psi)
   Psi_M2_max = as.numeric(sweep_param$psi_M[i])
-  Psi_F2_max = as.numeric(treatment_csv$psiF2[row_number])
-  Sigma_A1 = as.numeric(treatment_csv$sigmaA1[row_number])
-  Sigma_M1 = as.numeric(treatment_csv$sigmaM1[row_number])
-  Sigma_A2 = as.numeric(treatment_csv$sigmaA2[row_number])
-  Sigma_M2 = as.numeric(treatment_csv$sigmaM2[row_number])
-  e_0 = as.numeric(treatment_csv$e[row_number])
-  Q_0 = as.numeric(treatment_csv$Q[row_number])
+  Psi_F2_max = as.numeric(setting_list$psiF2)
+  Sigma_A1 = as.numeric(setting_list$sigmaA1)
+  Sigma_M1 = as.numeric(setting_list$sigmaM1)
+  Sigma_A2 = as.numeric(setting_list$sigmaA2)
+  Sigma_M2 = as.numeric(setting_list$sigmaM2)
+  e_0 = as.numeric(setting_list$e)
+  Q_0 = as.numeric(setting_list$Q)
   
   ## Variables ----
-  A1_0 = as.numeric(treatment_csv$A1_0[row_number])
-  M1_0 = as.numeric(treatment_csv$M1_0[row_number])
-  F1_0 = as.numeric(treatment_csv$F1_0[row_number])
-  A2_0 = as.numeric(treatment_csv$A2_0[row_number])
-  M2_0 = as.numeric(treatment_csv$M2_0[row_number])
-  F2_0 = as.numeric(treatment_csv$F2_0[row_number])
-  C_0  = as.numeric(treatment_csv$C[row_number])
+  A1_0 = as.numeric(setting_list$A1_0)
+  M1_0 = as.numeric(setting_list$M1_0)
+  F1_0 = as.numeric(setting_list$F1_0)
+  A2_0 = as.numeric(setting_list$A2_0)
+  M2_0 = as.numeric(setting_list$M2_0)
+  F2_0 = as.numeric(setting_list$F2_0)
+  C_0  = as.numeric(setting_list$C)
   
   ## Initial conditions ----
   state <- c(A1 = A1_0, 
@@ -278,7 +253,7 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
         }
         
         # Euler simulation
-        C  = as.numeric(treatment_csv$C[row_number])
+        C  = as.numeric(setting_list$C)
         
         state <- c(A1 = A1, 
                    M1 = M1, 
@@ -337,7 +312,7 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
         }
         
         # Euler simulation
-        C  = as.numeric(treatment_csv$C[row_number])
+        C  = as.numeric(setting_list$C)
         
         state <- c(A1 = A1, 
                    M1 = M1, 
@@ -373,7 +348,7 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
           A2 = 0
           M2 = 0
           F2 = 0
-          C  = as.numeric(treatment_csv$C[row_number])
+          C  = as.numeric(setting_list$C)
         } else {
           # For odd cycles, select for F2 transconjugants
           A1 = 0
@@ -382,7 +357,7 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
           A2 = tail(cycle_df$A2, 1)
           M2 = tail(cycle_df$M2, 1)
           F2 = 0
-          C  = as.numeric(treatment_csv$C[row_number])
+          C  = as.numeric(setting_list$C)
         }
         
         #### Liquid selection: simulate until target density is reached ----
@@ -571,7 +546,7 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
         
         
         # Euler simulation
-        C  = as.numeric(treatment_csv$C[row_number])
+        C  = as.numeric(setting_list$C)
         
         state <- c(A1 = A1, 
                    M1 = M1, 
@@ -631,7 +606,7 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
         F2 = 0
         
         # Euler simulation
-        C  = as.numeric(treatment_csv$C[row_number])
+        C  = as.numeric(setting_list$C)
         
         state <- c(A1 = A1, 
                    M1 = M1, 
@@ -697,4 +672,4 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
 stopCluster(cluster)
 
 # Save output file
-write_csv(sweep_out, paste0(sweep_folder, "/" , t_s, "_out.csv"))
+write_csv(sweep_out, paste0(output_folder, "/" , ps, "_out.csv"))

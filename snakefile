@@ -6,11 +6,7 @@ import json
 ## Specify treatments
 #TREATMENTS = ["A.2","C.2","O","E","F"]
 TREATMENTS = ["E.R1"]
-SETTINGS = ["test", "testmut", "DimR1", "DimR1finO"]
-#PSWEEPS = ["pHFC.l_DimR1","pHFC.l_DimR1finO","pHFC.l_test"]
-#PSWEEPS = ["pLFC.l_DimR1finO","pLFC.l_DimR1","pLFC.l_test"]
-#PSWEEPS = ["pF_test","pF_DimR1finO","pF_DimR1","pE_test","pE_DimR1finO","pE_DimR1"]
-PSWEEPS = ["pE_DimR1"]
+PSWEEPS = ["pHFC_S.pB10", "pLFC_S.pB10", "pDim_E.R1", "pDim_E.RP4"]
 #PSWEEPS = ["pHFC.l_DimR1","pHFC.l_DimR1finO","pHFC.l_test","pLFC.l_DimR1finO","pLFC.l_DimR1","pLFC.l_test","pF_test","pF_DimR1finO","pF_DimR1"]
 
 
@@ -30,11 +26,10 @@ plot_colors = {
 plot_colors_psweep = {
   "p_Exc": "gray95",
   "p_Dis": "#140433",
-  "p_lowI": "#d2c5eb",
-  "p_highI": "#2b1457",
-  "p_parI": "#b7bde8",
-  "p_parD": "gray80",
-  "p_lowD": "#a38cd1"
+  "p_lowI": "#FFC2C2",
+  "p_highI": "#C20000",
+  "p_lowD": "#BABAFF",
+  "p_highD": "#0000AB"
 }
 
 ### Linetypes
@@ -48,10 +43,8 @@ rule all:
   input:
     expand("results/case_study_sims/{treatment}/{treatment}_density_plot.pdf", treatment = TREATMENTS),
     expand("results/case_study_sims/{treatment}/{treatment}_frequency_plot.pdf", treatment = TREATMENTS),
-    expand("results/parameter_sets/{parameters}_sweep_param.csv", parameters = SETTINGS),
     expand("results/parameter_sweeps/{psweep}/{psweep}_change_plot.pdf", psweep = PSWEEPS),
-    expand("results/parameter_sweeps/{psweep}/{psweep}_inv_plot.pdf", psweep = PSWEEPS),
-    expand("results/parameter_sweeps/{psweep}/{psweep}_inv_time_plot.pdf", psweep = PSWEEPS)
+    expand("results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot.pdf", psweep = PSWEEPS)
 
 # Define rule for running case study invasion simulations
 rule case_study_sims:
@@ -110,23 +103,22 @@ rule plot_case_study_sims:
 rule psweep_parameter:
   input:
     "src/generate_parameter_sets.R",
-    "input_data/Parameter_sweep_settings.csv"
+    "input_data/parameter_sweeps/{psweep}_psweep_settings.csv"
   output:
-    "results/parameter_sets/{parameters}_sweep_param.csv"
+    "results/parameter_sweeps/{psweep}/{psweep}_params.csv",
+    "results/parameter_sweeps/{psweep}/{psweep}_settings.rds"
   shell:
     """
     Rscript src/generate_parameter_sets.R \
-      --setting {wildcards.parameters} 
+      --psweepsetting {wildcards.psweep} 
     """
-# GPT thingy that is supposed to help me with the wildcard issue but idk
-# def get_setting_from_psweep(wc):
-#     return wc.psweep.split("_")[-1]
 
 # Define rule for running parameter sweep simulations
 rule psweep_sims:
   input:
     "src/simrun_psweep.R",
-    "input_data/Treatments_parameter_sweep.csv"
+    "results/parameter_sweeps/{psweep}/{psweep}_params.csv",
+    "results/parameter_sweeps/{psweep}/{psweep}_settings.rds"
   output:
     "results/parameter_sweeps/{psweep}/{psweep}_out.csv"
   threads:
@@ -142,7 +134,8 @@ rule psweep_sims:
 rule process_psweep:
   input:
     "src/process_psweep.R",
-    "results/parameter_sweeps/{psweep}/{psweep}_out.csv"
+    "results/parameter_sweeps/{psweep}/{psweep}_out.csv",
+    "results/parameter_sweeps/{psweep}/{psweep}_settings.rds"
   output:
     "results/parameter_sweeps/{psweep}/{psweep}_plot.csv"
   shell:
@@ -158,8 +151,7 @@ rule plot_psweep:
     "results/parameter_sweeps/{psweep}/{psweep}_plot.csv"
   output:
     "results/parameter_sweeps/{psweep}/{psweep}_change_plot.pdf",
-    "results/parameter_sweeps/{psweep}/{psweep}_inv_plot.pdf",
-    "results/parameter_sweeps/{psweep}/{psweep}_inv_time_plot.pdf"
+    "results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot.pdf"
   params:
     plot_colors_psweep = json.dumps(plot_colors_psweep)
   shell:

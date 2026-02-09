@@ -12,25 +12,16 @@ parser$add_argument("-p","--psweepsetting", type = "character", help = "Specify 
 args <- parser$parse_args()
 
 # Get treatment
-t_s <- args$psweepsetting
-sweep_folder <- paste("results/parameter_sweeps", t_s, sep = "/")
-
-treatment <- str_extract(t_s, ".*?(?=_)")
-setting <- str_extract(t_s, "(?<=_).*")
+ps <- args$psweepsetting
+output_folder <- paste("results", "parameter_sweeps", ps, sep = "/")
 
 # Read in files ----
-sweep_out <- read_csv(paste0(sweep_folder, "/" , t_s, "_out.csv"))
-treatment_csv <- read.csv("input_data/Treatments_parameter_sweep.csv", header = F)
-
-# Treatment file settings
-tr_colnames <- treatment_csv[[1]]
-treatment_csv <- as.data.frame(t(treatment_csv[,-1]))
-colnames(treatment_csv) <- tr_colnames
-row_number <- which(treatment_csv$Treatment_ID == treatment)
+sweep_out <- read_csv(paste0(output_folder, "/" , ps, "_out.csv"))
+setting_list <- readRDS(paste0(output_folder, "/", ps, "_settings.rds"))
 
 # Relevant Treatment file values
-A1_0 = as.numeric(treatment_csv$A1_0[row_number])
-M1_0 = as.numeric(treatment_csv$M1_0[row_number])
+A1_0 = as.numeric(setting_list$A1_0)
+M1_0 = as.numeric(setting_list$M1_0)
 
 # Designate invasion status of mutations
 sweep_plot <- sweep_out %>%
@@ -39,12 +30,8 @@ sweep_plot <- sweep_out %>%
   mutate(Anc_freq = Anc/(Anc + Mut),
          Mut_freq = Mut/(Mut + Anc)) %>%
   mutate(Mut_freq0 = M1_0/(A1_0 + M1_0)) %>%
-  mutate(Mut_freq_change = ifelse(Mut_freq > Mut_freq0, "Increase", "Decrease")) %>%
-  mutate(Invasion = case_when(Anc == 0 ~ "Displaced",
-                              Mut== 0 ~ "Excluded",
-                              # Designate situations where plasmid was outcompeted as NA
-                              Anc == 0 & Mut == 0 ~ "NA",
-                              Mut_freq > Mut_freq0 & Anc != 0 ~ "P_increase",
-                              Mut_freq < Mut_freq0 & Anc != 0 ~ "P_decrease"))
+  mutate(Mut_freq_change = Mut_freq - Mut_freq0,
+         Mut_freq_inv = ifelse(Mut_freq > Mut_freq0, "Increase", "Decrease"))
+
 # Save file
-write_csv(sweep_plot, paste0(sweep_folder, "/", t_s, "_plot.csv"))
+write_csv(sweep_plot, paste0(output_folder, "/", ps, "_plot.csv"))
