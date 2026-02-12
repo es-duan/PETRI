@@ -293,7 +293,7 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
         M2 = tail(cycle_df$M2, 1)
         F2 = tail(cycle_df$F2, 1)
         
-        if (last_phase == "growth" | last_phase == "transconjugant_selection" & Selection_type == "liquid"){
+        if (last_phase == "growth" | last_phase == "transconjugant_selection" & Selection_type == "liquid" & time_start != 0){
           # If entering from a growth phase, perform a dilution
           A1 = ifelse((A1 * Dilution_conjugation) < Dilution_cutoff, 0, A1 * Dilution_conjugation)
           M1 = ifelse((M1 * Dilution_conjugation) < Dilution_cutoff, 0, M1 * Dilution_conjugation)

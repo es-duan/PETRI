@@ -6,8 +6,7 @@ import json
 ## Specify treatments
 #TREATMENTS = ["A.2","C.2","O","E","F"]
 TREATMENTS = ["E.R1"]
-PSWEEPS = ["pHFC_S.pB10", "pLFC_S.pB10", "pDim_E.R1", "pDim_E.RP4"]
-#PSWEEPS = ["pHFC.l_DimR1","pHFC.l_DimR1finO","pHFC.l_test","pLFC.l_DimR1finO","pLFC.l_DimR1","pLFC.l_test","pF_test","pF_DimR1finO","pF_DimR1"]
+PSWEEPS = ["pHFC_S.pB10","pLFC_S.pB10","pDim90_E.R1","pDim90_E.RP4","pHFCi_S.pB10","pLFCi_S.pB10"]
 
 
 ## Specify global variables
@@ -44,7 +43,8 @@ rule all:
     expand("results/case_study_sims/{treatment}/{treatment}_density_plot.pdf", treatment = TREATMENTS),
     expand("results/case_study_sims/{treatment}/{treatment}_frequency_plot.pdf", treatment = TREATMENTS),
     expand("results/parameter_sweeps/{psweep}/{psweep}_change_plot.pdf", psweep = PSWEEPS),
-    expand("results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot.pdf", psweep = PSWEEPS)
+    expand("results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot.pdf", psweep = PSWEEPS),
+    expand("results/parameter_sweeps/{psweep}/{psweep}_inv_change_strain_plot.pdf", psweep = PSWEEPS)
 
 # Define rule for running case study invasion simulations
 rule case_study_sims:
@@ -151,7 +151,8 @@ rule plot_psweep:
     "results/parameter_sweeps/{psweep}/{psweep}_plot.csv"
   output:
     "results/parameter_sweeps/{psweep}/{psweep}_change_plot.pdf",
-    "results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot.pdf"
+    "results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot.pdf",
+    "results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot.rds"
   params:
     plot_colors_psweep = json.dumps(plot_colors_psweep)
   shell:
@@ -159,4 +160,18 @@ rule plot_psweep:
     Rscript src/plot_psweep.R \
       --psweepsetting {wildcards.psweep} \
       --colors '{params.plot_colors_psweep}'
+    """
+    
+# Define rule for plotting parameter sweeps with strains
+rule plot_psweep_strain:
+  input:
+    "input_data/strain_phenotypes.csv",
+    "src/plot_psweep_strain.R",
+    "results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot.rds"
+  output:
+    "results/parameter_sweeps/{psweep}/{psweep}_inv_change_strain_plot.pdf"
+  shell:
+    """
+    Rscript src/plot_psweep_strain.R \
+      --psweepsetting {wildcards.psweep}
     """

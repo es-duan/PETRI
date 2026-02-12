@@ -1,9 +1,8 @@
-# Process parameter sweep data
+# Plot parameter sweep data
 
 # Load packages ----
 library(tidyverse)
 library(argparse)
-library(ggh4x)
 library(ggnewscale)
 library(jsonlite)
 
@@ -21,6 +20,12 @@ output_folder <- paste("results/parameter_sweeps", ps, sep = "/")
 
 # Read in files ----
 sweep_plot <- read_csv(paste0(output_folder, "/" , ps, "_plot.csv"))
+setting_list <- readRDS(paste0(output_folder, "/", ps, "_settings.rds"))
+ph <- read_csv("input_data/strain_phenotypes.csv")
+
+# Relevant parameters
+gamma_ref <- as.numeric(setting_list$Ref_gamma)
+psi_ref <- as.numeric(setting_list$Ref_psi)
 
 # Load global variables ----
 ## Colors ----
@@ -46,62 +51,109 @@ source("src/ggplot_theme.R")
 # Plot psweep ----
 
 # Set plot limits
-gamma_fold_max = max(sweep_plot$gamma_fold)
-gamma_fold_min = min(sweep_plot$gamma_fold)
-psi_change_max = max(sweep_plot$psi_change)
-psi_change_min = min(sweep_plot$psi_change)
+gamma_M_max = max(sweep_plot$log_gamma_M)
+gamma_M_min = min(sweep_plot$log_gamma_M)
+psi_M_max = max(sweep_plot$psi_M)
+psi_M_min = min(sweep_plot$psi_M)
+
+# Select axes labels to plot
+gamma_all = seq(round(gamma_M_min, 0), round(gamma_M_max, 0), 1)
+gamma_range = gamma_all[seq(2,length(gamma_all), 2)]
+
+psi_all = seq(round(psi_M_min, 1), round(psi_M_max, 1), 0.1)
+psi_range = psi_all[seq(2, length(psi_all), 2)]
 
 # Generate dataset for axes labels
-axes_label <- sweep_plot %>%
-  filter(gamma_fold %% 1 == 0) %>%
-  filter(psi_change %% 0.1 == 0) %>%
-  filter(gamma_fold == 0 | psi_change == 0) %>%
-  filter(!(gamma_fold == 0 & psi_change == 0)) %>%
-  select(gamma_fold, psi_change) %>%
-  mutate(x = ifelse(gamma_fold == 0, gamma_fold - 0.25, gamma_fold),
-         y = ifelse(psi_change == 0, psi_change - 0.015, psi_change)) %>%
-  mutate(label = ifelse(gamma_fold == 0, psi_change, gamma_fold))
+axes1 <- data.frame("gamma" = c(gamma_range, rep(log10(gamma_ref), length(psi_range))),
+                      "psi" = c(rep(psi_ref, length(gamma_range)), psi_range)) %>%
+  mutate(x = ifelse(gamma == log10(gamma_ref), gamma - 0.25, gamma),
+         y = ifelse(psi == psi_ref, psi - 0.015, psi)) %>%
+  mutate(label = case_when(gamma == log10(gamma_ref) ~ as.character(psi),
+                           psi == psi_ref ~ as.character(gamma)))
+
+axes2 <- data.frame("gamma" = log10(gamma_ref),
+                    "psi" = psi_ref) %>%
+  mutate(x = gamma + 0.8,
+         y = psi + 0.03) %>%
+  mutate(label = paste0("(",as.character(round(gamma, 1)),",",
+                        as.character(round(psi,2)),")"))
+
+axes_label <- rbind(axes1,axes2)
 
 ## Plot by rate of change ----
 i1 <- ggplot() +
   geom_tile(data = filter(sweep_plot, Mut_freq_inv == "Increase"),
-            mapping = aes(gamma_fold,psi_change, fill = Mut_freq_change)) +
+            mapping = aes(log_gamma_M, psi_M, fill = Mut_freq_change)) +
   scale_fill_gradient("Frequency\nincrease",
                       low=p_lowI, high=p_highI) +
   new_scale_fill() +
   geom_tile(data = filter(sweep_plot, Mut_freq_inv == "Decrease"),
-            mapping = aes(gamma_fold,psi_change, fill = Mut_freq_change)) +
+            mapping = aes(log_gamma_M, psi_M, fill = Mut_freq_change)) +
   scale_fill_gradient("Frequency\ndecrease",
                       low=p_highD, high=p_lowD) +
-  geom_hline(yintercept = 0, color = "black", linewidth = 1.5) + 
-  geom_vline(xintercept = 0, color = "black", linewidth = 1.5) +
+  geom_hline(yintercept = psi_ref, color = "black", linewidth = 1) + 
+  geom_vline(xintercept = log10(gamma_ref), color = "black", linewidth = 1) +
   geom_text(data = axes_label,
             mapping = aes(x, y, label = label),
-            size = 6) +
+            size = 4) +
   scale_x_continuous(expand = c(0.01, 0.01),
                      labels = ~ ifelse(.x == 0, "", .x)) +
   scale_y_continuous(expand = c(0.01, 0.01),
                      labels = ~ ifelse(.x == 0, "", .x)) +
-  coord_axes_inside(labels_inside = TRUE,
-                    xlim=c(gamma_fold_min,gamma_fold_max),
-                    ylim=c(psi_change_min,psi_change_max)) +
-  labs(x = expression(Delta*"Conjugation Rate"),
-       y = expression(Delta*"Host Fitness")) +
-  axes_aes
+  labs(x = expression("log10(Conjugation Rate)"),
+       y = expression("Growth Rate")) +
+  axes_aes +
+  theme(axis.ticks = element_blank(),
+        axis.line = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
 
 # Save plot
 ggsave(paste0(output_folder, "/", ps, "_inv_change_plot.pdf"),
        i1, height = 5, width = 6.75, units = "in")
+saveRDS(i1, paste0(output_folder, "/", ps, "_inv_change_plot.rds"))
+
+i1r <- ggplot() +
+  geom_raster(data = filter(sweep_plot, Mut_freq_inv == "Increase"),
+            mapping = aes(log_gamma_M, psi_M, fill = Mut_freq_change)) +
+  scale_fill_gradient("Frequency\nincrease",
+                      low=p_lowI, high=p_highI) +
+  new_scale_fill() +
+  geom_raster(data = filter(sweep_plot, Mut_freq_inv == "Decrease"),
+            mapping = aes(log_gamma_M, psi_M, fill = Mut_freq_change)) +
+  scale_fill_gradient("Frequency\ndecrease",
+                      low=p_highD, high=p_lowD) +
+  geom_hline(yintercept = psi_ref, color = "black", linewidth = 1) + 
+  geom_vline(xintercept = log10(gamma_ref), color = "black", linewidth = 1) +
+  geom_text(data = axes_label,
+            mapping = aes(x, y, label = label),
+            size = 4) +
+  scale_x_continuous(expand = c(0.01, 0.01),
+                     labels = ~ ifelse(.x == 0, "", .x)) +
+  scale_y_continuous(expand = c(0.01, 0.01),
+                     labels = ~ ifelse(.x == 0, "", .x)) +
+  labs(x = expression("log10(Conjugation Rate)"),
+       y = expression("Growth Rate")) +
+  axes_aes +
+  theme(axis.ticks = element_blank(),
+        axis.line = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+
+# Save plot
+ggsave(paste0(output_folder, "/", ps, "_inv_change_plotr.pdf"),
+       i1r, height = 5, width = 6.75, units = "in")
+saveRDS(i1r, paste0(output_folder, "/", ps, "_inv_change_plotr.rds"))
 
 ## Binary plot (increase or decrease) ----
 i2 <- ggplot() +
   geom_tile(data = sweep_plot,
-            aes(gamma_fold, psi_change, fill = Mut_freq_inv)) +
-  geom_hline(yintercept = 0, color = "black", linewidth = 1.5) + 
-  geom_vline(xintercept = 0, color = "black", linewidth = 1.5) +
+            aes(log_gamma_M, psi_M, fill = Mut_freq_inv)) +
+  geom_hline(yintercept = psi_ref, color = "black", linewidth = 1) + 
+  geom_vline(xintercept = log10(gamma_ref), color = "black", linewidth = 1) +
   geom_text(data = axes_label,
             mapping = aes(x, y, label = label),
-            size = 6) +
+            size = 4) +
   scale_fill_manual(values = c("Increase" = p_Dis,
                                "Decrease" = p_Exc,
                                "NA" = "gray")) +
@@ -109,16 +161,15 @@ i2 <- ggplot() +
                      labels = ~ ifelse(.x == 0, "", .x)) +
   scale_y_continuous(expand = c(0.01, 0.01),
                      labels = ~ ifelse(.x == 0, "", .x)) +
-  coord_axes_inside(labels_inside = TRUE,
-                    xlim=c(gamma_fold_min,gamma_fold_max),
-                    ylim=c(psi_change_min,psi_change_max)) +
-  labs(x = expression(Delta*"Conjugation Rate"),
-       y = expression(Delta*"Host Fitness"),
+  labs(x = expression("log10(Conjugation Rate)"),
+       y = expression("Growth Rate"),
        fill = "Invasion") +
-  axes_aes
+  axes_aes +
+  theme(axis.ticks = element_blank(),
+        axis.line = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
 
 # Save plot
 ggsave(paste0(output_folder, "/", ps, "_change_plot.pdf"),
        i2, height = 5, width = 6.75, units = "in")
-
-

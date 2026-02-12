@@ -25,6 +25,7 @@ M1_0 = as.numeric(setting_list$M1_0)
 
 # Designate invasion status of mutations
 sweep_plot <- sweep_out %>%
+  mutate(log_gamma_M = log10(gamma_M)) %>%
   mutate(Anc = A1 + A2,
          Mut = M1 + M2) %>%
   mutate(Anc_freq = Anc/(Anc + Mut),
