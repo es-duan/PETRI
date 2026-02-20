@@ -38,12 +38,13 @@ p_lowD <- plot_colors[["p_lowD"]]
 p_highD <- plot_colors[["p_highD"]]
 
 # Non-snakemake
-# p_Exc <- "gray95"
-# p_Dis <- "#140433"
-# p_lowD <- "#BABAFF"
-# p_highD <- "#0000AB"
-# p_lowI <- "#FFC2C2"
-# p_highI <- "#C20000"
+p_Exc <- "gray95"
+p_Dis <- "#140433"
+p_lowD <- "#BABAFF"
+p_highD <- "#0000AB"
+p_lowI <- "#FFC2C2"
+p_highI <- "#C20000"
+p_mid <- "#fff2f2"
 
 ## Retrieve ggplot theme ----
 source("src/ggplot_theme.R")
@@ -65,7 +66,7 @@ psi_range = psi_all[seq(2, length(psi_all), 2)]
 
 # Generate dataset for axes labels
 axes1 <- data.frame("gamma" = c(gamma_range, rep(log10(gamma_ref), length(psi_range))),
-                      "psi" = c(rep(psi_ref, length(gamma_range)), psi_range)) %>%
+                    "psi" = c(rep(psi_ref, length(gamma_range)), psi_range)) %>%
   mutate(x = ifelse(gamma == log10(gamma_ref), gamma - 0.25, gamma),
          y = ifelse(psi == psi_ref, psi - 0.015, psi)) %>%
   mutate(label = case_when(gamma == log10(gamma_ref) ~ as.character(psi),
@@ -80,22 +81,55 @@ axes2 <- data.frame("gamma" = log10(gamma_ref),
 
 axes_label <- rbind(axes1,axes2)
 
+# Transformations for color
+max_change <- max(sweep_plot$Mut_freq_change)
+min_change <- min(sweep_plot$Mut_freq_change)
+
+sweep_plot2 <- sweep_plot %>%
+  mutate(Mut_freq_change2 = ifelse(Mut_freq_change > 0, Mut_freq_change/max_change,
+                                   -Mut_freq_change/min_change))
+
 ## Plot by rate of change ----
 i1 <- ggplot() +
-  geom_tile(data = filter(sweep_plot, Mut_freq_inv == "Increase"),
-            mapping = aes(log_gamma_M, psi_M, fill = Mut_freq_change)) +
+  geom_tile(data = sweep_plot2,
+            mapping = aes(log_gamma_M, psi_M, fill = Mut_freq_change2)) +
+  scale_fill_gradient2("Frequency\nchange",
+                       low=p_highD, mid = p_mid, high=p_highI, midpoint = 0) +
+  # geom_hline(yintercept = psi_ref, color = "black", linewidth = 1) + 
+  # geom_vline(xintercept = log10(gamma_ref), color = "black", linewidth = 1) +
+  # geom_text(data = axes_label,
+  #           mapping = aes(x, y, label = label),
+  #           size = 4) +
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+  scale_y_continuous(expand = c(0.01, 0.01)) +
+  labs(x = expression("log10(Conjugation Rate)"),
+       y = expression("Growth Rate")) +
+   fig_aes 
+  # theme(axis.ticks = element_blank(),
+  #       axis.line = element_blank(),
+  #       panel.grid.major = element_blank(),
+  #       panel.grid.minor = element_blank())
+
+# Save plot
+ggsave(paste0(output_folder, "/", ps, "_inv_change_plot.pdf"),
+       i1, height = 5, width = 6.75, units = "in")
+saveRDS(i1, paste0(output_folder, "/", ps, "_inv_change_plot.rds"))
+
+i1r <- ggplot() +
+  geom_raster(data = filter(sweep_plot, Mut_freq_inv == "Increase"),
+              mapping = aes(log_gamma_M, psi_M, fill = Mut_freq_change)) +
   scale_fill_gradient("Frequency\nincrease",
                       low=p_lowI, high=p_highI) +
   new_scale_fill() +
-  geom_tile(data = filter(sweep_plot, Mut_freq_inv == "Decrease"),
-            mapping = aes(log_gamma_M, psi_M, fill = Mut_freq_change)) +
+  geom_raster(data = filter(sweep_plot, Mut_freq_inv == "Decrease"),
+              mapping = aes(log_gamma_M, psi_M, fill = Mut_freq_change)) +
   scale_fill_gradient("Frequency\ndecrease",
                       low=p_highD, high=p_lowD) +
-  geom_hline(yintercept = psi_ref, color = "white", linewidth = 1) + 
-  geom_vline(xintercept = log10(gamma_ref), color = "white", linewidth = 1) +
+  geom_hline(yintercept = psi_ref, color = "black", linewidth = 1) + 
+  geom_vline(xintercept = log10(gamma_ref), color = "black", linewidth = 1) +
   geom_text(data = axes_label,
             mapping = aes(x, y, label = label),
-            size = 4, color = "white") +
+            size = 4) +
   scale_x_continuous(expand = c(0.01, 0.01),
                      labels = ~ ifelse(.x == 0, "", .x)) +
   scale_y_continuous(expand = c(0.01, 0.01),
@@ -109,10 +143,9 @@ i1 <- ggplot() +
         panel.grid.minor = element_blank())
 
 # Save plot
-ggsave(paste0(output_folder, "/", ps, "_inv_change_plot.pdf"),
-       i1, height = 5, width = 6.75, units = "in")
-saveRDS(i1, paste0(output_folder, "/", ps, "_inv_change_plot.rds"))
-
+ggsave(paste0(output_folder, "/", ps, "_inv_change_plotr.pdf"),
+       i1r, height = 5, width = 6.75, units = "in")
+saveRDS(i1r, paste0(output_folder, "/", ps, "_inv_change_plotr.rds"))
 
 ## Binary plot (increase or decrease) ----
 i2 <- ggplot() +

@@ -85,6 +85,7 @@ p1 <- ggplot() +
 # Save plot
 ggsave(paste0(treatment_folder, "/", treatment, "_density_plot.pdf"),
        p1, height = 5, width = 20, units = "in")
+saveRDS(p1, paste0(treatment_folder, "/", treatment, "_density_plot.rds"))
 
 # Plot frequencies over time ----
 p2 <- ggplot() + 
@@ -112,3 +113,4 @@ p2 <- ggplot() +
 # Save plot
 ggsave(paste0(treatment_folder, "/", treatment, "_frequency_plot.pdf"),
        p2, height = 5, width = 20, units = "in")
+saveRDS(p2, paste0(treatment_folder, "/", treatment, "_frequency_plot.rds"))

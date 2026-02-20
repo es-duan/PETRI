@@ -108,6 +108,7 @@ HFC_stat <- HFC_f %>%
 HFC_tt <- t.test(HFC_stat$Freq_T77a, HFC_stat$Freq_T0a, 
        alternative = "greater",
        paired = TRUE,
+       var.equal = FALSE,
        conf.level = 0.95)
 
 ## Save files ----
@@ -121,6 +122,8 @@ write_csv(tidy(HFC_tt), paste(output_dir, "HFC", "HFC_ttest.csv", sep = "/"))
 ## Clean up data, apply extinctions, add metadata ----
 plating_LFC2 <- plating_LFC %>%
   filter(!is.na(Count)) %>%
+  # Select first 3 replicates only
+  filter(Replicate %in% c(1,2,3)) %>%
   mutate(Replicate = as.character(Replicate)) %>%
   mutate(Host = ifelse(str_detect(Plate_type, "Rif"), "rifR", "nalR")) %>% # Add host info
   left_join(extinction_out_av, by = c("Host", "Phenotype", "Plate_type")) %>% # Add extinction data
@@ -224,6 +227,7 @@ LFC_stat <- LFC_f %>%
 LFC_tt <- t.test(LFC_stat$Freq_T245a, LFC_stat$Freq_T0a, 
        alternative = "greater",
        paired = TRUE,
+       var.equal = FALSE,
        conf.level = 0.95)
 
 ## Save files ----

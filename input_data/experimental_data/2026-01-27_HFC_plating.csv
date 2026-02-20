@@ -1,0 +1,31 @@
+Experiment,Treatment,Cycle,Phase,Day,Time,Plate_Dilution ,Volume_plated,Replicate,Plate_label,Plate_type,Phenotype,Predicted_count,Predicted_density,Count,Density,Count_time,Plating_style,Count_type,Notes
+2025-11-30_HFC,HFC,1,conj,1,0,3,100,1,HFC T0 R1 -3,Tet50/Rif75,Anc,10,1.00E+05,13,1.30E+05,48,dilution_plate,count,updated with streak data
+2025-11-30_HFC,HFC,1,conj,1,0,3,100,1,HFC T0 R1 -3,Tet50/Rif75,Mut,1000,1.00E+07,1481,1.48E+07,48,dilution_plate,count,updated with streak data
+2025-11-30_HFC,HFC,1,conj,1,0,4,100,1,HFC T0 R1 -4,Nal50,F,100,1.00E+07,134,1.34E+07,48,dilution_plate,count,
+2025-11-30_HFC,HFC,1,conj,1,0,0,5,1,HFC T0 R1 -0,Tet50/Nal50,Anc,0,0.00E+00,0,0.00E+00,48,dilution_plate,count,
+2025-11-30_HFC,HFC,1,conj,1,0,0,5,1,HFC T0 R1 -0,Tet50/Nal50,Mut,0,0.00E+00,0,0.00E+00,48,dilution_plate,count,
+2025-11-30_HFC,HFC,1,conj,1,0,3,100,2,HFC T0 R2 -3,Tet50/Rif75,Anc,10,1.00E+05,9,9.00E+04,48,dilution_plate,count,updated with streak data
+2025-11-30_HFC,HFC,1,conj,1,0,3,100,2,HFC T0 R2 -3,Tet50/Rif75,Mut,1000,1.00E+07,1214,1.21E+07,48,dilution_plate,count,updated with streak data
+2025-11-30_HFC,HFC,1,conj,1,0,4,100,2,HFC T0 R2 -4,Nal50,F,100,1.00E+07,172,1.72E+07,48,dilution_plate,count,
+2025-11-30_HFC,HFC,1,conj,1,0,0,5,2,HFC T0 R2 -0,Tet50/Nal50,Anc,0,0.00E+00,0,0.00E+00,48,dilution_plate,count,
+2025-11-30_HFC,HFC,1,conj,1,0,0,5,2,HFC T0 R2 -0,Tet50/Nal50,Mut,0,0.00E+00,0,0.00E+00,48,dilution_plate,count,
+2025-11-30_HFC,HFC,1,conj,1,0,3,100,3,HFC T0 R3 -3,Tet50/Rif75,Anc,10,1.00E+05,9,9.00E+04,48,dilution_plate,count,updated with streak data
+2025-11-30_HFC,HFC,1,conj,1,0,3,100,3,HFC T0 R3 -3,Tet50/Rif75,Mut,1000,1.00E+07,1418,1.42E+07,48,dilution_plate,count,updated with streak data
+2025-11-30_HFC,HFC,1,conj,1,0,4,100,3,HFC T0 R3 -4,Nal50,F,100,1.00E+07,224,2.24E+07,48,dilution_plate,count,
+2025-11-30_HFC,HFC,1,conj,1,0,0,5,3,HFC T0 R3 -0,Tet50/Nal50,Anc,0,0.00E+00,0,0.00E+00,48,dilution_plate,count,
+2025-11-30_HFC,HFC,1,conj,1,0,0,5,3,HFC T0 R3 -0,Tet50/Nal50,Mut,0,0.00E+00,0,0.00E+00,48,dilution_plate,count,
+2025-11-30_HFC,HFC,1,conj,1,5,4,300,1,HFC T5 R1 -4,Tet50/Rif75,Anc,10,3.33E+05,6,2.00E+05,48,dilution_plate,count,updated with streak data
+2025-11-30_HFC,HFC,1,conj,1,5,4,300,1,HFC T5 R1 -4,Tet50/Rif75,Mut,1200,4.00E+07,616,2.05E+07,48,dilution_plate,count,updated with streak data
+2025-11-30_HFC,HFC,1,conj,1,5,4,100,1,HFC T5 R1 -4,Nal50,F,300,3.00E+07,219,2.19E+07,48,dilution_plate,count,
+2025-11-30_HFC,HFC,1,conj,1,5,4,300,2,HFC T5 R2 -4,Tet50/Rif75,Anc,10,3.33E+05,6,2.00E+05,48,dilution_plate,count,updated with streak data
+2025-11-30_HFC,HFC,1,conj,1,5,4,300,2,HFC T5 R2 -4,Tet50/Rif75,Mut,1200,4.00E+07,1156,3.85E+07,48,dilution_plate,count,updated with streak data
+2025-11-30_HFC,HFC,1,conj,1,5,4,100,2,HFC T5 R2 -4,Nal50,F,300,3.00E+07,291,2.91E+07,48,dilution_plate,count,
+2025-11-30_HFC,HFC,1,conj,1,5,4,300,3,HFC T5 R3 -4,Tet50/Rif75,Anc,10,3.33E+05,6,2.00E+05,48,dilution_plate,count,
+2025-11-30_HFC,HFC,1,conj,1,5,4,300,3,HFC T5 R3 -4,Tet50/Rif75,Mut,1200,4.00E+07,1280,4.27E+07,48,dilution_plate,count,updated with streak data
+2025-11-30_HFC,HFC,1,conj,1,5,4,100,3,HFC T5 R3 -4,Nal50,F,300,3.00E+07,368,3.68E+07,48,dilution_plate,count,updated with streak data
+2025-11-30_HFC,HFC,1,conj,1,5,0,500,1,HFC T5 R1 -0,Tet50/Nal50,Anc,50,1.00E+02,53,1.06E+02,72,dilution_plate,count,updated with streak data
+2025-11-30_HFC,HFC,1,conj,1,5,0,500,1,HFC T5 R1 -0,Tet50/Nal50,Mut,50,1.00E+02,47,9.40E+01,72,dilution_plate,count,updated with streak data
+2025-11-30_HFC,HFC,1,conj,1,5,0,500,2,HFC T5 R2 -0,Tet50/Nal50,Anc,50,1.00E+02,139,2.78E+02,72,dilution_plate,count,updated with streak data
+2025-11-30_HFC,HFC,1,conj,1,5,0,500,2,HFC T5 R2 -0,Tet50/Nal50,Mut,50,1.00E+02,142,2.84E+02,72,dilution_plate,count,updated with streak data
+2025-11-30_HFC,HFC,1,conj,1,5,0,500,3,HFC T5 R3 -0,Tet50/Nal50,Anc,50,1.00E+02,79,1.58E+02,72,dilution_plate,count,updated with streak data
+2025-11-30_HFC,HFC,1,conj,1,5,0,500,3,HFC T5 R3 -0,Tet50/Nal50,Mut,50,1.00E+02,282,5.64E+02,72,dilution_plate,count,updated with streak data

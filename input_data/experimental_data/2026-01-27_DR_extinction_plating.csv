@@ -1,0 +1,13 @@
+Experiment,Strain,Plate_Dilution ,Volume_plated,Replicate,Plate_label,Plate_type,Phenotype,Predicted_count,Predicted_density,Count,Density
+2025-06-09_Extinction,84,6,100,1,84 R1 -6,LB,Anc,50,5.00E+08,29,2.90E+08
+2025-06-09_Extinction,84,6,100,1,84 R1 -6,Tet50/Rif75,Anc,50,5.00E+08,41,4.10E+08
+2025-06-09_Extinction,84,6,100,2,84 R2 -6,LB,Anc,50,5.00E+08,34,3.40E+08
+2025-06-09_Extinction,84,6,100,2,84 R2 -6,Tet50/Rif75,Anc,50,5.00E+08,75,7.50E+08
+2025-06-09_Extinction,85,6,100,1,85 R1 -6,LB,Mut,100,1.00E+09,126,1.26E+09
+2025-06-09_Extinction,85,6,100,1,85 R1 -6,Tet50/Rif75,Mut,100,1.00E+09,146,1.46E+09
+2025-06-09_Extinction,85,6,100,2,85 R2 -6,LB,Mut,100,1.00E+09,120,1.20E+09
+2025-06-09_Extinction,85,6,100,2,85 R2 -6,Tet50/Rif75,Mut,100,1.00E+09,141,1.41E+09
+2025-06-09_Extinction,44,6,100,1,44 R1 -6,LB,F,100,1.00E+09,348,3.48E+09
+2025-06-09_Extinction,44,6,100,1,44 R1 -6,Nal50,F,100,1.00E+09,296,2.96E+09
+2025-06-09_Extinction,44,6,100,2,44 R2 -6,LB,F,100,1.00E+09,365,3.65E+09
+2025-06-09_Extinction,44,6,100,2,44 R2 -6,Nal50,F,100,1.00E+09,284,2.84E+09

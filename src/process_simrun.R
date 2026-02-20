@@ -18,9 +18,6 @@ sim_results <- read_csv(paste0(treatment_folder, "/", treatment, "_data.csv"))
 sim_results_long <- read_csv(paste0(treatment_folder, "/", treatment, "_data_long.csv"))
 sim_phases <- read_csv(paste0(treatment_folder, "/", treatment, "_phases.csv"))
 
-# Factor to reduce temporal resolution for better plot visualization
-vf <- 0.01
-
 # Reformat data for plotting ----
 ## Density plot ----
 sim_dens <- sim_results_long %>%
@@ -36,11 +33,9 @@ sim_dens <- sim_results_long %>%
                               Genotype == "C" ~ "C")) %>%
   mutate(Genotype = factor(Genotype, levels = c("Ancestor", "Mutant", "Plasmid-free", "C"))) %>%
   mutate(Genotype_plot = fct_rev(Genotype)) %>%
-  mutate(Host = factor(Host, levels = c("rifR", "nalR", "C")))
+  mutate(Host = factor(Host, levels = c("rifR", "nalR", "C"))) %>%
   # Decrease number of points for smoother plotting
-  # group_by(Cycle, Phase, Cell_types, Host, Genotype) %>%
-  # slice(seq(1, n(), by = 1/0.01*vf)) %>%
-  # ungroup()
+  filter(Time %% 1 == 0)
 
 ## Phase colors ----
 phases_rect <- sim_phases %>%

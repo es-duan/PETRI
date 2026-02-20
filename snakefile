@@ -5,8 +5,8 @@ import json
 
 ## Specify treatments
 #TREATMENTS = ["A.2","C.2","O","E","F"]
-TREATMENTS = ["E.R1"]
-PSWEEPS = ["pHFC_S.pB10","pLFC_S.pB10","pDim90_E.R1","pDim90_E.RP4","pHFCi_S.pB10","pLFCi_S.pB10"]
+TREATMENTS = ["DG_pB10", "HFC_pB10", "LFC_pB10-A"]
+PSWEEPS = ["pHFC_S.pB10","pLFC_S.pB10","pDim90_E.R1","pDim90_E.RP4","pHFCi_S.pB10","pLFCi_S.pB10","pHFC_S.pB10-A","pLFC_S.pB10-A"]
 
 
 ## Specify global variables
@@ -49,8 +49,8 @@ rule all:
 # Define rule for running case study invasion simulations
 rule case_study_sims:
   input:
-    "src/simrun_case_study_snakemake.R",
-    "input_data/Treatments_case_study.csv"
+    "src/simrun_case_study.R",
+    "input_data/case_study_sims/{treatment}_inv_settings.csv"
   output:
     "results/case_study_sims/{treatment}/{treatment}_data.csv",
     "results/case_study_sims/{treatment}/{treatment}_data_long.csv",
@@ -59,7 +59,7 @@ rule case_study_sims:
     plot_colors = json.dumps(plot_colors)
   shell:
     """
-    Rscript src/simrun_case_study_snakemake.R \
+    Rscript src/simrun_case_study.R \
       --treatment {wildcards.treatment} \
       --colors '{params.plot_colors}'
     """
@@ -81,19 +81,21 @@ rule process_case_study_sims:
 # Define rule for plotting case study invasion simulations
 rule plot_case_study_sims:
   input:
-    "src/plot_simrun_snakemake.R",
+    "src/plot_simrun.R",
     "results/case_study_sims/{treatment}/{treatment}_density_plot_df.csv",
     "results/case_study_sims/{treatment}/{treatment}_frequency_plot_df.csv",
     "results/case_study_sims/{treatment}/{treatment}_phases_plot_df.csv"
   output:
     "results/case_study_sims/{treatment}/{treatment}_density_plot.pdf",
-    "results/case_study_sims/{treatment}/{treatment}_frequency_plot.pdf"
+    "results/case_study_sims/{treatment}/{treatment}_frequency_plot.pdf",
+    "results/case_study_sims/{treatment}/{treatment}_density_plot.rds",
+    "results/case_study_sims/{treatment}/{treatment}_frequency_plot.rds"
   params:
     plot_colors = json.dumps(plot_colors),
     plot_lines = json.dumps(plot_lines)
   shell:
     """
-    Rscript src/plot_simrun_snakemake.R \
+    Rscript src/plot_simrun.R \
       --treatment {wildcards.treatment} \
       --colors '{params.plot_colors}' \
       --lines '{params.plot_lines}'
@@ -122,7 +124,7 @@ rule psweep_sims:
   output:
     "results/parameter_sweeps/{psweep}/{psweep}_out.csv"
   threads:
-    5
+    6
   shell:
     """
     Rscript src/simrun_psweep.R \
