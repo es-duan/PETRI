@@ -6,5 +6,5 @@
 *archive/
 .snakemake/*
 !.snakemake/DAG.pdf
-results/case_study_sims/*archive/*
 prelim_experiments/*
+results/*
