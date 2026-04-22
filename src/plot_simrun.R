@@ -23,7 +23,8 @@ treatment_folder <- paste("results", "case_study_sims", treatment, sep = "/")
 
 sim_dens <- read_csv(paste0(treatment_folder, "/", treatment, "_density_plot_df.csv"))
 sim_freq <- read_csv(paste0(treatment_folder, "/", treatment, "_frequency_plot_df.csv"))
-phases_rect <- read_csv(paste0(treatment_folder, "/", treatment, "_phases_plot_df.csv"))
+phases_rect <- read_csv(paste0(treatment_folder, "/", treatment, "_phases_plot_df.csv")) %>%
+  mutate(Phase = factor(Phase, levels = c("Growth", "Conjugation", "Transconjugant selection", "Immigration")))
 
 # Load global variables ----
 ## Colors ----
@@ -35,7 +36,6 @@ p_growth <- plot_colors[["p_growth"]]
 p_conj <- plot_colors[["p_conj"]]
 p_tselect <- plot_colors[["p_tselect"]]
 p_imm <- plot_colors[["p_imm"]]
-p_select <- plot_colors[["p_select"]]
 
 ## Lines ----
 plot_lines <- fromJSON(args$lines)
@@ -46,19 +46,61 @@ nalR_l <- plot_lines[["nalR_l"]]
 source("src/ggplot_theme.R")
 
 # Plot densities over time ----
+## Split values to show strains that are being selected against ----
+if(str_detect(treatment, "Dim") == TRUE){
+  sim_densL <- sim_dens[1,]
+  sim_densB <- sim_dens %>% filter(Density != 0)
+  sim_densP <- sim_dens[1,]
+  point_size <- 0.01
+  
+} else{
+  sim_dens2 <- sim_dens %>%
+    filter(Density != 0) %>%
+    mutate(selection = case_when(Phase == "conj" & Cycle %in% c(1,3) & Cell_types %in% c("A1","M1","F2") ~ "yes",
+                                 Phase == "conj" & Cycle == 2 & Cell_types %in% c("A2","M2","F1") ~ "yes",
+                                 TRUE ~ "no"))
+  
+  sim_densL <- sim_dens2 %>% filter(selection == "yes")
+  sim_densP <- sim_densL %>%
+    group_by(Cycle, Cell_types) %>%
+    slice_tail(n = 1) %>%
+    ungroup()
+  point_size <- 2
+  
+  if(str_detect(treatment, "HFC") == TRUE){
+    sim_densB <- filter(sim_dens2, selection == "no")
+  }else{
+    sim_densB <- sim_densL %>%
+      group_by(Cycle, Cell_types) %>%
+      slice_head(n = 1) %>%
+      ungroup() %>%
+      mutate(Time = Time + 0.001) %>%
+      rbind(filter(sim_dens2, selection == "no")) 
+  }
+}
+
+
+## Plot ----
 p1 <- ggplot() + 
   geom_rect(data = phases_rect,
             mapping = aes(xmin = T_start, xmax = T_end, ymin = 1, ymax = Inf, fill = Phase)) +
-  scale_fill_manual(values = c("Growout" = "white",
-                               "Growth" = p_growth,
+  scale_fill_manual(values = c("Growth" = p_growth,
                                "Conjugation" = p_conj,
                                "Transconjugant selection" = p_tselect,
-                               "Immigration" = p_imm,
-                               "Plasmid selection" = p_select)) +
-  geom_line(data = sim_dens,
+                               "Immigration" = p_imm)) +
+  geom_line(data = sim_densL,
             mapping = aes(x = Time, y = Density,
-                          color = Genotype_plot, linetype = Host),
-            size = 2) +
+                          color = Genotype_plot, linetype = Host,
+                          group = interaction(Cycle, Genotype_plot, Host)),
+            linewidth = 2, alpha = 0.5) +
+  geom_point(data = sim_densP,
+             mapping = aes(x = Time, y = Density, color = Genotype_plot),
+             shape = 21, size = point_size, fill = "white", alpha = 0.75) +
+  geom_line(data = sim_densB,
+            mapping = aes(x = Time, y = Density,
+                          color = Genotype_plot, linetype = Host,
+                          group = interaction(Cycle, Genotype_plot, Host)),
+            linewidth = 2) +
   scale_color_manual(values = c("Ancestor" = p_Anc,
                                 "Mutant" = p_Mut,
                                 "Plasmid-free" = p_F),
@@ -72,13 +114,14 @@ p1 <- ggplot() +
        color = "Genotype",
        fill = "Phase",
        linetype = "Host") +
-  scale_y_continuous(trans = "log10",limits=c(1,2e9),
+  scale_y_continuous(trans = "log10",
                      breaks=c(1e0,1e2,1e4,1e6,1e8),
                      labels=sapply(c(0,2,4,6,8),function(i){parse(text = sprintf("10^%d",i))}),
-                     expand = c(0.01, 0.01)) +
+                     expand = c(0.01, 0.01),
+                     limits = c(0.9, 1.5e9)) +
   scale_x_continuous(expand = c(0.001, 0.001)) +
-  guides(fill = guide_legend(order=1, reverse = TRUE),
-         color = guide_legend(order=2),
+  guides(color = guide_legend(order=1, override.aes = list(shape = NA)),
+         fill = guide_legend(order=2),
          linetype = guide_legend(order=3)) +
   fig_aes
 
@@ -88,26 +131,42 @@ ggsave(paste0(treatment_folder, "/", treatment, "_density_plot.pdf"),
 saveRDS(p1, paste0(treatment_folder, "/", treatment, "_density_plot.rds"))
 
 # Plot frequencies over time ----
+# Use different scales for the plots
+if(min(sim_freq$Frequency) < 1e-5){
+  f_limits <- c(1e-7, 1)
+  f_breaks <- c(1e-6, 1e-4, 1e-2, 1)
+  f_labels <- c(-6, -4, -2)
+  
+} else if(min(sim_freq$Frequency) > 1e-5){
+  f_limits <- c(1e-5, 1)
+  f_breaks <- c(1e-4, 1e-2, 1)
+  f_labels <- c(-4, -2)
+}
+
 p2 <- ggplot() + 
   geom_rect(data = phases_rect,
             mapping = aes(xmin = T_start, xmax = T_end, ymin = 0, ymax = Inf, fill = Phase)) +
-  scale_fill_manual(values = c("Growout" = "white",
-                               "Growth" = p_growth,
+  scale_fill_manual(values = c("Growth" = p_growth,
                                "Conjugation" = p_conj,
                                "Transconjugant selection" = p_tselect,
-                               "Immigration" = p_imm,
-                               "Plasmid selection" = p_select)) +
+                               "Immigration" = p_imm)) +
   geom_line(data = sim_freq,
             mapping = aes(Time, Frequency, color = Genotype),
-            size = 2) +
+            linewidth = 2) +
   scale_color_manual(values = c("Ancestor" = p_Anc,
                                 "Mutant" = p_Mut)) +
-  scale_y_continuous(limits = c(0.00001,1),
-                     breaks=c(0, 0.0001, 0.01, 1),
-                     labels=c(0,sapply(c(-4,-2),function(i){parse(text = sprintf("10^%d",i))}),1),
+  scale_y_continuous(limits = f_limits,
+                     breaks = f_breaks,
+                     labels = c(sapply(f_labels,function(i){parse(text = sprintf("10^%d",i))}),1),
                      expand = c(0.01, 0.01),
-                     trans = "log10", name = "Frequency") +
+                     trans = "log10") +
   scale_x_continuous(expand = c(0.001, 0.001)) +
+  labs(x = "Time (hr)",
+       y = "Frequency",
+       color = "Genotype",
+       fill = "Phase") +
+  guides(color = guide_legend(order=1),
+         fill = guide_legend(order=2)) +
   fig_aes
 
 # Save plot

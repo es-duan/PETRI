@@ -2,19 +2,30 @@
 
 # Load packages ----
 library(tidyverse)
+library(argparse)
+library(jsonlite)
 
-# Set common aesthetics ----
-p_Anc <- "#8394F6"
-p_Mut <- "#8A407A"
-p_F <- "gray40"
+# Set arguments parser inputs ----
+parser <- ArgumentParser()
+parser$add_argument("-t","--treatment", type = "character", help = "Specify Treatment ID")
+parser$add_argument("-c","--colors", help = "JSON string of plot colors")
 
+# Parse arguments
+args <- parser$parse_args()
+
+# Load global variables ----
+## Colors ----
+plot_colors <- fromJSON(args$colors)
+p_Anc <- plot_colors[["p_Anc"]]
+p_Mut <- plot_colors[["p_Mut"]]
+p_F <- plot_colors[["p_F"]]
+p_growth <- plot_colors[["p_growth"]]
+p_conj <- plot_colors[["p_conj"]]
+p_tselect <- plot_colors[["p_tselect"]]
+p_imm <- plot_colors[["p_imm"]]
+
+## Retrieve ggplot theme ----
 source("src/ggplot_theme.R")
-p_conj <- "#D0D9FF"
-p_tselect <- "#FBE9FF"
-p_growth <- "#FFFBEF"
-
-rifR_l <- "solid"
-nalR_l <- "dashed"
 
 # Read in data ----
 plating_T <- read_csv("input_data/experimental_data/2026-01-27_T_extinction_plating.csv")
@@ -40,61 +51,8 @@ extinction <- plating_T %>%
 processed <- size %>%
   left_join(extinction, by = c("Experiment", "Phenotype", "Treatment", "Sizes", "Replicate"))
 
-## Plot all points by colony size ----
-### Size plot ----
-s1 <- ggplot() +
-  geom_jitter(data = processed, aes(Sizes, Cells_colony, color = Treatment),
-              alpha = 0.5, width = 0.1, size = 5) +
-  scale_y_continuous(trans = "log10", name = "Colony size (CFU)",
-                     breaks = c(1e6,1e7,1e8),
-                     labels = sapply(c(6,7,8),function(i){parse(text = sprintf("10^%d",i))})) +
-  fig_aes
-
-### Extinction plot ----
-e1 <- ggplot() +
-  geom_jitter(data = processed, aes(Sizes, Extinction, color = Treatment),
-              alpha = 0.5, width = 0.1, size = 5) +
-  fig_aes
-
-## Compare averages for three groupings ----
-# all_points: all points by initial size
-# monocultures: monoculture data only
-# size_maintained: points where size was maintained
-all <- processed %>%
-  mutate(group = "all_points")
-mono <- processed %>%
-  filter(Treatment %in% c("Anc-mono", "Mut-mono")) %>%
-  mutate(group = "monocultures")
-maintain <- processed %>%
-  filter(Sizes %in% c("small-small", "large-large")) %>%
-  mutate(group = "size_maintained")
-compare <- rbind(all, mono, maintain)
-
-### Size plot ----
-s2 <- ggplot(data = compare, aes(Phenotype, Cells_colony, color = Phenotype)) +
-  geom_point(alpha = 0.5, size = 5) +
-  stat_summary(fun.data="mean_se",geom="errorbar", width=0.2) +
-  stat_summary(fun="mean",geom="point", shape = 18, size=5) +
-  scale_y_continuous(trans = "log10", name = "Colony size (CFU)",
-                     breaks = c(1e6,1e7,1e8),
-                     labels = sapply(c(6,7,8),function(i){parse(text = sprintf("10^%d",i))})) +
-  facet_grid(~group) +
-  scale_color_manual(values = c("Anc" = p_Anc,
-                                "Mut" = p_Mut)) +
-  fig_aes
-
-### Extinction plot ----
-e2 <- ggplot(data = compare, aes(Phenotype, Extinction, color = Phenotype)) +
-  geom_point(alpha = 0.5, size = 5) +
-  stat_summary(fun.data="mean_se",geom="errorbar", width=0.2) +
-  stat_summary(fun="mean",geom="point", shape = 18, size=5) +
-  facet_grid(~group) +
-  scale_color_manual(values = c("Anc" = p_Anc,
-                                "Mut" = p_Mut)) +
-  fig_aes
-
-# Move forward with colonies that maintained their sizes ----
-extinction_T <- maintain %>%
+# Reformat data for plotting ----
+extinction_T <- processed %>%
   select(Experiment, Treatment, Phenotype, Sizes,
          Replicate, Cells_colony, Extinction) %>%
   mutate(Host = "nalR") %>%
@@ -114,9 +72,9 @@ extinction_T_av <- extinction_T %>%
 ## Plots with final data ----
 ### Size plot ----
 s3 <- ggplot() +
-  geom_point(data = extinction_T, 
-             mapping = aes(Phenotype, Cells_colony, color = Phenotype),
-             size = 5, alpha = 0.5) +
+  # geom_point(data = extinction_T, 
+  #            mapping = aes(Phenotype, Cells_colony, color = Phenotype),
+  #            size = 5, alpha = 0.5) +
   geom_errorbar(data = extinction_T_av,
                 mapping = aes(x = Phenotype, ymax = Cells_colony_mean + Cells_colony_se,
                               ymin = Cells_colony_mean - Cells_colony_se,
@@ -128,16 +86,17 @@ s3 <- ggplot() +
   scale_color_manual(values = c("Anc" = p_Anc,
                                 "Mut" = p_Mut)) +
   scale_y_continuous(trans = "log10", name = "Colony size (CFU)",
-                     breaks = c(1e6,1e7,1e8),
-                     labels = sapply(c(6,7,8),function(i){parse(text = sprintf("10^%d",i))})) +
+                     limits = c(5e6, 5e8),
+                     breaks = c(1e7,1e8),
+                     labels = sapply(c(7,8),function(i){parse(text = sprintf("10^%d",i))})) +
   fig_aes +
   theme(axis.title.x = element_blank())
 
 ### Extinction plot ----
 e3 <- ggplot() +
-  geom_point(data = extinction_T, 
-             mapping = aes(Phenotype, Extinction, color = Phenotype),
-             size = 5, alpha = 0.5) +
+  # geom_point(data = extinction_T, 
+  #            mapping = aes(Phenotype, Extinction, color = Phenotype),
+  #            size = 5, alpha = 0.5) +
   geom_errorbar(data = extinction_T_av,
                 mapping = aes(x = Phenotype, ymax = Extinction_mean + Extinction_se,
                               ymin = Extinction_mean - Extinction_se,
@@ -225,11 +184,6 @@ write_csv(extinction_out, paste(output_dir, "extinction_size.csv", sep = "/"))
 write_csv(extinction_out_av, paste(output_dir, "extinction_size_av.csv", sep = "/"))
 
 # plots
-ggsave(paste(output_dir, "colony_size_T_comp.pdf", sep = "/"), s2,
-       width = 12, height = 5, units = "in")
-ggsave(paste(output_dir, "extinction_T_comp.pdf", sep = "/"), e2,
-       width = 12, height = 5, units = "in")
-
 ggsave(paste(output_dir, "colony_size_T_out.pdf", sep = "/"), s3,
        width = 5, height = 4, units = "in")
 ggsave(paste(output_dir, "extinction_T_out.pdf", sep = "/"), e3,

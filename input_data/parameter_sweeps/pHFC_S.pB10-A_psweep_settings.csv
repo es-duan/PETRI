@@ -38,7 +38,7 @@ Protocol,"conjugation,transconjugant_selection"
 Protocol_phases,"1,1"
 Selection_type,liquid
 Hours_growth,0
-Hours_conjugation,24
+Hours_conjugation,5
 Hours_t_selection,24
 A_colony,
 M_colony,

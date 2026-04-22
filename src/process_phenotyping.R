@@ -20,22 +20,13 @@ LDM_plating_av <- LDM_plating2 %>%
   ungroup() %>%
   mutate(Density_se = Density_sd/sqrt(n))
 
-## Calculate growth rates ----
-LDM_growth <- LDM_plating_av %>%
-  select(Day, Strain, Time, Plate.cell.type, Density_mean) %>%
-  pivot_wider(names_from = Time, values_from = Density_mean, names_prefix = "Density_") %>%
-  mutate(Time = ifelse(!is.na(Density_1), 1, 2),
-         Density_t = ifelse(!is.na(Density_1), Density_1, Density_2)) %>%
-  select(-Density_1, -Density_2) %>%
-  mutate(Growth_rate = log(Density_t/Density_0)/Time)
-
-LDM_growth_av <- LDM_growth %>%
-  group_by(Strain, Plate.cell.type) %>%
-  summarize(Growth_rate_mean = mean(Growth_rate),
-            Growth_rate_sd = sd(Growth_rate),
-            n = n()) %>%
-  ungroup() %>%
-  mutate(Growth_rate_se = Growth_rate_sd/sqrt(n))
+## Read in growth rate data ----
+# Update script to read file once growth is finalized
+OD_growth <- data.frame("Genotype" = c("Anc", "Mut", "F"),
+                        "Growth_rate_mean" = c(0.476, 0.623, 0.607),
+                        "Growth_rate_sd" = c(0.0323, 0.0440, 0.0258),
+                        "n" = rep("n", 3),
+                        "Growth_rate_se" = c(0.0186, 0.0254, 0.0149))
 
 ## Conjugation rate dataframe ----
 LDM <- data.frame("Genotype" = c(rep("Anc",3), rep("Mut", 3)),
@@ -43,38 +34,30 @@ LDM <- data.frame("Genotype" = c(rep("Anc",3), rep("Mut", 3)),
                                          3.53e-14, 9.12e-15, 5.38e-15),
                   "Day" = as.Date(rep(c("2025-07-23","2025-08-25","2025-09-11"), 2)))
 
-# Combine data ----
-LDM_phenotype <- LDM_growth %>%
-  mutate(Genotype = case_when(Strain == 84 & Plate.cell.type == "Donor" ~ "Anc",
-                              Strain == 85 & Plate.cell.type == "Donor" ~ "Mut",
-                              Plate.cell.type == "Recipient" ~ "F")) %>%
-  filter(Genotype != "F") %>%
-  select(Day, Genotype, Growth_rate) %>%
-  left_join(LDM, by = c("Day", "Genotype"))
-
-LDM_phenotype_av <- LDM_phenotype %>%
+# Summarize LDM data ----
+LDM_av <- LDM %>%
   group_by(Genotype) %>%
-  summarise(Growth_rate_mean = mean(Growth_rate),
-            Growth_rate_sd = sd(Growth_rate),
-            Conjugation_rate_mean = mean(Conjugation_rate),
+  summarise(Conjugation_rate_mean = mean(Conjugation_rate),
             Conjugation_rate_sd = sd(Conjugation_rate),
             n = n()) %>%
   ungroup() %>%
-  mutate(Growth_rate_se = Growth_rate_sd/sqrt(n),
-         Conjugation_rate_se = Conjugation_rate_sd/sqrt(n))
+  mutate(Conjugation_rate_se = Conjugation_rate_sd/sqrt(n))
+
+# Merge growth and conjugation data ----
+phenotyping <- left_join(OD_growth, LDM_av, by = "Genotype")
 
 # Statistics ----
 ## Growth rate ----
-growth_tt <- t.test(filter(LDM_phenotype, Genotype == "Anc")$Growth_rate,
-                    filter(LDM_phenotype, Genotype == "Mut")$Growth_rate, 
+growth_tt <- t.test(filter(OD_growth, Genotype == "Anc")$Growth_rate,
+                    filter(OD_growth, Genotype == "Mut")$Growth_rate, 
                  alternative = "two.sided",
                  var.equal = FALSE,
                  paired = TRUE,
                  conf.level = 0.95)
 
 ## Conjugation rate ----
-conj_tt <- t.test(log10(filter(LDM_phenotype, Genotype == "Anc")$Conjugation_rate),
-                  log10(filter(LDM_phenotype, Genotype == "Mut")$Conjugation_rate), 
+conj_tt <- t.test(log10(filter(LDM, Genotype == "Anc")$Conjugation_rate),
+                  log10(filter(LDM, Genotype == "Mut")$Conjugation_rate), 
                   alternative = "two.sided",
                   var.equal = FALSE,
                   paired = TRUE,
@@ -83,7 +66,7 @@ conj_tt <- t.test(log10(filter(LDM_phenotype, Genotype == "Anc")$Conjugation_rat
 
 # Export data ----
 write_csv(LDM_phenotype, "results/phenotyping/LDM_phenotyping.csv")
-write_csv(LDM_phenotype_av, "results/phenotyping/LDM_phenotyping_av.csv")
+write_csv(phenotyping, "results/phenotyping/phenotyping_av.csv")
 
 write_csv(tidy(growth_tt), "results/phenotyping/LDM_growth_tt.csv")
 write_csv(tidy(conj_tt), "results/phenotyping/LDM_conjugation_tt.csv")

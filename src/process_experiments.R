@@ -5,7 +5,7 @@ library(tidyverse)
 library(broom)
 
 # Data processing/experimental parameters ----
-tselect_t = 72 # colony growth time of 72 hr
+tselect_t = 24 # colony growth time of 72 hr
 tselect_d = 1e7 # scale plate scraping estimates to a density of 1e7
 limit_est = 0.5 # use estimate of 0.5 for plates below the detection limit
 
@@ -97,15 +97,15 @@ HFC_f_av <- HFC_f %>%
 
 ## Statistical analysis ----
 HFC_stat <- HFC_f %>%
-  filter(Time %in% c(0,77)) %>%
+  filter(Time %in% c(0,5+tselect_t)) %>%
   filter(Phenotype == "Anc") %>%
   select(Time, Phenotype, Frequency, Replicate) %>%
   pivot_wider(names_from = Time, values_from = Frequency,
               names_prefix = "Freq_T") %>%
   mutate(Freq_T0a = asin(sqrt(Freq_T0)),
-         Freq_T77a = asin(sqrt(Freq_T77))) # arcsin transformation
+         !!paste0("Freq_T",5+tselect_t,"a") := asin(sqrt(!!sym(paste0("Freq_T",5+tselect_t))))) # arcsin transformation
 
-HFC_tt <- t.test(HFC_stat$Freq_T77a, HFC_stat$Freq_T0a, 
+HFC_tt <- t.test(HFC_stat[[paste0("Freq_T",5+tselect_t,"a")]], HFC_stat$Freq_T0a, 
        alternative = "greater",
        paired = TRUE,
        var.equal = FALSE,
@@ -216,15 +216,15 @@ LFC_f_av <- LFC_f %>%
 
 ## Statistical analysis ----
 LFC_stat <- LFC_f %>%
-  filter(Time %in% c(0,245)) %>%
+  filter(Time %in% c(0,173+tselect_t)) %>%
   filter(Phenotype == "Mut") %>%
   select(Time, Phenotype, Frequency, Replicate) %>%
   pivot_wider(names_from = Time, values_from = Frequency,
               names_prefix = "Freq_T") %>%
   mutate(Freq_T0a = asin(sqrt(Freq_T0)),
-         Freq_T245a = asin(sqrt(Freq_T245))) # arcsin transformation
+         !!paste0("Freq_T",173+tselect_t,"a") := asin(sqrt(!!sym(paste0("Freq_T",173+tselect_t))))) # arcsin transformation
 
-LFC_tt <- t.test(LFC_stat$Freq_T245a, LFC_stat$Freq_T0a, 
+LFC_tt <- t.test(LFC_stat[[paste0("Freq_T",173+tselect_t,"a")]], LFC_stat$Freq_T0a, 
        alternative = "greater",
        paired = TRUE,
        var.equal = FALSE,

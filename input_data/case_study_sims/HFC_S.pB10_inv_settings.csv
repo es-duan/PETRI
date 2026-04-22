@@ -1,11 +1,11 @@
-﻿Treatment_ID,HFC_pB10
+﻿Treatment_ID,HFC_S.pB10
 Notes,"HFC, ancestor invades, solid"
-psiA1,0.29
-psiM1,0.39
-psiF1,0.35
-psiA2,0.29
-psiM2,0.39
-psiF2,0.35
+psiA1,0.476
+psiM1,0.623
+psiF1,0.607
+psiA2,0.476
+psiM2,0.623
+psiF2,0.607
 gammaA1.F1,0.00E+00
 gammaA2.F1,2.44E-12
 gammaM1.F1,0.00E+00
@@ -46,7 +46,7 @@ Protocol_phases,"1,1"
 Selection_type,solid
 Hours_growth,0
 Hours_conjugation,5
-Hours_t_selection,72
+Hours_t_selection,24
 A_colony,5.00E+06
 M_colony,1.00E+08
 Final_density_t_selection,1.00E+07

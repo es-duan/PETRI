@@ -4,7 +4,7 @@ Ref_gamma,1.61E-14
 Ref_psi,0.39
 Range_gamma,4
 Range_psi,0.4
-Resolution,20
+Resolution,50
 psiF1,0.35
 psiF2,0.35
 gammaA1.F1_base,0.00E+00

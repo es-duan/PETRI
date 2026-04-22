@@ -3,7 +3,6 @@
 # Load packages ----
 library(tidyverse)
 library(argparse)
-library(ggnewscale)
 library(jsonlite)
 
 # Set arguments parser inputs ----
@@ -37,10 +36,9 @@ ph_s <- ph %>%
 
 ## Plot strains on tile plot ----
 i1_s <- i1 +
-  new_scale_fill() +
   geom_point(data = ph_s,
-             mapping = aes(log_conj, Growth_rate, fill = Strain),
-             shape = 23, color = "white", size = 3)
+             mapping = aes(log_conj, Growth_rate, shape = Strain),
+             color = "white", size = 3)
 
 # Save file
 ggsave(paste0(output_folder, "/", ps, "_inv_change_strain_plot.pdf"),

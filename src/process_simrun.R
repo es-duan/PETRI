@@ -19,6 +19,11 @@ sim_results_long <- read_csv(paste0(treatment_folder, "/", treatment, "_data_lon
 sim_phases <- read_csv(paste0(treatment_folder, "/", treatment, "_phases.csv"))
 
 # Reformat data for plotting ----
+## Relevel factors ----
+g_levels <- c("Ancestor", "Mutant", "Plasmid-free", "C")
+phase_levels <- c("Growth", "Conjugation", "Transconjugant selection", "Immigration")
+
+
 ## Density plot ----
 sim_dens <- sim_results_long %>%
   # Remove nutrient values
@@ -31,7 +36,7 @@ sim_dens <- sim_results_long %>%
                               Genotype == "M" ~ "Mutant",
                               Genotype == "F" ~ "Plasmid-free",
                               Genotype == "C" ~ "C")) %>%
-  mutate(Genotype = factor(Genotype, levels = c("Ancestor", "Mutant", "Plasmid-free", "C"))) %>%
+  mutate(Genotype = factor(Genotype, levels = g_levels)) %>%
   mutate(Genotype_plot = fct_rev(Genotype)) %>%
   mutate(Host = factor(Host, levels = c("rifR", "nalR", "C"))) %>%
   # Decrease number of points for smoother plotting
@@ -48,8 +53,8 @@ phases_rect <- sim_phases %>%
                            Phase == "growth" ~ "Growth",
                            Phase == "growout" ~ "Growout",
                            Phase == "tselect" ~ "Transconjugant selection",
-                           Phase == "immigration" ~ "Immigration",
-                           Phase == "selection" ~ "Plasmid selection"))
+                           Phase == "immigration" ~ "Immigration")) %>%
+  mutate(Phase = factor(Phase, levels = phase_levels))
 
 ## Ratio plots ----
 

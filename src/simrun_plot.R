@@ -35,7 +35,7 @@ p_imm <- "#d0ffeb"
 p_select <- "#ffe9fc"
 
 rifR_l <- "solid"
-nalR_l <- "dashed"
+nalR_l <- "22"
 
 # Retrieve ggplot theme
 source("src/ggplot_theme.R")
