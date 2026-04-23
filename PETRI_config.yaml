@@ -4,6 +4,11 @@ channels:
   - bioconda
   - defaults
 dependencies:
+# Add Conda's isolated compilers
+  - c-compiler
+  - cxx-compiler
+  - fortran-compiler
+  
   # R runtime and packages used in src/*.R
   - r-base>=4.4.0
   - r-tidyverse=2.0.0

@@ -1,16 +1,15 @@
 # scripts/install_cran_pkgs.R
 
-# Specify the CRAN mirror
 local({r <- getOption("repos")
        r["CRAN"] <- "https://cloud.r-project.org"
        options(repos=r)
 })
 
-# Install packages
-packages_to_install <- c("funkyheatmap", "deSolve")
+# Force R to use the active Conda environment's library path
+# .libPaths()[1] will point to the .snakemake/conda/.../lib/R/library folder
+conda_lib_path <- .libPaths()[1]
 
-for (pkg in packages_to_install) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg)
-  }
+# Install funkyheatmap ONLY into the isolated Conda path
+if (!requireNamespace("funkyheatmap", quietly = TRUE)) {
+  install.packages("funkyheatmap", lib = conda_lib_path)
 }
