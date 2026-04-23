@@ -1,0 +1,22 @@
+name: PETRI
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  # R runtime and packages used in src/*.R
+  - r-base
+  - r-tidyverse
+  - r-argparse
+  - r-jsonlite
+  - r-desolve
+  - r-foreach
+  - r-doparallel
+  - r-broom
+  - r-patchwork
+  - r-colorspace
+  - r-ggnewscale
+
+  # Required by src/fig_axes.R, but not currently available as a conda package.
+  # Install after creating the env:
+  # R -q -e 'install.packages("funkyheatmap", repos="https://cloud.r-project.org")'

@@ -1,6 +1,8 @@
 # Snakemake file
 
 # Snakemake Configuration
+conda: "PETRI_config.yaml"
+
 import json
 
 ## Specify treatments
