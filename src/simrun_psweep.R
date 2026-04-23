@@ -65,13 +65,13 @@ Immigration_ratio = as.numeric(setting_list$Immigration_ratio)
 model <- function(time, state, parameters) {
   with(as.list(c(state, parameters)), {
     # guarantees that the variables current values can be called
-    A1 <- state["A1"]
-    M1 <- state["M1"]
-    F1 <- state["F1"]
-    A2 <- state["A2"]
-    M2 <- state["M2"]
-    F2 <- state["F2"]
-    C  <- state["C"]
+    # A1 <- state["A1"]
+    # M1 <- state["M1"]
+    # F1 <- state["F1"]
+    # A2 <- state["A2"]
+    # M2 <- state["M2"]
+    # F2 <- state["F2"]
+    # C  <- state["C"]
     
     # within.species resource.dependent conjugation equations
     gamma_A1.F1_C <- gamma_A1.F1_base + ((gamma_A1.F1_max - gamma_A1.F1_base) * (C / (Q + C)))
@@ -104,6 +104,27 @@ model <- function(time, state, parameters) {
     
     list(c(dA1, dM1, dF1, dA2, dM2, dF2, dC))
   })
+}
+
+# 1. Root Function: Detects when C drops to a microscopic threshold
+rootfunc <- function(time, state, parameters) {
+  return(state["C"] - 1e-10) 
+}
+
+# 2. Event Function: Triggers when the root is hit to clamp values cleanly
+eventfunc <- function(time, state, parameters) {
+  # Clamp C to exactly 0 to stop negative resource drain
+  state["C"] <- 0  
+  
+  # Clamp populations to 0 to catch any tiny floating-point negatives
+  state["A1"] <- max(state["A1"], 0)
+  state["M1"] <- max(state["M1"], 0)
+  state["F1"] <- max(state["F1"], 0)
+  state["A2"] <- max(state["A2"], 0)
+  state["M2"] <- max(state["M2"], 0)
+  state["F2"] <- max(state["F2"], 0)
+  
+  return(state)
 }
 
 # Initiate for loop for parameter sweep ----
@@ -263,11 +284,20 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
                    F2 = F2, 
                    C  = C)
         
-        out <- ode(y = state, times = times, func = model, parms = parameters, method = "euler", hini = Timestep)
+        out <- ode(
+          y = state, 
+          times = times, 
+          func = model, 
+          parms = parameters, 
+          method = "lsoda", 
+          atol = 1e-10,     # Tighten absolute tolerance
+          rtol = 1e-8,      # Tighten relative tolerance
+          rootfun = rootfunc,
+          events = list(func = eventfunc, root = TRUE) # Tells it to use the clamping event
+        )
         out_df <- as.data.frame(out) %>%
           mutate(Phase = "growth")
-        #out_df <- out_df %>% slice(seq(1, n(), by = 1/Timestep*0.01))
-        
+
         # Save start and end times of the phase
         df_start <- head(out_df, 1) %>%
           mutate(Type = "start")
@@ -322,10 +352,19 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
                    F2 = F2, 
                    C  = C)
         
-        out <- ode(y = state, times = times, func = model, parms = parameters, method = "euler", hini = Timestep)
+        out <- ode(
+          y = state, 
+          times = times, 
+          func = model, 
+          parms = parameters, 
+          method = "lsoda", 
+          atol = 1e-10,     # Tighten absolute tolerance
+          rtol = 1e-8,      # Tighten relative tolerance
+          rootfun = rootfunc,
+          events = list(func = eventfunc, root = TRUE) # Tells it to use the clamping event
+        )
         out_df <- as.data.frame(out) %>%
           mutate(Phase = "conj")
-        #out_df <- out_df %>% slice(seq(1, n(), by = 1/Timestep*0.01))
         
         # Save start and end times of the phase
         df_start <- head(out_df, 1) %>%
@@ -388,9 +427,19 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
                      F2 = F2, 
                      C  = C)
           
-          out <- ode(y = state, times = times, func = model, parms = parameters, method = "euler", hini = Timestep)
+          out <- ode(
+            y = state, 
+            times = times, 
+            func = model, 
+            parms = parameters, 
+            method = "lsoda", 
+            atol = 1e-10,     # Tighten absolute tolerance
+            rtol = 1e-8,      # Tighten relative tolerance
+            rootfun = rootfunc,
+            events = list(func = eventfunc, root = TRUE) # Tells it to use the clamping event
+          )
           out_df <- as.data.frame(out)
-          #out_df <- out_df %>% slice(seq(1, n(), by = 1/Timestep*0.01))
+          
           t_out <- rbind(t_out, out_df)
           
           # Remove the first row of the dataframe (repeat of results)
@@ -556,10 +605,19 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
                    F2 = F2, 
                    C  = C)
         
-        out <- ode(y = state, times = times, func = model, parms = parameters, method = "euler", hini = Timestep)
+        out <- ode(
+          y = state, 
+          times = times, 
+          func = model, 
+          parms = parameters, 
+          method = "lsoda", 
+          atol = 1e-10,     # Tighten absolute tolerance
+          rtol = 1e-8,      # Tighten relative tolerance
+          rootfun = rootfunc,
+          events = list(func = eventfunc, root = TRUE) # Tells it to use the clamping event
+        )
         out_df <- as.data.frame(out) %>%
           mutate(Phase = "immigration")
-        #out_df <- out_df %>% slice(seq(1, n(), by = 1/Timestep*0.01))
         
         # Save start and end times of the phase
         df_start <- head(out_df, 1) %>%
@@ -570,67 +628,7 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
         
         # Add output to cycle dataframe
         cycle_df <- rbind(cycle_df, out_df)
-      } else if (phase == "selection"){
-        ### Selection phase: kill plasmid-free cells ----
-        # Set time period
-        time_start = tail(cycle_df$time, 1)
-        time_end = time_start + Hours_growth
-        times = seq(time_start, time_end, by = Timestep)
-        
-        # Set densities for the start of the phase
-        A1 = tail(cycle_df$A1, 1)
-        M1 = tail(cycle_df$M1, 1)
-        F1 = tail(cycle_df$F1, 1)
-        A2 = tail(cycle_df$A2, 1)
-        M2 = tail(cycle_df$M2, 1)
-        F2 = tail(cycle_df$F2, 1)
-        
-        if (c == 1 & p == 1){
-          # Do not dilute strains if this is the first phase of the protocol
-          
-        } else if (last_phase == "transconjugant_selection"){
-          # If transitioning from a transconjugant selection phase, do not dilute strains
-          
-        } else {
-          # Else, dilute strains first
-          A1 = ifelse((A1 * Dilution_growth) < Dilution_cutoff, 0, A1 * Dilution_growth)
-          M1 = ifelse((M1 * Dilution_growth) < Dilution_cutoff, 0, M1 * Dilution_growth)
-          F1 = ifelse((F1 * Dilution_growth) < Dilution_cutoff, 0, F1 * Dilution_growth)
-          A2 = ifelse((A2 * Dilution_growth) < Dilution_cutoff, 0, A2 * Dilution_growth)
-          M2 = ifelse((M2 * Dilution_growth) < Dilution_cutoff, 0, M2 * Dilution_growth)
-          F2 = ifelse((F2 * Dilution_growth) < Dilution_cutoff, 0, F2 * Dilution_growth)
-        }
-        
-        # Set plasmid-free cells to 0
-        F1 = 0
-        F2 = 0
-        
-        # Euler simulation
-        C  = as.numeric(setting_list$C)
-        
-        state <- c(A1 = A1, 
-                   M1 = M1, 
-                   F1 = F1, 
-                   A2 = A2, 
-                   M2 = M2, 
-                   F2 = F2, 
-                   C  = C)
-        
-        out <- ode(y = state, times = times, func = model, parms = parameters, method = "euler", hini = Timestep)
-        out_df <- as.data.frame(out) %>%
-          mutate(Phase = "selection")
-        #out_df <- out_df %>% slice(seq(1, n(), by = 1/Timestep*0.01))
-        
-        # Save start and end times of the phase
-        df_start <- head(out_df, 1) %>%
-          mutate(Type = "start")
-        df_end <- tail(out_df, 1) %>%
-          mutate(Type = "end")
-
-        
-        # Add output to cycle dataframe
-        cycle_df <- rbind(cycle_df, out_df)
-      }
+      } 
       # End simulation if ancestor or mutant density is 0
       final_A = tail(cycle_df$A1, 1) + tail(cycle_df$A2, 1)
       final_M = tail(cycle_df$M1, 1) + tail(cycle_df$M2, 1)

@@ -42,19 +42,18 @@ Range_psi  = as.numeric(setting_list$Range_psi)
 Resolution  = as.numeric(setting_list$Resolution)
 
 # Calculate the set of mutant parameters to run ----
-
 ## Print the total number of values ----
-total_points <- (2*Resolution)^2 #total points
+total_points <- (Resolution)^2 #total points
 print(paste("The total number of points for setting",ps,"is:",total_points))
 
-## Determine fold change values ----
-gamma_res <- Range_gamma/Resolution
-gamma_range <- seq(-Range_gamma, Range_gamma, gamma_res)
+## Determine values ----
+log_gamma_range <- seq(log10(Ref_gamma)-Range_gamma, log10(Ref_gamma) + Range_gamma,
+                       length.out = Resolution)
+gamma_range <- 10^(log_gamma_range)
+psi_range <- seq(Ref_psi - Range_psi, Ref_psi + Range_psi, 
+                 length.out = Resolution)
 
-psi_res <- Range_psi/Resolution
-psi_range <- seq(-Range_psi, Range_psi, psi_res)
-
-## Calculate fold change values ----
+## Pair values ----
 # Pair gamma and psi fold change values
 gamma_sweep <- rep(gamma_range,length(psi_range))
 psi_sweep <- c(rep(psi_range[1],length(gamma_range)))
@@ -64,18 +63,12 @@ for(psi in 2:length(psi_range)){
   psi_sweep <- c(psi_sweep,c)
 }
 
-fc_values <- data.frame(gamma_fold = gamma_sweep,
-                      psi_change = psi_sweep)
-
-# Calculate actual values
-# Conjugation change is currently being calculated as a order of magnitude fold change
-# Growth change is currently being calculated as an absolute change
-sweep_param <- fc_values %>%
-  mutate(gamma_M = Ref_gamma*(10^gamma_fold),
-         psi_M = psi_change + Ref_psi) %>%
+# Save final dataset
+sweep_param <- data.frame(gamma_M = gamma_sweep,
+                      psi_M = psi_sweep) %>%
   mutate(SetID = ps) %>%
   mutate(SweepID = row_number()) %>%
-  select(SetID, SweepID, gamma_fold, psi_change, gamma_M, psi_M)
+  select(SetID, SweepID, gamma_M, psi_M)
 
 # Save files ----
 saveRDS(setting_list, paste0(output_folder, "/", ps, "_settings.rds"))

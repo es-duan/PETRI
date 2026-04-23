@@ -1,12 +1,12 @@
 ﻿Treatment_ID,pHFC_S.pB10
 Notes,HFC liquid with pB10 A mut
 Ref_gamma,1.61E-14
-Ref_psi,0.39
+Ref_psi,0.623
 Range_gamma,4
 Range_psi,0.4
-Resolution,50
-psiF1,0.35
-psiF2,0.35
+Resolution,40
+psiF1,0.607
+psiF2,0.607
 gammaA1.F1_base,0.00E+00
 gammaA2.F1_base,0.00E+00
 gammaM1.F1_base,0.00E+00

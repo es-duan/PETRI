@@ -1,12 +1,12 @@
 ﻿Treatment_ID,pLFC_S.pB10
 Notes,LFC liquid with pB10 anc
 Ref_gamma,1.56E-12
-Ref_psi,0.29
+Ref_psi,0.476
 Range_gamma,4
 Range_psi,0.4
-Resolution,50
-psiF1,0.35
-psiF2,0.35
+Resolution,40
+psiF1,0.607
+psiF2,0.607
 gammaA1.F1_base,0.00E+00
 gammaA2.F1_base,0.00E+00
 gammaM1.F1_base,0.00E+00

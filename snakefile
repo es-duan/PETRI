@@ -5,8 +5,8 @@ import json
 
 ## Specify treatments
 TREATMENTS = ["DG_S.pB10", "HFC_S.pB10", "LFC_S.pB10-A"]
-PSWEEPS = ["pHFC_S.pB10-high","pHFC_S.pB10-low","pHFC_S.pB10","pLFC_S.pB10","pDim90_E.R1","pDim90_E.RP4","pHFCi_S.pB10","pLFCi_S.pB10","pHFC_S.pB10-A","pLFC_S.pB10-A"]
-
+#PSWEEPS = ["pHFC_S.pB10-high","pHFC_S.pB10-low","pHFC_S.pB10","pLFC_S.pB10","pDim90_E.R1","pDim90_E.RP4","pHFCi_S.pB10","pLFCi_S.pB10","pHFC_S.pB10-A","pLFC_S.pB10-A"]
+PSWEEPS = ["pHFC_S.pB10","pLFC_S.pB10","pHFC_S.pB10-A","pLFC_S.pB10-A"]
 
 ## Specify global variables
 ### Colors
