@@ -284,8 +284,8 @@ rule plot_phenotyping:
 # Define rule for generating fig 1a: phenotypic axes
 rule fig1a:
   input:
-    setup = "results/.r_setup_complete.flag",
-    "src/fig_axes.R"
+    "src/fig_axes.R",
+    setup = "results/.r_setup_complete.flag"
   output:
     "figures/panels/fig1a_axes.pdf",
     "figures/panels/fig1a_axes.rds"
