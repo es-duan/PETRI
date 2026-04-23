@@ -53,6 +53,15 @@ rule all:
     "figures/fig5_validation.pdf",
     "figures/fig5_validation2.pdf"
 
+# Download cran packages
+rule setup_r_environment:
+    output:
+        touch("results/.r_setup_complete.flag")
+    conda:
+        "PETRI_config.yaml"
+    script:
+        "scripts/install_cran_pkgs.R"
+
 # Define rule for running case study invasion simulations
 rule case_study_sims:
   input:
@@ -275,6 +284,7 @@ rule plot_phenotyping:
 # Define rule for generating fig 1a: phenotypic axes
 rule fig1a:
   input:
+    setup = "results/.r_setup_complete.flag",
     "src/fig_axes.R"
   output:
     "figures/panels/fig1a_axes.pdf",
