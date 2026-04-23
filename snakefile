@@ -60,7 +60,7 @@ rule setup_r_environment:
     conda:
         "PETRI_config.yaml"
     script:
-        "scripts/install_cran_pkgs.R"
+        "src/install_cran_pkgs.R"
 
 # Define rule for running case study invasion simulations
 rule case_study_sims:
