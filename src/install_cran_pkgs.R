@@ -6,7 +6,11 @@ local({r <- getOption("repos")
        options(repos=r)
 })
 
-# Install funkyheatmap if it's not already installed
-if (!requireNamespace("funkyheatmap", quietly = TRUE)) {
-  install.packages("funkyheatmap")
+# Install packages
+packages_to_install <- c("funkyheatmap", "deSolve")
+
+for (pkg in packages_to_install) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg)
+  }
 }

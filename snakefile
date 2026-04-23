@@ -66,7 +66,8 @@ rule setup_r_environment:
 rule case_study_sims:
   input:
     "src/simrun_case_study.R",
-    "input_data/case_study_sims/{treatment}_inv_settings.csv"
+    "input_data/case_study_sims/{treatment}_inv_settings.csv",
+    setup = "results/.r_setup_complete.flag"
   output:
     "results/case_study_sims/{treatment}/{treatment}_data.csv",
     "results/case_study_sims/{treatment}/{treatment}_data_long.csv",
@@ -136,7 +137,8 @@ rule psweep_sims:
   input:
     "src/simrun_psweep.R",
     "results/parameter_sweeps/{psweep}/{psweep}_params.csv",
-    "results/parameter_sweeps/{psweep}/{psweep}_settings.rds"
+    "results/parameter_sweeps/{psweep}/{psweep}_settings.rds",
+    setup = "results/.r_setup_complete.flag"
   output:
     "results/parameter_sweeps/{psweep}/{psweep}_out.csv"
   threads:
