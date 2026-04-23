@@ -1,0 +1,10 @@
+Cycle,Phase,T_start,T_end
+1,Growth,0,168
+1,Conjugation,168,192
+1,Transconjugant selection,192,216
+2,Growth,216,384
+2,Conjugation,384,408
+2,Transconjugant selection,408,432
+3,Growth,432,600
+3,Conjugation,600,624
+3,Transconjugant selection,624,648

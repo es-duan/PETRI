@@ -7,4 +7,3 @@
 .snakemake/*
 !.snakemake/DAG.pdf
 prelim_experiments/*
-results/*

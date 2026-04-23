@@ -1,0 +1,4 @@
+Genotype,Growth_rate_mean,Growth_rate_sd,n.x,Growth_rate_se,Conjugation_rate_mean,Conjugation_rate_sd,n.y,Conjugation_rate_se
+Anc,0.476,0.0323,n,0.0186,2.4399999999999997e-12,1.8812761626087755e-12,3,1.0861552989022027e-12
+Mut,0.623,0.044,n,0.0254,1.66e-14,1.6302282048842118e-14,3,9.412126929304201e-15
+F,0.607,0.0258,n,0.0149,NA,NA,NA,NA
