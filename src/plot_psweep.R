@@ -91,13 +91,15 @@ max_change <- max(sweep_plot$Mut_freq_change)
 min_change <- min(sweep_plot$Mut_freq_change)
 
 sweep_plot2 <- sweep_plot %>%
-  mutate(Mut_freq_change2 = ifelse(Mut_freq_change > 0, Mut_freq_change/max_change,
-                                   -Mut_freq_change/min_change))
+  # mutate(Mut_freq_change2 = ifelse(Mut_freq_change > 0, Mut_freq_change/max_change,
+  #                                  -Mut_freq_change/min_change)) %>%
+  mutate(Mut_freq_change2 = log(1 + Mut_freq_change))
 
 # Plot by rate of change ----
 i1 <- ggplot() +
   geom_tile(data = sweep_plot2,
-            mapping = aes(log_gamma_M, psi_M, fill = Mut_freq_change2)) +
+            mapping = aes(log_gamma_M, psi_M, fill = Mut_freq_change2),
+            color = NA) +
   scale_fill_gradient2("Frequency\nchange",
                        low=p_highD, mid = p_mid, high=p_highI, midpoint = 0) +
   geom_hline(yintercept = psi_ref, color = p_axes, linewidth = 1) + 
@@ -125,7 +127,8 @@ saveRDS(i1, paste0(output_folder, "/", ps, "_inv_change_plot.rds"))
 # Plot without labels ----
 i2 <- ggplot() +
   geom_tile(data = sweep_plot2,
-            mapping = aes(log_gamma_M, psi_M, fill = Mut_freq_change2)) +
+            mapping = aes(log_gamma_M, psi_M, fill = Mut_freq_change2),
+            color = NA) +
   scale_fill_gradient2("Frequency\nchange",
                        low=p_highD, mid = p_mid, high=p_highI, midpoint = 0,
                        labels = NULL) +
@@ -148,7 +151,8 @@ saveRDS(i2, paste0(output_folder, "/", ps, "_inv_change_plot2.rds"))
 ## Binary plot (increase or decrease) ----
 i2 <- ggplot() +
   geom_tile(data = sweep_plot,
-            aes(log_gamma_M, psi_M, fill = Mut_freq_inv)) +
+            aes(log_gamma_M, psi_M, fill = Mut_freq_inv),
+            color = NA) +
   geom_hline(yintercept = psi_ref, color = "black", linewidth = 1) + 
   geom_vline(xintercept = log10(gamma_ref), color = "black", linewidth = 1) +
   geom_text(data = axes_label,
