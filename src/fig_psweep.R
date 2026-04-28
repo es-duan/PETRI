@@ -104,7 +104,7 @@ final_plot <- (pA | pB) /
   plot_layout(guides = "collect") &
   theme(legend.position = "top") 
 
-ggsave("figures/fig_psweep.pdf",
+ggsave("figures/fig6_psweep.pdf",
        final_plot, width = 10, height = 10, units = "in")
 
 
