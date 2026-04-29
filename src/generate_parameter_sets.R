@@ -17,6 +17,7 @@ setting_csv <- read_csv(paste("input_data", "parameter_sweeps",
                               paste0(ps, "_psweep_settings.csv"),
                               sep = "/"))
 
+
 ## Transpose file into a list for easier reading ----
 s_colnames <- setting_csv[[1]]
 setting_csv <- as.data.frame(t(setting_csv[,-1]))

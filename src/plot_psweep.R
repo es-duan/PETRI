@@ -91,9 +91,9 @@ max_change <- max(sweep_plot$Mut_freq_change)
 min_change <- min(sweep_plot$Mut_freq_change)
 
 sweep_plot2 <- sweep_plot %>%
-  # mutate(Mut_freq_change2 = ifelse(Mut_freq_change > 0, Mut_freq_change/max_change,
-  #                                  -Mut_freq_change/min_change)) %>%
-  mutate(Mut_freq_change2 = log(1 + Mut_freq_change))
+  mutate(Mut_freq_change2 = ifelse(Mut_freq_change > 0, Mut_freq_change/max_change,
+                                   -Mut_freq_change/min_change)) #%>%
+  # mutate(Mut_freq_change2 = log(1 + Mut_freq_change))
 
 # Plot by rate of change ----
 i1 <- ggplot() +
