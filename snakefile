@@ -8,7 +8,7 @@ import json
 ## Specify treatments
 TREATMENTS = ["DG_S.pB10", "HFC_S.pB10", "LFC_S.pB10-A"]
 #PSWEEPS = ["pHFC_S.pB10-high","pHFC_S.pB10-low","pHFC_S.pB10","pLFC_S.pB10","pDim90_E.R1","pDim90_E.RP4","pHFCi_S.pB10","pLFCi_S.pB10","pHFC_S.pB10-A","pLFC_S.pB10-A"]
-PSWEEPS = ["pHFC_S.pB10","pLFC_S.pB10","pHFC_S.pB10-A","pLFC_S.pB10-A"]
+PSWEEPS = ["pHFC_S.pB10","pLFC_S.pB10","pHFC_S.pB10-A","pLFC_S.pB10-A","pDim90_E.R1","pDim90_E.RP4"]
 
 ## Specify global variables
 ### Colors
@@ -51,7 +51,8 @@ rule all:
     "figures/panels/fig1a_axes.pdf",
     "figures/fig4_DG_invasion.pdf",
     "figures/fig5_validation.pdf",
-    "figures/fig5_validation2.pdf"
+    "figures/fig5_validation2.pdf",
+    "figures/fig6_psweep.pdf"
 
 # Download cran packages
 rule setup_r_environment:
@@ -140,7 +141,7 @@ rule psweep_sims:
   output:
     "results/parameter_sweeps/{psweep}/{psweep}_out.csv"
   threads:
-    6
+    19
   shell:
     """
     Rscript src/simrun_psweep.R \
@@ -329,3 +330,20 @@ rule fig5:
     """
     Rscript src/fig_validation.R 
     """
+
+# Define rule for generating fig 6: parameter sweeps
+rule fig6:
+  input:
+    "src/fig_psweep.R",
+    "results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot2.rds",
+    "results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot2.rds",
+    "results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot2.rds",
+    "results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2.rds"
+  output:
+    "figures/fig6_psweep.pdf"
+  shell:
+    """
+    Rscript src/fig_psweep.R 
+    """
+
+
