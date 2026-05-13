@@ -5,5 +5,5 @@ Cycle,Phase,Time,Genotype,Frequency
 1,conj,5,Mutant,0.5832540880523683
 1,tselect,5,Ancestor,0.4167459119476322
 1,tselect,5,Mutant,0.5832540880523678
-1,tselect,29,Ancestor,0.034493614975086295
-1,tselect,29,Mutant,0.9655063850249138
+1,tselect,77,Ancestor,0.08224682827573508
+1,tselect,77,Mutant,0.9177531717242648

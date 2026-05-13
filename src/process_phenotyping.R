@@ -5,28 +5,14 @@ library(tidyverse)
 library(broom)
 
 # Read in data ----
-LDM_plating <- read_csv("input_data/experimental_data/2026-02-18_compiled_LDM_plating.csv")[1:10]
+gr_out <- read_csv("results/phenotyping/growth_rate/growthratemax_av.csv")
 
-# Process data ----
-## Change names for plotting ----
-LDM_plating2 <- LDM_plating 
-
-## Average data ----
-LDM_plating_av <- LDM_plating2 %>%
-  group_by(Day, Strain, Time, Plate.cell.type) %>%
-  summarize(Density_mean = mean(Density),
-            Density_sd = sd(Density),
-            n = n()) %>%
-  ungroup() %>%
-  mutate(Density_se = Density_sd/sqrt(n))
-
-## Read in growth rate data ----
-# Update script to read file once growth is finalized
-OD_growth <- data.frame("Genotype" = c("Anc", "Mut", "F"),
-                        "Growth_rate_mean" = c(0.476, 0.623, 0.607),
-                        "Growth_rate_sd" = c(0.0323, 0.0440, 0.0258),
-                        "n" = rep("n", 3),
-                        "Growth_rate_se" = c(0.0186, 0.0254, 0.0149))
+# Rename data for merging ----
+OD_growth <- gr_out %>%
+  rename(Genotype = Strain,
+         Growth_rate_mean = max_gr_mean,
+         Growth_rate_sd = max_gr_sd,
+         Growth_rate_se = max_gr_se)
 
 ## Conjugation rate dataframe ----
 LDM <- data.frame("Genotype" = c(rep("Anc",3), rep("Mut", 3)),
@@ -47,14 +33,6 @@ LDM_av <- LDM %>%
 phenotyping <- left_join(OD_growth, LDM_av, by = "Genotype")
 
 # Statistics ----
-## Growth rate ----
-growth_tt <- t.test(filter(OD_growth, Genotype == "Anc")$Growth_rate,
-                    filter(OD_growth, Genotype == "Mut")$Growth_rate, 
-                 alternative = "two.sided",
-                 var.equal = FALSE,
-                 paired = TRUE,
-                 conf.level = 0.95)
-
 ## Conjugation rate ----
 conj_tt <- t.test(log10(filter(LDM, Genotype == "Anc")$Conjugation_rate),
                   log10(filter(LDM, Genotype == "Mut")$Conjugation_rate), 
@@ -65,9 +43,7 @@ conj_tt <- t.test(log10(filter(LDM, Genotype == "Anc")$Conjugation_rate),
 
 
 # Export data ----
-write_csv(LDM_phenotype, "results/phenotyping/LDM_phenotyping.csv")
 write_csv(phenotyping, "results/phenotyping/phenotyping_av.csv")
 
-write_csv(tidy(growth_tt), "results/phenotyping/LDM_growth_tt.csv")
 write_csv(tidy(conj_tt), "results/phenotyping/LDM_conjugation_tt.csv")
 

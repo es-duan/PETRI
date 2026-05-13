@@ -32,7 +32,9 @@ sweep_plot <- sweep_out %>%
          Mut_freq = Mut/(Mut + Anc)) %>%
   mutate(Mut_freq0 = M1_0/(A1_0 + M1_0)) %>%
   mutate(Mut_freq_change = Mut_freq - Mut_freq0,
-         Mut_freq_inv = ifelse(Mut_freq > Mut_freq0, "Increase", "Decrease"))
+         Mut_freq_inv = ifelse(Mut_freq > Mut_freq0, "Increase", "Decrease")) %>%
+  mutate(log_Mut_freq0 = log10(M1_0/(A1_0 + M1_0)),
+         log_Mut_freq_change = log10(Mut_freq) - log_Mut_freq0)
 
 # Save file
 write_csv(sweep_plot, paste0(output_folder, "/", ps, "_plot.csv"))

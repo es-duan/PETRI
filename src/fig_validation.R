@@ -10,7 +10,8 @@ LFC_sim <- readRDS("results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_frequency_
 HFC_v <- readRDS("results/experimental_validation/HFC/HFC_frequency_plot.rds")
 LFC_v <- readRDS("results/experimental_validation/LFC/LFC_frequency_plot.rds")
 
-# Edits to plots ----
+# First version data only ----
+## Edits to plots ----
 pA <- LFC_sim +
   theme(axis.title.x = element_blank(),
         axis.text.x  = element_blank(),
@@ -71,11 +72,11 @@ ggsave("figures/fig5_validation.pdf",
 
 
 
-# Second version with invasion comparison plots
+# Second version with invasion comparison plots ----
 phenotyping <- read_csv("results/phenotyping/phenotyping_av.csv") %>%
   filter(Genotype != "F")
 
-## Set plotting parameters
+## Set plotting parameters ----
 # Plot centers
 c_conj <- 10^mean(log10(phenotyping$Conjugation_rate_mean))
 c_growth <- mean(phenotyping$Growth_rate_mean)
@@ -95,19 +96,17 @@ m_y <-phenotyping$Growth_rate_mean[phenotyping$Genotype == "Mut"]
 anc_inv <- readRDS("results/phenotyping/pB10_anc_inv.rds")
 mut_inv <- readRDS("results/phenotyping/pB10_mut_inv.rds")
 
-# Edits to plots ----
-p1 <- anc_inv +
+## Edits to plots ----
+p1 <- mut_inv +
   theme(legend.position = "none") +
   guides(color = "none")
 
-p2 <- HFC_sim +
-  guides(shape = "none",
-         fill = "none",
-         color = "none") +
+p2 <- LFC_sim +
   theme(axis.title.x = element_blank(),
-        legend.position = "none")
+        legend.position = "top",
+        legend.title = element_blank())
 
-p3 <- HFC_v +
+p3 <- LFC_v +
   labs(x = "Time (hr)",
        y = "Frequency",
        color = "Genotype",
@@ -121,15 +120,17 @@ p3 <- HFC_v +
         axis.ticks.y = element_blank(),
         legend.position = "none")
 
-p4 <- mut_inv +
+p4 <- anc_inv +
   theme(legend.position = "none") +
   guides(color = "none")
 
-p5 <- LFC_sim +
-  theme(legend.position = "bottom",
-        legend.title = element_blank())
+p5 <- HFC_sim +
+  guides(shape = "none",
+         fill = "none",
+         color = "none") +
+  theme(legend.position = "none")
 
-p6 <- LFC_v +
+p6 <- HFC_v +
   labs(x = "Time (hr)",
        y = "Frequency",
        color = "Genotype",
@@ -143,7 +144,7 @@ p6 <- LFC_v +
         legend.position = "none")
 
 
-# Final plot
+## Final plot ----
 final_plot <- p1 + p2 + p3 + p4 + p5 + p6 + 
   plot_layout(
     ncol = 3, 
@@ -158,4 +159,80 @@ final_plot <- p1 + p2 + p3 + p4 + p5 + p6 +
 
 ggsave("figures/fig5_validation2.pdf",
        final_plot, width = 19.5, height = 9, units = "in")
+
+
+# Third version condensed phases ----
+## Read in plots ----
+HFC <- readRDS("figures/panels/fig5d_HFC.rds")
+LFC <- readRDS("figures/panels/fig5b_LFC.rds")
+
+## Set plotting parameters ----
+phenotyping <- read_csv("results/phenotyping/phenotyping_av.csv") %>%
+  filter(Genotype != "F")
+
+# Plot centers
+c_conj <- 10^mean(log10(phenotyping$Conjugation_rate_mean))
+c_growth <- mean(phenotyping$Growth_rate_mean)
+
+# Plot dimensions
+conj_step <- 10^2.5
+growth_step <- 0.3
+
+lim_conj <- c(c_conj/conj_step, c_conj*conj_step)
+lim_growth <- c(c_growth - growth_step, c_growth + growth_step)
+
+a_x <- phenotyping$Conjugation_rate_mean[phenotyping$Genotype == "Anc"]
+a_y <-phenotyping$Growth_rate_mean[phenotyping$Genotype == "Anc"]
+m_x <- phenotyping$Conjugation_rate_mean[phenotyping$Genotype == "Mut"]
+m_y <-phenotyping$Growth_rate_mean[phenotyping$Genotype == "Mut"]
+
+anc_inv <- readRDS("results/phenotyping/pB10_anc_inv.rds")
+mut_inv <- readRDS("results/phenotyping/pB10_mut_inv.rds")
+
+## Edits to plots ----
+p1 <- mut_inv +
+  labs(title = "Y invades X in LFC") +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5, size = 16)) +
+  guides(color = "none",
+         shape = "none")
+
+p2 <- LFC +
+  theme(axis.title.x = element_blank(),
+        axis.text.x  = element_blank(),
+        axis.ticks.x = element_blank(),
+        legend.position = "top",
+        legend.title = element_blank(),
+        legend.text = element_text(size = 16),
+        legend.box.spacing = unit(0, "pt")) +
+  guides(color = "none",
+         shape = "none")
+
+p3 <- anc_inv +
+  labs(title = "X invades Y in HFC") +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5, size = 16)) +
+  guides(color = "none",
+         shape = "none")
+
+p4 <- HFC +
+  theme(legend.position = "none") +
+  guides(color = "none",
+         shape = "none",
+         linetype = "none")
+
+## Final plot ----
+final_plot <- p1 + free(p2) + p3 + p4 + 
+  plot_layout(
+    ncol = 2, 
+    widths = c(1, 2)
+  ) +
+  plot_annotation(tag_levels = "a") & 
+  theme(
+    plot.margin = margin(10, 10, 10, 10),
+    plot.tag = element_text(size = 24)
+  ) 
+
+ggsave("figures/fig5_validation3.pdf",
+       final_plot, width = 9.75, height = 8.5, units = "in")
 

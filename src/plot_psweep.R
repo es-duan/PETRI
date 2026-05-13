@@ -37,16 +37,9 @@ p_lowD <- plot_colors[["p_lowD"]]
 p_highD <- plot_colors[["p_highD"]]
 p_axes <- plot_colors[["p_axes"]]
 p_mid <- plot_colors[["p_mid"]]
+p_invline <- plot_colors[["p_invline"]]
 
-# Non-snakemake
-# p_Exc <- "gray95"
-# p_Dis <- "#140433"
-# p_lowD <- "#BABAFF"
-# p_highD <- "#6d6dde"
-# p_lowI <- "#FFC2C2"
-# p_highI <- "#ad0000"
-# p_axes <- "white"
-# p_mid <- "#fff0f0"
+inv_width <- 0.7
 
 ## Retrieve ggplot theme ----
 source("src/ggplot_theme.R")
@@ -87,53 +80,57 @@ axes_label <- rbind(axes1,axes2) %>%
                              gamma == log10(gamma_ref) & psi != psi_ref ~ as.character(round(psi - psi_ref, 2))))
 
 ## Transformations for color ----
-max_change <- max(sweep_plot$Mut_freq_change)
-min_change <- min(sweep_plot$Mut_freq_change)
+log_max_change <- max(sweep_plot$log_Mut_freq_change)
+log_min_change <- min(sweep_plot$log_Mut_freq_change)
 
 sweep_plot2 <- sweep_plot %>%
-  mutate(Mut_freq_change2 = ifelse(Mut_freq_change > 0, Mut_freq_change/max_change,
-                                   -Mut_freq_change/min_change)) #%>%
-  # mutate(Mut_freq_change2 = log(1 + Mut_freq_change))
+  mutate(log_Mut_freq_change2 = ifelse(log_Mut_freq_change > 0, log_Mut_freq_change/log_max_change,
+                                       -log_Mut_freq_change/log_min_change))
 
-# Plot by rate of change ----
+## Identify points for invasion boundary line ----
+sweep0 <- sweep_plot2 %>% 
+  filter(abs(log_Mut_freq_change2) < 0.01)
+
+# Plot by relative frequency change ----
+## Contour line ----
 i1 <- ggplot() +
-  geom_tile(data = sweep_plot2,
-            mapping = aes(log_gamma_M, psi_M, fill = Mut_freq_change2),
-            color = NA) +
-  scale_fill_gradient2("Frequency\nchange",
-                       low=p_highD, mid = p_mid, high=p_highI, midpoint = 0) +
-  geom_hline(yintercept = psi_ref, color = p_axes, linewidth = 1) + 
+  geom_raster(data = sweep_plot2,
+              mapping = aes(log_gamma_M, psi_M, fill = log_Mut_freq_change2)) +
+  scale_fill_gradient2("Relative\nfrequency\nchange",
+                       low=p_highD, mid = p_mid, high=p_highI, midpoint = log(1)) +
+  geom_hline(yintercept = psi_ref, color = p_axes, linewidth = 1) +
   geom_vline(xintercept = log10(gamma_ref), color = p_axes, linewidth = 1) +
-  geom_text(data = axes_label,
-            mapping = aes(x, y, label = label),
-            size = 4, color = p_axes) +
-  scale_x_continuous(expand = c(0.01, 0.01),
-                     labels = ~ ifelse(.x == 0, "", .x)) +
-  scale_y_continuous(expand = c(0.01, 0.01),
-                     labels = ~ ifelse(.x == 0, "", .x)) +
+  geom_contour(data = sweep_plot2,
+               mapping = aes(x = log_gamma_M, psi_M, z = log_Mut_freq_change2),
+               breaks = 0, color = p_invline, linewidth = inv_width) +
+  # geom_text(data = axes_label,
+  #           mapping = aes(x, y, label = label),
+  #           size = 4) +
+  scale_x_continuous(expand = c(0.01, 0.01)) +
+  scale_y_continuous(expand = c(0.01, 0.01)) +
   labs(x = expression("log10(Conjugation Rate)"),
        y = expression("Growth Rate")) +
-  axes_aes +
-  theme(axis.ticks = element_blank(),
-        axis.line = element_blank(),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())
+  fig_aes 
 
 # Save plot
 ggsave(paste0(output_folder, "/", ps, "_inv_change_plot.pdf"),
        i1, height = 5, width = 6.75, units = "in")
 saveRDS(i1, paste0(output_folder, "/", ps, "_inv_change_plot.rds"))
 
-# Plot without labels ----
+# Geom smooth line ----
 i2 <- ggplot() +
-  geom_tile(data = sweep_plot2,
-            mapping = aes(log_gamma_M, psi_M, fill = Mut_freq_change2),
-            color = NA) +
-  scale_fill_gradient2("Frequency\nchange",
-                       low=p_highD, mid = p_mid, high=p_highI, midpoint = 0,
-                       labels = NULL) +
+  geom_raster(data = sweep_plot2,
+              mapping = aes(log_gamma_M, psi_M, fill = log_Mut_freq_change2)) +
+  # geom_contour(data = sweep_plot2,
+  #              mapping = aes(x = log_gamma_M, psi_M, z = log_Mut_freq_change2),
+  #              breaks = 0, color = p_invline) +
+  scale_fill_gradient2("Relative\nfrequency\nchange",
+                       low=p_highD, mid = p_mid, high=p_highI, midpoint = log(1)) +
   geom_hline(yintercept = psi_ref, color = p_axes, linewidth = 1) +
   geom_vline(xintercept = log10(gamma_ref), color = p_axes, linewidth = 1) +
+  geom_smooth(data = sweep0,
+              mapping = aes(log_gamma_M, psi_M),
+              color = p_invline, method = "lm", se = FALSE, linewidth = inv_width) +
   # geom_text(data = axes_label,
   #           mapping = aes(x, y, label = label),
   #           size = 4) +

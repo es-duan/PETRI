@@ -54,7 +54,7 @@ phase_levels <- c("Growth", "Conjugation", "Transconjugant selection")
 ph_levels <- c("Anc", "Mut", "F")
 
 ## Generate datasets for background plots ----
-tselect_t <- 24
+tselect_t <- 72
 HFC_phases <- data.frame("Phase" = c("Conjugation","Transconjugant selection"),
                          "T_start" = c(0,5),
                          "T_end" = c(5,5 + tselect_t)) %>%
@@ -117,7 +117,7 @@ h1 <- ggplot() +
   geom_errorbar(data = HFC_B,
                 mapping = aes(x = Time, ymax = Density_mean + Density_se, ymin = Density_mean - Density_se,
                               color = Phenotype, linetype = Host),
-                width = 1) +
+                width = 0.3) +
   geom_point(data = HFC_B,
              mapping = aes(Time, Density_mean, color = Phenotype, shape = Count_type),
              size = 4) +
@@ -151,9 +151,9 @@ h2 <- ggplot() +
   geom_errorbar(data = HFC_f_av,
                 mapping = aes(x = Time, ymax = Frequency_mean + Frequency_se, ymin = Frequency_mean - Frequency_se,
                               color = Phenotype),
-                width = 1) +
+                width = 0.3) +
   geom_point(data = HFC_f_av,
-             mapping = aes(Time, Frequency_mean, color = Phenotype, shape = Count_type),
+             mapping = aes(Time, Frequency_mean, color = Phenotype),
              size = 4) +
   scale_shape_manual(values = c("count" = 16,
                                 "estimate" = 15,
@@ -233,7 +233,7 @@ l2 <- ggplot() +
                               color = Phenotype),
                 width = 1) +
   geom_point(data = LFC_f_av,
-             mapping = aes(Time, Frequency_mean, color = Phenotype, shape = Count_type),
+             mapping = aes(Time, Frequency_mean, color = Phenotype),
              size = 4) +
   scale_shape_manual(values = c("count" = 16,
                                 "estimate" = 15,

@@ -30,7 +30,7 @@ ps_s <- str_split_1(ps, "_")[2]
 ps_sp <- str_sub(ps_s, 1,1)
 
 ph_s <- ph %>%
-  filter(str_detect(Strain, ps_sp)) %>%
+  filter(str_detect(Strain, ps_s)) %>%
   filter(Strain != ps_s) %>%
   mutate(log_conj = log10(Conjugation_rate))
 

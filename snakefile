@@ -29,19 +29,34 @@ plot_colors_psweep = {
   "p_Exc": "gray95",
   "p_Dis": "#140433",
   "p_lowI": "#FFC2C2",
-  "p_highI": "#ad0000",
+  "p_highI": "#c93251",
   "p_lowD": "#BABAFF",
-  "p_highD": "#6d6dde",
+  "p_highD": "#6c78a8",
   "p_axes": "white",
-  "p_mid": "#fff0f0"
+  "p_mid": "white",
+  "p_invline": "gray90"
 }
 
 ### Linetypes
 plot_lines = {
   "rifR_l": "solid",
-  "nalR_l": "22"
+  "nalR_l": "22",
+  "exp_l": "solid",
+  "sim_l": "12",
+  "plot_lw": 2
 }
 
+### Points
+plot_points = {
+  "psweep_point_size": 2,
+  "exp_point_size": 3,
+  "ph_point_size": 4,
+  "sh_Anc": 16,
+  "sh_Mut": 17,
+  "sh_R1": 16,
+  "sh_copA": 18,
+  "sh_finO": 15
+}
 
 rule all:
   input:
@@ -49,10 +64,12 @@ rule all:
     expand("results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot.pdf", psweep = PSWEEPS),
     expand("results/parameter_sweeps/{psweep}/{psweep}_inv_change_strain_plot.pdf", psweep = PSWEEPS),
     "figures/panels/fig1a_axes.pdf",
+    "figures/panels/fig3b_phenotyping.pdf",
     "figures/fig4_DG_invasion.pdf",
-    "figures/fig5_validation.pdf",
     "figures/fig5_validation2.pdf",
-    "figures/fig6_psweep.pdf"
+    "figures/fig5_validation3.pdf",
+    "figures/fig6_psweep.pdf",
+    "figures/fig7_Dim_psweep.pdf"
 
 # Download cran packages
 rule setup_r_environment:
@@ -171,7 +188,9 @@ rule plot_psweep:
   output:
     "results/parameter_sweeps/{psweep}/{psweep}_change_plot.pdf",
     "results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot.pdf",
-    "results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot.rds"
+    "results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot.rds",
+    "results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot2.pdf",
+    "results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot2.rds"
   params:
     plot_colors_psweep = json.dumps(plot_colors_psweep)
   shell:
@@ -259,7 +278,39 @@ rule plot_experiments:
       --lines '{params.plot_lines}'
     """
 
+# Define rule for processing growth rate data
+rule process_growth:
+  input:
+    "src/process_growth.R",
+    "input_data/experimental_data/2026-04-16_OD_growth_curve.xlsx"
+  output:
+    "results/phenotyping/growth_rate/growthratemax_av.csv",
+    "results/phenotyping/growth_rate/growthcurve_allrep.pdf",
+    "results/phenotyping/growth_rate/growthcurve_av.pdf",
+    "results/phenotyping/growth_rate/growthcurve_av.rds",
+    "results/phenotyping/growth_rate/growthrate_av.pdf",
+    "results/phenotyping/growth_rate/growthrate_av.rds",
+    "results/phenotyping/growth_rate/growthratemax_av.pdf",
+    "results/phenotyping/growth_rate/growthratemax_av.rds"
+  params:
+    plot_colors = json.dumps(plot_colors)
+  shell:
+    """
+    Rscript src/process_growth.R \
+      --colors '{params.plot_colors}'
+    """
+    
 # Define rule for processing phenotyping data
+rule process_phenotyping:
+  input:
+    "src/process_phenotyping.R",
+    "results/phenotyping/growth_rate/growthratemax_av.csv"
+  output:
+    "results/phenotyping/phenotyping_av.csv"
+  shell:
+    """
+    Rscript src/process_phenotyping.R
+    """
 
 # Define rule for plotting phenotyping data
 rule plot_phenotyping:
@@ -274,11 +325,13 @@ rule plot_phenotyping:
     "results/phenotyping/pB10_anc_inv.pdf",
     "results/phenotyping/pB10_anc_inv.rds"
   params:
-    plot_colors = json.dumps(plot_colors)
+    plot_colors = json.dumps(plot_colors),
+    plot_points = json.dumps(plot_points)
   shell:
     """
     Rscript src/plot_phenotyping.R \
-      --colors '{params.plot_colors}'
+      --colors '{params.plot_colors}'\
+      --points '{params.plot_points}'
     """
 
 # FIGURE SCRIPTS 
@@ -296,6 +349,51 @@ rule fig1a:
     """
     Rscript src/fig_axes.R \
       --colors '{params.plot_colors}'
+    """
+
+# Define rule for generating fig 3b: phenotyping annotated
+rule fig3b:
+  input:
+    "src/fig_phenotyping_labeled.R",
+    "results/phenotyping/pB10_phenotyping.rds",
+    "results/phenotyping/phenotyping_av.csv",
+    "results/phenotyping/growth_rate/growthratemax_tt.csv",
+    "results/phenotyping/LDM_conjugation/LDM_conjugation_tt.csv"
+  output:
+    "figures/panels/fig3b_phenotyping.pdf",
+    "figures/panels/fig3b_phenotyping.rds"
+  params:
+    plot_colors = json.dumps(plot_colors)
+  shell:
+    """
+    Rscript src/fig_phenotyping_labeled.R \
+      --colors '{params.plot_colors}'
+    """
+
+# Define rule for generating fig 5bd: exp validation plots
+rule fig5bd:
+  input:
+    "src/fig_exp_sim.R",
+    "src/ggplot_theme.R",
+    "results/experimental_validation/HFC/HFC_frequency_processed_av.csv",
+    "results/experimental_validation/LFC/LFC_frequency_processed_av.csv",
+    "results/case_study_sims/HFC_S.pB10/HFC_S.pB10_frequency_plot_df.csv",
+    "results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_frequency_plot_df.csv"
+  output:
+    "figures/panels/fig5d_HFC.pdf",
+    "figures/panels/fig5d_HFC.rds",
+    "figures/panels/fig5b_LFC.pdf",
+    "figures/panels/fig5b_LFC.rds"
+  params:
+    plot_colors = json.dumps(plot_colors),
+    plot_lines = json.dumps(plot_lines),
+    plot_points = json.dumps(plot_points)
+  shell:
+    """
+    Rscript src/fig_exp_sim.R \
+      --colors '{params.plot_colors}'\
+      --points '{params.plot_points}'\
+      --lines '{params.plot_lines}'
     """
 
 
@@ -322,10 +420,13 @@ rule fig5:
     "results/experimental_validation/LFC/LFC_frequency_plot.rds",
     "results/phenotyping/phenotyping_av.csv",
     "results/phenotyping/pB10_anc_inv.rds",
-    "results/phenotyping/pB10_mut_inv.rds"
+    "results/phenotyping/pB10_mut_inv.rds",
+    "figures/panels/fig5d_HFC.rds",
+    "figures/panels/fig5b_LFC.rds"
   output:
     "figures/fig5_validation.pdf",
-    "figures/fig5_validation2.pdf"
+    "figures/fig5_validation2.pdf",
+    "figures/fig5_validation3.pdf"
   shell:
     """
     Rscript src/fig_validation.R 
@@ -338,12 +439,36 @@ rule fig6:
     "results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot2.rds",
     "results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot2.rds",
     "results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot2.rds",
-    "results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2.rds"
+    "results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2.rds",
+    "input_data/strain_phenotypes.csv"
   output:
     "figures/fig6_psweep.pdf"
+  params:
+    plot_colors = json.dumps(plot_colors),
+    plot_points = json.dumps(plot_points)
   shell:
     """
-    Rscript src/fig_psweep.R 
+    Rscript src/fig_psweep.R \
+      --colors '{params.plot_colors}'\
+      --points '{params.plot_points}'
+    """
+
+# Define rule for generating fig 7: Dimitriu et al. parameter sweeps
+rule fig7:
+  input:
+    "src/fig_Dim_psweep.R",
+    "input_data/strain_phenotypes.csv",
+    "results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.rds"
+  output:
+    "figures/fig7_Dim_psweep.pdf"
+  params:
+    plot_colors = json.dumps(plot_colors),
+    plot_points = json.dumps(plot_points)
+  shell:
+    """
+    Rscript src/fig_Dim_psweep.R \
+      --colors '{params.plot_colors}'\
+      --points '{params.plot_points}'
     """
 
 

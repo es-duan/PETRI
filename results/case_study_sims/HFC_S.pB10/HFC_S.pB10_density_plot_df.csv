@@ -41,9 +41,9 @@
 3511,5,1,tselect,A2,395.923101239204,nalR,Ancestor,Ancestor
 3512,5,1,tselect,M2,554.111655883873,nalR,Mutant,Mutant
 3513,5,1,tselect,F2,0,nalR,Plasmid-free,Plasmid-free
-3515,29,1,tselect,A1,0,rifR,Ancestor,Ancestor
-3516,29,1,tselect,M1,0,rifR,Mutant,Mutant
-3517,29,1,tselect,F1,0,rifR,Plasmid-free,Plasmid-free
-3518,29,1,tselect,A2,344936.149750863,nalR,Ancestor,Ancestor
-3519,29,1,tselect,M2,9655063.85024914,nalR,Mutant,Mutant
-3520,29,1,tselect,F2,0,nalR,Plasmid-free,Plasmid-free
+3515,77,1,tselect,A1,0,rifR,Ancestor,Ancestor
+3516,77,1,tselect,M1,0,rifR,Mutant,Mutant
+3517,77,1,tselect,F1,0,rifR,Plasmid-free,Plasmid-free
+3518,77,1,tselect,A2,822468.282757351,nalR,Ancestor,Ancestor
+3519,77,1,tselect,M2,9177531.71724265,nalR,Mutant,Mutant
+3520,77,1,tselect,F2,0,nalR,Plasmid-free,Plasmid-free

@@ -1091,9 +1091,9 @@
 121160,173,1,tselect,A2,26.2315171702156,nalR,Ancestor,Ancestor
 121161,173,1,tselect,M2,554.315279028963,nalR,Mutant,Mutant
 121162,173,1,tselect,F2,0,nalR,Plasmid-free,Plasmid-free
-121164,197,1,tselect,A1,0,rifR,Ancestor,Ancestor
-121165,197,1,tselect,M1,0,rifR,Mutant,Mutant
-121166,197,1,tselect,F1,0,rifR,Plasmid-free,Plasmid-free
-121167,197,1,tselect,A2,23605.3359727618,nalR,Ancestor,Ancestor
-121168,197,1,tselect,M2,9976394.66402724,nalR,Mutant,Mutant
-121169,197,1,tselect,F2,0,nalR,Plasmid-free,Plasmid-free
+121164,245,1,tselect,A1,0,rifR,Ancestor,Ancestor
+121165,245,1,tselect,M1,0,rifR,Mutant,Mutant
+121166,245,1,tselect,F1,0,rifR,Plasmid-free,Plasmid-free
+121167,245,1,tselect,A2,59003.2859611883,nalR,Ancestor,Ancestor
+121168,245,1,tselect,M2,9940996.71403881,nalR,Mutant,Mutant
+121169,245,1,tselect,F2,0,nalR,Plasmid-free,Plasmid-free

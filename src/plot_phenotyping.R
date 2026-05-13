@@ -7,8 +7,8 @@ library(jsonlite)
 
 # Set arguments parser inputs ----
 parser <- ArgumentParser()
-parser$add_argument("-t","--treatment", type = "character", help = "Specify Treatment ID")
 parser$add_argument("-c","--colors", help = "JSON string of plot colors")
+parser$add_argument("-p","--points", help = "JSON string of point aesthetics")
 
 # Parse arguments
 args <- parser$parse_args()
@@ -22,6 +22,12 @@ p_F <- plot_colors[["p_F"]]
 p_hc <- plot_colors[["p_hc"]]
 p_syn <- plot_colors[["p_syn"]]
 p_par <- plot_colors[["p_par"]]
+
+## Points ----
+plot_points <- jsonlite::fromJSON(args$points)
+point_size <- plot_points[["ph_point_size"]]
+sh_Anc <- plot_points[["sh_Anc"]]
+sh_Mut <- plot_points[["sh_Mut"]]
 
 ## Retrieve ggplot theme ----
 source("src/ggplot_theme.R")
@@ -57,8 +63,9 @@ p1 <- ggplot() +
                                color = Genotype),
                  height = 0) +
   geom_point(data = phenotyping,
-             mapping = aes(Conjugation_rate_mean, Growth_rate_mean, color = Genotype),
-             size = 4) +
+             mapping = aes(Conjugation_rate_mean, Growth_rate_mean, color = Genotype,
+                           shape = Genotype),
+             size = point_size) +
   scale_x_continuous(trans = "log10", 
                      name = "Conjugation rate",
                      limits = lim_conj,
@@ -68,6 +75,8 @@ p1 <- ggplot() +
                      limits = lim_growth) + 
   scale_color_manual(values = c("Anc" = p_Anc,
                                 "Mut" = p_Mut)) +
+  scale_shape_manual(values = c("Anc" = sh_Anc,
+                                "Mut" = sh_Mut)) +
   fig_aes +
   theme(legend.background = element_rect(fill = "white", color = "gray70"),
         legend.position = c(0.2, 0.15))
@@ -96,17 +105,23 @@ c1 <- ggplot() +
   geom_segment(mapping = aes(x = a_x, xend = a_x, y = lim_growth[1], yend = lim_growth[2]),
                color = "black") +
   geom_point(data = phenotyping,
-             mapping = aes(Conjugation_rate_mean, Growth_rate_mean, color = Genotype),
-             size = 4) +
+             mapping = aes(Conjugation_rate_mean, Growth_rate_mean, color = Genotype,
+                           shape = Genotype),
+             size = point_size) +
   scale_x_continuous(trans = "log10", 
                      name = "Conjugation rate",
-                     limits = lim_conj) +
+                     limits = lim_conj,
+                     expand = c(0.001, 0.001)) +
   scale_y_continuous(name = "Growth Rate",
-                     limits = lim_growth) + 
+                     limits = lim_growth,
+                     expand = c(0.001, 0.001)) + 
   scale_color_manual(values = c("Anc" = p_Anc,
                                 "Mut" = p_Mut)) +
+  scale_shape_manual(values = c("Anc" = sh_Anc,
+                                "Mut" = sh_Mut)) +
   theme_void() +
-  theme(legend.position = "none")
+  theme(legend.position = "none",
+        panel.border = element_rect(colour = "black", fill = NA, linewidth = 0.5))
 
 ggsave("results/phenotyping/pB10_mut_inv.pdf",
        c1, width = 4, height = 4, units = "in")
@@ -130,17 +145,23 @@ c2 <- ggplot() +
   geom_segment(mapping = aes(x = m_x, xend = m_x, y = lim_growth[1], yend = lim_growth[2]),
                color = "black") +
   geom_point(data = phenotyping,
-             mapping = aes(Conjugation_rate_mean, Growth_rate_mean, color = Genotype),
-             size = 4) +
+             mapping = aes(Conjugation_rate_mean, Growth_rate_mean, color = Genotype,
+                           shape = Genotype),
+             size = point_size) +
   scale_x_continuous(trans = "log10", 
                      name = "Conjugation rate",
-                     limits = lim_conj) +
+                     limits = lim_conj,
+                     expand = c(0.001, 0.001)) +
   scale_y_continuous(name = "Growth Rate",
-                     limits = lim_growth) + 
+                     limits = lim_growth,
+                     expand = c(0.001, 0.001)) + 
   scale_color_manual(values = c("Anc" = p_Anc,
                                 "Mut" = p_Mut)) +
+  scale_shape_manual(values = c("Anc" = sh_Anc,
+                                "Mut" = sh_Mut)) +
   theme_void() +
-  theme(legend.position = "none")
+  theme(legend.position = "none",
+        panel.border = element_rect(colour = "black", fill = NA, linewidth = 0.5))
 
 ggsave("results/phenotyping/pB10_anc_inv.pdf",
        c2, width = 4, height = 4, units = "in")

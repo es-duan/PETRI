@@ -5,7 +5,7 @@ library(tidyverse)
 library(broom)
 
 # Data processing/experimental parameters ----
-tselect_t = 24 # colony growth time of 72 hr
+tselect_t = 72 # colony growth time of 72 hr
 tselect_d = 1e7 # scale plate scraping estimates to a density of 1e7
 limit_est = 0.5 # use estimate of 0.5 for plates below the detection limit
 

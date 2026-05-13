@@ -46,9 +46,9 @@ Protocol_phases,"7,1,1"
 Selection_type,solid
 Hours_growth,24
 Hours_conjugation,5
-Hours_t_selection,24
-A_colony,5.00E+06
-M_colony,1.00E+08
+Hours_t_selection,72
+A_colony,2.96E+07
+M_colony,2.36E+08
 Final_density_t_selection,1.00E+07
 Dilution_growth,0.001
 Dilution_conjugation,0.01

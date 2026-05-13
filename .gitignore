@@ -7,3 +7,5 @@
 .snakemake/*
 !.snakemake/DAG.pdf
 prelim_experiments/*
+.positai
+figures/edited/*
