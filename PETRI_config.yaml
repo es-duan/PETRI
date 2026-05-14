@@ -22,6 +22,8 @@ dependencies:
   - r-colorspace
   - r-ggnewscale
   - r-openxlsx
+  - r-ggpubr
+  - r-ggpattern  
 
   # Required by src/fig_axes.R, but not currently available as a conda package.
   # Install after creating the env:

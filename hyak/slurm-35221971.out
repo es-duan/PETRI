@@ -1,0 +1,446 @@
+________________________________________________________________________________
+Miniforge (conda) has been loaded.
+
+- Please create and work in your own conda environments:
+    conda create -n myenv python=3.12
+    conda activate myenv
+
+- To customize environment or package locations, edit your ~/.condarc:
+    envs_dirs:
+      - /path/to/your/envs
+    pkgs_dirs:
+      - /path/to/your/pkgs
+
+  For more information, see:
+    https://docs.conda.io/projects/conda/en/latest/configuration.html
+
+- If your personal Conda stops working after unloading this module, try:
+    source ~/.bashrc
+________________________________________________________________________________
+
+Lmod has detected the following error: Conda is already active (CONDA_PREFIX
+is set). Module conda/Miniforge3-25.9.1-0 not loaded. 
+While processing the following module(s):
+    Module fullname            Module Filename
+    ---------------            ---------------
+    conda/Miniforge3-25.9.1-0  /sw/klone/conda/Miniforge3-25.9.1-0.lua
+
+Injecting conda environment /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/PETRI_config.yaml.
+Assuming unrestricted shared filesystem usage.
+host: n3065
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 39
+Rules claiming more threads will be scaled down.
+Job stats:
+job                        count
+-----------------------  -------
+case_study_sims                2
+fig4                           1
+fig5bd                         1
+plot_experiments               1
+process_phenotyping            1
+psweep_sims                   10
+plot_phenotyping               1
+process_case_study_sims        2
+process_psweep                10
+fig3b                          1
+fig5                           1
+plot_case_study_sims           2
+plot_psweep                   10
+fig6                           1
+fig7                           1
+plot_psweep_strain            10
+all                            1
+total                         56
+
+Select jobs to execute...
+Execute 3 jobs...
+
+[Wed May 13 21:35:58 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_params.csv, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_settings.rds
+    output: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_out.csv
+    jobid: 46
+    reason: Updated input files: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_params.csv, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_settings.rds, src/simrun_psweep.R
+    wildcards: psweep=pLFCi_S.pB10
+    threads: 19
+    resources: tmpdir=/tmp
+[Wed May 13 21:35:58 2026]
+localrule plot_experiments:
+    input: src/plot_experiments.R, results/experimental_validation/HFC/HFC_plating_processed_av.csv, results/experimental_validation/HFC/HFC_frequency_processed_av.csv, results/experimental_validation/LFC/LFC_plating_processed_av.csv, results/experimental_validation/LFC/LFC_frequency_processed_av.csv
+    output: results/experimental_validation/HFC/HFC_density_plot.pdf, results/experimental_validation/HFC/HFC_density_plot.rds, results/experimental_validation/HFC/HFC_frequency_plot.pdf, results/experimental_validation/HFC/HFC_frequency_plot.rds, results/experimental_validation/LFC/LFC_density_plot.pdf, results/experimental_validation/LFC/LFC_density_plot.rds, results/experimental_validation/LFC/LFC_frequency_plot.pdf, results/experimental_validation/LFC/LFC_frequency_plot.rds
+    jobid: 74
+    reason: Updated input files: results/experimental_validation/HFC/HFC_frequency_processed_av.csv, results/experimental_validation/LFC/LFC_plating_processed_av.csv, results/experimental_validation/HFC/HFC_plating_processed_av.csv, src/plot_experiments.R, results/experimental_validation/LFC/LFC_frequency_processed_av.csv
+    resources: tmpdir=/tmp
+[Wed May 13 21:35:58 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, results/parameter_sweeps/pHFCi2_S.pB10/pHFCi2_S.pB10_params.csv, results/parameter_sweeps/pHFCi2_S.pB10/pHFCi2_S.pB10_settings.rds
+    output: results/parameter_sweeps/pHFCi2_S.pB10/pHFCi2_S.pB10_out.csv
+    jobid: 50
+    reason: Missing output files: results/parameter_sweeps/pHFCi2_S.pB10/pHFCi2_S.pB10_out.csv
+    wildcards: psweep=pHFCi2_S.pB10
+    threads: 19
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘foreach’
+
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+The following objects are masked from ‘package:purrr’:
+
+    accumulate, when
+
+Loading required package: iterators
+Loading required package: parallel
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘foreach’
+
+The following objects are masked from ‘package:purrr’:
+
+    accumulate, when
+
+Loading required package: iterators
+Loading required package: parallel
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+Rows: 22500 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SetID
+dbl (3): SweepID, gamma_M, psi_M
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 22500 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SetID
+dbl (3): SweepID, gamma_M, psi_M
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 12 Columns: 11
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (6): Experiment, Treatment, Phase, Phenotype, Host, Count_type
+dbl (5): Time, Density_mean, Density_sd, n, Density_se
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 6 Columns: 11
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (6): Experiment, Treatment, Phase, Phenotype, Host, Count_type
+dbl (5): Time, Frequency_mean, Frequency_sd, n, Frequency_se
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 28 Columns: 11
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (6): Experiment, Treatment, Phase, Phenotype, Host, Count_type
+dbl (5): Time, Density_mean, Density_sd, n, Density_se
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 20 Columns: 11
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (6): Experiment, Treatment, Phase, Phenotype, Host, Count_type
+dbl (5): Time, Frequency_mean, Frequency_sd, n, Frequency_se
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Warning message:
+In scale_y_continuous(trans = "log10", name = "Density (CFU/mL)",  :
+  log-10 transformation introduced infinite values.
+Warning messages:
+1: In scale_y_continuous(limits = c(1e-05, 1), breaks = c(0, 1e-04,  :
+  log-10 transformation introduced infinite values.
+2: No shared levels found between `names(values)` of the manual scale and the
+data's shape values. 
+Warning message:
+In scale_y_continuous(trans = "log10", name = "Density (CFU/mL)",  :
+  log-10 transformation introduced infinite values.
+Warning messages:
+1: In scale_y_continuous(limits = c(1e-05, 1), breaks = c(0, 1e-04,  :
+  log-10 transformation introduced infinite values.
+2: No shared levels found between `names(values)` of the manual scale and the
+data's shape values. 
+[Wed May 13 21:36:05 2026]
+Finished jobid: 74 (Rule: plot_experiments)
+1 of 56 steps (2%) done
+Execute 1 jobs...
+
+[Wed May 13 21:36:05 2026]
+localrule case_study_sims:
+    input: src/simrun_case_study.R, input_data/case_study_sims/HFC_S.pB10_full_inv_settings.csv
+    output: results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_data.csv, results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_data_long.csv, results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_sim_plot.pdf
+    jobid: 12
+    reason: Missing output files: results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_data.csv, results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_data_long.csv
+    wildcards: treatment=HFC_S.pB10_full
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+[1] "Treatment HFC_S.pB10_full folder exists. Rewriting previous run."
+[1] "Cycle 1 complete."
+[1] "Cycle 2 complete."
+[1] "Cycle 3 complete."
+[1] "Cycle 4 complete."
+[1] "Cycle 5 complete."
+[1] "Cycle 6 complete."
+[1] "Cycle 7 complete."
+[1] "Cycle 8 complete."
+[1] "Cycle 9 complete."
+Warning message:
+Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead. 
+Warning message:
+In scale_y_continuous(trans = "log10", breaks = c(10, 1000, 1e+05,  :
+  log-10 transformation introduced infinite values.
+[Wed May 13 21:36:10 2026]
+Finished jobid: 12 (Rule: case_study_sims)
+2 of 56 steps (4%) done
+Execute 1 jobs...
+
+[Wed May 13 21:36:10 2026]
+localrule process_phenotyping:
+    input: src/process_phenotyping.R, results/phenotyping/growth_rate/growthratemax_av.csv
+    output: results/phenotyping/phenotyping_av.csv
+    jobid: 70
+    reason: Updated input files: results/phenotyping/growth_rate/growthratemax_av.csv, src/process_phenotyping.R
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+Rows: 3 Columns: 5
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): Strain
+dbl (4): max_gr_mean, max_gr_sd, n, max_gr_se
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+[Wed May 13 21:36:12 2026]
+Finished jobid: 70 (Rule: process_phenotyping)
+3 of 56 steps (5%) done
+Execute 1 jobs...
+
+[Wed May 13 21:36:12 2026]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_data.csv, results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_data_long.csv
+    output: results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_density_plot_df.csv, results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_frequency_plot_df.csv, results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_phases_plot_df.csv
+    jobid: 11
+    reason: Missing output files: results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_phases_plot_df.csv, results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_density_plot_df.csv, results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_frequency_plot_df.csv; Input files updated by another job: results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_data.csv, results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_data_long.csv
+    wildcards: treatment=HFC_S.pB10_full
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+New names:
+• `` -> `...1`
+Rows: 4535 Columns: 11
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (1): Phase
+dbl (10): ...1, Time, A1, M1, F1, A2, M2, F2, C, Cycle
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+New names:
+• `` -> `...1`
+Rows: 31745 Columns: 8
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (4): Phase, Cell_types, Host, Genotype
+dbl (4): ...1, Time, Cycle, Density
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+New names:
+• `` -> `...1`
+Rows: 36 Columns: 12
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (2): Phase, Type
+dbl (10): ...1, Time, A1, M1, F1, A2, M2, F2, C, Cycle
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+`summarise()` has regrouped the output.
+ℹ Summaries were computed grouped by Cycle and Phase.
+ℹ Output is grouped by Cycle.
+ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+ℹ Use `summarise(.by = c(Cycle, Phase))` for per-operation grouping
+  (`?dplyr::dplyr_by`) instead.
+[Wed May 13 21:36:15 2026]
+Finished jobid: 11 (Rule: process_case_study_sims)
+4 of 56 steps (7%) done
+Execute 1 jobs...
+
+[Wed May 13 21:36:15 2026]
+localrule plot_phenotyping:
+    input: src/plot_phenotyping.R, results/phenotyping/phenotyping_av.csv
+    output: results/phenotyping/pB10_phenotyping.pdf, results/phenotyping/pB10_phenotyping.rds, results/phenotyping/pB10_mut_inv.pdf, results/phenotyping/pB10_mut_inv.rds, results/phenotyping/pB10_anc_inv.pdf, results/phenotyping/pB10_anc_inv.rds
+    jobid: 69
+    reason: Input files updated by another job: results/phenotyping/phenotyping_av.csv
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+Rows: 3 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): Genotype
+dbl (8): Growth_rate_mean, Growth_rate_sd, n.x, Growth_rate_se, Conjugation_...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Warning message:
+`geom_errorbarh()` was deprecated in ggplot2 4.0.0.
+ℹ Please use the `orientation` argument of `geom_errorbar()` instead. 
+`height` was translated to `width`.
+[Wed May 13 21:36:20 2026]
+Finished jobid: 69 (Rule: plot_phenotyping)
+5 of 56 steps (9%) done
+Execute 1 jobs...
+
+[Wed May 13 21:36:20 2026]
+localrule fig3b:
+    input: src/fig_phenotyping_labeled.R, results/phenotyping/pB10_phenotyping.rds, results/phenotyping/phenotyping_av.csv, results/phenotyping/growth_rate/growthratemax_tt.csv, results/phenotyping/LDM_conjugation/LDM_conjugation_tt.csv
+    output: figures/panels/fig3b_phenotyping.pdf, figures/panels/fig3b_phenotyping.rds
+    jobid: 68
+    reason: Input files updated by another job: results/phenotyping/phenotyping_av.csv, results/phenotyping/pB10_phenotyping.rds
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+Error in library(ggpubr) : there is no package called ‘ggpubr’
+Execution halted
+RuleException:
+CalledProcessError in file "/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/snakefile", line 371:
+Command 'set -euo pipefail;  
+    Rscript src/fig_phenotyping_labeled.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb", "p_hc": "#e7e9fd", "p_syn": "#A69AE0", "p_par": "#d8aace"}'' returned non-zero exit status 1.
+[Wed May 13 21:36:22 2026]
+Error in rule fig3b:
+    message: None
+    jobid: 68
+    input: src/fig_phenotyping_labeled.R, results/phenotyping/pB10_phenotyping.rds, results/phenotyping/phenotyping_av.csv, results/phenotyping/growth_rate/growthratemax_tt.csv, results/phenotyping/LDM_conjugation/LDM_conjugation_tt.csv
+    output: figures/panels/fig3b_phenotyping.pdf, figures/panels/fig3b_phenotyping.rds
+    shell:
+        
+    Rscript src/fig_phenotyping_labeled.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb", "p_hc": "#e7e9fd", "p_syn": "#A69AE0", "p_par": "#d8aace"}'
+    
+        (command exited with non-zero exit code)
+[Wed May 13 21:47:42 2026]
+Finished jobid: 50 (Rule: psweep_sims)
+6 of 56 steps (11%) done
+[Wed May 13 22:00:59 2026]
+Finished jobid: 46 (Rule: psweep_sims)
+7 of 56 steps (12%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Wed May 13 22:00:59 2026]
+Error in rule fig3b:
+    message: None
+    jobid: 68
+    input: src/fig_phenotyping_labeled.R, results/phenotyping/pB10_phenotyping.rds, results/phenotyping/phenotyping_av.csv, results/phenotyping/growth_rate/growthratemax_tt.csv, results/phenotyping/LDM_conjugation/LDM_conjugation_tt.csv
+    output: figures/panels/fig3b_phenotyping.pdf, figures/panels/fig3b_phenotyping.rds
+    shell:
+        
+    Rscript src/fig_phenotyping_labeled.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb", "p_hc": "#e7e9fd", "p_syn": "#A69AE0", "p_par": "#d8aace"}'
+    
+        (command exited with non-zero exit code)
+Complete log(s): /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/log/2026-05-13T213553.754531.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

@@ -1,0 +1,667 @@
+________________________________________________________________________________
+Miniforge (conda) has been loaded.
+
+- Please create and work in your own conda environments:
+    conda create -n myenv python=3.12
+    conda activate myenv
+
+- To customize environment or package locations, edit your ~/.condarc:
+    envs_dirs:
+      - /path/to/your/envs
+    pkgs_dirs:
+      - /path/to/your/pkgs
+
+  For more information, see:
+    https://docs.conda.io/projects/conda/en/latest/configuration.html
+
+- If your personal Conda stops working after unloading this module, try:
+    source ~/.bashrc
+________________________________________________________________________________
+
+Lmod has detected the following error: Conda is already active (CONDA_PREFIX
+is set). Module conda/Miniforge3-25.9.1-0 not loaded. 
+While processing the following module(s):
+    Module fullname            Module Filename
+    ---------------            ---------------
+    conda/Miniforge3-25.9.1-0  /sw/klone/conda/Miniforge3-25.9.1-0.lua
+
+Injecting conda environment /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/PETRI_config.yaml.
+Assuming unrestricted shared filesystem usage.
+host: n3303
+Building DAG of jobs...
+Creating conda environment PETRI_config.yaml...
+Downloading and installing remote packages.
+Cleaning up conda package tarballs.
+Environment for /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/PETRI_config.yaml created (location: .snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_)
+Using shell: /usr/bin/bash
+Provided cores: 39
+Rules claiming more threads will be scaled down.
+Job stats:
+job                        count
+-----------------------  -------
+case_study_sims                1
+fig3b                          1
+fig4                           1
+fig5bd                         1
+plot_case_study_sims           2
+process_psweep                10
+psweep_sims                    8
+setup_r_environment            1
+fig1a                          1
+fig5                           1
+plot_psweep                   10
+process_case_study_sims        1
+plot_psweep_strain            10
+fig6                           1
+fig7                           1
+all                            1
+total                         51
+
+Select jobs to execute...
+Execute 3 jobs...
+
+[Wed May 13 22:21:34 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_params.csv, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_settings.rds
+    output: results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_out.csv
+    jobid: 26
+    reason: Updated input files: results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_params.csv, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_settings.rds
+    wildcards: psweep=pDim90_E.R1
+    threads: 19
+    resources: tmpdir=/tmp
+[Wed May 13 22:21:34 2026]
+localrule fig3b:
+    input: src/fig_phenotyping_labeled.R, results/phenotyping/pB10_phenotyping.rds, results/phenotyping/phenotyping_av.csv, results/phenotyping/growth_rate/growthratemax_tt.csv, results/phenotyping/LDM_conjugation/LDM_conjugation_tt.csv
+    output: figures/panels/fig3b_phenotyping.pdf, figures/panels/fig3b_phenotyping.rds
+    jobid: 68
+    reason: Missing output files: figures/panels/fig3b_phenotyping.pdf
+    resources: tmpdir=/tmp
+[Wed May 13 22:21:34 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_params.csv, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_settings.rds
+    output: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_out.csv
+    jobid: 22
+    reason: Updated input files: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_settings.rds, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_params.csv
+    wildcards: psweep=pLFC_S.pB10
+    threads: 19
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+
+Attaching package: ‘foreach’
+
+The following objects are masked from ‘package:purrr’:
+
+    accumulate, when
+
+
+Attaching package: ‘foreach’
+
+The following objects are masked from ‘package:purrr’:
+
+    accumulate, when
+
+Loading required package: iterators
+Loading required package: iterators
+Loading required package: parallel
+Loading required package: parallel
+Rows: 22500 Columns: 4
+Rows: 3 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SetID
+dbl (3): SweepID, gamma_M, psi_M
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): Genotype
+dbl (8): Growth_rate_mean, Growth_rate_sd, n.x, Growth_rate_se, Conjugation_...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 1 Columns: 8
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): method, alternative
+dbl (6): estimate, statistic, p.value, parameter, conf.low, conf.high
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 22500 Columns: 4
+Rows: 1 Columns: 8
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): method, alternative
+dbl (6): estimate, statistic, p.value, parameter, conf.low, conf.high
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SetID
+dbl (3): SweepID, gamma_M, psi_M
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+`height` was translated to `width`.
+[Wed May 13 22:22:03 2026]
+Finished jobid: 68 (Rule: fig3b)
+1 of 51 steps (2%) done
+Execute 1 jobs...
+
+[Wed May 13 22:22:03 2026]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_out.csv, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_settings.rds
+    output: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_plot.csv
+    jobid: 45
+    reason: Updated input files: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_settings.rds, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_out.csv, src/process_psweep.R
+    wildcards: psweep=pLFCi_S.pB10
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+Rows: 22500 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SetID
+dbl (8): SweepID, gamma_M, psi_M, end_time, A1, M1, A2, M2
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+[Wed May 13 22:22:06 2026]
+Finished jobid: 45 (Rule: process_psweep)
+2 of 51 steps (4%) done
+Execute 1 jobs...
+
+[Wed May 13 22:22:06 2026]
+localrule setup_r_environment:
+    output: results/.r_setup_complete.flag
+    jobid: 67
+    reason: Software environment definition has changed since last execution
+    resources: tmpdir=/tmp
+Select jobs to execute...
+Activating conda environment: .snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_
+also installing the dependencies ‘tweenr’, ‘polyclip’, ‘ggforce’
+
+trying URL 'https://cloud.r-project.org/src/contrib/tweenr_2.0.3.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/polyclip_1.10-7.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/ggforce_0.5.0.tar.gz'
+trying URL 'https://cloud.r-project.org/src/contrib/funkyheatmap_0.5.2.tar.gz'
+* installing *source* package ‘tweenr’ ...
+** this is package ‘tweenr’ version ‘2.0.3’
+** package ‘tweenr’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C compiler: ‘x86_64-conda-linux-gnu-cc (conda-forge gcc 14.3.0-19) 14.3.0’
+using C++ compiler: ‘x86_64-conda-linux-gnu-c++ (conda-forge gcc 14.3.0-19) 14.3.0’
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG  -I'/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/cpp11/include' -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib    -fpic  -fvisibility-inlines-hidden  -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix   -c along.cpp -o along.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG  -I'/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/cpp11/include' -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib    -fpic  -fvisibility-inlines-hidden  -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix   -c at.cpp -o at.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG  -I'/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/cpp11/include' -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib    -fpic  -fvisibility-inlines-hidden  -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix   -c cpp11.cpp -o cpp11.o
+x86_64-conda-linux-gnu-cc -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG  -I'/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/cpp11/include' -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib    -fpic  -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix  -c easing.c -o easing.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG  -I'/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/cpp11/include' -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib    -fpic  -fvisibility-inlines-hidden  -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix   -c element.cpp -o element.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG  -I'/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/cpp11/include' -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib    -fpic  -fvisibility-inlines-hidden  -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix   -c element_at.cpp -o element_at.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG  -I'/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/cpp11/include' -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib    -fpic  -fvisibility-inlines-hidden  -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix   -c fill.cpp -o fill.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG  -I'/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/cpp11/include' -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib    -fpic  -fvisibility-inlines-hidden  -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix   -c state.cpp -o state.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -shared -L/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/lib -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -Wl,--allow-shlib-undefined -Wl,-rpath,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib -L/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib -o tweenr.so along.o at.o cpp11.o easing.o element.o element_at.o fill.o state.o -L/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/lib -lR
+installing to /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/00LOCK-tweenr/00new/tweenr/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (tweenr)
+* installing *source* package ‘polyclip’ ...
+** this is package ‘polyclip’ version ‘1.10-7’
+** package ‘polyclip’ successfully unpacked and MD5 sums checked
+** using staged installation
+checking whether the C++ compiler works... yes
+checking for C++ compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C++ compiler... yes
+checking whether /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/bin/x86_64-conda-linux-gnu-c++ accepts -g... yes
+Using PKG_CONFIG: pkgconf
+Compiling against bundled copy of clipper library.
+checking for int64_t... yes
+     In the clipper library, signed 64-bit integers (cInt)
+     will be declared as 'int64_t'
+checking for uint64_t... yes
+     In the clipper library, unsigned 64-bit integers (cUInt)
+     will be declared as 'uint64_t'
+configure: creating ./config.status
+config.status: creating src/Makevars
+** libs
+using C compiler: ‘x86_64-conda-linux-gnu-cc (conda-forge gcc 14.3.0-19) 14.3.0’
+using C++ compiler: ‘x86_64-conda-linux-gnu-c++ (conda-forge gcc 14.3.0-19) 14.3.0’
+x86_64-conda-linux-gnu-cc -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG -DPOLYCLIP_LONG64="int64_t" -DPOLYCLIP_ULONG64="uint64_t"  -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib    -fpic  -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix  -c init.c -o init.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG -DPOLYCLIP_LONG64="int64_t" -DPOLYCLIP_ULONG64="uint64_t"  -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib   -fvisibility-inlines-hidden -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix -fpic  -fvisibility-inlines-hidden  -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix   -c interface.cpp -o interface.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG -DPOLYCLIP_LONG64="int64_t" -DPOLYCLIP_ULONG64="uint64_t"  -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib   -fvisibility-inlines-hidden -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix -fpic  -fvisibility-inlines-hidden  -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix   -c clipper.cpp -o clipper.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -shared -L/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/lib -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -Wl,--allow-shlib-undefined -Wl,-rpath,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib -L/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib -o polyclip.so init.o interface.o clipper.o -L/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/lib -lR
+installing to /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/00LOCK-polyclip/00new/polyclip/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (polyclip)
+* installing *source* package ‘ggforce’ ...
+** this is package ‘ggforce’ version ‘0.5.0’
+** package ‘ggforce’ successfully unpacked and MD5 sums checked
+** using staged installation
+** libs
+using C++ compiler: ‘x86_64-conda-linux-gnu-c++ (conda-forge gcc 14.3.0-19) 14.3.0’
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG  -I'/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/cpp11/include' -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib    -fpic  -fvisibility-inlines-hidden  -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix   -c bSpline.cpp -o bSpline.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG  -I'/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/cpp11/include' -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib    -fpic  -fvisibility-inlines-hidden  -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix   -c bezier.cpp -o bezier.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG  -I'/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/cpp11/include' -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib    -fpic  -fvisibility-inlines-hidden  -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix   -c concaveman.cpp -o concaveman.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG  -I'/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/cpp11/include' -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib    -fpic  -fvisibility-inlines-hidden  -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix   -c cpp11.cpp -o cpp11.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG  -I'/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/cpp11/include' -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib    -fpic  -fvisibility-inlines-hidden  -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix   -c deBoor.cpp -o deBoor.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG  -I'/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/cpp11/include' -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib    -fpic  -fvisibility-inlines-hidden  -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix   -c ellipseEnclose.cpp -o ellipseEnclose.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG  -I'/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/cpp11/include' -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib    -fpic  -fvisibility-inlines-hidden  -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix   -c enclose.cpp -o enclose.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -I"/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/include" -DNDEBUG  -I'/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/cpp11/include' -DNDEBUG -D_FORTIFY_SOURCE=2 -O2 -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -I/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib    -fpic  -fvisibility-inlines-hidden  -fmessage-length=0 -march=nocona -mtune=haswell -ftree-vectorize -fPIC -fstack-protector-strong -fno-plt -O2 -ffunction-sections -pipe -isystem /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/include -fdebug-prefix-map=/home/conda/feedstock_root/build_artifacts/r-base-split_1773745610701/work=/usr/local/src/conda/r-base-4.5.3 -fdebug-prefix-map=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_=/usr/local/src/conda-prefix   -c pointPath.cpp -o pointPath.o
+x86_64-conda-linux-gnu-c++ -std=gnu++17 -shared -L/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/lib -Wl,-O2 -Wl,--sort-common -Wl,--as-needed -Wl,-z,relro -Wl,-z,now -Wl,--disable-new-dtags -Wl,--gc-sections -Wl,--allow-shlib-undefined -Wl,-rpath,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib -Wl,-rpath-link,/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib -L/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib -o ggforce.so bSpline.o bezier.o concaveman.o cpp11.o deBoor.o ellipseEnclose.o enclose.o pointPath.o -L/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/lib -lR
+installing to /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/conda/ccac9e29c8a67a186bb8229e3ee0618d_/lib/R/library/00LOCK-ggforce/00new/ggforce/libs
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** checking absolute paths in shared objects and dynamic libraries
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (ggforce)
+* installing *source* package ‘funkyheatmap’ ...
+** this is package ‘funkyheatmap’ version ‘0.5.2’
+** package ‘funkyheatmap’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (funkyheatmap)
+
+The downloaded source packages are in
+	‘/tmp/RtmpglVBKS/downloaded_packages’
+Updating HTML index of packages in '.Library'
+Making 'packages.html' ... done
+Touching output file results/.r_setup_complete.flag.
+[Wed May 13 22:23:46 2026]
+Finished jobid: 67 (Rule: setup_r_environment)
+3 of 51 steps (6%) done
+Execute 1 jobs...
+
+[Wed May 13 22:23:46 2026]
+localrule plot_case_study_sims:
+    input: src/plot_simrun.R, results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_density_plot_df.csv, results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_frequency_plot_df.csv, results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_phases_plot_df.csv
+    output: results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_density_plot.pdf, results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_frequency_plot.pdf, results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_density_plot.rds, results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_frequency_plot.rds
+    jobid: 10
+    reason: Missing output files: results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_frequency_plot.pdf
+    wildcards: treatment=HFC_S.pB10_full
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+Rows: 480 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (5): Phase, Cell_types, Host, Genotype, Genotype_plot
+dbl (4): ...1, Time, Cycle, Density
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 72 Columns: 5
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): Phase, Genotype
+dbl (3): Cycle, Time, Frequency
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 18 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): Phase
+dbl (3): Cycle, T_start, T_end
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Warning message:
+In scale_y_continuous(limits = f_limits, breaks = f_breaks, labels = c(sapply(f_labels,  :
+  log-10 transformation introduced infinite values.
+[Wed May 13 22:23:52 2026]
+Finished jobid: 10 (Rule: plot_case_study_sims)
+4 of 51 steps (8%) done
+Execute 1 jobs...
+
+[Wed May 13 22:23:52 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_plot.csv
+    output: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.rds, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot2.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot2.rds
+    jobid: 44
+    reason: Input files updated by another job: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_plot.csv
+    wildcards: psweep=pLFCi_S.pB10
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+Rows: 22500 Columns: 19
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (2): SetID, Mut_freq_inv
+dbl (17): SweepID, gamma_M, psi_M, end_time, A1, M1, A2, M2, log_gamma_M, An...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 7 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): Strain, Source
+dbl (2): Growth_rate, Conjugation_rate
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Warning messages:
+1: Removed 12307 rows containing non-finite outside the scale range
+(`stat_contour()`). 
+2: `stat_contour()`: Zero contours were generated 
+3: In min(x) : no non-missing arguments to min; returning Inf
+4: In max(x) : no non-missing arguments to max; returning -Inf
+[Wed May 13 22:23:59 2026]
+Finished jobid: 44 (Rule: plot_psweep)
+5 of 51 steps (10%) done
+Execute 1 jobs...
+
+[Wed May 13 22:23:59 2026]
+localrule case_study_sims:
+    input: src/simrun_case_study.R, input_data/case_study_sims/LFC_S.pB10-A_full_inv_settings.csv
+    output: results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_data.csv, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_data_long.csv, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_sim_plot.pdf
+    jobid: 15
+    reason: Missing output files: results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_data.csv, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_data_long.csv
+    wildcards: treatment=LFC_S.pB10-A_full
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+[1] "Treatment LFC_S.pB10-A_full folder exists. Rewriting previous run."
+[1] "Cycle 1 complete."
+[1] "Cycle 2 complete."
+Warning message:
+Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead. 
+Warning message:
+In scale_y_continuous(trans = "log10", breaks = c(10, 1000, 1e+05,  :
+  log-10 transformation introduced infinite values.
+[Wed May 13 22:24:12 2026]
+Finished jobid: 15 (Rule: case_study_sims)
+6 of 51 steps (12%) done
+Execute 1 jobs...
+
+[Wed May 13 22:24:13 2026]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_data.csv, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_data_long.csv
+    output: results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_density_plot_df.csv, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_frequency_plot_df.csv, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_phases_plot_df.csv
+    jobid: 14
+    reason: Missing output files: results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_phases_plot_df.csv, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_density_plot_df.csv, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_frequency_plot_df.csv; Input files updated by another job: results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_data.csv, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_data_long.csv
+    wildcards: treatment=LFC_S.pB10-A_full
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+New names:
+• `` -> `...1`
+Rows: 34621 Columns: 11
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (1): Phase
+dbl (10): ...1, Time, A1, M1, F1, A2, M2, F2, C, Cycle
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+New names:
+• `` -> `...1`
+Rows: 242347 Columns: 8
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (4): Phase, Cell_types, Host, Genotype
+dbl (4): ...1, Time, Cycle, Density
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+New names:
+• `` -> `...1`
+Rows: 36 Columns: 12
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (2): Phase, Type
+dbl (10): ...1, Time, A1, M1, F1, A2, M2, F2, C, Cycle
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+`summarise()` has regrouped the output.
+ℹ Summaries were computed grouped by Cycle and Phase.
+ℹ Output is grouped by Cycle.
+ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+ℹ Use `summarise(.by = c(Cycle, Phase))` for per-operation grouping
+  (`?dplyr::dplyr_by`) instead.
+[Wed May 13 22:24:17 2026]
+Finished jobid: 14 (Rule: process_case_study_sims)
+7 of 51 steps (14%) done
+Execute 1 jobs...
+
+[Wed May 13 22:24:17 2026]
+localrule plot_case_study_sims:
+    input: src/plot_simrun.R, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_density_plot_df.csv, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_frequency_plot_df.csv, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_phases_plot_df.csv
+    output: results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_density_plot.pdf, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_frequency_plot.pdf, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_density_plot.rds, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_frequency_plot.rds
+    jobid: 13
+    reason: Missing output files: results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_frequency_plot.pdf; Input files updated by another job: results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_phases_plot_df.csv, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_density_plot_df.csv, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_frequency_plot_df.csv
+    wildcards: treatment=LFC_S.pB10-A_full
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+Rows: 2202 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (5): Phase, Cell_types, Host, Genotype, Genotype_plot
+dbl (4): ...1, Time, Cycle, Density
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 72 Columns: 5
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): Phase, Genotype
+dbl (3): Cycle, Time, Frequency
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 6 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): Phase
+dbl (3): Cycle, T_start, T_end
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Warning message:
+In scale_y_continuous(limits = f_limits, breaks = f_breaks, labels = c(sapply(f_labels,  :
+  log-10 transformation introduced infinite values.
+[Wed May 13 22:24:22 2026]
+Finished jobid: 13 (Rule: plot_case_study_sims)
+8 of 51 steps (16%) done
+Execute 1 jobs...
+
+[Wed May 13 22:24:22 2026]
+localrule fig1a:
+    input: src/fig_axes.R, results/.r_setup_complete.flag
+    output: figures/panels/fig1a_axes.pdf, figures/panels/fig1a_axes.rds
+    jobid: 66
+    reason: Input files updated by another job: results/.r_setup_complete.flag
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+Error in library(funkyheatmap) : 
+  there is no package called ‘funkyheatmap’
+Execution halted
+RuleException:
+CalledProcessError in file "/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/snakefile", line 352:
+Command 'set -euo pipefail;  
+    Rscript src/fig_axes.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb", "p_hc": "#e7e9fd", "p_syn": "#A69AE0", "p_par": "#d8aace"}'' returned non-zero exit status 1.
+[Wed May 13 22:24:24 2026]
+Error in rule fig1a:
+    message: None
+    jobid: 66
+    input: src/fig_axes.R, results/.r_setup_complete.flag
+    output: figures/panels/fig1a_axes.pdf, figures/panels/fig1a_axes.rds
+    shell:
+        
+    Rscript src/fig_axes.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb", "p_hc": "#e7e9fd", "p_syn": "#A69AE0", "p_par": "#d8aace"}'
+    
+        (command exited with non-zero exit code)
+[Wed May 13 22:28:08 2026]
+Finished jobid: 26 (Rule: psweep_sims)
+9 of 51 steps (18%) done
+[2026-05-13T22:41:16.822] error: *** JOB 35222698 ON n3303 CANCELLED AT 2026-05-13T22:41:16 DUE to SIGNAL Terminated ***

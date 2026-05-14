@@ -1,0 +1,192 @@
+________________________________________________________________________________
+Miniforge (conda) has been loaded.
+
+- Please create and work in your own conda environments:
+    conda create -n myenv python=3.12
+    conda activate myenv
+
+- To customize environment or package locations, edit your ~/.condarc:
+    envs_dirs:
+      - /path/to/your/envs
+    pkgs_dirs:
+      - /path/to/your/pkgs
+
+  For more information, see:
+    https://docs.conda.io/projects/conda/en/latest/configuration.html
+
+- If your personal Conda stops working after unloading this module, try:
+    source ~/.bashrc
+________________________________________________________________________________
+
+Lmod has detected the following error: Conda is already active (CONDA_PREFIX
+is set). Module conda/Miniforge3-25.9.1-0 not loaded. 
+While processing the following module(s):
+    Module fullname            Module Filename
+    ---------------            ---------------
+    conda/Miniforge3-25.9.1-0  /sw/klone/conda/Miniforge3-25.9.1-0.lua
+
+Injecting conda environment /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/PETRI_config.yaml.
+Assuming unrestricted shared filesystem usage.
+host: n3242
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 39
+Rules claiming more threads will be scaled down.
+Job stats:
+job                   count
+------------------  -------
+fig4                      1
+fig5bd                    1
+plot_psweep_strain       10
+process_psweep            9
+psweep_sims               7
+fig5                      1
+plot_psweep               9
+fig7                      1
+fig6                      1
+all                       1
+total                    41
+
+Select jobs to execute...
+Execute 3 jobs...
+
+[Wed May 13 22:48:37 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_params.csv, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_settings.rds
+    output: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_out.csv
+    jobid: 42
+    reason: Updated input files: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_settings.rds, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_params.csv, src/simrun_psweep.R
+    wildcards: psweep=pHFCi_S.pB10
+    threads: 19
+    resources: tmpdir=/tmp
+[Wed May 13 22:48:38 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_params.csv, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_settings.rds
+    output: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_out.csv
+    jobid: 22
+    reason: Missing output files: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_out.csv; Updated input files: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_settings.rds, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_params.csv
+    wildcards: psweep=pLFC_S.pB10
+    threads: 19
+    resources: tmpdir=/tmp
+[Wed May 13 22:48:38 2026]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pHFCi2_S.pB10/pHFCi2_S.pB10_out.csv, results/parameter_sweeps/pHFCi2_S.pB10/pHFCi2_S.pB10_settings.rds
+    output: results/parameter_sweeps/pHFCi2_S.pB10/pHFCi2_S.pB10_plot.csv
+    jobid: 49
+    reason: Missing output files: results/parameter_sweeps/pHFCi2_S.pB10/pHFCi2_S.pB10_plot.csv
+    wildcards: psweep=pHFCi2_S.pB10
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘foreach’
+
+
+Attaching package: ‘foreach’
+
+The following objects are masked from ‘package:purrr’:
+
+    accumulate, when
+
+The following objects are masked from ‘package:purrr’:
+
+    accumulate, when
+
+Loading required package: iterators
+Loading required package: iterators
+Loading required package: parallel
+Loading required package: parallel
+Rows: 22500 Columns: 4
+Rows: 22500 Columns: 4
+Rows: 22500 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SetID
+dbl (3): SweepID, gamma_M, psi_M
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SetID
+dbl (3): SweepID, gamma_M, psi_M
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SetID
+dbl (8): SweepID, gamma_M, psi_M, end_time, A1, M1, A2, M2
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+[Wed May 13 22:49:21 2026]
+Finished jobid: 49 (Rule: process_psweep)
+1 of 41 steps (2%) done
+Execute 1 jobs...
+
+[Wed May 13 22:49:21 2026]
+localrule fig5bd:
+    input: src/fig_exp_sim.R, src/ggplot_theme.R, results/experimental_validation/HFC/HFC_frequency_processed_av.csv, results/experimental_validation/LFC/LFC_frequency_processed_av.csv, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_frequency_plot_df.csv, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_frequency_plot_df.csv
+    output: figures/panels/fig5d_HFC.pdf, figures/panels/fig5d_HFC.rds, figures/panels/fig5b_LFC.pdf, figures/panels/fig5b_LFC.rds
+    jobid: 75
+    reason: Updated input files: results/experimental_validation/LFC/LFC_frequency_processed_av.csv, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_frequency_plot_df.csv, results/experimental_validation/HFC/HFC_frequency_processed_av.csv, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_frequency_plot_df.csv, src/ggplot_theme.R, src/fig_exp_sim.R
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+Error in library(ggpattern) : there is no package called ‘ggpattern’
+Execution halted
+RuleException:
+CalledProcessError in file "/mmfs1/gscratch/biology/kerrlab/ESD/PETRI/snakefile", line 395:
+Command 'set -euo pipefail;  
+    Rscript src/fig_exp_sim.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb", "p_hc": "#e7e9fd", "p_syn": "#A69AE0", "p_par": "#d8aace"}'      --points '{"psweep_point_size": 2, "exp_point_size": 3, "ph_point_size": 4, "sh_Anc": 16, "sh_Mut": 17, "sh_R1": 16, "sh_copA": 18, "sh_finO": 15}'      --lines '{"rifR_l": "solid", "nalR_l": "22", "exp_l": "solid", "sim_l": "12", "plot_lw": 2}'' returned non-zero exit status 1.
+[Wed May 13 22:49:23 2026]
+Error in rule fig5bd:
+    message: None
+    jobid: 75
+    input: src/fig_exp_sim.R, src/ggplot_theme.R, results/experimental_validation/HFC/HFC_frequency_processed_av.csv, results/experimental_validation/LFC/LFC_frequency_processed_av.csv, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_frequency_plot_df.csv, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_frequency_plot_df.csv
+    output: figures/panels/fig5d_HFC.pdf, figures/panels/fig5d_HFC.rds, figures/panels/fig5b_LFC.pdf, figures/panels/fig5b_LFC.rds
+    shell:
+        
+    Rscript src/fig_exp_sim.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb", "p_hc": "#e7e9fd", "p_syn": "#A69AE0", "p_par": "#d8aace"}'      --points '{"psweep_point_size": 2, "exp_point_size": 3, "ph_point_size": 4, "sh_Anc": 16, "sh_Mut": 17, "sh_R1": 16, "sh_copA": 18, "sh_finO": 15}'      --lines '{"rifR_l": "solid", "nalR_l": "22", "exp_l": "solid", "sim_l": "12", "plot_lw": 2}'
+    
+        (command exited with non-zero exit code)
+[2026-05-13T22:51:51.314] error: *** JOB 35223480 ON n3242 CANCELLED AT 2026-05-13T22:51:51 DUE to SIGNAL Terminated ***

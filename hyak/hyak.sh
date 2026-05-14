@@ -9,7 +9,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=39
-#SBATCH --mem=150G
+#SBATCH --mem=200G
 #SBATCH --time=24:00:00
 
 #SBATCH --export=all
@@ -25,4 +25,4 @@ eval "$(conda shell.bash hook)"
 conda activate snakemake_host
 
 # Run pipeline
-snakemake --cores 39 --use-conda
+snakemake --cores 39 --use-conda --rerun-incomplete
