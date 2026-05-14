@@ -1,12 +1,12 @@
 ﻿Treatment_ID,pHFC_S.pB10
 Notes,HFC liquid with pB10 anc
 Ref_gamma,1.56E-12
-Ref_psi,0.29
+Ref_psi,0.476
 Range_gamma,4
 Range_psi,0.4
-Resolution,20
-psiF1,0.35
-psiF2,0.35
+Resolution,150
+psiF1,0.607
+psiF2,0.607
 gammaA1.F1_base,0.00E+00
 gammaA2.F1_base,0.00E+00
 gammaM1.F1_base,0.00E+00
@@ -38,14 +38,14 @@ Protocol,"conjugation,transconjugant_selection"
 Protocol_phases,"1,1"
 Selection_type,liquid
 Hours_growth,0
-Hours_conjugation,24
-Hours_t_selection,24
+Hours_conjugation,5
+Hours_t_selection,14.1
 A_colony,
 M_colony,
 Final_density_t_selection,1.00E+07
 Dilution_growth,1
 Dilution_conjugation,0.01
-Dilution_t_selection,0.1
+Dilution_t_selection,1
 A1_migrants,0
 M1_migrants,0
 F1_migrants,1.00E+07

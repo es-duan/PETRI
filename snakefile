@@ -6,9 +6,8 @@ conda: "PETRI_config.yaml"
 import json
 
 ## Specify treatments
-TREATMENTS = ["DG_S.pB10", "HFC_S.pB10", "LFC_S.pB10-A"]
-#PSWEEPS = ["pHFC_S.pB10-high","pHFC_S.pB10-low","pHFC_S.pB10","pLFC_S.pB10","pDim90_E.R1","pDim90_E.RP4","pHFCi_S.pB10","pLFCi_S.pB10","pHFC_S.pB10-A","pLFC_S.pB10-A"]
-PSWEEPS = ["pHFC_S.pB10","pLFC_S.pB10","pHFC_S.pB10-A","pLFC_S.pB10-A","pDim90_E.R1","pDim90_E.RP4"]
+TREATMENTS = ["DG_S.pB10", "HFC_S.pB10", "LFC_S.pB10-A", "HFC_S.pB10_full", "LFC_S.pB10-A_full"]
+PSWEEPS = ["pHFC_S.pB10","pLFC_S.pB10","pDim90_E.R1","pDim90_E.RP4","pHFC_S.pB10-A","pLFC_S.pB10-A","pHFCi_S.pB10","pLFCi_S.pB10","pHFCi2_S.pB10","pLFCi2_S.pB10"]
 
 ## Specify global variables
 ### Colors
@@ -60,6 +59,7 @@ plot_points = {
 
 rule all:
   input:
+    expand("results/case_study_sims/{treatment}/{treatment}_frequency_plot.pdf", treatment = TREATMENTS),
     expand("results/parameter_sweeps/{psweep}/{psweep}_change_plot.pdf", psweep = PSWEEPS),
     expand("results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot.pdf", psweep = PSWEEPS),
     expand("results/parameter_sweeps/{psweep}/{psweep}_inv_change_strain_plot.pdf", psweep = PSWEEPS),
@@ -208,10 +208,13 @@ rule plot_psweep_strain:
     "results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot.rds"
   output:
     "results/parameter_sweeps/{psweep}/{psweep}_inv_change_strain_plot.pdf"
+  params:
+    plot_points = json.dumps(plot_points)
   shell:
     """
     Rscript src/plot_psweep_strain.R \
-      --psweepsetting {wildcards.psweep}
+      --psweepsetting {wildcards.psweep}\
+      --points '{params.plot_points}'
     """
 
 # Define rule for processing extinction and colony size data

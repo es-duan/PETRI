@@ -38,14 +38,14 @@ Protocol,"growth,conjugation,transconjugant_selection"
 Protocol_phases,"7,1,1"
 Selection_type,liquid
 Hours_growth,24
-Hours_conjugation,24
-Hours_t_selection,24
+Hours_conjugation,5
+Hours_t_selection,14.1
 A_colony,
 M_colony,
 Final_density_t_selection,1.00E+07
 Dilution_growth,0.001
 Dilution_conjugation,0.01
-Dilution_t_selection,0.1
+Dilution_t_selection,1
 A1_migrants,0
 M1_migrants,0
 F1_migrants,1.00E+07

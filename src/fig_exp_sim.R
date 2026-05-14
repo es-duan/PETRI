@@ -11,7 +11,7 @@ parser <- ArgumentParser()
 parser$add_argument("-t","--treatment", type = "character", help = "Specify Treatment ID")
 parser$add_argument("-c","--colors", help = "JSON string of plot colors")
 parser$add_argument("-l","--lines", help = "JSON string of plot lines")
-parser$add_argument("-p","--points", help = "JSON string of point aesthetics")
+parser$add_argument("-o","--points", help = "JSON string of point aesthetics")
 
 # Parse arguments
 args <- parser$parse_args()

@@ -9,7 +9,7 @@ library(jsonlite)
 # Set arguments parser inputs ----
 parser <- ArgumentParser()
 parser$add_argument("-c","--colors", help = "JSON string of plot colors")
-parser$add_argument("-p","--points", help = "JSON string of point aesthetics")
+parser$add_argument("-o","--points", help = "JSON string of point aesthetics")
 
 # Parse arguments
 args <- parser$parse_args()
