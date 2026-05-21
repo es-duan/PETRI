@@ -33,7 +33,7 @@ plot_colors_psweep = {
   "p_highD": "#6c78a8",
   "p_axes": "white",
   "p_mid": "white",
-  "p_invline": "gray90"
+  "p_invline": "gray80"
 }
 
 ### Linetypes
@@ -47,7 +47,7 @@ plot_lines = {
 
 ### Points
 plot_points = {
-  "psweep_point_size": 2,
+  "psweep_point_size": 3,
   "exp_point_size": 3,
   "ph_point_size": 4,
   "sh_Anc": 16,
@@ -63,7 +63,7 @@ rule all:
     expand("results/parameter_sweeps/{psweep}/{psweep}_change_plot.pdf", psweep = PSWEEPS),
     expand("results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot.pdf", psweep = PSWEEPS),
     expand("results/parameter_sweeps/{psweep}/{psweep}_inv_change_strain_plot.pdf", psweep = PSWEEPS),
-#    "figures/panels/fig1a_axes.pdf",
+    "figures/panels/fig1a_axes.pdf",
     "figures/panels/fig3b_phenotyping.pdf",
     "figures/fig4_DG_invasion.pdf",
     "figures/fig5_validation2.pdf",
