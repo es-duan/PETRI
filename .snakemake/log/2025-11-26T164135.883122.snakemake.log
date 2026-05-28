@@ -1,0 +1,167 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job               count
+--------------  -------
+all                   1
+plot_psweep           5
+process_psweep        3
+total                 9
+
+Select jobs to execute...
+Execute 4 jobs...
+[Wed Nov 26 16:41:36 2025]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pO_test/pO_test_plot.csv
+    output: results/parameter_sweeps/pO_test/pO_test_change_plot.pdf, results/parameter_sweeps/pO_test/pO_test_inv_plot.pdf
+    jobid: 16
+    reason: Missing output files: results/parameter_sweeps/pO_test/pO_test_inv_plot.pdf, results/parameter_sweeps/pO_test/pO_test_change_plot.pdf
+    wildcards: psweep=pO_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov 26 16:41:36 2025]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC_test/pHFC_test_plot.csv
+    output: results/parameter_sweeps/pHFC_test/pHFC_test_change_plot.pdf, results/parameter_sweeps/pHFC_test/pHFC_test_inv_plot.pdf
+    jobid: 19
+    reason: Missing output files: results/parameter_sweeps/pHFC_test/pHFC_test_change_plot.pdf, results/parameter_sweeps/pHFC_test/pHFC_test_inv_plot.pdf
+    wildcards: psweep=pHFC_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov 26 16:41:36 2025]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pLFC_test/pLFC_test_out.csv
+    output: results/parameter_sweeps/pLFC_test/pLFC_test_plot.csv
+    jobid: 23
+    reason: Missing output files: results/parameter_sweeps/pLFC_test/pLFC_test_plot.csv
+    wildcards: psweep=pLFC_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov 26 16:41:36 2025]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pE_test/pE_test_out.csv
+    output: results/parameter_sweeps/pE_test/pE_test_plot.csv
+    jobid: 26
+    reason: Missing output files: results/parameter_sweeps/pE_test/pE_test_plot.csv
+    wildcards: psweep=pE_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Nov 26 16:41:41 2025]
+Finished jobid: 26 (Rule: process_psweep)
+1 of 9 steps (11%) done
+Execute 1 jobs...
+[Wed Nov 26 16:41:41 2025]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pF_test/pF_test_out.csv
+    output: results/parameter_sweeps/pF_test/pF_test_plot.csv
+    jobid: 29
+    reason: Missing output files: results/parameter_sweeps/pF_test/pF_test_plot.csv
+    wildcards: psweep=pF_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov 26 16:41:41 2025]
+Finished jobid: 23 (Rule: process_psweep)
+2 of 9 steps (22%) done
+Select jobs to execute...
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 136:
+Command 'set -euo pipefail;  
+    Rscript src/plot_psweep.R       --psweepsetting pHFC_test       --colors '{"p_Exc": "gray95", "p_Dis": "#140433", "p_lowI": "#d2c5eb", "p_highI": "#2b1457"}'' returned non-zero exit status 1.
+[Wed Nov 26 16:41:41 2025]
+Error in rule plot_psweep:
+    message: None
+    jobid: 19
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC_test/pHFC_test_plot.csv
+    output: results/parameter_sweeps/pHFC_test/pHFC_test_change_plot.pdf, results/parameter_sweeps/pHFC_test/pHFC_test_inv_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep.R       --psweepsetting pHFC_test       --colors '{"p_Exc": "gray95", "p_Dis": "#140433", "p_lowI": "#d2c5eb", "p_highI": "#2b1457"}'
+    
+        (command exited with non-zero exit code)
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 136:
+Command 'set -euo pipefail;  
+    Rscript src/plot_psweep.R       --psweepsetting pO_test       --colors '{"p_Exc": "gray95", "p_Dis": "#140433", "p_lowI": "#d2c5eb", "p_highI": "#2b1457"}'' returned non-zero exit status 1.
+[Wed Nov 26 16:41:41 2025]
+Error in rule plot_psweep:
+    message: None
+    jobid: 16
+    input: src/plot_psweep.R, results/parameter_sweeps/pO_test/pO_test_plot.csv
+    output: results/parameter_sweeps/pO_test/pO_test_change_plot.pdf, results/parameter_sweeps/pO_test/pO_test_inv_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep.R       --psweepsetting pO_test       --colors '{"p_Exc": "gray95", "p_Dis": "#140433", "p_lowI": "#d2c5eb", "p_highI": "#2b1457"}'
+    
+        (command exited with non-zero exit code)
+Execute 1 jobs...
+[Wed Nov 26 16:41:42 2025]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pLFC_test/pLFC_test_plot.csv
+    output: results/parameter_sweeps/pLFC_test/pLFC_test_change_plot.pdf, results/parameter_sweeps/pLFC_test/pLFC_test_inv_plot.pdf
+    jobid: 22
+    reason: Missing output files: results/parameter_sweeps/pLFC_test/pLFC_test_inv_plot.pdf, results/parameter_sweeps/pLFC_test/pLFC_test_change_plot.pdf; Input files updated by another job: results/parameter_sweeps/pLFC_test/pLFC_test_plot.csv
+    wildcards: psweep=pLFC_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov 26 16:41:46 2025]
+Finished jobid: 29 (Rule: process_psweep)
+3 of 9 steps (33%) done
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 136:
+Command 'set -euo pipefail;  
+    Rscript src/plot_psweep.R       --psweepsetting pLFC_test       --colors '{"p_Exc": "gray95", "p_Dis": "#140433", "p_lowI": "#d2c5eb", "p_highI": "#2b1457"}'' returned non-zero exit status 1.
+[Wed Nov 26 16:41:46 2025]
+Error in rule plot_psweep:
+    message: None
+    jobid: 22
+    input: src/plot_psweep.R, results/parameter_sweeps/pLFC_test/pLFC_test_plot.csv
+    output: results/parameter_sweeps/pLFC_test/pLFC_test_change_plot.pdf, results/parameter_sweeps/pLFC_test/pLFC_test_inv_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep.R       --psweepsetting pLFC_test       --colors '{"p_Exc": "gray95", "p_Dis": "#140433", "p_lowI": "#d2c5eb", "p_highI": "#2b1457"}'
+    
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Wed Nov 26 16:41:46 2025]
+Error in rule plot_psweep:
+    message: None
+    jobid: 16
+    input: src/plot_psweep.R, results/parameter_sweeps/pO_test/pO_test_plot.csv
+    output: results/parameter_sweeps/pO_test/pO_test_change_plot.pdf, results/parameter_sweeps/pO_test/pO_test_inv_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep.R       --psweepsetting pO_test       --colors '{"p_Exc": "gray95", "p_Dis": "#140433", "p_lowI": "#d2c5eb", "p_highI": "#2b1457"}'
+    
+        (command exited with non-zero exit code)
+[Wed Nov 26 16:41:46 2025]
+Error in rule plot_psweep:
+    message: None
+    jobid: 19
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC_test/pHFC_test_plot.csv
+    output: results/parameter_sweeps/pHFC_test/pHFC_test_change_plot.pdf, results/parameter_sweeps/pHFC_test/pHFC_test_inv_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep.R       --psweepsetting pHFC_test       --colors '{"p_Exc": "gray95", "p_Dis": "#140433", "p_lowI": "#d2c5eb", "p_highI": "#2b1457"}'
+    
+        (command exited with non-zero exit code)
+[Wed Nov 26 16:41:46 2025]
+Error in rule plot_psweep:
+    message: None
+    jobid: 22
+    input: src/plot_psweep.R, results/parameter_sweeps/pLFC_test/pLFC_test_plot.csv
+    output: results/parameter_sweeps/pLFC_test/pLFC_test_change_plot.pdf, results/parameter_sweeps/pLFC_test/pLFC_test_inv_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep.R       --psweepsetting pLFC_test       --colors '{"p_Exc": "gray95", "p_Dis": "#140433", "p_lowI": "#d2c5eb", "p_highI": "#2b1457"}'
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2025-11-26T164135.883122.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

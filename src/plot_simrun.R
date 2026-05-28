@@ -41,6 +41,7 @@ p_imm <- plot_colors[["p_imm"]]
 plot_lines <- fromJSON(args$lines)
 rifR_l <- plot_lines[["rifR_l"]]
 nalR_l <- plot_lines[["nalR_l"]]
+plot_lw <- plot_lines[["plot_lw"]]
 
 ## Retrieve ggplot theme ----
 source("src/ggplot_theme.R")
@@ -92,7 +93,7 @@ p1 <- ggplot() +
             mapping = aes(x = Time, y = Density,
                           color = Genotype_plot, linetype = Host,
                           group = interaction(Cycle, Genotype_plot, Host)),
-            linewidth = 2, alpha = 0.5) +
+            linewidth = plot_lw, alpha = 0.5) +
   geom_point(data = sim_densP,
              mapping = aes(x = Time, y = Density, color = Genotype_plot),
              shape = 21, size = point_size, fill = "white", alpha = 0.75) +
@@ -100,7 +101,7 @@ p1 <- ggplot() +
             mapping = aes(x = Time, y = Density,
                           color = Genotype_plot, linetype = Host,
                           group = interaction(Cycle, Genotype_plot, Host)),
-            linewidth = 2) +
+            linewidth = plot_lw) +
   scale_color_manual(values = c("Ancestor" = p_Anc,
                                 "Mutant" = p_Mut,
                                 "Plasmid-free" = p_F),
@@ -108,7 +109,7 @@ p1 <- ggplot() +
                      labels = c("Ancestor", "Mutant", "Plasmid-free")) +
   scale_linetype_manual(values = c("rifR" = rifR_l,
                                    "nalR" = nalR_l)) +
-  geom_hline(yintercept = 1.5, color = "white") +
+  #geom_hline(yintercept = 1.5, color = "white") +
   labs(x = "Time (hr)",
        y = "Density (CFU/mL)",
        color = "Genotype",
@@ -127,7 +128,7 @@ p1 <- ggplot() +
 
 # Save plot
 ggsave(paste0(treatment_folder, "/", treatment, "_density_plot.pdf"),
-       p1, height = 5, width = 20, units = "in")
+       p1, height = 3, width = 7.5, units = "in")
 saveRDS(p1, paste0(treatment_folder, "/", treatment, "_density_plot.rds"))
 
 # Plot frequencies over time ----
@@ -152,7 +153,7 @@ p2 <- ggplot() +
                                "Immigration" = p_imm)) +
   geom_line(data = sim_freq,
             mapping = aes(Time, Frequency, color = Genotype),
-            linewidth = 2) +
+            linewidth = plot_lw) +
   scale_color_manual(values = c("Ancestor" = p_Anc,
                                 "Mutant" = p_Mut)) +
   scale_y_continuous(limits = f_limits,
@@ -171,5 +172,5 @@ p2 <- ggplot() +
 
 # Save plot
 ggsave(paste0(treatment_folder, "/", treatment, "_frequency_plot.pdf"),
-       p2, height = 5, width = 20, units = "in")
+       p2, height = 3, width = 7.5, units = "in")
 saveRDS(p2, paste0(treatment_folder, "/", treatment, "_frequency_plot.rds"))

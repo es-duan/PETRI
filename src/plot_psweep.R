@@ -114,7 +114,7 @@ i1 <- ggplot() +
 
 # Save plot
 ggsave(paste0(output_folder, "/", ps, "_inv_change_plot.pdf"),
-       i1, height = 5, width = 6.75, units = "in")
+       i1, height = 2.5, width = 3.5, units = "in")
 saveRDS(i1, paste0(output_folder, "/", ps, "_inv_change_plot.rds"))
 
 # Geom smooth line ----
@@ -130,7 +130,7 @@ i2 <- ggplot() +
   geom_vline(xintercept = log10(gamma_ref), color = p_axes, linewidth = 1) +
   geom_smooth(data = sweep0,
               mapping = aes(log_gamma_M, psi_M),
-              color = p_invline, method = "lm", se = FALSE, linewidth = inv_width) +
+              color = p_invline, se = FALSE, linewidth = inv_width) +
   # geom_text(data = axes_label,
   #           mapping = aes(x, y, label = label),
   #           size = 4) +
@@ -142,7 +142,7 @@ i2 <- ggplot() +
 
 # Save plot
 ggsave(paste0(output_folder, "/", ps, "_inv_change_plot2.pdf"),
-       i2, height = 5, width = 6.75, units = "in")
+       i2, height = 2.5, width = 3.5, units = "in")
 saveRDS(i2, paste0(output_folder, "/", ps, "_inv_change_plot2.rds"))
 
 ## Binary plot (increase or decrease) ----
@@ -165,7 +165,7 @@ i2 <- ggplot() +
   labs(x = expression("log10(Conjugation Rate)"),
        y = expression("Growth Rate"),
        fill = "Invasion") +
-  axes_aes +
+  fig_aes +
   theme(axis.ticks = element_blank(),
         axis.line = element_blank(),
         panel.grid.major = element_blank(),
@@ -173,4 +173,4 @@ i2 <- ggplot() +
 
 # Save plot
 ggsave(paste0(output_folder, "/", ps, "_change_plot.pdf"),
-       i2, height = 5, width = 6.75, units = "in")
+       i2, height = 2.5, width = 3.5, units = "in")

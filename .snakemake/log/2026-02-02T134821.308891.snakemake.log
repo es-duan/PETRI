@@ -1,0 +1,77 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job                 count
+----------------  -------
+all                     1
+psweep_parameter        4
+total                   5
+
+Select jobs to execute...
+Execute 4 jobs...
+[Mon Feb  2 13:48:22 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sets/DimR1finO_sweep_param.csv
+    jobid: 10
+    reason: Updated input files: input_data/Parameter_sweep_settings.csv
+    wildcards: parameters=DimR1finO
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Mon Feb  2 13:48:22 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sets/testmut_sweep_param.csv
+    jobid: 8
+    reason: Updated input files: input_data/Parameter_sweep_settings.csv
+    wildcards: parameters=testmut
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Mon Feb  2 13:48:22 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sets/DimR1_sweep_param.csv
+    jobid: 9
+    reason: Updated input files: input_data/Parameter_sweep_settings.csv
+    wildcards: parameters=DimR1
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Mon Feb  2 13:48:22 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sets/test_sweep_param.csv
+    jobid: 7
+    reason: Updated input files: input_data/Parameter_sweep_settings.csv
+    wildcards: parameters=test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Mon Feb  2 13:48:27 2026]
+Finished jobid: 7 (Rule: psweep_parameter)
+1 of 5 steps (20%) done
+[Mon Feb  2 13:48:27 2026]
+Finished jobid: 9 (Rule: psweep_parameter)
+2 of 5 steps (40%) done
+[Mon Feb  2 13:48:27 2026]
+Finished jobid: 8 (Rule: psweep_parameter)
+3 of 5 steps (60%) done
+[Mon Feb  2 13:48:27 2026]
+Finished jobid: 10 (Rule: psweep_parameter)
+4 of 5 steps (80%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Mon Feb  2 13:48:27 2026]
+localrule all:
+    input: results/case_study_sims/A.2_full/A.2_full_density_plot.pdf, results/case_study_sims/C.2_full/C.2_full_density_plot.pdf, results/case_study_sims/A.2_full/A.2_full_frequency_plot.pdf, results/case_study_sims/C.2_full/C.2_full_frequency_plot.pdf, results/parameter_sets/test_sweep_param.csv, results/parameter_sets/testmut_sweep_param.csv, results/parameter_sets/DimR1_sweep_param.csv, results/parameter_sets/DimR1finO_sweep_param.csv, results/parameter_sweeps/pLFC.l_DimR1finO/pLFC.l_DimR1finO_change_plot.pdf, results/parameter_sweeps/pLFC.l_DimR1/pLFC.l_DimR1_change_plot.pdf, results/parameter_sweeps/pLFC.l_test/pLFC.l_test_change_plot.pdf, results/parameter_sweeps/pLFC.l_DimR1finO/pLFC.l_DimR1finO_inv_plot.pdf, results/parameter_sweeps/pLFC.l_DimR1/pLFC.l_DimR1_inv_plot.pdf, results/parameter_sweeps/pLFC.l_test/pLFC.l_test_inv_plot.pdf, results/parameter_sweeps/pLFC.l_DimR1finO/pLFC.l_DimR1finO_inv_time_plot.pdf, results/parameter_sweeps/pLFC.l_DimR1/pLFC.l_DimR1_inv_time_plot.pdf, results/parameter_sweeps/pLFC.l_test/pLFC.l_test_inv_time_plot.pdf
+    jobid: 0
+    reason: Input files updated by another job: results/parameter_sets/DimR1finO_sweep_param.csv, results/parameter_sets/testmut_sweep_param.csv, results/parameter_sets/DimR1_sweep_param.csv, results/parameter_sets/test_sweep_param.csv
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Mon Feb  2 13:48:27 2026]
+Finished jobid: 0 (Rule: all)
+5 of 5 steps (100%) done
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-02-02T134821.308891.snakemake.log

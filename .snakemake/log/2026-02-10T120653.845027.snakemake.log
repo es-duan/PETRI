@@ -1,0 +1,10 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+MissingInputException in rule psweep_parameter in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 103:
+Missing input files for rule psweep_parameter:
+    output: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_params.csv, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_settings.rds
+    wildcards: psweep=pLFCi_S.pB10
+    affected files:
+        input_data/parameter_sweeps/pLFCi_S.pB10_psweep_settings.csv

@@ -1,0 +1,275 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-8.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job                        count
+-----------------------  -------
+all                            1
+case_study_sims                6
+plot_case_study_sims           6
+process_case_study_sims        6
+total                         19
+
+Select jobs to execute...
+Execute 4 jobs...
+[Tue Nov  4 14:24:34 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/A.2/A.2_data.csv, results/case_study_sims/A.2/A.2_data_long.csv, results/case_study_sims/A.2/A.2_sim_plot.pdf
+    jobid: 3
+    reason: Updated input files: input_data/Treatments_case_study.csv
+    wildcards: treatment=A.2
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Nov  4 14:24:34 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/E/E_data.csv, results/case_study_sims/E/E_data_long.csv, results/case_study_sims/E/E_sim_plot.pdf
+    jobid: 15
+    reason: Missing output files: results/case_study_sims/E/E_data.csv, results/case_study_sims/E/E_data_long.csv; Set of input files has changed since last execution; Code has changed since last execution; Params have changed since last execution: Union of exclusive params before and now across all output: before: <nothing exclusive> now: '{"p_Anc": "#8394F6", "p_Mut": "#8A407A", "p_F": "gray40", "p_growth": "#FFFBEF", "p_conj": "#D0D9FF", "p_tselect": "#FBE9FF", "p_imm": "#d0ffeb"}' 
+    wildcards: treatment=E
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Nov  4 14:24:34 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/F/F_data.csv, results/case_study_sims/F/F_data_long.csv, results/case_study_sims/F/F_sim_plot.pdf
+    jobid: 18
+    reason: Missing output files: results/case_study_sims/F/F_data.csv, results/case_study_sims/F/F_data_long.csv; Code has changed since last execution; Params have changed since last execution: Union of exclusive params before and now across all output: before: <nothing exclusive> now: '{"p_Anc": "#8394F6", "p_Mut": "#8A407A", "p_F": "gray40", "p_growth": "#FFFBEF", "p_conj": "#D0D9FF", "p_tselect": "#FBE9FF", "p_imm": "#d0ffeb"}' 
+    wildcards: treatment=F
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Nov  4 14:24:34 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/A.2_full/A.2_full_data.csv, results/case_study_sims/A.2_full/A.2_full_data_long.csv, results/case_study_sims/A.2_full/A.2_full_sim_plot.pdf
+    jobid: 6
+    reason: Missing output files: results/case_study_sims/A.2_full/A.2_full_data_long.csv, results/case_study_sims/A.2_full/A.2_full_data.csv; Code has changed since last execution; Params have changed since last execution: Union of exclusive params before and now across all output: before: <nothing exclusive> now: '{"p_Anc": "#8394F6", "p_Mut": "#8A407A", "p_F": "gray40", "p_growth": "#FFFBEF", "p_conj": "#D0D9FF", "p_tselect": "#FBE9FF", "p_imm": "#d0ffeb"}' 
+    wildcards: treatment=A.2_full
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Tue Nov  4 14:24:41 2025]
+Finished jobid: 3 (Rule: case_study_sims)
+1 of 19 steps (5%) done
+Execute 1 jobs...
+[Tue Nov  4 14:24:42 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/C.2_full/C.2_full_data.csv, results/case_study_sims/C.2_full/C.2_full_data_long.csv, results/case_study_sims/C.2_full/C.2_full_sim_plot.pdf
+    jobid: 12
+    reason: Missing output files: results/case_study_sims/C.2_full/C.2_full_data_long.csv, results/case_study_sims/C.2_full/C.2_full_data.csv; Set of input files has changed since last execution; Code has changed since last execution; Params have changed since last execution: Union of exclusive params before and now across all output: before: <nothing exclusive> now: '{"p_Anc": "#8394F6", "p_Mut": "#8A407A", "p_F": "gray40", "p_growth": "#FFFBEF", "p_conj": "#D0D9FF", "p_tselect": "#FBE9FF", "p_imm": "#d0ffeb"}' 
+    wildcards: treatment=C.2_full
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Tue Nov  4 14:24:43 2025]
+Finished jobid: 6 (Rule: case_study_sims)
+2 of 19 steps (11%) done
+Execute 1 jobs...
+[Tue Nov  4 14:24:43 2025]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/A.2_full/A.2_full_data.csv, results/case_study_sims/A.2_full/A.2_full_data_long.csv
+    output: results/case_study_sims/A.2_full/A.2_full_density_plot_df.csv, results/case_study_sims/A.2_full/A.2_full_frequency_plot_df.csv, results/case_study_sims/A.2_full/A.2_full_phases_plot_df.csv
+    jobid: 5
+    reason: Missing output files: results/case_study_sims/A.2_full/A.2_full_phases_plot_df.csv, results/case_study_sims/A.2_full/A.2_full_frequency_plot_df.csv, results/case_study_sims/A.2_full/A.2_full_density_plot_df.csv; Input files updated by another job: results/case_study_sims/A.2_full/A.2_full_data_long.csv, results/case_study_sims/A.2_full/A.2_full_data.csv
+    wildcards: treatment=A.2_full
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Tue Nov  4 14:24:47 2025]
+Finished jobid: 15 (Rule: case_study_sims)
+3 of 19 steps (16%) done
+Execute 1 jobs...
+[Tue Nov  4 14:24:47 2025]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/A.2/A.2_data.csv, results/case_study_sims/A.2/A.2_data_long.csv
+    output: results/case_study_sims/A.2/A.2_density_plot_df.csv, results/case_study_sims/A.2/A.2_frequency_plot_df.csv, results/case_study_sims/A.2/A.2_phases_plot_df.csv
+    jobid: 2
+    reason: Input files updated by another job: results/case_study_sims/A.2/A.2_data_long.csv, results/case_study_sims/A.2/A.2_data.csv
+    wildcards: treatment=A.2
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Tue Nov  4 14:24:49 2025]
+Finished jobid: 5 (Rule: process_case_study_sims)
+4 of 19 steps (21%) done
+Execute 1 jobs...
+[Tue Nov  4 14:24:49 2025]
+localrule plot_case_study_sims:
+    input: src/plot_simrun_snakemake.R, results/case_study_sims/A.2_full/A.2_full_density_plot_df.csv, results/case_study_sims/A.2_full/A.2_full_frequency_plot_df.csv, results/case_study_sims/A.2_full/A.2_full_phases_plot_df.csv
+    output: results/case_study_sims/A.2_full/A.2_full_density_plot.pdf, results/case_study_sims/A.2_full/A.2_full_frequency_plot.pdf
+    jobid: 4
+    reason: Missing output files: results/case_study_sims/A.2_full/A.2_full_frequency_plot.pdf, results/case_study_sims/A.2_full/A.2_full_density_plot.pdf; Input files updated by another job: results/case_study_sims/A.2_full/A.2_full_phases_plot_df.csv, results/case_study_sims/A.2_full/A.2_full_frequency_plot_df.csv, results/case_study_sims/A.2_full/A.2_full_density_plot_df.csv
+    wildcards: treatment=A.2_full
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Tue Nov  4 14:24:53 2025]
+Finished jobid: 2 (Rule: process_case_study_sims)
+5 of 19 steps (26%) done
+Execute 1 jobs...
+[Tue Nov  4 14:24:53 2025]
+localrule plot_case_study_sims:
+    input: src/plot_simrun_snakemake.R, results/case_study_sims/A.2/A.2_density_plot_df.csv, results/case_study_sims/A.2/A.2_frequency_plot_df.csv, results/case_study_sims/A.2/A.2_phases_plot_df.csv
+    output: results/case_study_sims/A.2/A.2_density_plot.pdf, results/case_study_sims/A.2/A.2_frequency_plot.pdf
+    jobid: 1
+    reason: Input files updated by another job: results/case_study_sims/A.2/A.2_phases_plot_df.csv, results/case_study_sims/A.2/A.2_frequency_plot_df.csv, results/case_study_sims/A.2/A.2_density_plot_df.csv
+    wildcards: treatment=A.2
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Tue Nov  4 14:24:56 2025]
+Finished jobid: 4 (Rule: plot_case_study_sims)
+6 of 19 steps (32%) done
+Execute 1 jobs...
+[Tue Nov  4 14:24:56 2025]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/E/E_data.csv, results/case_study_sims/E/E_data_long.csv
+    output: results/case_study_sims/E/E_density_plot_df.csv, results/case_study_sims/E/E_frequency_plot_df.csv, results/case_study_sims/E/E_phases_plot_df.csv
+    jobid: 14
+    reason: Missing output files: results/case_study_sims/E/E_frequency_plot_df.csv, results/case_study_sims/E/E_phases_plot_df.csv, results/case_study_sims/E/E_density_plot_df.csv; Input files updated by another job: results/case_study_sims/E/E_data.csv, results/case_study_sims/E/E_data_long.csv
+    wildcards: treatment=E
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Nov  4 14:24:56 2025]
+Finished jobid: 12 (Rule: case_study_sims)
+7 of 19 steps (37%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Nov  4 14:24:56 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/C.2/C.2_data.csv, results/case_study_sims/C.2/C.2_data_long.csv, results/case_study_sims/C.2/C.2_sim_plot.pdf
+    jobid: 9
+    reason: Missing output files: results/case_study_sims/C.2/C.2_data.csv, results/case_study_sims/C.2/C.2_data_long.csv; Set of input files has changed since last execution; Code has changed since last execution; Params have changed since last execution: Union of exclusive params before and now across all output: before: <nothing exclusive> now: '{"p_Anc": "#8394F6", "p_Mut": "#8A407A", "p_F": "gray40", "p_growth": "#FFFBEF", "p_conj": "#D0D9FF", "p_tselect": "#FBE9FF", "p_imm": "#d0ffeb"}' 
+    wildcards: treatment=C.2
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Tue Nov  4 14:24:57 2025]
+Finished jobid: 18 (Rule: case_study_sims)
+8 of 19 steps (42%) done
+Execute 1 jobs...
+[Tue Nov  4 14:24:57 2025]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/C.2_full/C.2_full_data.csv, results/case_study_sims/C.2_full/C.2_full_data_long.csv
+    output: results/case_study_sims/C.2_full/C.2_full_density_plot_df.csv, results/case_study_sims/C.2_full/C.2_full_frequency_plot_df.csv, results/case_study_sims/C.2_full/C.2_full_phases_plot_df.csv
+    jobid: 11
+    reason: Missing output files: results/case_study_sims/C.2_full/C.2_full_frequency_plot_df.csv, results/case_study_sims/C.2_full/C.2_full_density_plot_df.csv, results/case_study_sims/C.2_full/C.2_full_phases_plot_df.csv; Input files updated by another job: results/case_study_sims/C.2_full/C.2_full_data_long.csv, results/case_study_sims/C.2_full/C.2_full_data.csv
+    wildcards: treatment=C.2_full
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Tue Nov  4 14:24:59 2025]
+Finished jobid: 1 (Rule: plot_case_study_sims)
+9 of 19 steps (47%) done
+Execute 1 jobs...
+[Tue Nov  4 14:24:59 2025]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/F/F_data.csv, results/case_study_sims/F/F_data_long.csv
+    output: results/case_study_sims/F/F_density_plot_df.csv, results/case_study_sims/F/F_frequency_plot_df.csv, results/case_study_sims/F/F_phases_plot_df.csv
+    jobid: 17
+    reason: Missing output files: results/case_study_sims/F/F_density_plot_df.csv, results/case_study_sims/F/F_phases_plot_df.csv, results/case_study_sims/F/F_frequency_plot_df.csv; Input files updated by another job: results/case_study_sims/F/F_data.csv, results/case_study_sims/F/F_data_long.csv
+    wildcards: treatment=F
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Nov  4 14:25:01 2025]
+Finished jobid: 14 (Rule: process_case_study_sims)
+10 of 19 steps (53%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Nov  4 14:25:02 2025]
+localrule plot_case_study_sims:
+    input: src/plot_simrun_snakemake.R, results/case_study_sims/E/E_density_plot_df.csv, results/case_study_sims/E/E_frequency_plot_df.csv, results/case_study_sims/E/E_phases_plot_df.csv
+    output: results/case_study_sims/E/E_density_plot.pdf, results/case_study_sims/E/E_frequency_plot.pdf
+    jobid: 13
+    reason: Missing output files: results/case_study_sims/E/E_density_plot.pdf, results/case_study_sims/E/E_frequency_plot.pdf; Input files updated by another job: results/case_study_sims/E/E_frequency_plot_df.csv, results/case_study_sims/E/E_phases_plot_df.csv, results/case_study_sims/E/E_density_plot_df.csv
+    wildcards: treatment=E
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Nov  4 14:25:02 2025]
+Finished jobid: 11 (Rule: process_case_study_sims)
+11 of 19 steps (58%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Nov  4 14:25:02 2025]
+localrule plot_case_study_sims:
+    input: src/plot_simrun_snakemake.R, results/case_study_sims/C.2_full/C.2_full_density_plot_df.csv, results/case_study_sims/C.2_full/C.2_full_frequency_plot_df.csv, results/case_study_sims/C.2_full/C.2_full_phases_plot_df.csv
+    output: results/case_study_sims/C.2_full/C.2_full_density_plot.pdf, results/case_study_sims/C.2_full/C.2_full_frequency_plot.pdf
+    jobid: 10
+    reason: Missing output files: results/case_study_sims/C.2_full/C.2_full_frequency_plot.pdf, results/case_study_sims/C.2_full/C.2_full_density_plot.pdf; Input files updated by another job: results/case_study_sims/C.2_full/C.2_full_frequency_plot_df.csv, results/case_study_sims/C.2_full/C.2_full_phases_plot_df.csv, results/case_study_sims/C.2_full/C.2_full_density_plot_df.csv
+    wildcards: treatment=C.2_full
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Nov  4 14:25:05 2025]
+Finished jobid: 9 (Rule: case_study_sims)
+12 of 19 steps (63%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Nov  4 14:25:05 2025]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/C.2/C.2_data.csv, results/case_study_sims/C.2/C.2_data_long.csv
+    output: results/case_study_sims/C.2/C.2_density_plot_df.csv, results/case_study_sims/C.2/C.2_frequency_plot_df.csv, results/case_study_sims/C.2/C.2_phases_plot_df.csv
+    jobid: 8
+    reason: Missing output files: results/case_study_sims/C.2/C.2_frequency_plot_df.csv, results/case_study_sims/C.2/C.2_density_plot_df.csv, results/case_study_sims/C.2/C.2_phases_plot_df.csv; Input files updated by another job: results/case_study_sims/C.2/C.2_data.csv, results/case_study_sims/C.2/C.2_data_long.csv
+    wildcards: treatment=C.2
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Nov  4 14:25:05 2025]
+Finished jobid: 17 (Rule: process_case_study_sims)
+13 of 19 steps (68%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Nov  4 14:25:05 2025]
+localrule plot_case_study_sims:
+    input: src/plot_simrun_snakemake.R, results/case_study_sims/F/F_density_plot_df.csv, results/case_study_sims/F/F_frequency_plot_df.csv, results/case_study_sims/F/F_phases_plot_df.csv
+    output: results/case_study_sims/F/F_density_plot.pdf, results/case_study_sims/F/F_frequency_plot.pdf
+    jobid: 16
+    reason: Missing output files: results/case_study_sims/F/F_density_plot.pdf, results/case_study_sims/F/F_frequency_plot.pdf; Input files updated by another job: results/case_study_sims/F/F_phases_plot_df.csv, results/case_study_sims/F/F_density_plot_df.csv, results/case_study_sims/F/F_frequency_plot_df.csv
+    wildcards: treatment=F
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Nov  4 14:25:08 2025]
+Finished jobid: 13 (Rule: plot_case_study_sims)
+14 of 19 steps (74%) done
+[Tue Nov  4 14:25:09 2025]
+Finished jobid: 10 (Rule: plot_case_study_sims)
+15 of 19 steps (79%) done
+[Tue Nov  4 14:25:10 2025]
+Finished jobid: 8 (Rule: process_case_study_sims)
+16 of 19 steps (84%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Nov  4 14:25:10 2025]
+localrule plot_case_study_sims:
+    input: src/plot_simrun_snakemake.R, results/case_study_sims/C.2/C.2_density_plot_df.csv, results/case_study_sims/C.2/C.2_frequency_plot_df.csv, results/case_study_sims/C.2/C.2_phases_plot_df.csv
+    output: results/case_study_sims/C.2/C.2_density_plot.pdf, results/case_study_sims/C.2/C.2_frequency_plot.pdf
+    jobid: 7
+    reason: Missing output files: results/case_study_sims/C.2/C.2_frequency_plot.pdf, results/case_study_sims/C.2/C.2_density_plot.pdf; Input files updated by another job: results/case_study_sims/C.2/C.2_frequency_plot_df.csv, results/case_study_sims/C.2/C.2_density_plot_df.csv, results/case_study_sims/C.2/C.2_phases_plot_df.csv
+    wildcards: treatment=C.2
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Nov  4 14:25:13 2025]
+Finished jobid: 16 (Rule: plot_case_study_sims)
+17 of 19 steps (89%) done
+[Tue Nov  4 14:25:15 2025]
+Finished jobid: 7 (Rule: plot_case_study_sims)
+18 of 19 steps (95%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Nov  4 14:25:15 2025]
+localrule all:
+    input: results/case_study_sims/A.2/A.2_density_plot.pdf, results/case_study_sims/A.2_full/A.2_full_density_plot.pdf, results/case_study_sims/C.2/C.2_density_plot.pdf, results/case_study_sims/C.2_full/C.2_full_density_plot.pdf, results/case_study_sims/E/E_density_plot.pdf, results/case_study_sims/F/F_density_plot.pdf, results/case_study_sims/A.2/A.2_frequency_plot.pdf, results/case_study_sims/A.2_full/A.2_full_frequency_plot.pdf, results/case_study_sims/C.2/C.2_frequency_plot.pdf, results/case_study_sims/C.2_full/C.2_full_frequency_plot.pdf, results/case_study_sims/E/E_frequency_plot.pdf, results/case_study_sims/F/F_frequency_plot.pdf
+    jobid: 0
+    reason: Input files updated by another job: results/case_study_sims/C.2/C.2_frequency_plot.pdf, results/case_study_sims/F/F_frequency_plot.pdf, results/case_study_sims/C.2/C.2_density_plot.pdf, results/case_study_sims/A.2/A.2_density_plot.pdf, results/case_study_sims/F/F_density_plot.pdf, results/case_study_sims/C.2_full/C.2_full_density_plot.pdf, results/case_study_sims/E/E_frequency_plot.pdf, results/case_study_sims/A.2_full/A.2_full_density_plot.pdf, results/case_study_sims/C.2_full/C.2_full_frequency_plot.pdf, results/case_study_sims/A.2/A.2_frequency_plot.pdf, results/case_study_sims/A.2_full/A.2_full_frequency_plot.pdf, results/case_study_sims/E/E_density_plot.pdf
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Nov  4 14:25:15 2025]
+Finished jobid: 0 (Rule: all)
+19 of 19 steps (100%) done
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2025-11-04T142433.562201.snakemake.log

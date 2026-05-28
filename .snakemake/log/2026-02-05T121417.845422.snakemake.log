@@ -1,0 +1,67 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job                        count
+-----------------------  -------
+all                            1
+case_study_sims                1
+plot_case_study_sims           1
+process_case_study_sims        1
+total                          4
+
+Select jobs to execute...
+Execute 1 jobs...
+[Thu Feb  5 12:14:18 2026]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/E.R1.6/E.R1.6_data.csv, results/case_study_sims/E.R1.6/E.R1.6_data_long.csv, results/case_study_sims/E.R1.6/E.R1.6_sim_plot.pdf
+    jobid: 3
+    reason: Missing output files: results/case_study_sims/E.R1.6/E.R1.6_data_long.csv, results/case_study_sims/E.R1.6/E.R1.6_data.csv
+    wildcards: treatment=E.R1.6
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Thu Feb  5 12:14:27 2026]
+Finished jobid: 3 (Rule: case_study_sims)
+1 of 4 steps (25%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Thu Feb  5 12:14:27 2026]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/E.R1.6/E.R1.6_data.csv, results/case_study_sims/E.R1.6/E.R1.6_data_long.csv
+    output: results/case_study_sims/E.R1.6/E.R1.6_density_plot_df.csv, results/case_study_sims/E.R1.6/E.R1.6_frequency_plot_df.csv, results/case_study_sims/E.R1.6/E.R1.6_phases_plot_df.csv
+    jobid: 2
+    reason: Missing output files: results/case_study_sims/E.R1.6/E.R1.6_phases_plot_df.csv, results/case_study_sims/E.R1.6/E.R1.6_frequency_plot_df.csv, results/case_study_sims/E.R1.6/E.R1.6_density_plot_df.csv; Input files updated by another job: results/case_study_sims/E.R1.6/E.R1.6_data_long.csv, results/case_study_sims/E.R1.6/E.R1.6_data.csv
+    wildcards: treatment=E.R1.6
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 85:
+Command 'set -euo pipefail;  Rscript src/process_simrun.R --treatment E.R1.6' returned non-zero exit status 1.
+[Thu Feb  5 12:14:31 2026]
+Error in rule process_case_study_sims:
+    message: None
+    jobid: 2
+    input: src/process_simrun.R, results/case_study_sims/E.R1.6/E.R1.6_data.csv, results/case_study_sims/E.R1.6/E.R1.6_data_long.csv
+    output: results/case_study_sims/E.R1.6/E.R1.6_density_plot_df.csv, results/case_study_sims/E.R1.6/E.R1.6_frequency_plot_df.csv, results/case_study_sims/E.R1.6/E.R1.6_phases_plot_df.csv
+    shell:
+        Rscript src/process_simrun.R --treatment E.R1.6
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Thu Feb  5 12:14:31 2026]
+Error in rule process_case_study_sims:
+    message: None
+    jobid: 2
+    input: src/process_simrun.R, results/case_study_sims/E.R1.6/E.R1.6_data.csv, results/case_study_sims/E.R1.6/E.R1.6_data_long.csv
+    output: results/case_study_sims/E.R1.6/E.R1.6_density_plot_df.csv, results/case_study_sims/E.R1.6/E.R1.6_frequency_plot_df.csv, results/case_study_sims/E.R1.6/E.R1.6_phases_plot_df.csv
+    shell:
+        Rscript src/process_simrun.R --treatment E.R1.6
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-02-05T121417.845422.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

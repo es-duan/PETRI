@@ -78,11 +78,11 @@ p1 <- ggplot() +
   scale_shape_manual(values = c("Anc" = sh_Anc,
                                 "Mut" = sh_Mut)) +
   fig_aes +
-  theme(legend.background = element_rect(fill = "white", color = "gray70"),
-        legend.position = c(0.2, 0.15))
+  theme(legend.background = element_rect(fill = "white", color = "gray30", linewidth = 0.3),
+        legend.position = c(0.2, 0.21))
 
 ggsave("results/phenotyping/pB10_phenotyping.pdf",
-       p1, width = 7.5, height = 7, units = "in")
+       p1, width = 3, height = 3, units = "in")
 saveRDS(p1, "results/phenotyping/pB10_phenotyping.rds")
 
 
@@ -124,7 +124,7 @@ c1 <- ggplot() +
         panel.border = element_rect(colour = "black", fill = NA, linewidth = 0.5))
 
 ggsave("results/phenotyping/pB10_mut_inv.pdf",
-       c1, width = 4, height = 4, units = "in")
+       c1, width = 1.5, height = 1.5, units = "in")
 saveRDS(c1, "results/phenotyping/pB10_mut_inv.rds")
 
 ## Anc invasion ----
@@ -164,5 +164,5 @@ c2 <- ggplot() +
         panel.border = element_rect(colour = "black", fill = NA, linewidth = 0.5))
 
 ggsave("results/phenotyping/pB10_anc_inv.pdf",
-       c2, width = 4, height = 4, units = "in")
+       c2, width = 1.5, height = 1.5, units = "in")
 saveRDS(c2, "results/phenotyping/pB10_anc_inv.rds")

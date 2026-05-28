@@ -1,0 +1,96 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-7.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job                     count
+--------------------  -------
+all                         1
+plot_case_study_sims        3
+total                       4
+
+Select jobs to execute...
+Execute 3 jobs...
+[Thu Jun  5 21:03:47 2025]
+localrule plot_case_study_sims:
+    input: results/case_study_sims/T4/T4_data.csv, results/case_study_sims/T4/T4_data_long.csv
+    output: results/case_study_sims/T4/T4_density_plot.pdf, results/case_study_sims/T4/T4_ratio_plot.pdf, results/case_study_sims/T4/T4_density_plot_df.csv, results/case_study_sims/T4/T4_ratio_plot_df.csv.pdf
+    jobid: 7
+    reason: Missing output files: results/case_study_sims/T4/T4_ratio_plot.pdf, results/case_study_sims/T4/T4_density_plot.pdf
+    wildcards: treatment=T4
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Thu Jun  5 21:03:47 2025]
+localrule plot_case_study_sims:
+    input: results/case_study_sims/T5/T5_data.csv, results/case_study_sims/T5/T5_data_long.csv
+    output: results/case_study_sims/T5/T5_density_plot.pdf, results/case_study_sims/T5/T5_ratio_plot.pdf, results/case_study_sims/T5/T5_density_plot_df.csv, results/case_study_sims/T5/T5_ratio_plot_df.csv.pdf
+    jobid: 9
+    reason: Missing output files: results/case_study_sims/T5/T5_ratio_plot.pdf, results/case_study_sims/T5/T5_density_plot.pdf
+    wildcards: treatment=T5
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Thu Jun  5 21:03:47 2025]
+localrule plot_case_study_sims:
+    input: results/case_study_sims/T6/T6_data.csv, results/case_study_sims/T6/T6_data_long.csv
+    output: results/case_study_sims/T6/T6_density_plot.pdf, results/case_study_sims/T6/T6_ratio_plot.pdf, results/case_study_sims/T6/T6_density_plot_df.csv, results/case_study_sims/T6/T6_ratio_plot_df.csv.pdf
+    jobid: 11
+    reason: Missing output files: results/case_study_sims/T6/T6_ratio_plot.pdf, results/case_study_sims/T6/T6_density_plot.pdf
+    wildcards: treatment=T6
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Waiting at most 5 seconds for missing files:
+results/case_study_sims/T4/T4_ratio_plot_df.csv.pdf (missing locally)
+MissingOutputException in rule plot_case_study_sims in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 23:
+Job 7  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+results/case_study_sims/T4/T4_ratio_plot_df.csv.pdf (missing locally, parent dir contents: T4_ratio_plot.pdf, T4_density_plot_df.csv, T4_ratio_plot_df.csv, T4_data.csv, T4_phases.csv, T4_data_long.csv, T4_plot.pdf, T4_density_plot.pdf)
+Removing output files of failed job plot_case_study_sims since they might be corrupted:
+results/case_study_sims/T4/T4_density_plot.pdf, results/case_study_sims/T4/T4_ratio_plot.pdf, results/case_study_sims/T4/T4_density_plot_df.csv
+Waiting at most 5 seconds for missing files:
+results/case_study_sims/T5/T5_ratio_plot_df.csv.pdf (missing locally)
+MissingOutputException in rule plot_case_study_sims in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 23:
+Job 9  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+results/case_study_sims/T5/T5_ratio_plot_df.csv.pdf (missing locally, parent dir contents: T5_phases.csv, T5_ratio_plot_df.csv, .DS_Store, T5_density_plot_df.csv, T5_ratio_plot.pdf, T5_data_long.csv, T5_data.csv, T5_density_plot.pdf, T5_plot.pdf)
+Removing output files of failed job plot_case_study_sims since they might be corrupted:
+results/case_study_sims/T5/T5_density_plot.pdf, results/case_study_sims/T5/T5_ratio_plot.pdf, results/case_study_sims/T5/T5_density_plot_df.csv
+Waiting at most 5 seconds for missing files:
+results/case_study_sims/T6/T6_ratio_plot_df.csv.pdf (missing locally)
+MissingOutputException in rule plot_case_study_sims in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 23:
+Job 11  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+results/case_study_sims/T6/T6_ratio_plot_df.csv.pdf (missing locally, parent dir contents: T6_data_long.csv, T6_density_plot_df.csv, T6_ratio_plot.pdf, T6_density_plot.pdf, T6_plot.pdf, T6_ratio_plot_df.csv, T6_data.csv, T6_phases.csv)
+Removing output files of failed job plot_case_study_sims since they might be corrupted:
+results/case_study_sims/T6/T6_density_plot.pdf, results/case_study_sims/T6/T6_ratio_plot.pdf, results/case_study_sims/T6/T6_density_plot_df.csv
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Thu Jun  5 21:04:09 2025]
+Error in rule plot_case_study_sims:
+    message: None
+    jobid: 7
+    input: results/case_study_sims/T4/T4_data.csv, results/case_study_sims/T4/T4_data_long.csv
+    output: results/case_study_sims/T4/T4_density_plot.pdf, results/case_study_sims/T4/T4_ratio_plot.pdf, results/case_study_sims/T4/T4_density_plot_df.csv, results/case_study_sims/T4/T4_ratio_plot_df.csv.pdf
+    shell:
+        Rscript src/process_simrun.R --treatment T4
+        (command exited with non-zero exit code)
+[Thu Jun  5 21:04:09 2025]
+Error in rule plot_case_study_sims:
+    message: None
+    jobid: 9
+    input: results/case_study_sims/T5/T5_data.csv, results/case_study_sims/T5/T5_data_long.csv
+    output: results/case_study_sims/T5/T5_density_plot.pdf, results/case_study_sims/T5/T5_ratio_plot.pdf, results/case_study_sims/T5/T5_density_plot_df.csv, results/case_study_sims/T5/T5_ratio_plot_df.csv.pdf
+    shell:
+        Rscript src/process_simrun.R --treatment T5
+        (command exited with non-zero exit code)
+[Thu Jun  5 21:04:09 2025]
+Error in rule plot_case_study_sims:
+    message: None
+    jobid: 11
+    input: results/case_study_sims/T6/T6_data.csv, results/case_study_sims/T6/T6_data_long.csv
+    output: results/case_study_sims/T6/T6_density_plot.pdf, results/case_study_sims/T6/T6_ratio_plot.pdf, results/case_study_sims/T6/T6_density_plot_df.csv, results/case_study_sims/T6/T6_ratio_plot_df.csv.pdf
+    shell:
+        Rscript src/process_simrun.R --treatment T6
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2025-06-05T210347.044902.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

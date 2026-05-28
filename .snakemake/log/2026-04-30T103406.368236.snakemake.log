@@ -1,0 +1,58 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 6
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job      count
+-----  -------
+all          1
+fig5         1
+total        2
+
+Select jobs to execute...
+Execute 1 jobs...
+[Thu Apr 30 10:34:07 2026]
+localrule fig5:
+    input: src/fig_validation.R, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_frequency_plot.rds, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_frequency_plot.rds, results/experimental_validation/HFC/HFC_frequency_plot.rds, results/experimental_validation/LFC/LFC_frequency_plot.rds, results/phenotyping/phenotyping_av.csv, results/phenotyping/pB10_anc_inv.rds, results/phenotyping/pB10_mut_inv.rds
+    output: figures/fig5_validation.pdf, figures/fig5_validation2.pdf
+    jobid: 37
+    reason: Updated input files: src/fig_validation.R
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 332:
+Command 'set -euo pipefail;  
+    Rscript src/fig_validation.R' returned non-zero exit status 1.
+[Thu Apr 30 10:34:09 2026]
+Error in rule fig5:
+    message: None
+    jobid: 37
+    input: src/fig_validation.R, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_frequency_plot.rds, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_frequency_plot.rds, results/experimental_validation/HFC/HFC_frequency_plot.rds, results/experimental_validation/LFC/LFC_frequency_plot.rds, results/phenotyping/phenotyping_av.csv, results/phenotyping/pB10_anc_inv.rds, results/phenotyping/pB10_mut_inv.rds
+    output: figures/fig5_validation.pdf, figures/fig5_validation2.pdf
+    shell:
+        
+    Rscript src/fig_validation.R 
+    
+        (command exited with non-zero exit code)
+Removing output files of failed job fig5 since they might be corrupted:
+figures/fig5_validation.pdf
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Thu Apr 30 10:34:09 2026]
+Error in rule fig5:
+    message: None
+    jobid: 37
+    input: src/fig_validation.R, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_frequency_plot.rds, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_frequency_plot.rds, results/experimental_validation/HFC/HFC_frequency_plot.rds, results/experimental_validation/LFC/LFC_frequency_plot.rds, results/phenotyping/phenotyping_av.csv, results/phenotyping/pB10_anc_inv.rds, results/phenotyping/pB10_mut_inv.rds
+    output: figures/fig5_validation.pdf, figures/fig5_validation2.pdf
+    shell:
+        
+    Rscript src/fig_validation.R 
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-04-30T103406.368236.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

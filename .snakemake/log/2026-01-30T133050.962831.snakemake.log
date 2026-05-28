@@ -1,0 +1,85 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job                 count
+----------------  -------
+all                     1
+plot_psweep             3
+process_psweep          3
+psweep_parameter        3
+psweep_sims             3
+total                  13
+
+Select jobs to execute...
+Execute 3 jobs...
+[Fri Jan 30 13:30:56 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pE_DimR1/pE_DimR1_out.csv
+    jobid: 12
+    reason: Missing output files: results/parameter_sweeps/pE_DimR1/pE_DimR1_out.csv
+    wildcards: psweep=pE_DimR1
+    threads: 5
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Jan 30 13:30:56 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sets/test_sweep_param.csv
+    jobid: 7
+    reason: Updated input files: input_data/Parameter_sweep_settings.csv
+    wildcards: parameters=test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Jan 30 13:30:56 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sets/testmut_sweep_param.csv
+    jobid: 8
+    reason: Updated input files: input_data/Parameter_sweep_settings.csv
+    wildcards: parameters=testmut
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 127:
+Command 'set -euo pipefail;  
+    Rscript src/simrun_psweep.R       --psweepsetting pE_DimR1       --threads 5' returned non-zero exit status 1.
+[Fri Jan 30 13:31:02 2026]
+Error in rule psweep_sims:
+    message: None
+    jobid: 12
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pE_DimR1/pE_DimR1_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting pE_DimR1       --threads 5
+    
+        (command exited with non-zero exit code)
+[Fri Jan 30 13:31:02 2026]
+Finished jobid: 7 (Rule: psweep_parameter)
+1 of 13 steps (8%) done
+[Fri Jan 30 13:31:02 2026]
+Finished jobid: 8 (Rule: psweep_parameter)
+2 of 13 steps (15%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Fri Jan 30 13:31:02 2026]
+Error in rule psweep_sims:
+    message: None
+    jobid: 12
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pE_DimR1/pE_DimR1_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting pE_DimR1       --threads 5
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-01-30T133050.962831.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

@@ -1,0 +1,7 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+WildcardError in rule plot_psweep in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 126:
+Wildcards in input files cannot be determined from output files: (rule plot_psweep, line 219, /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile)
+'psweep'

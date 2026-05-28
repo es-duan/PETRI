@@ -1,0 +1,60 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job               count
+--------------  -------
+all                   1
+plot_psweep           3
+process_psweep        3
+psweep_sims           3
+total                10
+
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Feb  3 10:41:00 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pHFC.l_DimR1/pHFC.l_DimR1_out.csv
+    jobid: 13
+    reason: Updated input files: src/simrun_psweep.R
+    wildcards: psweep=pHFC.l_DimR1
+    threads: 5
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 132:
+Command 'set -euo pipefail;  
+    Rscript src/simrun_psweep.R       --psweepsetting pHFC.l_DimR1       --threads 5' returned non-zero exit status 1.
+[Tue Feb  3 10:41:05 2026]
+Error in rule psweep_sims:
+    message: None
+    jobid: 13
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pHFC.l_DimR1/pHFC.l_DimR1_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting pHFC.l_DimR1       --threads 5
+    
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Tue Feb  3 10:41:05 2026]
+Error in rule psweep_sims:
+    message: None
+    jobid: 13
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pHFC.l_DimR1/pHFC.l_DimR1_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting pHFC.l_DimR1       --threads 5
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-02-03T104059.240436.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

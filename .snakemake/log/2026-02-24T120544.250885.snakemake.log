@@ -1,0 +1,169 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job                   count
+------------------  -------
+all                       1
+plot_psweep               2
+plot_psweep_strain        2
+process_psweep            2
+psweep_parameter          2
+psweep_sims               2
+total                    11
+
+Select jobs to execute...
+Execute 2 jobs...
+[Tue Feb 24 12:05:45 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/parameter_sweeps/pHFC_S.pB10-low_psweep_settings.csv
+    output: results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_params.csv, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_settings.rds
+    jobid: 17
+    reason: Missing output files: results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_settings.rds, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_params.csv
+    wildcards: psweep=pHFC_S.pB10-low
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Feb 24 12:05:45 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/parameter_sweeps/pHFC_S.pB10-high_psweep_settings.csv
+    output: results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_params.csv, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_settings.rds
+    jobid: 13
+    reason: Missing output files: results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_settings.rds, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_params.csv
+    wildcards: psweep=pHFC_S.pB10-high
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Feb 24 12:05:49 2026]
+Finished jobid: 13 (Rule: psweep_parameter)
+1 of 11 steps (9%) done
+[Tue Feb 24 12:05:49 2026]
+Finished jobid: 17 (Rule: psweep_parameter)
+2 of 11 steps (18%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Feb 24 12:05:49 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_params.csv, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_settings.rds
+    output: results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_out.csv
+    jobid: 12
+    reason: Missing output files: results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_out.csv; Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_settings.rds, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_params.csv
+    wildcards: psweep=pHFC_S.pB10-high
+    threads: 6
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Tue Feb 24 12:07:07 2026]
+Finished jobid: 12 (Rule: psweep_sims)
+3 of 11 steps (27%) done
+Execute 2 jobs...
+[Tue Feb 24 12:07:07 2026]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_out.csv, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_settings.rds
+    output: results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_plot.csv
+    jobid: 11
+    reason: Missing output files: results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_plot.csv; Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_settings.rds, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_out.csv
+    wildcards: psweep=pHFC_S.pB10-high
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Feb 24 12:07:07 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_params.csv, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_settings.rds
+    output: results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_out.csv
+    jobid: 16
+    reason: Missing output files: results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_out.csv; Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_settings.rds, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_params.csv
+    wildcards: psweep=pHFC_S.pB10-low
+    threads: 6
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Feb 24 12:07:11 2026]
+Finished jobid: 11 (Rule: process_psweep)
+4 of 11 steps (36%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Feb 24 12:07:11 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_plot.csv
+    output: results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_inv_change_plot.rds
+    jobid: 10
+    reason: Missing output files: results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_inv_change_plot.rds, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_change_plot.pdf; Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_plot.csv
+    wildcards: psweep=pHFC_S.pB10-high
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Feb 24 12:07:19 2026]
+Finished jobid: 10 (Rule: plot_psweep)
+5 of 11 steps (45%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Feb 24 12:07:19 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_inv_change_plot.rds
+    output: results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_inv_change_strain_plot.pdf
+    jobid: 50
+    reason: Missing output files: results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_inv_change_strain_plot.pdf; Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_inv_change_plot.rds
+    wildcards: psweep=pHFC_S.pB10-high
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Feb 24 12:07:27 2026]
+Finished jobid: 50 (Rule: plot_psweep_strain)
+6 of 11 steps (55%) done
+[Tue Feb 24 12:08:35 2026]
+Finished jobid: 16 (Rule: psweep_sims)
+7 of 11 steps (64%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Feb 24 12:08:35 2026]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_out.csv, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_settings.rds
+    output: results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_plot.csv
+    jobid: 15
+    reason: Missing output files: results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_plot.csv; Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_settings.rds, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_out.csv
+    wildcards: psweep=pHFC_S.pB10-low
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Feb 24 12:08:38 2026]
+Finished jobid: 15 (Rule: process_psweep)
+8 of 11 steps (73%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Feb 24 12:08:38 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_plot.csv
+    output: results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_inv_change_plot.rds
+    jobid: 14
+    reason: Missing output files: results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_inv_change_plot.rds, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_inv_change_plot.pdf; Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_plot.csv
+    wildcards: psweep=pHFC_S.pB10-low
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Feb 24 12:08:42 2026]
+Finished jobid: 14 (Rule: plot_psweep)
+9 of 11 steps (82%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Feb 24 12:08:42 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_inv_change_plot.rds
+    output: results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_inv_change_strain_plot.pdf
+    jobid: 51
+    reason: Missing output files: results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_inv_change_strain_plot.pdf; Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_inv_change_plot.rds
+    wildcards: psweep=pHFC_S.pB10-low
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Feb 24 12:08:46 2026]
+Finished jobid: 51 (Rule: plot_psweep_strain)
+10 of 11 steps (91%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Tue Feb 24 12:08:46 2026]
+localrule all:
+    input: results/case_study_sims/DG_S.pB10/DG_S.pB10_density_plot.pdf, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_density_plot.pdf, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_density_plot.pdf, results/case_study_sims/DG_S.pB10/DG_S.pB10_frequency_plot.pdf, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_frequency_plot.pdf, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_frequency_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_change_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_inv_change_strain_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_inv_change_strain_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_strain_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_strain_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_strain_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_strain_plot.pdf
+    jobid: 0
+    reason: Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_inv_change_strain_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-high/pHFC_S.pB10-high_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-low/pHFC_S.pB10-low_inv_change_strain_plot.pdf
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Feb 24 12:08:46 2026]
+Finished jobid: 0 (Rule: all)
+11 of 11 steps (100%) done
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-02-24T120544.250885.snakemake.log

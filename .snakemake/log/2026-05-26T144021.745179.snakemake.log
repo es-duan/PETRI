@@ -1,0 +1,95 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 3
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                       count
+----------------------  -------
+all                           1
+fig3b                         1
+fig5                          1
+plot_phenotyping              1
+process_growth_OD             1
+process_growth_plating        1
+process_phenotyping           1
+total                         7
+
+Select jobs to execute...
+Execute 2 jobs...
+[Tue May 26 14:40:22 2026]
+localrule process_growth_OD:
+    input: src/process_growth_OD.R, input_data/experimental_data/2026-04-16_OD_growth_curve.xlsx
+    output: results/phenotyping/growth_rate/OD/growthratemax_av.csv, results/phenotyping/growth_rate/OD/growthcurve_allrep.pdf, results/phenotyping/growth_rate/OD/growthcurve_av.pdf, results/phenotyping/growth_rate/OD/growthcurve_av.rds, results/phenotyping/growth_rate/OD/growthrate_av.pdf, results/phenotyping/growth_rate/OD/growthrate_av.rds, results/phenotyping/growth_rate/OD/growthratemax_av.pdf, results/phenotyping/growth_rate/OD/growthratemax_av.rds
+    jobid: 76
+    reason: Missing output files: results/phenotyping/growth_rate/OD/growthrate_av.pdf
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue May 26 14:40:22 2026]
+localrule process_growth_plating:
+    input: src/process_growth_plating.R, input_data/experimental_data/2026-04-02_growth_rate_plating.csv
+    output: results/phenotyping/growth_rate/plating/growth_density_av.pdf, results/phenotyping/growth_rate/plating/growth_rate_av.pdf, results/phenotyping/growth_rate/plating/growthrate_tt.csv, results/phenotyping/growth_rate/plating/growthrate0-4_av.csv
+    jobid: 82
+    reason: Updated input files: src/process_growth_plating.R
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 307:
+Command 'set -euo pipefail;  
+    Rscript src/process_growth.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb", "p_hc": "#e7e9fd", "p_syn": "#A69AE0", "p_par": "#d8aace"}'' returned non-zero exit status 2.
+[Tue May 26 14:40:23 2026]
+Error in rule process_growth_OD:
+    message: None
+    jobid: 76
+    input: src/process_growth_OD.R, input_data/experimental_data/2026-04-16_OD_growth_curve.xlsx
+    output: results/phenotyping/growth_rate/OD/growthratemax_av.csv, results/phenotyping/growth_rate/OD/growthcurve_allrep.pdf, results/phenotyping/growth_rate/OD/growthcurve_av.pdf, results/phenotyping/growth_rate/OD/growthcurve_av.rds, results/phenotyping/growth_rate/OD/growthrate_av.pdf, results/phenotyping/growth_rate/OD/growthrate_av.rds, results/phenotyping/growth_rate/OD/growthratemax_av.pdf, results/phenotyping/growth_rate/OD/growthratemax_av.rds
+    shell:
+        
+    Rscript src/process_growth.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb", "p_hc": "#e7e9fd", "p_syn": "#A69AE0", "p_par": "#d8aace"}'
+    
+        (command exited with non-zero exit code)
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 325:
+Command 'set -euo pipefail;  
+    Rscript src/process_growth.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb", "p_hc": "#e7e9fd", "p_syn": "#A69AE0", "p_par": "#d8aace"}'' returned non-zero exit status 2.
+[Tue May 26 14:40:23 2026]
+Error in rule process_growth_plating:
+    message: None
+    jobid: 82
+    input: src/process_growth_plating.R, input_data/experimental_data/2026-04-02_growth_rate_plating.csv
+    output: results/phenotyping/growth_rate/plating/growth_density_av.pdf, results/phenotyping/growth_rate/plating/growth_rate_av.pdf, results/phenotyping/growth_rate/plating/growthrate_tt.csv, results/phenotyping/growth_rate/plating/growthrate0-4_av.csv
+    shell:
+        
+    Rscript src/process_growth.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb", "p_hc": "#e7e9fd", "p_syn": "#A69AE0", "p_par": "#d8aace"}'
+    
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Tue May 26 14:40:23 2026]
+Error in rule process_growth_OD:
+    message: None
+    jobid: 76
+    input: src/process_growth_OD.R, input_data/experimental_data/2026-04-16_OD_growth_curve.xlsx
+    output: results/phenotyping/growth_rate/OD/growthratemax_av.csv, results/phenotyping/growth_rate/OD/growthcurve_allrep.pdf, results/phenotyping/growth_rate/OD/growthcurve_av.pdf, results/phenotyping/growth_rate/OD/growthcurve_av.rds, results/phenotyping/growth_rate/OD/growthrate_av.pdf, results/phenotyping/growth_rate/OD/growthrate_av.rds, results/phenotyping/growth_rate/OD/growthratemax_av.pdf, results/phenotyping/growth_rate/OD/growthratemax_av.rds
+    shell:
+        
+    Rscript src/process_growth.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb", "p_hc": "#e7e9fd", "p_syn": "#A69AE0", "p_par": "#d8aace"}'
+    
+        (command exited with non-zero exit code)
+[Tue May 26 14:40:23 2026]
+Error in rule process_growth_plating:
+    message: None
+    jobid: 82
+    input: src/process_growth_plating.R, input_data/experimental_data/2026-04-02_growth_rate_plating.csv
+    output: results/phenotyping/growth_rate/plating/growth_density_av.pdf, results/phenotyping/growth_rate/plating/growth_rate_av.pdf, results/phenotyping/growth_rate/plating/growthrate_tt.csv, results/phenotyping/growth_rate/plating/growthrate0-4_av.csv
+    shell:
+        
+    Rscript src/process_growth.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb", "p_hc": "#e7e9fd", "p_syn": "#A69AE0", "p_par": "#d8aace"}'
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-05-26T144021.745179.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

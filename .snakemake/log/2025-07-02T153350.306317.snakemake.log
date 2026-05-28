@@ -1,0 +1,120 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-7.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job                        count
+-----------------------  -------
+all                            1
+plot_case_study_sims           2
+process_case_study_sims        2
+total                          5
+
+Select jobs to execute...
+Execute 2 jobs...
+[Wed Jul  2 15:33:50 2025]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/A/A_data.csv, results/case_study_sims/A/A_data_long.csv
+    output: results/case_study_sims/A/A_density_plot_df.csv, results/case_study_sims/A/A_frequency_plot_df.csv, results/case_study_sims/A/A_phases_plot_df.csv
+    jobid: 2
+    reason: Set of input files has changed since last execution
+    wildcards: treatment=A
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Jul  2 15:33:50 2025]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/C/C_data.csv, results/case_study_sims/C/C_data_long.csv
+    output: results/case_study_sims/C/C_density_plot_df.csv, results/case_study_sims/C/C_frequency_plot_df.csv, results/case_study_sims/C/C_phases_plot_df.csv
+    jobid: 5
+    reason: Set of input files has changed since last execution
+    wildcards: treatment=C
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Jul  2 15:33:55 2025]
+Finished jobid: 2 (Rule: process_case_study_sims)
+1 of 5 steps (20%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Jul  2 15:33:55 2025]
+localrule plot_case_study_sims:
+    input: src/plot_simrun_snakemake.R, results/case_study_sims/A/A_density_plot_df.csv, results/case_study_sims/A/A_frequency_plot_df.csv, results/case_study_sims/A/A_phases_plot_df.csv
+    output: results/case_study_sims/A/A_density_plot.pdf, results/case_study_sims/A/A_frequency_plot.pdf
+    jobid: 1
+    reason: Missing output files: results/case_study_sims/A/A_density_plot.pdf, results/case_study_sims/A/A_frequency_plot.pdf; Input files updated by another job: results/case_study_sims/A/A_phases_plot_df.csv, results/case_study_sims/A/A_density_plot_df.csv, results/case_study_sims/A/A_frequency_plot_df.csv
+    wildcards: treatment=A
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Jul  2 15:33:55 2025]
+Finished jobid: 5 (Rule: process_case_study_sims)
+2 of 5 steps (40%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Jul  2 15:33:55 2025]
+localrule plot_case_study_sims:
+    input: src/plot_simrun_snakemake.R, results/case_study_sims/C/C_density_plot_df.csv, results/case_study_sims/C/C_frequency_plot_df.csv, results/case_study_sims/C/C_phases_plot_df.csv
+    output: results/case_study_sims/C/C_density_plot.pdf, results/case_study_sims/C/C_frequency_plot.pdf
+    jobid: 4
+    reason: Missing output files: results/case_study_sims/C/C_frequency_plot.pdf, results/case_study_sims/C/C_density_plot.pdf; Input files updated by another job: results/case_study_sims/C/C_phases_plot_df.csv, results/case_study_sims/C/C_density_plot_df.csv, results/case_study_sims/C/C_frequency_plot_df.csv
+    wildcards: treatment=C
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 72:
+Command 'set -euo pipefail;  
+    Rscript src/plot_simrun_snakemake.R       --treatment A       --colors '{"p_Anc": "#8394F6", "p_Mut": "#8A407A", "p_F": "gray40", "p_growth": "#FFFBEF", "p_conj": "#D0D9FF", "p_tselect": "#FBE9FF"}'       --lines '{"rifR": "solid", "nalR": "dashed"}'' returned non-zero exit status 1.
+[Wed Jul  2 15:33:59 2025]
+Error in rule plot_case_study_sims:
+    message: None
+    jobid: 1
+    input: src/plot_simrun_snakemake.R, results/case_study_sims/A/A_density_plot_df.csv, results/case_study_sims/A/A_frequency_plot_df.csv, results/case_study_sims/A/A_phases_plot_df.csv
+    output: results/case_study_sims/A/A_density_plot.pdf, results/case_study_sims/A/A_frequency_plot.pdf
+    shell:
+        
+    Rscript src/plot_simrun_snakemake.R       --treatment A       --colors '{"p_Anc": "#8394F6", "p_Mut": "#8A407A", "p_F": "gray40", "p_growth": "#FFFBEF", "p_conj": "#D0D9FF", "p_tselect": "#FBE9FF"}'       --lines '{"rifR": "solid", "nalR": "dashed"}'
+    
+        (command exited with non-zero exit code)
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 72:
+Command 'set -euo pipefail;  
+    Rscript src/plot_simrun_snakemake.R       --treatment C       --colors '{"p_Anc": "#8394F6", "p_Mut": "#8A407A", "p_F": "gray40", "p_growth": "#FFFBEF", "p_conj": "#D0D9FF", "p_tselect": "#FBE9FF"}'       --lines '{"rifR": "solid", "nalR": "dashed"}'' returned non-zero exit status 1.
+[Wed Jul  2 15:33:59 2025]
+Error in rule plot_case_study_sims:
+    message: None
+    jobid: 4
+    input: src/plot_simrun_snakemake.R, results/case_study_sims/C/C_density_plot_df.csv, results/case_study_sims/C/C_frequency_plot_df.csv, results/case_study_sims/C/C_phases_plot_df.csv
+    output: results/case_study_sims/C/C_density_plot.pdf, results/case_study_sims/C/C_frequency_plot.pdf
+    shell:
+        
+    Rscript src/plot_simrun_snakemake.R       --treatment C       --colors '{"p_Anc": "#8394F6", "p_Mut": "#8A407A", "p_F": "gray40", "p_growth": "#FFFBEF", "p_conj": "#D0D9FF", "p_tselect": "#FBE9FF"}'       --lines '{"rifR": "solid", "nalR": "dashed"}'
+    
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Wed Jul  2 15:34:00 2025]
+Error in rule plot_case_study_sims:
+    message: None
+    jobid: 4
+    input: src/plot_simrun_snakemake.R, results/case_study_sims/C/C_density_plot_df.csv, results/case_study_sims/C/C_frequency_plot_df.csv, results/case_study_sims/C/C_phases_plot_df.csv
+    output: results/case_study_sims/C/C_density_plot.pdf, results/case_study_sims/C/C_frequency_plot.pdf
+    shell:
+        
+    Rscript src/plot_simrun_snakemake.R       --treatment C       --colors '{"p_Anc": "#8394F6", "p_Mut": "#8A407A", "p_F": "gray40", "p_growth": "#FFFBEF", "p_conj": "#D0D9FF", "p_tselect": "#FBE9FF"}'       --lines '{"rifR": "solid", "nalR": "dashed"}'
+    
+        (command exited with non-zero exit code)
+[Wed Jul  2 15:34:00 2025]
+Error in rule plot_case_study_sims:
+    message: None
+    jobid: 1
+    input: src/plot_simrun_snakemake.R, results/case_study_sims/A/A_density_plot_df.csv, results/case_study_sims/A/A_frequency_plot_df.csv, results/case_study_sims/A/A_phases_plot_df.csv
+    output: results/case_study_sims/A/A_density_plot.pdf, results/case_study_sims/A/A_frequency_plot.pdf
+    shell:
+        
+    Rscript src/plot_simrun_snakemake.R       --treatment A       --colors '{"p_Anc": "#8394F6", "p_Mut": "#8A407A", "p_F": "gray40", "p_growth": "#FFFBEF", "p_conj": "#D0D9FF", "p_tselect": "#FBE9FF"}'       --lines '{"rifR": "solid", "nalR": "dashed"}'
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2025-07-02T153350.306317.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

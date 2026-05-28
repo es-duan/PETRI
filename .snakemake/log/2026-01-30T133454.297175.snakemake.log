@@ -1,0 +1,101 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job               count
+--------------  -------
+all                   1
+plot_psweep           3
+process_psweep        3
+psweep_sims           3
+total                10
+
+Select jobs to execute...
+Execute 1 jobs...
+[Fri Jan 30 13:34:55 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pHFC.l_DimR1/pHFC.l_DimR1_out.csv
+    jobid: 19
+    reason: Missing output files: results/parameter_sweeps/pHFC.l_DimR1/pHFC.l_DimR1_out.csv
+    wildcards: psweep=pHFC.l_DimR1
+    threads: 5
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Fri Jan 30 13:39:13 2026]
+Finished jobid: 19 (Rule: psweep_sims)
+1 of 10 steps (10%) done
+Execute 2 jobs...
+[Fri Jan 30 13:39:13 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pE_DimR1finO/pE_DimR1finO_out.csv
+    jobid: 16
+    reason: Missing output files: results/parameter_sweeps/pE_DimR1finO/pE_DimR1finO_out.csv
+    wildcards: psweep=pE_DimR1finO
+    threads: 5
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Jan 30 13:39:13 2026]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pHFC.l_DimR1/pHFC.l_DimR1_out.csv
+    output: results/parameter_sweeps/pHFC.l_DimR1/pHFC.l_DimR1_plot.csv
+    jobid: 18
+    reason: Missing output files: results/parameter_sweeps/pHFC.l_DimR1/pHFC.l_DimR1_plot.csv; Input files updated by another job: results/parameter_sweeps/pHFC.l_DimR1/pHFC.l_DimR1_out.csv
+    wildcards: psweep=pHFC.l_DimR1
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Fri Jan 30 13:39:18 2026]
+Finished jobid: 18 (Rule: process_psweep)
+2 of 10 steps (20%) done
+Execute 1 jobs...
+[Fri Jan 30 13:39:18 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC.l_DimR1/pHFC.l_DimR1_plot.csv
+    output: results/parameter_sweeps/pHFC.l_DimR1/pHFC.l_DimR1_change_plot.pdf, results/parameter_sweeps/pHFC.l_DimR1/pHFC.l_DimR1_inv_plot.pdf
+    jobid: 17
+    reason: Missing output files: results/parameter_sweeps/pHFC.l_DimR1/pHFC.l_DimR1_change_plot.pdf, results/parameter_sweeps/pHFC.l_DimR1/pHFC.l_DimR1_inv_plot.pdf; Input files updated by another job: results/parameter_sweeps/pHFC.l_DimR1/pHFC.l_DimR1_plot.csv
+    wildcards: psweep=pHFC.l_DimR1
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Fri Jan 30 13:39:26 2026]
+Finished jobid: 17 (Rule: plot_psweep)
+3 of 10 steps (30%) done
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 127:
+Command 'set -euo pipefail;  
+    Rscript src/simrun_psweep.R       --psweepsetting pE_DimR1finO       --threads 5' returned non-zero exit status 1.
+[Fri Jan 30 13:40:27 2026]
+Error in rule psweep_sims:
+    message: None
+    jobid: 16
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pE_DimR1finO/pE_DimR1finO_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting pE_DimR1finO       --threads 5
+    
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Fri Jan 30 13:40:27 2026]
+Error in rule psweep_sims:
+    message: None
+    jobid: 16
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pE_DimR1finO/pE_DimR1finO_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting pE_DimR1finO       --threads 5
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-01-30T133454.297175.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

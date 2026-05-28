@@ -1,0 +1,144 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-8.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job                        count
+-----------------------  -------
+all                            1
+case_study_sims                6
+plot_case_study_sims           6
+process_case_study_sims        6
+total                         19
+
+Select jobs to execute...
+Execute 4 jobs...
+[Tue Nov  4 13:14:06 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/A.2/A.2_data.csv, results/case_study_sims/A.2/A.2_data_long.csv, results/case_study_sims/A.2/A.2_sim_plot.pdf
+    jobid: 3
+    reason: Set of input files has changed since last execution; Code has changed since last execution
+    wildcards: treatment=A.2
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Nov  4 13:14:06 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/A.2_full/A.2_full_data.csv, results/case_study_sims/A.2_full/A.2_full_data_long.csv, results/case_study_sims/A.2_full/A.2_full_sim_plot.pdf
+    jobid: 6
+    reason: Set of input files has changed since last execution; Code has changed since last execution
+    wildcards: treatment=A.2_full
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Nov  4 13:14:06 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/E/E_data.csv, results/case_study_sims/E/E_data_long.csv, results/case_study_sims/E/E_sim_plot.pdf
+    jobid: 15
+    reason: Set of input files has changed since last execution; Code has changed since last execution
+    wildcards: treatment=E
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Tue Nov  4 13:14:06 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/F/F_data.csv, results/case_study_sims/F/F_data_long.csv, results/case_study_sims/F/F_sim_plot.pdf
+    jobid: 18
+    reason: Set of input files has changed since last execution; Code has changed since last execution
+    wildcards: treatment=F
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 43:
+Command 'set -euo pipefail;  Rscript src/simrun_case_study_snakemake.R --treatment A.2' returned non-zero exit status 1.
+[Tue Nov  4 13:14:12 2025]
+Error in rule case_study_sims:
+    message: None
+    jobid: 3
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/A.2/A.2_data.csv, results/case_study_sims/A.2/A.2_data_long.csv, results/case_study_sims/A.2/A.2_sim_plot.pdf
+    shell:
+        Rscript src/simrun_case_study_snakemake.R --treatment A.2
+        (command exited with non-zero exit code)
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 43:
+Command 'set -euo pipefail;  Rscript src/simrun_case_study_snakemake.R --treatment F' returned non-zero exit status 1.
+[Tue Nov  4 13:14:12 2025]
+Error in rule case_study_sims:
+    message: None
+    jobid: 18
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/F/F_data.csv, results/case_study_sims/F/F_data_long.csv, results/case_study_sims/F/F_sim_plot.pdf
+    shell:
+        Rscript src/simrun_case_study_snakemake.R --treatment F
+        (command exited with non-zero exit code)
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 43:
+Command 'set -euo pipefail;  Rscript src/simrun_case_study_snakemake.R --treatment A.2_full' returned non-zero exit status 1.
+[Tue Nov  4 13:14:12 2025]
+Error in rule case_study_sims:
+    message: None
+    jobid: 6
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/A.2_full/A.2_full_data.csv, results/case_study_sims/A.2_full/A.2_full_data_long.csv, results/case_study_sims/A.2_full/A.2_full_sim_plot.pdf
+    shell:
+        Rscript src/simrun_case_study_snakemake.R --treatment A.2_full
+        (command exited with non-zero exit code)
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 43:
+Command 'set -euo pipefail;  Rscript src/simrun_case_study_snakemake.R --treatment E' returned non-zero exit status 1.
+[Tue Nov  4 13:14:12 2025]
+Error in rule case_study_sims:
+    message: None
+    jobid: 15
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/E/E_data.csv, results/case_study_sims/E/E_data_long.csv, results/case_study_sims/E/E_sim_plot.pdf
+    shell:
+        Rscript src/simrun_case_study_snakemake.R --treatment E
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Tue Nov  4 13:14:12 2025]
+Error in rule case_study_sims:
+    message: None
+    jobid: 6
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/A.2_full/A.2_full_data.csv, results/case_study_sims/A.2_full/A.2_full_data_long.csv, results/case_study_sims/A.2_full/A.2_full_sim_plot.pdf
+    shell:
+        Rscript src/simrun_case_study_snakemake.R --treatment A.2_full
+        (command exited with non-zero exit code)
+[Tue Nov  4 13:14:12 2025]
+Error in rule case_study_sims:
+    message: None
+    jobid: 3
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/A.2/A.2_data.csv, results/case_study_sims/A.2/A.2_data_long.csv, results/case_study_sims/A.2/A.2_sim_plot.pdf
+    shell:
+        Rscript src/simrun_case_study_snakemake.R --treatment A.2
+        (command exited with non-zero exit code)
+[Tue Nov  4 13:14:12 2025]
+Error in rule case_study_sims:
+    message: None
+    jobid: 18
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/F/F_data.csv, results/case_study_sims/F/F_data_long.csv, results/case_study_sims/F/F_sim_plot.pdf
+    shell:
+        Rscript src/simrun_case_study_snakemake.R --treatment F
+        (command exited with non-zero exit code)
+[Tue Nov  4 13:14:12 2025]
+Error in rule case_study_sims:
+    message: None
+    jobid: 15
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/E/E_data.csv, results/case_study_sims/E/E_data_long.csv, results/case_study_sims/E/E_sim_plot.pdf
+    shell:
+        Rscript src/simrun_case_study_snakemake.R --treatment E
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2025-11-04T131406.703222.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

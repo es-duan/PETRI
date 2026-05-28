@@ -1,0 +1,46 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job                 count
+----------------  -------
+all                     1
+psweep_parameter        1
+total                   2
+
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Nov 26 22:01:49 2025]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R
+    output: results/parameter_sets/test/test_sweep_param.csv
+    jobid: 16
+    reason: Missing output files: results/parameter_sets/test/test_sweep_param.csv
+    wildcards: parameters=test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Waiting at most 5 seconds for missing files:
+results/parameter_sets/test/test_sweep_param.csv (missing locally)
+MissingOutputException in rule psweep_parameter in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 100:
+Job 16  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+results/parameter_sets/test/test_sweep_param.csv (missing locally, parent dir contents: )
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Wed Nov 26 22:01:58 2025]
+Error in rule psweep_parameter:
+    message: None
+    jobid: 16
+    input: src/generate_parameter_sets.R
+    output: results/parameter_sets/test/test_sweep_param.csv
+    shell:
+        
+    Rscript src/generate_parameter_sets.R       --setting test 
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2025-11-26T220148.623151.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

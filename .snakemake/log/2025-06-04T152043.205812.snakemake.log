@@ -1,0 +1,105 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-7.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job                count
+---------------  -------
+all                    1
+case_study_sims        6
+total                  7
+
+Select jobs to execute...
+Execute 4 jobs...
+[Wed Jun  4 15:20:43 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study.R, input_data/Treatments.csv
+    output: results/case_study_sims/T1/T1_data.csv, results/case_study_sims/T1/T1_data_long.csv, results/case_study_sims/T1/T1_plot.pdf
+    jobid: 1
+    reason: Updated input files: input_data/Treatments.csv
+    wildcards: treatment=T1
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Jun  4 15:20:43 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study.R, input_data/Treatments.csv
+    output: results/case_study_sims/T2/T2_data.csv, results/case_study_sims/T2/T2_data_long.csv, results/case_study_sims/T2/T2_plot.pdf
+    jobid: 2
+    reason: Updated input files: input_data/Treatments.csv
+    wildcards: treatment=T2
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Jun  4 15:20:43 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study.R, input_data/Treatments.csv
+    output: results/case_study_sims/T5/T5_data.csv, results/case_study_sims/T5/T5_data_long.csv, results/case_study_sims/T5/T5_plot.pdf
+    jobid: 5
+    reason: Updated input files: input_data/Treatments.csv
+    wildcards: treatment=T5
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Jun  4 15:20:43 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study.R, input_data/Treatments.csv
+    output: results/case_study_sims/T4/T4_data.csv, results/case_study_sims/T4/T4_data_long.csv, results/case_study_sims/T4/T4_plot.pdf
+    jobid: 4
+    reason: Updated input files: input_data/Treatments.csv
+    wildcards: treatment=T4
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Jun  4 15:20:59 2025]
+Finished jobid: 4 (Rule: case_study_sims)
+1 of 7 steps (14%) done
+Execute 1 jobs...
+[Wed Jun  4 15:20:59 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study.R, input_data/Treatments.csv
+    output: results/case_study_sims/T6/T6_data.csv, results/case_study_sims/T6/T6_data_long.csv, results/case_study_sims/T6/T6_plot.pdf
+    jobid: 6
+    reason: Missing output files: results/case_study_sims/T6/T6_data.csv, results/case_study_sims/T6/T6_data_long.csv, results/case_study_sims/T6/T6_plot.pdf
+    wildcards: treatment=T6
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Jun  4 15:21:00 2025]
+Finished jobid: 2 (Rule: case_study_sims)
+2 of 7 steps (29%) done
+Execute 1 jobs...
+[Wed Jun  4 15:21:00 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study.R, input_data/Treatments.csv
+    output: results/case_study_sims/T3/T3_data.csv, results/case_study_sims/T3/T3_data_long.csv, results/case_study_sims/T3/T3_plot.pdf
+    jobid: 3
+    reason: Updated input files: input_data/Treatments.csv
+    wildcards: treatment=T3
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Jun  4 15:21:06 2025]
+Finished jobid: 1 (Rule: case_study_sims)
+3 of 7 steps (43%) done
+[Wed Jun  4 15:21:14 2025]
+Finished jobid: 3 (Rule: case_study_sims)
+4 of 7 steps (57%) done
+[Wed Jun  4 15:21:30 2025]
+Finished jobid: 6 (Rule: case_study_sims)
+5 of 7 steps (71%) done
+[Wed Jun  4 15:21:35 2025]
+Finished jobid: 5 (Rule: case_study_sims)
+6 of 7 steps (86%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Jun  4 15:21:36 2025]
+localrule all:
+    input: results/case_study_sims/T1/T1_data.csv, results/case_study_sims/T2/T2_data.csv, results/case_study_sims/T3/T3_data.csv, results/case_study_sims/T4/T4_data.csv, results/case_study_sims/T5/T5_data.csv, results/case_study_sims/T6/T6_data.csv, results/case_study_sims/T1/T1_data_long.csv, results/case_study_sims/T2/T2_data_long.csv, results/case_study_sims/T3/T3_data_long.csv, results/case_study_sims/T4/T4_data_long.csv, results/case_study_sims/T5/T5_data_long.csv, results/case_study_sims/T6/T6_data_long.csv, results/case_study_sims/T1/T1_plot.pdf, results/case_study_sims/T2/T2_plot.pdf, results/case_study_sims/T3/T3_plot.pdf, results/case_study_sims/T4/T4_plot.pdf, results/case_study_sims/T5/T5_plot.pdf, results/case_study_sims/T6/T6_plot.pdf
+    jobid: 0
+    reason: Input files updated by another job: results/case_study_sims/T1/T1_data_long.csv, results/case_study_sims/T3/T3_data.csv, results/case_study_sims/T4/T4_data.csv, results/case_study_sims/T2/T2_data_long.csv, results/case_study_sims/T4/T4_data_long.csv, results/case_study_sims/T5/T5_plot.pdf, results/case_study_sims/T1/T1_data.csv, results/case_study_sims/T6/T6_data_long.csv, results/case_study_sims/T1/T1_plot.pdf, results/case_study_sims/T2/T2_data.csv, results/case_study_sims/T2/T2_plot.pdf, results/case_study_sims/T4/T4_plot.pdf, results/case_study_sims/T6/T6_data.csv, results/case_study_sims/T5/T5_data_long.csv, results/case_study_sims/T5/T5_data.csv, results/case_study_sims/T3/T3_data_long.csv, results/case_study_sims/T3/T3_plot.pdf, results/case_study_sims/T6/T6_plot.pdf
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Jun  4 15:21:36 2025]
+Finished jobid: 0 (Rule: all)
+7 of 7 steps (100%) done
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2025-06-04T152043.205812.snakemake.log

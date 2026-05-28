@@ -1,0 +1,339 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job                   count
+------------------  -------
+all                       1
+plot_psweep               8
+plot_psweep_strain        8
+total                    17
+
+Select jobs to execute...
+Execute 7 jobs...
+[Fri Feb 20 12:16:45 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_plot.csv
+    output: results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_change_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.rds
+    jobid: 18
+    reason: Updated input files: src/plot_psweep.R
+    wildcards: psweep=pDim90_E.R1
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Feb 20 12:16:45 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_plot.csv
+    output: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.rds
+    jobid: 30
+    reason: Updated input files: src/plot_psweep.R
+    wildcards: psweep=pLFCi_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Feb 20 12:16:45 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_plot.csv
+    output: results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_plot.rds
+    jobid: 22
+    reason: Updated input files: src/plot_psweep.R
+    wildcards: psweep=pDim90_E.RP4
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Feb 20 12:16:45 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_plot.csv
+    output: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.rds
+    jobid: 10
+    reason: Updated input files: src/plot_psweep.R
+    wildcards: psweep=pHFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Feb 20 12:16:45 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_plot.csv
+    output: results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot.rds
+    jobid: 34
+    reason: Updated input files: src/plot_psweep.R
+    wildcards: psweep=pHFC_S.pB10-A
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Feb 20 12:16:45 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_plot.csv
+    output: results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot.rds
+    jobid: 38
+    reason: Updated input files: src/plot_psweep.R
+    wildcards: psweep=pLFC_S.pB10-A
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Feb 20 12:16:45 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_plot.csv
+    output: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.rds
+    jobid: 14
+    reason: Updated input files: src/plot_psweep.R
+    wildcards: psweep=pLFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Fri Feb 20 12:16:53 2026]
+Finished jobid: 18 (Rule: plot_psweep)
+1 of 17 steps (6%) done
+Execute 1 jobs...
+[Fri Feb 20 12:16:53 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_plot.csv
+    output: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_plot.rds
+    jobid: 26
+    reason: Updated input files: src/plot_psweep.R
+    wildcards: psweep=pHFCi_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Feb 20 12:16:53 2026]
+Finished jobid: 30 (Rule: plot_psweep)
+2 of 17 steps (12%) done
+[Fri Feb 20 12:16:53 2026]
+Finished jobid: 22 (Rule: plot_psweep)
+3 of 17 steps (18%) done
+Select jobs to execute...
+Execute 2 jobs...
+[Fri Feb 20 12:16:54 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.rds
+    output: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_strain_plot.pdf
+    jobid: 47
+    reason: Input files updated by another job: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.rds
+    wildcards: psweep=pLFCi_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Feb 20 12:16:54 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.rds
+    output: results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_strain_plot.pdf
+    jobid: 44
+    reason: Input files updated by another job: results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.rds
+    wildcards: psweep=pDim90_E.R1
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Fri Feb 20 12:16:54 2026]
+Finished jobid: 14 (Rule: plot_psweep)
+4 of 17 steps (24%) done
+Execute 1 jobs...
+[Fri Feb 20 12:16:54 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.rds
+    output: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_strain_plot.pdf
+    jobid: 43
+    reason: Input files updated by another job: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.rds
+    wildcards: psweep=pLFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Feb 20 12:16:54 2026]
+Finished jobid: 34 (Rule: plot_psweep)
+5 of 17 steps (29%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Fri Feb 20 12:16:54 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot.rds
+    output: results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_strain_plot.pdf
+    jobid: 48
+    reason: Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot.rds
+    wildcards: psweep=pHFC_S.pB10-A
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Feb 20 12:16:54 2026]
+Finished jobid: 10 (Rule: plot_psweep)
+6 of 17 steps (35%) done
+[Fri Feb 20 12:16:54 2026]
+Finished jobid: 38 (Rule: plot_psweep)
+7 of 17 steps (41%) done
+Select jobs to execute...
+Execute 2 jobs...
+[Fri Feb 20 12:16:54 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.rds
+    output: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_strain_plot.pdf
+    jobid: 42
+    reason: Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.rds
+    wildcards: psweep=pHFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Feb 20 12:16:54 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot.rds
+    output: results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_strain_plot.pdf
+    jobid: 49
+    reason: Input files updated by another job: results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot.rds
+    wildcards: psweep=pLFC_S.pB10-A
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 178:
+Command 'set -euo pipefail;  
+    Rscript src/plot_psweep_strain.R       --psweepsetting pLFCi_S.pB10' returned non-zero exit status 1.
+[Fri Feb 20 12:16:55 2026]
+Error in rule plot_psweep_strain:
+    message: None
+    jobid: 47
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.rds
+    output: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_strain_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep_strain.R       --psweepsetting pLFCi_S.pB10
+    
+        (command exited with non-zero exit code)
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 178:
+Command 'set -euo pipefail;  
+    Rscript src/plot_psweep_strain.R       --psweepsetting pDim90_E.R1' returned non-zero exit status 1.
+[Fri Feb 20 12:16:55 2026]
+Error in rule plot_psweep_strain:
+    message: None
+    jobid: 44
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.rds
+    output: results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_strain_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep_strain.R       --psweepsetting pDim90_E.R1
+    
+        (command exited with non-zero exit code)
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 178:
+Command 'set -euo pipefail;  
+    Rscript src/plot_psweep_strain.R       --psweepsetting pLFC_S.pB10' returned non-zero exit status 1.
+[Fri Feb 20 12:16:55 2026]
+Error in rule plot_psweep_strain:
+    message: None
+    jobid: 43
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.rds
+    output: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_strain_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep_strain.R       --psweepsetting pLFC_S.pB10
+    
+        (command exited with non-zero exit code)
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 178:
+Command 'set -euo pipefail;  
+    Rscript src/plot_psweep_strain.R       --psweepsetting pHFC_S.pB10-A' returned non-zero exit status 1.
+[Fri Feb 20 12:16:56 2026]
+Error in rule plot_psweep_strain:
+    message: None
+    jobid: 48
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot.rds
+    output: results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_strain_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep_strain.R       --psweepsetting pHFC_S.pB10-A
+    
+        (command exited with non-zero exit code)
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 178:
+Command 'set -euo pipefail;  
+    Rscript src/plot_psweep_strain.R       --psweepsetting pLFC_S.pB10-A' returned non-zero exit status 1.
+[Fri Feb 20 12:16:56 2026]
+Error in rule plot_psweep_strain:
+    message: None
+    jobid: 49
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot.rds
+    output: results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_strain_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep_strain.R       --psweepsetting pLFC_S.pB10-A
+    
+        (command exited with non-zero exit code)
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 178:
+Command 'set -euo pipefail;  
+    Rscript src/plot_psweep_strain.R       --psweepsetting pHFC_S.pB10' returned non-zero exit status 1.
+[Fri Feb 20 12:16:56 2026]
+Error in rule plot_psweep_strain:
+    message: None
+    jobid: 42
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.rds
+    output: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_strain_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep_strain.R       --psweepsetting pHFC_S.pB10
+    
+        (command exited with non-zero exit code)
+[Fri Feb 20 12:16:59 2026]
+Finished jobid: 26 (Rule: plot_psweep)
+8 of 17 steps (47%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Fri Feb 20 12:16:59 2026]
+Error in rule plot_psweep_strain:
+    message: None
+    jobid: 42
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.rds
+    output: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_strain_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep_strain.R       --psweepsetting pHFC_S.pB10
+    
+        (command exited with non-zero exit code)
+[Fri Feb 20 12:16:59 2026]
+Error in rule plot_psweep_strain:
+    message: None
+    jobid: 47
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.rds
+    output: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_strain_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep_strain.R       --psweepsetting pLFCi_S.pB10
+    
+        (command exited with non-zero exit code)
+[Fri Feb 20 12:16:59 2026]
+Error in rule plot_psweep_strain:
+    message: None
+    jobid: 49
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot.rds
+    output: results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_strain_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep_strain.R       --psweepsetting pLFC_S.pB10-A
+    
+        (command exited with non-zero exit code)
+[Fri Feb 20 12:16:59 2026]
+Error in rule plot_psweep_strain:
+    message: None
+    jobid: 44
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.rds
+    output: results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_strain_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep_strain.R       --psweepsetting pDim90_E.R1
+    
+        (command exited with non-zero exit code)
+[Fri Feb 20 12:16:59 2026]
+Error in rule plot_psweep_strain:
+    message: None
+    jobid: 43
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.rds
+    output: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_strain_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep_strain.R       --psweepsetting pLFC_S.pB10
+    
+        (command exited with non-zero exit code)
+[Fri Feb 20 12:16:59 2026]
+Error in rule plot_psweep_strain:
+    message: None
+    jobid: 48
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot.rds
+    output: results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_strain_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep_strain.R       --psweepsetting pHFC_S.pB10-A
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-02-20T121644.347423.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

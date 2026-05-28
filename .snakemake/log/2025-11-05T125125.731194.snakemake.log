@@ -1,0 +1,146 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-8.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job                        count
+-----------------------  -------
+all                            1
+case_study_sims                7
+plot_case_study_sims           7
+process_case_study_sims        7
+total                         22
+
+Select jobs to execute...
+Execute 4 jobs...
+[Wed Nov  5 12:51:29 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/A.2/A.2_data.csv, results/case_study_sims/A.2/A.2_data_long.csv, results/case_study_sims/A.2/A.2_sim_plot.pdf
+    jobid: 3
+    reason: Updated input files: input_data/Treatments_case_study.csv
+    wildcards: treatment=A.2
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov  5 12:51:29 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/F/F_data.csv, results/case_study_sims/F/F_data_long.csv, results/case_study_sims/F/F_sim_plot.pdf
+    jobid: 18
+    reason: Updated input files: input_data/Treatments_case_study.csv
+    wildcards: treatment=F
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov  5 12:51:29 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/E/E_data.csv, results/case_study_sims/E/E_data_long.csv, results/case_study_sims/E/E_sim_plot.pdf
+    jobid: 15
+    reason: Updated input files: input_data/Treatments_case_study.csv
+    wildcards: treatment=E
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov  5 12:51:29 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/A.2_full/A.2_full_data.csv, results/case_study_sims/A.2_full/A.2_full_data_long.csv, results/case_study_sims/A.2_full/A.2_full_sim_plot.pdf
+    jobid: 6
+    reason: Updated input files: input_data/Treatments_case_study.csv
+    wildcards: treatment=A.2_full
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Nov  5 12:51:38 2025]
+Finished jobid: 3 (Rule: case_study_sims)
+1 of 22 steps (5%) done
+Execute 1 jobs...
+[Wed Nov  5 12:51:38 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/O/O_data.csv, results/case_study_sims/O/O_data_long.csv, results/case_study_sims/O/O_sim_plot.pdf
+    jobid: 21
+    reason: Updated input files: input_data/Treatments_case_study.csv
+    wildcards: treatment=O
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov  5 12:51:38 2025]
+Finished jobid: 6 (Rule: case_study_sims)
+2 of 22 steps (9%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Nov  5 12:51:38 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/C.2/C.2_data.csv, results/case_study_sims/C.2/C.2_data_long.csv, results/case_study_sims/C.2/C.2_sim_plot.pdf
+    jobid: 9
+    reason: Updated input files: input_data/Treatments_case_study.csv
+    wildcards: treatment=C.2
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Nov  5 12:51:41 2025]
+Finished jobid: 15 (Rule: case_study_sims)
+3 of 22 steps (14%) done
+Execute 1 jobs...
+[Wed Nov  5 12:51:41 2025]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/E/E_data.csv, results/case_study_sims/E/E_data_long.csv
+    output: results/case_study_sims/E/E_density_plot_df.csv, results/case_study_sims/E/E_frequency_plot_df.csv, results/case_study_sims/E/E_phases_plot_df.csv
+    jobid: 14
+    reason: Input files updated by another job: results/case_study_sims/E/E_data_long.csv, results/case_study_sims/E/E_data.csv
+    wildcards: treatment=E
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Nov  5 12:51:48 2025]
+Finished jobid: 9 (Rule: case_study_sims)
+4 of 22 steps (18%) done
+Execute 1 jobs...
+[Wed Nov  5 12:51:48 2025]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/A.2/A.2_data.csv, results/case_study_sims/A.2/A.2_data_long.csv
+    output: results/case_study_sims/A.2/A.2_density_plot_df.csv, results/case_study_sims/A.2/A.2_frequency_plot_df.csv, results/case_study_sims/A.2/A.2_phases_plot_df.csv
+    jobid: 2
+    reason: Input files updated by another job: results/case_study_sims/A.2/A.2_data_long.csv, results/case_study_sims/A.2/A.2_data.csv
+    wildcards: treatment=A.2
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 62:
+Command 'set -euo pipefail;  Rscript src/process_simrun.R --treatment E' returned non-zero exit status 1.
+[Wed Nov  5 12:51:49 2025]
+Error in rule process_case_study_sims:
+    message: None
+    jobid: 14
+    input: src/process_simrun.R, results/case_study_sims/E/E_data.csv, results/case_study_sims/E/E_data_long.csv
+    output: results/case_study_sims/E/E_density_plot_df.csv, results/case_study_sims/E/E_frequency_plot_df.csv, results/case_study_sims/E/E_phases_plot_df.csv
+    shell:
+        Rscript src/process_simrun.R --treatment E
+        (command exited with non-zero exit code)
+[Wed Nov  5 12:51:52 2025]
+Finished jobid: 18 (Rule: case_study_sims)
+5 of 22 steps (23%) done
+[Wed Nov  5 12:51:53 2025]
+Finished jobid: 2 (Rule: process_case_study_sims)
+6 of 22 steps (27%) done
+[Wed Nov  5 12:52:12 2025]
+Finished jobid: 21 (Rule: case_study_sims)
+7 of 22 steps (32%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Wed Nov  5 12:52:12 2025]
+Error in rule process_case_study_sims:
+    message: None
+    jobid: 14
+    input: src/process_simrun.R, results/case_study_sims/E/E_data.csv, results/case_study_sims/E/E_data_long.csv
+    output: results/case_study_sims/E/E_density_plot_df.csv, results/case_study_sims/E/E_frequency_plot_df.csv, results/case_study_sims/E/E_phases_plot_df.csv
+    shell:
+        Rscript src/process_simrun.R --treatment E
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2025-11-05T125125.731194.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

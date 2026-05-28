@@ -1,0 +1,73 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 3
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job                    count
+-------------------  -------
+all                        1
+fig5                       1
+plot_phenotyping           1
+process_phenotyping        1
+total                      4
+
+Select jobs to execute...
+Execute 1 jobs...
+[Mon May 11 13:20:08 2026]
+localrule process_phenotyping:
+    input: src/process_phenotyping.R, results/phenotyping/growth_rate/growthratemax_av.csv
+    output: results/phenotyping/phenotyping_av.csv
+    jobid: 47
+    reason: Missing output files: results/phenotyping/phenotyping_av.csv; Code has changed since last execution
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Mon May 11 13:20:09 2026]
+Finished jobid: 47 (Rule: process_phenotyping)
+1 of 4 steps (25%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Mon May 11 13:20:09 2026]
+localrule plot_phenotyping:
+    input: src/plot_phenotyping.R, results/phenotyping/phenotyping_av.csv
+    output: results/phenotyping/pB10_phenotyping.pdf, results/phenotyping/pB10_phenotyping.rds, results/phenotyping/pB10_mut_inv.pdf, results/phenotyping/pB10_mut_inv.rds, results/phenotyping/pB10_anc_inv.pdf, results/phenotyping/pB10_anc_inv.rds
+    jobid: 49
+    reason: Input files updated by another job: results/phenotyping/phenotyping_av.csv
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 318:
+Command 'set -euo pipefail;  
+    Rscript src/plot_phenotyping.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb", "p_hc": "#e7e9fd", "p_syn": "#A69AE0", "p_par": "#d8aace"}'' returned non-zero exit status 1.
+[Mon May 11 13:20:13 2026]
+Error in rule plot_phenotyping:
+    message: None
+    jobid: 49
+    input: src/plot_phenotyping.R, results/phenotyping/phenotyping_av.csv
+    output: results/phenotyping/pB10_phenotyping.pdf, results/phenotyping/pB10_phenotyping.rds, results/phenotyping/pB10_mut_inv.pdf, results/phenotyping/pB10_mut_inv.rds, results/phenotyping/pB10_anc_inv.pdf, results/phenotyping/pB10_anc_inv.rds
+    shell:
+        
+    Rscript src/plot_phenotyping.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb", "p_hc": "#e7e9fd", "p_syn": "#A69AE0", "p_par": "#d8aace"}'
+    
+        (command exited with non-zero exit code)
+Removing output files of failed job plot_phenotyping since they might be corrupted:
+results/phenotyping/pB10_phenotyping.pdf
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Mon May 11 13:20:13 2026]
+Error in rule plot_phenotyping:
+    message: None
+    jobid: 49
+    input: src/plot_phenotyping.R, results/phenotyping/phenotyping_av.csv
+    output: results/phenotyping/pB10_phenotyping.pdf, results/phenotyping/pB10_phenotyping.rds, results/phenotyping/pB10_mut_inv.pdf, results/phenotyping/pB10_mut_inv.rds, results/phenotyping/pB10_anc_inv.pdf, results/phenotyping/pB10_anc_inv.rds
+    shell:
+        
+    Rscript src/plot_phenotyping.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb", "p_hc": "#e7e9fd", "p_syn": "#A69AE0", "p_par": "#d8aace"}'
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-05-11T132008.194534.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

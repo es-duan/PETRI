@@ -1,0 +1,53 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-7.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job stats:
+job                     count
+--------------------  -------
+all                         1
+plot_case_study_sims        2
+total                       3
+
+Select jobs to execute...
+Execute 2 jobs...
+[Wed Jul  2 16:02:11 2025]
+localrule plot_case_study_sims:
+    input: src/plot_simrun_snakemake.R, results/case_study_sims/C/C_density_plot_df.csv, results/case_study_sims/C/C_frequency_plot_df.csv, results/case_study_sims/C/C_phases_plot_df.csv
+    output: results/case_study_sims/C/C_density_plot.pdf, results/case_study_sims/C/C_frequency_plot.pdf
+    jobid: 4
+    reason: Missing output files: results/case_study_sims/C/C_frequency_plot.pdf, results/case_study_sims/C/C_density_plot.pdf
+    wildcards: treatment=C
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Jul  2 16:02:12 2025]
+localrule plot_case_study_sims:
+    input: src/plot_simrun_snakemake.R, results/case_study_sims/A/A_density_plot_df.csv, results/case_study_sims/A/A_frequency_plot_df.csv, results/case_study_sims/A/A_phases_plot_df.csv
+    output: results/case_study_sims/A/A_density_plot.pdf, results/case_study_sims/A/A_frequency_plot.pdf
+    jobid: 1
+    reason: Missing output files: results/case_study_sims/A/A_frequency_plot.pdf; Updated input files: src/plot_simrun_snakemake.R
+    wildcards: treatment=A
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Jul  2 16:02:17 2025]
+Finished jobid: 1 (Rule: plot_case_study_sims)
+1 of 3 steps (33%) done
+[Wed Jul  2 16:02:17 2025]
+Finished jobid: 4 (Rule: plot_case_study_sims)
+2 of 3 steps (67%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Jul  2 16:02:17 2025]
+localrule all:
+    input: results/case_study_sims/A/A_density_plot.pdf, results/case_study_sims/C/C_density_plot.pdf, results/case_study_sims/A/A_frequency_plot.pdf, results/case_study_sims/C/C_frequency_plot.pdf
+    jobid: 0
+    reason: Input files updated by another job: results/case_study_sims/C/C_density_plot.pdf, results/case_study_sims/A/A_frequency_plot.pdf, results/case_study_sims/C/C_frequency_plot.pdf, results/case_study_sims/A/A_density_plot.pdf
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Jul  2 16:02:17 2025]
+Finished jobid: 0 (Rule: all)
+3 of 3 steps (100%) done
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2025-07-02T160211.362872.snakemake.log

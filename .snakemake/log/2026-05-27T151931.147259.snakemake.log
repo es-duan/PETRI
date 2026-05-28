@@ -1,0 +1,41 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job      count
+-----  -------
+all          1
+fig5         1
+total        2
+
+Select jobs to execute...
+Execute 1 jobs...
+[Wed May 27 15:19:31 2026]
+localrule fig5:
+    input: src/fig5_validation.R, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_frequency_plot.rds, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_frequency_plot.rds, results/experimental_validation/HFC/HFC_frequency_plot.rds, results/experimental_validation/LFC/LFC_frequency_plot.rds, results/phenotyping/phenotyping_av.csv, results/phenotyping/pB10_anc_inv.rds, results/phenotyping/pB10_mut_inv.rds, figures/panels/fig5d_HFC.rds, figures/panels/fig5b_LFC.rds
+    output: figures/fig5_validation.pdf
+    jobid: 85
+    reason: Updated input files: src/fig5_validation.R
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed May 27 15:19:34 2026]
+Finished jobid: 85 (Rule: fig5)
+1 of 2 steps (50%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed May 27 15:19:35 2026]
+localrule all:
+    input: results/case_study_sims/DG_S.pB10/DG_S.pB10_frequency_plot.pdf, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_frequency_plot.pdf, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_frequency_plot.pdf, results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_frequency_plot.pdf, results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_frequency_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_change_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pHFCi2_S.pB10/pHFCi2_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFCi2_S.pB10/pLFCi2_S.pB10_change_plot.pdf, results/parameter_sweeps/pDG_S.pB10/pDG_S.pB10_change_plot.pdf, results/parameter_sweeps/pDGs_S.pB10/pDGs_S.pB10_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pHFCi2_S.pB10/pHFCi2_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFCi2_S.pB10/pLFCi2_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pDG_S.pB10/pDG_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pDGs_S.pB10/pDGs_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_strain_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_strain_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_strain_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_strain_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pHFCi2_S.pB10/pHFCi2_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pLFCi2_S.pB10/pLFCi2_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pDG_S.pB10/pDG_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pDGs_S.pB10/pDGs_S.pB10_inv_change_strain_plot.pdf, results/phenotyping/growth_rate/OD/growthrate_av.pdf, figures/panels/fig1a_axes.pdf, figures/panels/fig3b_phenotyping.pdf, figures/fig4_DG_invasion.pdf, figures/fig5_validation.pdf, figures/fig6_psweep.pdf, figures/fig7_Dim_psweep.pdf
+    jobid: 0
+    reason: Input files updated by another job: figures/fig5_validation.pdf
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed May 27 15:19:35 2026]
+Finished jobid: 0 (Rule: all)
+2 of 2 steps (100%) done
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-05-27T151931.147259.snakemake.log

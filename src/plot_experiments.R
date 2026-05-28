@@ -10,6 +10,7 @@ parser <- ArgumentParser()
 parser$add_argument("-t","--treatment", type = "character", help = "Specify Treatment ID")
 parser$add_argument("-c","--colors", help = "JSON string of plot colors")
 parser$add_argument("-l","--lines", help = "JSON string of plot lines")
+parser$add_argument("-o","--points", help = "JSON string of point aesthetics")
 
 # Parse arguments
 args <- parser$parse_args()
@@ -29,6 +30,14 @@ p_imm <- plot_colors[["p_imm"]]
 plot_lines <- fromJSON(args$lines)
 rifR_l <- plot_lines[["rifR_l"]]
 nalR_l <- plot_lines[["nalR_l"]]
+plot_lw <- plot_lines[["plot_lw"]]
+
+## Points ----
+plot_points <- jsonlite::fromJSON(args$points)
+exp_point_size <- plot_points[["exp_point_size"]]
+sh_Anc <- plot_points[["sh_Anc"]]
+sh_Mut <- plot_points[["sh_Mut"]]
+sh_F <- plot_points[["sh_F"]]
 
 ## Retrieve ggplot theme ----
 source("src/ggplot_theme.R")
@@ -100,27 +109,27 @@ h1 <- ggplot() +
                                "Transconjugant selection" = p_tselect)) +
   geom_line(data = HFC_L,
             mapping = aes(Time, Density_mean, color = Phenotype, linetype = Host),
-            linewidth = 2, alpha = 0.5) +
+            linewidth = plot_lw, alpha = 0.5) +
   geom_errorbar(data = HFC_L,
                 mapping = aes(x = Time, ymax = Density_mean + Density_se, ymin = Density_mean - Density_se,
                               color = Phenotype, linetype = Host),
                 width = 1, alpha = 0.5) +
   geom_point(data = HFC_P2,
              mapping = aes(Time, Density_mean, color = Phenotype),
-             size = 4, alpha = 0.75) +
+             size = exp_point_size, alpha = 0.75) +
   geom_point(data = HFC_P,
              mapping = aes(Time, Density_mean, color = Phenotype),
-             size = 4, shape = 21, fill = "white", alpha = 0.75) +
+             size = exp_point_size, shape = 21, fill = "white", alpha = 0.75) +
   geom_line(data = HFC_B,
             mapping = aes(Time, Density_mean, color = Phenotype, linetype = Host),
-            linewidth = 2) +
+            linewidth = plot_lw) +
   geom_errorbar(data = HFC_B,
                 mapping = aes(x = Time, ymax = Density_mean + Density_se, ymin = Density_mean - Density_se,
                               color = Phenotype, linetype = Host),
                 width = 0.3) +
   geom_point(data = HFC_B,
              mapping = aes(Time, Density_mean, color = Phenotype, shape = Count_type),
-             size = 4) +
+             size = exp_point_size) +
   scale_shape_manual(values = c("count" = 16,
                                 "estimate" = 15,
                                 "below_limit" = 17,
@@ -137,7 +146,8 @@ h1 <- ggplot() +
   scale_linetype_manual(values = c("rifR" = rifR_l,
                                    "nalR" = nalR_l)) +
   guides(color = guide_legend(order=1, override.aes = list(shape = NA))) +
-  fig_aes
+  fig_aes +
+  theme(legend.spacing.y = unit(0, "cm"))
 
 ### Frequency plot ----
 h2 <- ggplot() +
@@ -147,14 +157,14 @@ h2 <- ggplot() +
                                "Transconjugant selection" = p_tselect)) +
   geom_line(data = HFC_f_av,
             mapping = aes(Time, Frequency_mean, color = Phenotype),
-            linewidth = 2) +
+            linewidth = plot_lw) +
   geom_errorbar(data = HFC_f_av,
                 mapping = aes(x = Time, ymax = Frequency_mean + Frequency_se, ymin = Frequency_mean - Frequency_se,
                               color = Phenotype),
                 width = 0.3) +
   geom_point(data = HFC_f_av,
              mapping = aes(Time, Frequency_mean, color = Phenotype),
-             size = 4) +
+             size = exp_point_size) +
   scale_shape_manual(values = c("count" = 16,
                                 "estimate" = 15,
                                 "below_limit" = 17,
@@ -167,7 +177,8 @@ h2 <- ggplot() +
   scale_x_continuous(expand = c(0.001, 0.001)) +
   scale_color_manual(values = c("Anc" = p_Anc,
                                 "Mut" = p_Mut)) +
-  fig_aes
+  fig_aes +
+  theme(legend.spacing.y = unit(0, "cm"))
 
 ## LFC ----
 
@@ -180,27 +191,27 @@ l1 <- ggplot() +
                                "Growth" = p_growth)) +
   geom_line(data = LFC_L,
             mapping = aes(Time, Density_mean, color = Phenotype, linetype = Host),
-            linewidth = 2, alpha = 0.5) +
+            linewidth = plot_lw, alpha = 0.5) +
   geom_errorbar(data = LFC_L,
                 mapping = aes(x = Time, ymax = Density_mean + Density_se, ymin = Density_mean - Density_se,
                               color = Phenotype, linetype = Host),
                 width = 1, alpha = 0.5) +
   geom_point(data = LFC_P,
              mapping = aes(Time, Density_mean, color = Phenotype, shape = Count_type),
-             size = 4, alpha = 0.75) +
+             size = exp_point_size, alpha = 0.75) +
   geom_point(data = LFC_P2,
              mapping = aes(Time, Density_mean, color = Phenotype, shape = Count_type),
-             size = 4, alpha = 0.75) +
+             size = exp_point_size, alpha = 0.75) +
   geom_line(data = LFC_B,
             mapping = aes(Time, Density_mean, color = Phenotype, linetype = Host),
-            linewidth = 2) +
+            linewidth = plot_lw) +
   geom_errorbar(data = LFC_B,
                 mapping = aes(x = Time, ymax = Density_mean + Density_se, ymin = Density_mean - Density_se,
                               color = Phenotype, linetype = Host),
                 width = 1) +
   geom_point(data = LFC_B,
              mapping = aes(Time, Density_mean, color = Phenotype, shape = Count_type),
-             size = 4) +
+             size = exp_point_size) +
   scale_shape_manual(values = c("count" = 16,
                                 "estimate" = 15,
                                 "below_limit" = 17,
@@ -216,7 +227,8 @@ l1 <- ggplot() +
                                 "F" = p_F)) +
   scale_linetype_manual(values = c("rifR" = rifR_l,
                                    "nalR" = nalR_l)) +
-  fig_aes
+  fig_aes +
+  theme(legend.spacing.y = unit(0, "cm"))
 
 ### Frequency plot ----
 l2 <- ggplot() +
@@ -227,14 +239,14 @@ l2 <- ggplot() +
                                "Growth" = p_growth)) +
   geom_line(data = LFC_f_av,
             mapping = aes(Time, Frequency_mean, color = Phenotype),
-            linewidth = 2) +
+            linewidth = plot_lw) +
   geom_errorbar(data = LFC_f_av,
                 mapping = aes(x = Time, ymax = Frequency_mean + Frequency_se, ymin = Frequency_mean - Frequency_se,
                               color = Phenotype),
                 width = 1) +
   geom_point(data = LFC_f_av,
              mapping = aes(Time, Frequency_mean, color = Phenotype),
-             size = 4) +
+             size = exp_point_size) +
   scale_shape_manual(values = c("count" = 16,
                                 "estimate" = 15,
                                 "below_limit" = 17,
@@ -247,21 +259,22 @@ l2 <- ggplot() +
   scale_x_continuous(expand = c(0.001, 0.001)) +
   scale_color_manual(values = c("Anc" = p_Anc,
                                 "Mut" = p_Mut)) +
-  fig_aes
+  fig_aes +
+  theme(legend.spacing.y = unit(0, "cm"))
 
 # Save plots ----
 ggsave(paste(output_dir, "HFC", "HFC_density_plot.pdf", sep = "/"), h1, 
-       width = 12, height = 6, units = "in")
+       width = 6, height = 3.5, units = "in")
 saveRDS(h1, paste(output_dir, "HFC", "HFC_density_plot.rds", sep = "/"))
 ggsave(paste(output_dir, "HFC", "HFC_frequency_plot.pdf", sep = "/"), h2, 
-       width = 12, height = 6, units = "in")
+       width = 6, height = 3.5, units = "in")
 saveRDS(h2, paste(output_dir, "HFC", "HFC_frequency_plot.rds", sep = "/"))
 
 
 ggsave(paste(output_dir, "LFC", "LFC_density_plot.pdf", sep = "/"), l1, 
-       width = 16, height = 6, units = "in")
+       width = 8, height = 3.5, units = "in")
 saveRDS(l1, paste(output_dir, "LFC", "LFC_density_plot.rds", sep = "/"))
 ggsave(paste(output_dir, "LFC", "LFC_frequency_plot.pdf", sep = "/"), l2, 
-       width = 16, height = 6, units = "in")
+       width = 8, height = 3.5, units = "in")
 saveRDS(l2, paste(output_dir, "LFC", "LFC_frequency_plot.rds", sep = "/"))
 

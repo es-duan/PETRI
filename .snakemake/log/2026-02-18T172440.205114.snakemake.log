@@ -1,0 +1,275 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job                     count
+--------------------  -------
+all                         1
+plot_case_study_sims        3
+plot_psweep                 8
+plot_psweep_strain          8
+total                      20
+
+Select jobs to execute...
+Execute 7 jobs...
+[Wed Feb 18 17:24:40 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_plot.csv
+    output: results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_change_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.rds
+    jobid: 18
+    reason: Updated input files: src/plot_psweep.R
+    wildcards: psweep=pDim90_E.R1
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 18 17:24:40 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_plot.csv
+    output: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.rds
+    jobid: 30
+    reason: Updated input files: src/plot_psweep.R
+    wildcards: psweep=pLFCi_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 18 17:24:40 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_plot.csv
+    output: results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_plot.rds
+    jobid: 22
+    reason: Updated input files: src/plot_psweep.R
+    wildcards: psweep=pDim90_E.RP4
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 18 17:24:40 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_plot.csv
+    output: results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot.rds
+    jobid: 34
+    reason: Updated input files: src/plot_psweep.R
+    wildcards: psweep=pHFC_S.pB10-A
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 18 17:24:40 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_plot.csv
+    output: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.rds
+    jobid: 10
+    reason: Updated input files: src/plot_psweep.R
+    wildcards: psweep=pHFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 18 17:24:41 2026]
+localrule plot_case_study_sims:
+    input: src/plot_simrun.R, results/case_study_sims/HFC_pB10/HFC_pB10_density_plot_df.csv, results/case_study_sims/HFC_pB10/HFC_pB10_frequency_plot_df.csv, results/case_study_sims/HFC_pB10/HFC_pB10_phases_plot_df.csv
+    output: results/case_study_sims/HFC_pB10/HFC_pB10_density_plot.pdf, results/case_study_sims/HFC_pB10/HFC_pB10_frequency_plot.pdf, results/case_study_sims/HFC_pB10/HFC_pB10_density_plot.rds, results/case_study_sims/HFC_pB10/HFC_pB10_frequency_plot.rds
+    jobid: 4
+    reason: Updated input files: src/plot_simrun.R
+    wildcards: treatment=HFC_pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 18 17:24:41 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_plot.csv
+    output: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_plot.rds
+    jobid: 26
+    reason: Updated input files: src/plot_psweep.R
+    wildcards: psweep=pHFCi_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Feb 18 17:24:50 2026]
+Finished jobid: 34 (Rule: plot_psweep)
+1 of 20 steps (5%) done
+Execute 1 jobs...
+[Wed Feb 18 17:24:50 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot.rds
+    output: results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_strain_plot.pdf
+    jobid: 48
+    reason: Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot.rds
+    wildcards: psweep=pHFC_S.pB10-A
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 18 17:24:50 2026]
+Finished jobid: 30 (Rule: plot_psweep)
+2 of 20 steps (10%) done
+[Wed Feb 18 17:24:50 2026]
+Finished jobid: 18 (Rule: plot_psweep)
+3 of 20 steps (15%) done
+[Wed Feb 18 17:24:50 2026]
+Finished jobid: 22 (Rule: plot_psweep)
+4 of 20 steps (20%) done
+[Wed Feb 18 17:24:50 2026]
+Finished jobid: 26 (Rule: plot_psweep)
+5 of 20 steps (25%) done
+Select jobs to execute...
+Execute 4 jobs...
+[Wed Feb 18 17:24:50 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_plot.rds
+    output: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_strain_plot.pdf
+    jobid: 46
+    reason: Input files updated by another job: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_plot.rds
+    wildcards: psweep=pHFCi_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 18 17:24:50 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.rds
+    output: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_strain_plot.pdf
+    jobid: 47
+    reason: Input files updated by another job: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.rds
+    wildcards: psweep=pLFCi_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 18 17:24:51 2026]
+localrule plot_case_study_sims:
+    input: src/plot_simrun.R, results/case_study_sims/LFC_pB10-A/LFC_pB10-A_density_plot_df.csv, results/case_study_sims/LFC_pB10-A/LFC_pB10-A_frequency_plot_df.csv, results/case_study_sims/LFC_pB10-A/LFC_pB10-A_phases_plot_df.csv
+    output: results/case_study_sims/LFC_pB10-A/LFC_pB10-A_density_plot.pdf, results/case_study_sims/LFC_pB10-A/LFC_pB10-A_frequency_plot.pdf, results/case_study_sims/LFC_pB10-A/LFC_pB10-A_density_plot.rds, results/case_study_sims/LFC_pB10-A/LFC_pB10-A_frequency_plot.rds
+    jobid: 7
+    reason: Updated input files: src/plot_simrun.R
+    wildcards: treatment=LFC_pB10-A
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 18 17:24:51 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_plot.rds
+    output: results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_strain_plot.pdf
+    jobid: 45
+    reason: Input files updated by another job: results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_plot.rds
+    wildcards: psweep=pDim90_E.RP4
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Feb 18 17:24:51 2026]
+Finished jobid: 4 (Rule: plot_case_study_sims)
+6 of 20 steps (30%) done
+Execute 1 jobs...
+[Wed Feb 18 17:24:53 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.rds
+    output: results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_strain_plot.pdf
+    jobid: 44
+    reason: Input files updated by another job: results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.rds
+    wildcards: psweep=pDim90_E.R1
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Feb 18 17:24:53 2026]
+Finished jobid: 10 (Rule: plot_psweep)
+7 of 20 steps (35%) done
+Execute 1 jobs...
+[Wed Feb 18 17:24:54 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_plot.csv
+    output: results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot.rds
+    jobid: 38
+    reason: Updated input files: src/plot_psweep.R
+    wildcards: psweep=pLFC_S.pB10-A
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Feb 18 17:25:01 2026]
+Finished jobid: 47 (Rule: plot_psweep_strain)
+8 of 20 steps (40%) done
+Execute 1 jobs...
+[Wed Feb 18 17:25:01 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_plot.csv
+    output: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.rds
+    jobid: 14
+    reason: Updated input files: src/plot_psweep.R
+    wildcards: psweep=pLFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 18 17:25:01 2026]
+Finished jobid: 46 (Rule: plot_psweep_strain)
+9 of 20 steps (45%) done
+[Wed Feb 18 17:25:01 2026]
+Finished jobid: 48 (Rule: plot_psweep_strain)
+10 of 20 steps (50%) done
+[Wed Feb 18 17:25:01 2026]
+Finished jobid: 44 (Rule: plot_psweep_strain)
+11 of 20 steps (55%) done
+[Wed Feb 18 17:25:01 2026]
+Finished jobid: 45 (Rule: plot_psweep_strain)
+12 of 20 steps (60%) done
+Select jobs to execute...
+Execute 2 jobs...
+[Wed Feb 18 17:25:01 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.rds
+    output: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_strain_plot.pdf
+    jobid: 42
+    reason: Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.rds
+    wildcards: psweep=pHFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 18 17:25:02 2026]
+localrule plot_case_study_sims:
+    input: src/plot_simrun.R, results/case_study_sims/DG_pB10/DG_pB10_density_plot_df.csv, results/case_study_sims/DG_pB10/DG_pB10_frequency_plot_df.csv, results/case_study_sims/DG_pB10/DG_pB10_phases_plot_df.csv
+    output: results/case_study_sims/DG_pB10/DG_pB10_density_plot.pdf, results/case_study_sims/DG_pB10/DG_pB10_frequency_plot.pdf, results/case_study_sims/DG_pB10/DG_pB10_density_plot.rds, results/case_study_sims/DG_pB10/DG_pB10_frequency_plot.rds
+    jobid: 1
+    reason: Updated input files: src/plot_simrun.R
+    wildcards: treatment=DG_pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 18 17:25:02 2026]
+Finished jobid: 38 (Rule: plot_psweep)
+13 of 20 steps (65%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Feb 18 17:25:02 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot.rds
+    output: results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_strain_plot.pdf
+    jobid: 49
+    reason: Input files updated by another job: results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot.rds
+    wildcards: psweep=pLFC_S.pB10-A
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 18 17:25:03 2026]
+Finished jobid: 7 (Rule: plot_case_study_sims)
+14 of 20 steps (70%) done
+[Wed Feb 18 17:25:09 2026]
+Finished jobid: 42 (Rule: plot_psweep_strain)
+15 of 20 steps (75%) done
+[Wed Feb 18 17:25:10 2026]
+Finished jobid: 14 (Rule: plot_psweep)
+16 of 20 steps (80%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Feb 18 17:25:10 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.rds
+    output: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_strain_plot.pdf
+    jobid: 43
+    reason: Input files updated by another job: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.rds
+    wildcards: psweep=pLFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 18 17:25:10 2026]
+Finished jobid: 49 (Rule: plot_psweep_strain)
+17 of 20 steps (85%) done
+[Wed Feb 18 17:25:10 2026]
+Finished jobid: 1 (Rule: plot_case_study_sims)
+18 of 20 steps (90%) done
+[Wed Feb 18 17:25:14 2026]
+Finished jobid: 43 (Rule: plot_psweep_strain)
+19 of 20 steps (95%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Feb 18 17:25:14 2026]
+localrule all:
+    input: results/case_study_sims/DG_pB10/DG_pB10_density_plot.pdf, results/case_study_sims/HFC_pB10/HFC_pB10_density_plot.pdf, results/case_study_sims/LFC_pB10-A/LFC_pB10-A_density_plot.pdf, results/case_study_sims/DG_pB10/DG_pB10_frequency_plot.pdf, results/case_study_sims/HFC_pB10/HFC_pB10_frequency_plot.pdf, results/case_study_sims/LFC_pB10-A/LFC_pB10-A_frequency_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_change_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_strain_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_strain_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_strain_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_strain_plot.pdf
+    jobid: 0
+    reason: Input files updated by another job: results/case_study_sims/DG_pB10/DG_pB10_density_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_strain_plot.pdf, results/case_study_sims/HFC_pB10/HFC_pB10_frequency_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_strain_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_strain_plot.pdf, results/case_study_sims/DG_pB10/DG_pB10_frequency_plot.pdf, results/case_study_sims/HFC_pB10/HFC_pB10_density_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_change_plot.pdf, results/case_study_sims/LFC_pB10-A/LFC_pB10-A_frequency_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_change_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_strain_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_strain_plot.pdf, results/case_study_sims/LFC_pB10-A/LFC_pB10-A_density_plot.pdf
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 18 17:25:14 2026]
+Finished jobid: 0 (Rule: all)
+20 of 20 steps (100%) done
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-02-18T172440.205114.snakemake.log

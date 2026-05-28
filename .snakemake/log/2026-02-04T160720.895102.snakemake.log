@@ -1,0 +1,60 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job               count
+--------------  -------
+all                   1
+plot_psweep          12
+process_psweep       12
+psweep_sims          12
+total                37
+
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Feb  4 16:07:21 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pE_DimR1finO/pE_DimR1finO_out.csv
+    jobid: 43
+    reason: Missing output files: results/parameter_sweeps/pE_DimR1finO/pE_DimR1finO_out.csv; Updated input files: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    wildcards: psweep=pE_DimR1finO
+    threads: 5
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 136:
+Command 'set -euo pipefail;  
+    Rscript src/simrun_psweep.R       --psweepsetting pE_DimR1finO       --threads 5' returned non-zero exit status 1.
+[Wed Feb  4 16:08:50 2026]
+Error in rule psweep_sims:
+    message: None
+    jobid: 43
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pE_DimR1finO/pE_DimR1finO_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting pE_DimR1finO       --threads 5
+    
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Wed Feb  4 16:08:50 2026]
+Error in rule psweep_sims:
+    message: None
+    jobid: 43
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pE_DimR1finO/pE_DimR1finO_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting pE_DimR1finO       --threads 5
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-02-04T160720.895102.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

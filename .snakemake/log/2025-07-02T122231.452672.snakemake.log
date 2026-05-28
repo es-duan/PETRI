@@ -1,0 +1,81 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-7.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 4
+Rules claiming more threads will be scaled down.
+Job stats:
+job                count
+---------------  -------
+all                    1
+case_study_sims        2
+total                  3
+
+Select jobs to execute...
+Execute 2 jobs...
+[Wed Jul  2 12:22:32 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/A/A_data.csv, results/case_study_sims/A/A_data_long.csv, results/case_study_sims/A/A_plot.pdf
+    jobid: 1
+    reason: Missing output files: results/case_study_sims/A/A_plot.pdf
+    wildcards: treatment=A
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Jul  2 12:22:32 2025]
+localrule case_study_sims:
+    input: src/simrun_case_study.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/C/C_data.csv, results/case_study_sims/C/C_data_long.csv, results/case_study_sims/C/C_plot.pdf
+    jobid: 2
+    reason: Missing output files: results/case_study_sims/C/C_plot.pdf
+    wildcards: treatment=C
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 36:
+Command 'set -euo pipefail;  Rscript src/simrun_case_study.R --treatment C' returned non-zero exit status 1.
+[Wed Jul  2 12:22:42 2025]
+Error in rule case_study_sims:
+    message: None
+    jobid: 2
+    input: src/simrun_case_study.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/C/C_data.csv, results/case_study_sims/C/C_data_long.csv, results/case_study_sims/C/C_plot.pdf
+    shell:
+        Rscript src/simrun_case_study.R --treatment C
+        (command exited with non-zero exit code)
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 36:
+Command 'set -euo pipefail;  Rscript src/simrun_case_study.R --treatment A' returned non-zero exit status 1.
+[Wed Jul  2 12:22:49 2025]
+Error in rule case_study_sims:
+    message: None
+    jobid: 1
+    input: src/simrun_case_study.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/A/A_data.csv, results/case_study_sims/A/A_data_long.csv, results/case_study_sims/A/A_plot.pdf
+    shell:
+        Rscript src/simrun_case_study.R --treatment A
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Wed Jul  2 12:22:49 2025]
+Error in rule case_study_sims:
+    message: None
+    jobid: 1
+    input: src/simrun_case_study.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/A/A_data.csv, results/case_study_sims/A/A_data_long.csv, results/case_study_sims/A/A_plot.pdf
+    shell:
+        Rscript src/simrun_case_study.R --treatment A
+        (command exited with non-zero exit code)
+[Wed Jul  2 12:22:49 2025]
+Error in rule case_study_sims:
+    message: None
+    jobid: 2
+    input: src/simrun_case_study.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/C/C_data.csv, results/case_study_sims/C/C_data_long.csv, results/case_study_sims/C/C_plot.pdf
+    shell:
+        Rscript src/simrun_case_study.R --treatment C
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2025-07-02T122231.452672.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

@@ -1,0 +1,59 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job                 count
+----------------  -------
+all                     1
+plot_psweep             1
+process_psweep          1
+psweep_parameter        1
+psweep_sims             1
+total                   5
+
+Select jobs to execute...
+Execute 1 jobs...
+[Thu Feb  5 17:15:00 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/parameter_sweeps/pHFC_S.pB10_psweep_settings.csv
+    output: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_params.csv, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_settings.rds
+    jobid: 7
+    reason: Missing output files: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_params.csv, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_settings.rds
+    wildcards: psweep=pHFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 114:
+Command 'set -euo pipefail;  
+    Rscript src/generate_parameter_sets.R       --setting pHFC_S.pB10' returned non-zero exit status 1.
+[Thu Feb  5 17:15:04 2026]
+Error in rule psweep_parameter:
+    message: None
+    jobid: 7
+    input: src/generate_parameter_sets.R, input_data/parameter_sweeps/pHFC_S.pB10_psweep_settings.csv
+    output: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_params.csv, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_settings.rds
+    shell:
+        
+    Rscript src/generate_parameter_sets.R       --setting pHFC_S.pB10 
+    
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Thu Feb  5 17:15:04 2026]
+Error in rule psweep_parameter:
+    message: None
+    jobid: 7
+    input: src/generate_parameter_sets.R, input_data/parameter_sweeps/pHFC_S.pB10_psweep_settings.csv
+    output: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_params.csv, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_settings.rds
+    shell:
+        
+    Rscript src/generate_parameter_sets.R       --setting pHFC_S.pB10 
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-02-05T171459.739014.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

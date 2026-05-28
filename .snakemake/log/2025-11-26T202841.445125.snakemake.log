@@ -1,0 +1,96 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job               count
+--------------  -------
+all                   1
+plot_psweep           5
+process_psweep        5
+psweep_sims           5
+total                16
+
+Select jobs to execute...
+Execute 2 jobs...
+[Wed Nov 26 20:28:42 2025]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/pO_test/pO_test_out.csv
+    jobid: 18
+    reason: Updated input files: input_data/Parameter_sweep_settings.csv
+    wildcards: psweep=pO_test
+    threads: 3
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov 26 20:28:42 2025]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/pHFC_test/pHFC_test_out.csv
+    jobid: 21
+    reason: Updated input files: input_data/Parameter_sweep_settings.csv
+    wildcards: psweep=pHFC_test
+    threads: 3
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 109:
+Command 'set -euo pipefail;  
+    Rscript src/simrun_psweep.R       --psweepsetting pO_test       --threads 3' returned non-zero exit status 1.
+[Wed Nov 26 20:28:46 2025]
+Error in rule psweep_sims:
+    message: None
+    jobid: 18
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/pO_test/pO_test_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting pO_test       --threads 3
+    
+        (command exited with non-zero exit code)
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 109:
+Command 'set -euo pipefail;  
+    Rscript src/simrun_psweep.R       --psweepsetting pHFC_test       --threads 3' returned non-zero exit status 1.
+[Wed Nov 26 20:28:46 2025]
+Error in rule psweep_sims:
+    message: None
+    jobid: 21
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/pHFC_test/pHFC_test_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting pHFC_test       --threads 3
+    
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Wed Nov 26 20:28:46 2025]
+Error in rule psweep_sims:
+    message: None
+    jobid: 18
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/pO_test/pO_test_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting pO_test       --threads 3
+    
+        (command exited with non-zero exit code)
+[Wed Nov 26 20:28:46 2025]
+Error in rule psweep_sims:
+    message: None
+    jobid: 21
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/pHFC_test/pHFC_test_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting pHFC_test       --threads 3
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2025-11-26T202841.445125.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

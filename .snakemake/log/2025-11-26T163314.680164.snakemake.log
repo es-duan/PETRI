@@ -1,0 +1,134 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job               count
+--------------  -------
+all                   1
+plot_psweep           5
+process_psweep        5
+psweep_sims           5
+total                16
+
+Select jobs to execute...
+Execute 5 jobs...
+[Wed Nov 26 16:33:15 2025]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/pO_test/pO_test_out.csv
+    jobid: 18
+    reason: Missing output files: results/parameter_sweeps/pO_test/pO_test_out.csv
+    wildcards: psweep=pO_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov 26 16:33:15 2025]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/pHFC_test/pHFC_test_out.csv
+    jobid: 21
+    reason: Missing output files: results/parameter_sweeps/pHFC_test/pHFC_test_out.csv
+    wildcards: psweep=pHFC_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov 26 16:33:15 2025]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/pLFC_test/pLFC_test_out.csv
+    jobid: 24
+    reason: Missing output files: results/parameter_sweeps/pLFC_test/pLFC_test_out.csv
+    wildcards: psweep=pLFC_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov 26 16:33:15 2025]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/pE_test/pE_test_out.csv
+    jobid: 27
+    reason: Missing output files: results/parameter_sweeps/pE_test/pE_test_out.csv
+    wildcards: psweep=pE_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov 26 16:33:15 2025]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/pF_test/pF_test_out.csv
+    jobid: 30
+    reason: Missing output files: results/parameter_sweeps/pF_test/pF_test_out.csv
+    wildcards: psweep=pF_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov 26 16:35:03 2025]
+Finished jobid: 21 (Rule: psweep_sims)
+1 of 16 steps (6%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Nov 26 16:35:03 2025]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pHFC_test/pHFC_test_out.csv
+    output: results/parameter_sweeps/pHFC_test/pHFC_test_plot.csv
+    jobid: 20
+    reason: Missing output files: results/parameter_sweeps/pHFC_test/pHFC_test_plot.csv; Input files updated by another job: results/parameter_sweeps/pHFC_test/pHFC_test_out.csv
+    wildcards: psweep=pHFC_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov 26 16:35:49 2025]
+Finished jobid: 20 (Rule: process_psweep)
+2 of 16 steps (12%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Nov 26 16:35:49 2025]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC_test/pHFC_test_plot.csv
+    output: results/parameter_sweeps/pHFC_test/pHFC_test_change_psweep_plot.pdf, results/parameter_sweeps/pHFC_test/pHFC_test_inv_psweep_plot.pdf
+    jobid: 19
+    reason: Missing output files: results/parameter_sweeps/pHFC_test/pHFC_test_inv_psweep_plot.pdf, results/parameter_sweeps/pHFC_test/pHFC_test_change_psweep_plot.pdf; Input files updated by another job: results/parameter_sweeps/pHFC_test/pHFC_test_plot.csv
+    wildcards: psweep=pHFC_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 136:
+Command 'set -euo pipefail;  
+    Rscript src/plot_psweep.R       --psweepsetting pHFC_test       --colors '{"p_Exc": "gray95", "p_Dis": "#140433", "p_lowI": "#d2c5eb", "p_highI": "#2b1457"}'' returned non-zero exit status 1.
+[Wed Nov 26 16:36:38 2025]
+Error in rule plot_psweep:
+    message: None
+    jobid: 19
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC_test/pHFC_test_plot.csv
+    output: results/parameter_sweeps/pHFC_test/pHFC_test_change_psweep_plot.pdf, results/parameter_sweeps/pHFC_test/pHFC_test_inv_psweep_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep.R       --psweepsetting pHFC_test       --colors '{"p_Exc": "gray95", "p_Dis": "#140433", "p_lowI": "#d2c5eb", "p_highI": "#2b1457"}'
+    
+        (command exited with non-zero exit code)
+[Wed Nov 26 16:37:01 2025]
+Finished jobid: 27 (Rule: psweep_sims)
+3 of 16 steps (19%) done
+[Wed Nov 26 16:37:05 2025]
+Finished jobid: 24 (Rule: psweep_sims)
+4 of 16 steps (25%) done
+[Wed Nov 26 16:37:27 2025]
+Finished jobid: 30 (Rule: psweep_sims)
+5 of 16 steps (31%) done
+[Wed Nov 26 16:37:36 2025]
+Finished jobid: 18 (Rule: psweep_sims)
+6 of 16 steps (38%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Wed Nov 26 16:37:36 2025]
+Error in rule plot_psweep:
+    message: None
+    jobid: 19
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC_test/pHFC_test_plot.csv
+    output: results/parameter_sweeps/pHFC_test/pHFC_test_change_psweep_plot.pdf, results/parameter_sweeps/pHFC_test/pHFC_test_inv_psweep_plot.pdf
+    shell:
+        
+    Rscript src/plot_psweep.R       --psweepsetting pHFC_test       --colors '{"p_Exc": "gray95", "p_Dis": "#140433", "p_lowI": "#d2c5eb", "p_highI": "#2b1457"}'
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2025-11-26T163314.680164.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

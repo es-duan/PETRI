@@ -58,5 +58,5 @@ i1_s <- i1 +
 
 # Save file
 ggsave(paste0(output_folder, "/", ps, "_inv_change_strain_plot.pdf"),
-       i1_s, height = 6.5, width = 8.775, units = "in")
+       i1_s, height = 2.5, width = 3.75, units = "in")
 

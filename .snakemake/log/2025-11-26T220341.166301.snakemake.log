@@ -1,0 +1,7 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+WildcardError in rule psweep_sims in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 112:
+Wildcards in input files cannot be determined from output files: (rule psweep_sims, line 189, /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile)
+'parameters'

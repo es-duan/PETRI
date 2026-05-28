@@ -1,0 +1,102 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 2
+Rules claiming more threads will be scaled down.
+Job stats:
+job                 count
+----------------  -------
+all                     1
+plot_psweep             1
+process_psweep          1
+psweep_parameter        4
+psweep_sims             1
+total                   8
+
+Select jobs to execute...
+Execute 2 jobs...
+[Thu Feb  5 13:06:10 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sets/test_sweep_param.csv
+    jobid: 4
+    reason: Updated input files: input_data/Parameter_sweep_settings.csv
+    wildcards: parameters=test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Thu Feb  5 13:06:10 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sets/testmut_sweep_param.csv
+    jobid: 5
+    reason: Updated input files: input_data/Parameter_sweep_settings.csv
+    wildcards: parameters=testmut
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Thu Feb  5 13:06:14 2026]
+Finished jobid: 4 (Rule: psweep_parameter)
+1 of 8 steps (12%) done
+Execute 1 jobs...
+[Thu Feb  5 13:06:14 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sets/DimR1_sweep_param.csv
+    jobid: 6
+    reason: Updated input files: input_data/Parameter_sweep_settings.csv
+    wildcards: parameters=DimR1
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Thu Feb  5 13:06:14 2026]
+Finished jobid: 5 (Rule: psweep_parameter)
+2 of 8 steps (25%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Thu Feb  5 13:06:14 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sets/DimR1finO_sweep_param.csv
+    jobid: 7
+    reason: Updated input files: input_data/Parameter_sweep_settings.csv
+    wildcards: parameters=DimR1finO
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Thu Feb  5 13:06:18 2026]
+Finished jobid: 6 (Rule: psweep_parameter)
+3 of 8 steps (38%) done
+[Thu Feb  5 13:06:18 2026]
+Finished jobid: 7 (Rule: psweep_parameter)
+4 of 8 steps (50%) done
+Execute 1 jobs...
+[Thu Feb  5 13:06:19 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pHFC_test/pHFC_test_out.csv
+    jobid: 10
+    reason: Updated input files: src/simrun_psweep.R
+    wildcards: psweep=pHFC_test
+    threads: 2
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Terminating processes on user request, this might take some time.
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 135:
+Command 'set -euo pipefail;  
+    Rscript src/simrun_psweep.R       --psweepsetting pHFC_test       --threads 2' returned non-zero exit status 1.
+[Thu Feb  5 13:06:25 2026]
+Error in rule psweep_sims:
+    message: None
+    jobid: 10
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pHFC_test/pHFC_test_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting pHFC_test       --threads 2
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-02-05T130609.459975.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

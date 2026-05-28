@@ -4,8 +4,6 @@
 .Ruserdata
 **/.DS_Store
 *archive/
-.snakemake/*
-!.snakemake/DAG.pdf
 prelim_experiments/*
 .positai
 figures/edited/*

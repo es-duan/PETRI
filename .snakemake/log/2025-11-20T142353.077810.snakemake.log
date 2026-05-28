@@ -1,0 +1,9 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+MissingInputException in rule all in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 30:
+Missing input files for rule all:
+    affected files:
+        results/case_study_sims/A.2_full/A.2_full_data.pdf
+        results/case_study_sims/A.2_full/A.2_full_data_long.pdf

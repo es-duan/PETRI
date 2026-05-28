@@ -1,0 +1,94 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job stats:
+job       count
+------  -------
+all           1
+fig2bc        1
+fig4          1
+fig5          1
+fig6          1
+total         5
+
+Select jobs to execute...
+Execute 4 jobs...
+[Wed May 27 17:23:29 2026]
+localrule fig4:
+    input: src/fig4_DG.R, results/case_study_sims/DG_S.pB10/DG_S.pB10_density_plot.rds, results/case_study_sims/DG_S.pB10/DG_S.pB10_frequency_plot.rds
+    output: figures/fig4_DG_invasion.pdf
+    jobid: 85
+    reason: Updated input files: src/fig4_DG.R
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed May 27 17:23:29 2026]
+localrule fig5:
+    input: src/fig5_validation.R, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_frequency_plot.rds, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_frequency_plot.rds, results/experimental_validation/HFC/HFC_frequency_plot.rds, results/experimental_validation/LFC/LFC_frequency_plot.rds, results/phenotyping/phenotyping_av.csv, results/phenotyping/pB10_anc_inv.rds, results/phenotyping/pB10_mut_inv.rds, figures/panels/fig5d_HFC.rds, figures/panels/fig5b_LFC.rds
+    output: figures/fig5_validation.pdf
+    jobid: 86
+    reason: Updated input files: src/fig5_validation.R
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed May 27 17:23:29 2026]
+localrule fig6:
+    input: src/fig6_psweep.R, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot2.rds, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot2.rds, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot2.rds, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2.rds, input_data/strain_phenotypes.csv
+    output: figures/fig6_psweep.pdf
+    jobid: 91
+    reason: Updated input files: src/fig6_psweep.R
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed May 27 17:23:29 2026]
+localrule fig2bc:
+    input: src/fig2bc_criterion.R
+    output: figures/panels/fig2bc_criterion.pdf
+    jobid: 79
+    reason: Updated input files: src/fig2bc_criterion.R
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed May 27 17:23:31 2026]
+Finished jobid: 85 (Rule: fig4)
+1 of 5 steps (20%) done
+[Wed May 27 17:23:33 2026]
+Finished jobid: 86 (Rule: fig5)
+2 of 5 steps (40%) done
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 418:
+Command 'set -euo pipefail;  
+    Rscript src/fig2bc_criterion.R       --colors '{"p_Exc": "gray95", "p_Dis": "#140433", "p_lowI": "#FFC2C2", "p_highI": "#c93251", "p_lowD": "#BABAFF", "p_highD": "#6c78a8", "p_axes": "white", "p_mid": "white", "p_invline": "gray80"}'' returned non-zero exit status 1.
+[Wed May 27 17:23:34 2026]
+Error in rule fig2bc:
+    message: None
+    jobid: 79
+    input: src/fig2bc_criterion.R
+    output: figures/panels/fig2bc_criterion.pdf
+    shell:
+        
+    Rscript src/fig2bc_criterion.R       --colors '{"p_Exc": "gray95", "p_Dis": "#140433", "p_lowI": "#FFC2C2", "p_highI": "#c93251", "p_lowD": "#BABAFF", "p_highD": "#6c78a8", "p_axes": "white", "p_mid": "white", "p_invline": "gray80"}'
+    
+        (command exited with non-zero exit code)
+Removing output files of failed job fig2bc since they might be corrupted:
+figures/panels/fig2bc_criterion.pdf
+[Wed May 27 17:23:36 2026]
+Finished jobid: 91 (Rule: fig6)
+3 of 5 steps (60%) done
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Wed May 27 17:23:36 2026]
+Error in rule fig2bc:
+    message: None
+    jobid: 79
+    input: src/fig2bc_criterion.R
+    output: figures/panels/fig2bc_criterion.pdf
+    shell:
+        
+    Rscript src/fig2bc_criterion.R       --colors '{"p_Exc": "gray95", "p_Dis": "#140433", "p_lowI": "#FFC2C2", "p_highI": "#c93251", "p_lowD": "#BABAFF", "p_highD": "#6c78a8", "p_axes": "white", "p_mid": "white", "p_invline": "gray80"}'
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-05-27T172328.763824.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

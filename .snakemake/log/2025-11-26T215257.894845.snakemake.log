@@ -1,0 +1,16 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+AmbiguousRuleException:
+Rules psweep_sims and psweep_parameter are ambiguous for the file results/parameter_sweeps/pO_test/pO_test_out.csv.
+Consider starting rule output with a unique prefix, constrain your wildcards, or use the ruleorder directive.
+Wildcards:
+	psweep_sims: psweep=pO_test
+	psweep_parameter: parameters=pO_test
+Expected input files:
+	psweep_sims: src/simrun_psweep.R input_data/Treatments_parameter_sweep.csv input_data/Parameter_sweep_settings.csv
+	psweep_parameter: src/generate_parameter_sets.R
+Expected output files:
+	psweep_sims: results/parameter_sweeps/pO_test/pO_test_out.csv
+	psweep_parameter: results/parameter_sweeps/pO_test/pO_test_out.csv

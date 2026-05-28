@@ -127,16 +127,9 @@ assign_mut <- function(Cycle, Phase, Type, M1, M2){
   return(mut_out)
 }
 
-# Do not change host identities for protocols without a host switch
-if(str_detect(treatment, "E") == FALSE){
-  sim_phases2 <- sim_phases %>%
-    mutate(Anc = assign_anc(Cycle, Phase, Type, A1, A2)) %>%
-    mutate(Mut = assign_mut(Cycle, Phase, Type, M1, M2))
-} else{
-  sim_phases2 <- sim_phases %>%
-    mutate(Anc = A1 + A2) %>%
-    mutate(Mut = M1 + M2)
-}
+sim_phases2 <- sim_phases %>%
+  mutate(Anc = assign_anc(Cycle, Phase, Type, A1, A2)) %>%
+  mutate(Mut = assign_mut(Cycle, Phase, Type, M1, M2))
 
 sim_phases3 <- sim_phases2 %>%
   mutate(A_M = Anc/Mut,
@@ -150,7 +143,8 @@ sim_freq <- sim_phases3 %>%
   pivot_longer(cols = -c(Cycle, Phase, Time),
                names_to = "Genotype",
                values_to = "Frequency") %>%
-  mutate(Genotype = ifelse(Genotype=="Por_A", "Ancestor", "Mutant"))
+  mutate(Genotype = ifelse(Genotype=="Por_A", "Ancestor", "Mutant")) %>%
+  mutate(Frequency = ifelse(Frequency < 1e-7, 0, Frequency))
 
 # Save files ----
 write_csv(sim_dens, paste0(treatment_folder, "/", treatment, "_density_plot_df.csv"))

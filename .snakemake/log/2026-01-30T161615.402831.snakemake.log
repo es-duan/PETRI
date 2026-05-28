@@ -1,0 +1,72 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job               count
+--------------  -------
+all                   1
+plot_psweep           1
+process_psweep        1
+psweep_sims           1
+total                 4
+
+Select jobs to execute...
+Execute 1 jobs...
+[Fri Jan 30 16:16:15 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pHFC.l_DimR1finO/pHFC.l_DimR1finO_out.csv
+    jobid: 13
+    reason: Missing output files: results/parameter_sweeps/pHFC.l_DimR1finO/pHFC.l_DimR1finO_out.csv
+    wildcards: psweep=pHFC.l_DimR1finO
+    threads: 5
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Jan 30 16:17:18 2026]
+Finished jobid: 13 (Rule: psweep_sims)
+1 of 4 steps (25%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Fri Jan 30 16:17:18 2026]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pHFC.l_DimR1finO/pHFC.l_DimR1finO_out.csv
+    output: results/parameter_sweeps/pHFC.l_DimR1finO/pHFC.l_DimR1finO_plot.csv
+    jobid: 12
+    reason: Missing output files: results/parameter_sweeps/pHFC.l_DimR1finO/pHFC.l_DimR1finO_plot.csv; Input files updated by another job: results/parameter_sweeps/pHFC.l_DimR1finO/pHFC.l_DimR1finO_out.csv
+    wildcards: psweep=pHFC.l_DimR1finO
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Jan 30 16:17:23 2026]
+Finished jobid: 12 (Rule: process_psweep)
+2 of 4 steps (50%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Fri Jan 30 16:17:23 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC.l_DimR1finO/pHFC.l_DimR1finO_plot.csv
+    output: results/parameter_sweeps/pHFC.l_DimR1finO/pHFC.l_DimR1finO_change_plot.pdf, results/parameter_sweeps/pHFC.l_DimR1finO/pHFC.l_DimR1finO_inv_plot.pdf
+    jobid: 11
+    reason: Missing output files: results/parameter_sweeps/pHFC.l_DimR1finO/pHFC.l_DimR1finO_change_plot.pdf, results/parameter_sweeps/pHFC.l_DimR1finO/pHFC.l_DimR1finO_inv_plot.pdf; Input files updated by another job: results/parameter_sweeps/pHFC.l_DimR1finO/pHFC.l_DimR1finO_plot.csv
+    wildcards: psweep=pHFC.l_DimR1finO
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Jan 30 16:17:27 2026]
+Finished jobid: 11 (Rule: plot_psweep)
+3 of 4 steps (75%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Fri Jan 30 16:17:28 2026]
+localrule all:
+    input: results/case_study_sims/A.2_full/A.2_full_density_plot.pdf, results/case_study_sims/C.2_full/C.2_full_density_plot.pdf, results/case_study_sims/A.2_full/A.2_full_frequency_plot.pdf, results/case_study_sims/C.2_full/C.2_full_frequency_plot.pdf, results/parameter_sets/test_sweep_param.csv, results/parameter_sets/testmut_sweep_param.csv, results/parameter_sets/DimR1_sweep_param.csv, results/parameter_sets/DimR1finO_sweep_param.csv, results/parameter_sweeps/pHFC.l_DimR1finO/pHFC.l_DimR1finO_change_plot.pdf, results/parameter_sweeps/pHFC.l_DimR1finO/pHFC.l_DimR1finO_inv_plot.pdf
+    jobid: 0
+    reason: Input files updated by another job: results/parameter_sweeps/pHFC.l_DimR1finO/pHFC.l_DimR1finO_change_plot.pdf, results/parameter_sweeps/pHFC.l_DimR1finO/pHFC.l_DimR1finO_inv_plot.pdf
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Jan 30 16:17:28 2026]
+Finished jobid: 0 (Rule: all)
+4 of 4 steps (100%) done
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-01-30T161615.402831.snakemake.log

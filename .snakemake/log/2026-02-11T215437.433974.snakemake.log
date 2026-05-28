@@ -1,0 +1,370 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job                   count
+------------------  -------
+all                       1
+plot_psweep               5
+plot_psweep_strain        5
+process_psweep            5
+psweep_parameter          5
+psweep_sims               5
+total                    26
+
+Select jobs to execute...
+Execute 5 jobs...
+[Wed Feb 11 21:54:38 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/parameter_sweeps/pLFCi_S.pB10_psweep_settings.csv
+    output: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_params.csv, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_settings.rds
+    jobid: 27
+    reason: Updated input files: input_data/parameter_sweeps/pLFCi_S.pB10_psweep_settings.csv
+    wildcards: psweep=pLFCi_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 11 21:54:38 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/parameter_sweeps/pHFC_S.pB10_psweep_settings.csv
+    output: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_params.csv, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_settings.rds
+    jobid: 7
+    reason: Updated input files: input_data/parameter_sweeps/pHFC_S.pB10_psweep_settings.csv
+    wildcards: psweep=pHFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 11 21:54:38 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/parameter_sweeps/pDim90_E.RP4_psweep_settings.csv
+    output: results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_params.csv, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_settings.rds
+    jobid: 19
+    reason: Updated input files: input_data/parameter_sweeps/pDim90_E.RP4_psweep_settings.csv
+    wildcards: psweep=pDim90_E.RP4
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 11 21:54:38 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/parameter_sweeps/pLFC_S.pB10_psweep_settings.csv
+    output: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_params.csv, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_settings.rds
+    jobid: 11
+    reason: Updated input files: input_data/parameter_sweeps/pLFC_S.pB10_psweep_settings.csv
+    wildcards: psweep=pLFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 11 21:54:38 2026]
+localrule psweep_parameter:
+    input: src/generate_parameter_sets.R, input_data/parameter_sweeps/pHFCi_S.pB10_psweep_settings.csv
+    output: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_params.csv, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_settings.rds
+    jobid: 23
+    reason: Updated input files: input_data/parameter_sweeps/pHFCi_S.pB10_psweep_settings.csv
+    wildcards: psweep=pHFCi_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 11 21:54:44 2026]
+Finished jobid: 7 (Rule: psweep_parameter)
+1 of 26 steps (4%) done
+Select jobs to execute...
+[Wed Feb 11 21:54:45 2026]
+Finished jobid: 11 (Rule: psweep_parameter)
+2 of 26 steps (8%) done
+[Wed Feb 11 21:54:45 2026]
+Finished jobid: 19 (Rule: psweep_parameter)
+3 of 26 steps (12%) done
+[Wed Feb 11 21:54:45 2026]
+Finished jobid: 23 (Rule: psweep_parameter)
+4 of 26 steps (15%) done
+[Wed Feb 11 21:54:45 2026]
+Finished jobid: 27 (Rule: psweep_parameter)
+5 of 26 steps (19%) done
+Execute 1 jobs...
+[Wed Feb 11 21:54:45 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_params.csv, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_settings.rds
+    output: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_out.csv
+    jobid: 6
+    reason: Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_settings.rds, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_params.csv
+    wildcards: psweep=pHFC_S.pB10
+    threads: 5
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Feb 11 21:57:35 2026]
+Finished jobid: 6 (Rule: psweep_sims)
+6 of 26 steps (23%) done
+Execute 2 jobs...
+[Wed Feb 11 21:57:35 2026]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_out.csv, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_settings.rds
+    output: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_plot.csv
+    jobid: 5
+    reason: Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_settings.rds, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_out.csv
+    wildcards: psweep=pHFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 11 21:57:35 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_params.csv, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_settings.rds
+    output: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_out.csv
+    jobid: 26
+    reason: Input files updated by another job: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_params.csv, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_settings.rds
+    wildcards: psweep=pLFCi_S.pB10
+    threads: 5
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Feb 11 21:57:39 2026]
+Finished jobid: 5 (Rule: process_psweep)
+7 of 26 steps (27%) done
+Execute 1 jobs...
+[Wed Feb 11 21:57:40 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_plot.csv
+    output: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.rds
+    jobid: 4
+    reason: Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_plot.csv
+    wildcards: psweep=pHFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Feb 11 21:57:47 2026]
+Finished jobid: 4 (Rule: plot_psweep)
+8 of 26 steps (31%) done
+Execute 1 jobs...
+[Wed Feb 11 21:57:47 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.rds
+    output: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_strain_plot.pdf
+    jobid: 28
+    reason: Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.rds
+    wildcards: psweep=pHFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Feb 11 21:57:55 2026]
+Finished jobid: 28 (Rule: plot_psweep_strain)
+9 of 26 steps (35%) done
+[Wed Feb 11 22:07:36 2026]
+Finished jobid: 26 (Rule: psweep_sims)
+10 of 26 steps (38%) done
+Execute 2 jobs...
+[Wed Feb 11 22:07:36 2026]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_out.csv, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_settings.rds
+    output: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_plot.csv
+    jobid: 25
+    reason: Input files updated by another job: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_settings.rds, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_out.csv
+    wildcards: psweep=pLFCi_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 11 22:07:36 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_params.csv, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_settings.rds
+    output: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_out.csv
+    jobid: 22
+    reason: Input files updated by another job: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_params.csv, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_settings.rds
+    wildcards: psweep=pHFCi_S.pB10
+    threads: 5
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Feb 11 22:07:41 2026]
+Finished jobid: 25 (Rule: process_psweep)
+11 of 26 steps (42%) done
+Execute 1 jobs...
+[Wed Feb 11 22:07:41 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_plot.csv
+    output: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.rds
+    jobid: 24
+    reason: Missing output files: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.rds; Input files updated by another job: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_plot.csv
+    wildcards: psweep=pLFCi_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Feb 11 22:07:49 2026]
+Finished jobid: 24 (Rule: plot_psweep)
+12 of 26 steps (46%) done
+Execute 1 jobs...
+[Wed Feb 11 22:07:49 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.rds
+    output: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_strain_plot.pdf
+    jobid: 33
+    reason: Missing output files: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_strain_plot.pdf; Input files updated by another job: results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.rds
+    wildcards: psweep=pLFCi_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Feb 11 22:07:57 2026]
+Finished jobid: 33 (Rule: plot_psweep_strain)
+13 of 26 steps (50%) done
+[Wed Feb 11 22:11:44 2026]
+Finished jobid: 22 (Rule: psweep_sims)
+14 of 26 steps (54%) done
+Execute 2 jobs...
+[Wed Feb 11 22:11:44 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_params.csv, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_settings.rds
+    output: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_out.csv
+    jobid: 10
+    reason: Input files updated by another job: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_params.csv, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_settings.rds
+    wildcards: psweep=pLFC_S.pB10
+    threads: 5
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 11 22:11:44 2026]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_out.csv, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_settings.rds
+    output: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_plot.csv
+    jobid: 21
+    reason: Input files updated by another job: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_settings.rds, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_out.csv
+    wildcards: psweep=pHFCi_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Feb 11 22:11:50 2026]
+Finished jobid: 21 (Rule: process_psweep)
+15 of 26 steps (58%) done
+Execute 1 jobs...
+[Wed Feb 11 22:11:50 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_plot.csv
+    output: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_plot.rds
+    jobid: 20
+    reason: Missing output files: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_plot.rds; Input files updated by another job: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_plot.csv
+    wildcards: psweep=pHFCi_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Feb 11 22:12:02 2026]
+Finished jobid: 20 (Rule: plot_psweep)
+16 of 26 steps (62%) done
+Execute 1 jobs...
+[Wed Feb 11 22:12:02 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_plot.rds
+    output: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_strain_plot.pdf
+    jobid: 32
+    reason: Missing output files: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_strain_plot.pdf; Input files updated by another job: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_plot.rds
+    wildcards: psweep=pHFCi_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Feb 11 22:12:12 2026]
+Finished jobid: 32 (Rule: plot_psweep_strain)
+17 of 26 steps (65%) done
+[Wed Feb 11 22:27:12 2026]
+Finished jobid: 10 (Rule: psweep_sims)
+18 of 26 steps (69%) done
+Execute 2 jobs...
+[Wed Feb 11 22:27:12 2026]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_out.csv, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_settings.rds
+    output: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_plot.csv
+    jobid: 9
+    reason: Input files updated by another job: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_out.csv, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_settings.rds
+    wildcards: psweep=pLFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 11 22:27:12 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_params.csv, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_settings.rds
+    output: results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_out.csv
+    jobid: 18
+    reason: Input files updated by another job: results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_params.csv, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_settings.rds
+    wildcards: psweep=pDim90_E.RP4
+    threads: 5
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 11 22:27:17 2026]
+Finished jobid: 9 (Rule: process_psweep)
+19 of 26 steps (73%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Feb 11 22:27:17 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_plot.csv
+    output: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.rds
+    jobid: 8
+    reason: Missing output files: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.rds; Input files updated by another job: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_plot.csv
+    wildcards: psweep=pLFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 11 22:27:25 2026]
+Finished jobid: 8 (Rule: plot_psweep)
+20 of 26 steps (77%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Feb 11 22:27:25 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.rds
+    output: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_strain_plot.pdf
+    jobid: 29
+    reason: Missing output files: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_strain_plot.pdf; Input files updated by another job: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.rds
+    wildcards: psweep=pLFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 11 22:27:34 2026]
+Finished jobid: 29 (Rule: plot_psweep_strain)
+21 of 26 steps (81%) done
+[Wed Feb 11 22:28:57 2026]
+Finished jobid: 18 (Rule: psweep_sims)
+22 of 26 steps (85%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Feb 11 22:28:57 2026]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_out.csv, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_settings.rds
+    output: results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_plot.csv
+    jobid: 17
+    reason: Input files updated by another job: results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_out.csv, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_settings.rds
+    wildcards: psweep=pDim90_E.RP4
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 11 22:29:01 2026]
+Finished jobid: 17 (Rule: process_psweep)
+23 of 26 steps (88%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Feb 11 22:29:01 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_plot.csv
+    output: results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_plot.rds
+    jobid: 16
+    reason: Missing output files: results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_plot.rds; Input files updated by another job: results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_plot.csv
+    wildcards: psweep=pDim90_E.RP4
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 11 22:29:06 2026]
+Finished jobid: 16 (Rule: plot_psweep)
+24 of 26 steps (92%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Feb 11 22:29:06 2026]
+localrule plot_psweep_strain:
+    input: input_data/strain_phenotypes.csv, src/plot_psweep_strain.R, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_plot.rds
+    output: results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_strain_plot.pdf
+    jobid: 31
+    reason: Missing output files: results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_strain_plot.pdf; Input files updated by another job: results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_plot.rds
+    wildcards: psweep=pDim90_E.RP4
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 11 22:29:10 2026]
+Finished jobid: 31 (Rule: plot_psweep_strain)
+25 of 26 steps (96%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Feb 11 22:29:10 2026]
+localrule all:
+    input: results/case_study_sims/E.R1/E.R1_density_plot.pdf, results/case_study_sims/E.R1/E.R1_frequency_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_change_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_strain_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_strain_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_strain_plot.pdf
+    jobid: 0
+    reason: Input files updated by another job: results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFCi_S.pB10/pLFCi_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pHFCi_S.pB10/pHFCi_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_strain_plot.pdf, results/parameter_sweeps/pDim90_E.RP4/pDim90_E.RP4_inv_change_strain_plot.pdf
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Feb 11 22:29:10 2026]
+Finished jobid: 0 (Rule: all)
+26 of 26 steps (100%) done
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-02-11T215437.433974.snakemake.log

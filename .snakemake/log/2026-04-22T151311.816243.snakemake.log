@@ -1,0 +1,67 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job      count
+-----  -------
+all          1
+fig1a        1
+fig4         1
+total        3
+
+Select jobs to execute...
+Execute 2 jobs...
+[Wed Apr 22 15:13:13 2026]
+localrule fig1a:
+    input: src/fig_axes.R
+    output: figures/panels/fig1a_axes.pdf, figures/panels/fig1a_axes.rds
+    jobid: 60
+    reason: Missing output files: figures/panels/fig1a_axes.pdf
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Apr 22 15:13:13 2026]
+localrule fig4:
+    input: src/fig_DG.R, results/case_study_sims/DG_S.pB10/DG_S.pB10_density_plot.rds, results/case_study_sims/DG_S.pB10/DG_S.pB10_frequency_plot.rds
+    output: figures/fig4_DG_invasion.pdf
+    jobid: 61
+    reason: Missing output files: figures/fig4_DG_invasion.pdf
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Apr 22 15:13:14 2026]
+Finished jobid: 61 (Rule: fig4)
+1 of 3 steps (33%) done
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 280:
+Command 'set -euo pipefail;  
+    Rscript src/fig_axes.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb"}'' returned non-zero exit status 1.
+[Wed Apr 22 15:13:17 2026]
+Error in rule fig1a:
+    message: None
+    jobid: 60
+    input: src/fig_axes.R
+    output: figures/panels/fig1a_axes.pdf, figures/panels/fig1a_axes.rds
+    shell:
+        
+    Rscript src/fig_axes.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb"}'
+    
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Wed Apr 22 15:13:17 2026]
+Error in rule fig1a:
+    message: None
+    jobid: 60
+    input: src/fig_axes.R
+    output: figures/panels/fig1a_axes.pdf, figures/panels/fig1a_axes.rds
+    shell:
+        
+    Rscript src/fig_axes.R       --colors '{"p_Anc": "#8A407A", "p_Mut": "#8394F6", "p_F": "gray40", "p_growth": "#e7e9fd", "p_conj": "#d8aace", "p_tselect": "#c4bbeb", "p_imm": "#d0ffeb"}'
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-04-22T151311.816243.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

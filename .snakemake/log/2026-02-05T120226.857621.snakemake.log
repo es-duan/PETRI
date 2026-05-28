@@ -1,0 +1,132 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job                        count
+-----------------------  -------
+all                            1
+case_study_sims                2
+plot_case_study_sims           2
+plot_psweep                    1
+process_case_study_sims        2
+process_psweep                 1
+psweep_sims                    1
+total                         10
+
+Select jobs to execute...
+Execute 3 jobs...
+[Thu Feb  5 12:02:27 2026]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/E/E_data.csv, results/case_study_sims/E/E_data_long.csv, results/case_study_sims/E/E_sim_plot.pdf
+    jobid: 3
+    reason: Missing output files: results/case_study_sims/E/E_data.csv, results/case_study_sims/E/E_data_long.csv; Updated input files: src/simrun_case_study_snakemake.R
+    wildcards: treatment=E
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Thu Feb  5 12:02:27 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pE_DimR1finO/pE_DimR1finO_out.csv
+    jobid: 13
+    reason: Missing output files: results/parameter_sweeps/pE_DimR1finO/pE_DimR1finO_out.csv
+    wildcards: psweep=pE_DimR1finO
+    threads: 5
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Thu Feb  5 12:02:27 2026]
+localrule case_study_sims:
+    input: src/simrun_case_study_snakemake.R, input_data/Treatments_case_study.csv
+    output: results/case_study_sims/E.R1/E.R1_data.csv, results/case_study_sims/E.R1/E.R1_data_long.csv, results/case_study_sims/E.R1/E.R1_sim_plot.pdf
+    jobid: 6
+    reason: Missing output files: results/case_study_sims/E.R1/E.R1_data_long.csv, results/case_study_sims/E.R1/E.R1_data.csv
+    wildcards: treatment=E.R1
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Thu Feb  5 12:02:40 2026]
+Finished jobid: 3 (Rule: case_study_sims)
+1 of 10 steps (10%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Thu Feb  5 12:02:40 2026]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/E/E_data.csv, results/case_study_sims/E/E_data_long.csv
+    output: results/case_study_sims/E/E_density_plot_df.csv, results/case_study_sims/E/E_frequency_plot_df.csv, results/case_study_sims/E/E_phases_plot_df.csv
+    jobid: 2
+    reason: Input files updated by another job: results/case_study_sims/E/E_data.csv, results/case_study_sims/E/E_data_long.csv
+    wildcards: treatment=E
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Thu Feb  5 12:02:40 2026]
+Finished jobid: 6 (Rule: case_study_sims)
+2 of 10 steps (20%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Thu Feb  5 12:02:40 2026]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/E.R1/E.R1_data.csv, results/case_study_sims/E.R1/E.R1_data_long.csv
+    output: results/case_study_sims/E.R1/E.R1_density_plot_df.csv, results/case_study_sims/E.R1/E.R1_frequency_plot_df.csv, results/case_study_sims/E.R1/E.R1_phases_plot_df.csv
+    jobid: 5
+    reason: Missing output files: results/case_study_sims/E.R1/E.R1_density_plot_df.csv, results/case_study_sims/E.R1/E.R1_phases_plot_df.csv, results/case_study_sims/E.R1/E.R1_frequency_plot_df.csv; Input files updated by another job: results/case_study_sims/E.R1/E.R1_data_long.csv, results/case_study_sims/E.R1/E.R1_data.csv
+    wildcards: treatment=E.R1
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 85:
+Command 'set -euo pipefail;  Rscript src/process_simrun.R --treatment E.R1' returned non-zero exit status 1.
+[Thu Feb  5 12:02:49 2026]
+Error in rule process_case_study_sims:
+    message: None
+    jobid: 5
+    input: src/process_simrun.R, results/case_study_sims/E.R1/E.R1_data.csv, results/case_study_sims/E.R1/E.R1_data_long.csv
+    output: results/case_study_sims/E.R1/E.R1_density_plot_df.csv, results/case_study_sims/E.R1/E.R1_frequency_plot_df.csv, results/case_study_sims/E.R1/E.R1_phases_plot_df.csv
+    shell:
+        Rscript src/process_simrun.R --treatment E.R1
+        (command exited with non-zero exit code)
+[Thu Feb  5 12:02:49 2026]
+Finished jobid: 2 (Rule: process_case_study_sims)
+3 of 10 steps (30%) done
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 135:
+Command 'set -euo pipefail;  
+    Rscript src/simrun_psweep.R       --psweepsetting pE_DimR1finO       --threads 5' returned non-zero exit status 1.
+[Thu Feb  5 12:04:04 2026]
+Error in rule psweep_sims:
+    message: None
+    jobid: 13
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pE_DimR1finO/pE_DimR1finO_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting pE_DimR1finO       --threads 5
+    
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Thu Feb  5 12:04:04 2026]
+Error in rule process_case_study_sims:
+    message: None
+    jobid: 5
+    input: src/process_simrun.R, results/case_study_sims/E.R1/E.R1_data.csv, results/case_study_sims/E.R1/E.R1_data_long.csv
+    output: results/case_study_sims/E.R1/E.R1_density_plot_df.csv, results/case_study_sims/E.R1/E.R1_frequency_plot_df.csv, results/case_study_sims/E.R1/E.R1_phases_plot_df.csv
+    shell:
+        Rscript src/process_simrun.R --treatment E.R1
+        (command exited with non-zero exit code)
+[Thu Feb  5 12:04:04 2026]
+Error in rule psweep_sims:
+    message: None
+    jobid: 13
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pE_DimR1finO/pE_DimR1finO_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting pE_DimR1finO       --threads 5
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-02-05T120226.857621.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

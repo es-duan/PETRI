@@ -1,0 +1,2 @@
+estimate,statistic,p.value,parameter,conf.low,conf.high,method,alternative
+-0.19472921601458354,-2.853499742169869,0.03567708103985457,5,-0.3701514801757659,-0.01930695185340118,Paired t-test,two.sided

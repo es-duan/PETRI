@@ -1,0 +1,113 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 6
+Rules claiming more threads will be scaled down.
+Job stats:
+job               count
+--------------  -------
+all                   1
+plot_psweep           2
+process_psweep        2
+psweep_sims           2
+total                 7
+
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Dec  3 09:32:40 2025]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pHFC_testmut/pHFC_testmut_out.csv
+    jobid: 8
+    reason: Missing output files: results/parameter_sweeps/pHFC_testmut/pHFC_testmut_out.csv
+    wildcards: psweep=pHFC_testmut
+    threads: 5
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Select jobs to execute...
+[Wed Dec  3 09:32:49 2025]
+Finished jobid: 8 (Rule: psweep_sims)
+1 of 7 steps (14%) done
+Execute 2 jobs...
+[Wed Dec  3 09:32:50 2025]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv
+    output: results/parameter_sweeps/pHFC.por_testmut/pHFC.por_testmut_out.csv
+    jobid: 11
+    reason: Missing output files: results/parameter_sweeps/pHFC.por_testmut/pHFC.por_testmut_out.csv
+    wildcards: psweep=pHFC.por_testmut
+    threads: 5
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Dec  3 09:32:50 2025]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pHFC_testmut/pHFC_testmut_out.csv
+    output: results/parameter_sweeps/pHFC_testmut/pHFC_testmut_plot.csv
+    jobid: 7
+    reason: Missing output files: results/parameter_sweeps/pHFC_testmut/pHFC_testmut_plot.csv; Input files updated by another job: results/parameter_sweeps/pHFC_testmut/pHFC_testmut_out.csv
+    wildcards: psweep=pHFC_testmut
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Dec  3 09:32:54 2025]
+Finished jobid: 7 (Rule: process_psweep)
+2 of 7 steps (29%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Dec  3 09:32:54 2025]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC_testmut/pHFC_testmut_plot.csv
+    output: results/parameter_sweeps/pHFC_testmut/pHFC_testmut_change_plot.pdf, results/parameter_sweeps/pHFC_testmut/pHFC_testmut_inv_plot.pdf
+    jobid: 6
+    reason: Missing output files: results/parameter_sweeps/pHFC_testmut/pHFC_testmut_change_plot.pdf, results/parameter_sweeps/pHFC_testmut/pHFC_testmut_inv_plot.pdf; Input files updated by another job: results/parameter_sweeps/pHFC_testmut/pHFC_testmut_plot.csv
+    wildcards: psweep=pHFC_testmut
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Dec  3 09:33:00 2025]
+Finished jobid: 11 (Rule: psweep_sims)
+3 of 7 steps (43%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Dec  3 09:33:00 2025]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pHFC.por_testmut/pHFC.por_testmut_out.csv
+    output: results/parameter_sweeps/pHFC.por_testmut/pHFC.por_testmut_plot.csv
+    jobid: 10
+    reason: Missing output files: results/parameter_sweeps/pHFC.por_testmut/pHFC.por_testmut_plot.csv; Input files updated by another job: results/parameter_sweeps/pHFC.por_testmut/pHFC.por_testmut_out.csv
+    wildcards: psweep=pHFC.por_testmut
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Dec  3 09:33:01 2025]
+Finished jobid: 6 (Rule: plot_psweep)
+4 of 7 steps (57%) done
+[Wed Dec  3 09:33:04 2025]
+Finished jobid: 10 (Rule: process_psweep)
+5 of 7 steps (71%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Dec  3 09:33:04 2025]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC.por_testmut/pHFC.por_testmut_plot.csv
+    output: results/parameter_sweeps/pHFC.por_testmut/pHFC.por_testmut_change_plot.pdf, results/parameter_sweeps/pHFC.por_testmut/pHFC.por_testmut_inv_plot.pdf
+    jobid: 9
+    reason: Missing output files: results/parameter_sweeps/pHFC.por_testmut/pHFC.por_testmut_inv_plot.pdf, results/parameter_sweeps/pHFC.por_testmut/pHFC.por_testmut_change_plot.pdf; Input files updated by another job: results/parameter_sweeps/pHFC.por_testmut/pHFC.por_testmut_plot.csv
+    wildcards: psweep=pHFC.por_testmut
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Dec  3 09:33:09 2025]
+Finished jobid: 9 (Rule: plot_psweep)
+6 of 7 steps (86%) done
+Select jobs to execute...
+Execute 1 jobs...
+[Wed Dec  3 09:33:09 2025]
+localrule all:
+    input: results/case_study_sims/A.2/A.2_density_plot.pdf, results/case_study_sims/A.2/A.2_frequency_plot.pdf, results/parameter_sets/test_sweep_param.csv, results/parameter_sets/testmut_sweep_param.csv, results/parameter_sweeps/pHFC_testmut/pHFC_testmut_change_plot.pdf, results/parameter_sweeps/pHFC.por_testmut/pHFC.por_testmut_change_plot.pdf, results/parameter_sweeps/pHFC_testmut/pHFC_testmut_inv_plot.pdf, results/parameter_sweeps/pHFC.por_testmut/pHFC.por_testmut_inv_plot.pdf
+    jobid: 0
+    reason: Input files updated by another job: results/parameter_sweeps/pHFC.por_testmut/pHFC.por_testmut_inv_plot.pdf, results/parameter_sweeps/pHFC.por_testmut/pHFC.por_testmut_change_plot.pdf, results/parameter_sweeps/pHFC_testmut/pHFC_testmut_change_plot.pdf, results/parameter_sweeps/pHFC_testmut/pHFC_testmut_inv_plot.pdf
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Dec  3 09:33:09 2025]
+Finished jobid: 0 (Rule: all)
+7 of 7 steps (100%) done
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2025-12-03T093239.592660.snakemake.log

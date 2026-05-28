@@ -1,0 +1,112 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job                        count
+-----------------------  -------
+all                            1
+plot_case_study_sims           3
+process_case_study_sims        3
+total                          7
+
+Select jobs to execute...
+Execute 3 jobs...
+[Fri Feb 20 16:52:33 2026]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_data.csv, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_data_long.csv
+    output: results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_density_plot_df.csv, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_frequency_plot_df.csv, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_phases_plot_df.csv
+    jobid: 8
+    reason: Updated input files: src/process_simrun.R
+    wildcards: treatment=LFC_S.pB10-A
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Feb 20 16:52:33 2026]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/DG_S.pB10/DG_S.pB10_data.csv, results/case_study_sims/DG_S.pB10/DG_S.pB10_data_long.csv
+    output: results/case_study_sims/DG_S.pB10/DG_S.pB10_density_plot_df.csv, results/case_study_sims/DG_S.pB10/DG_S.pB10_frequency_plot_df.csv, results/case_study_sims/DG_S.pB10/DG_S.pB10_phases_plot_df.csv
+    jobid: 2
+    reason: Updated input files: src/process_simrun.R
+    wildcards: treatment=DG_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Fri Feb 20 16:52:33 2026]
+localrule process_case_study_sims:
+    input: src/process_simrun.R, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_data.csv, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_data_long.csv
+    output: results/case_study_sims/HFC_S.pB10/HFC_S.pB10_density_plot_df.csv, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_frequency_plot_df.csv, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_phases_plot_df.csv
+    jobid: 5
+    reason: Updated input files: src/process_simrun.R
+    wildcards: treatment=HFC_S.pB10
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 80:
+Command 'set -euo pipefail;  Rscript src/process_simrun.R --treatment HFC_S.pB10' returned non-zero exit status 1.
+[Fri Feb 20 16:52:38 2026]
+Error in rule process_case_study_sims:
+    message: None
+    jobid: 5
+    input: src/process_simrun.R, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_data.csv, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_data_long.csv
+    output: results/case_study_sims/HFC_S.pB10/HFC_S.pB10_density_plot_df.csv, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_frequency_plot_df.csv, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_phases_plot_df.csv
+    shell:
+        Rscript src/process_simrun.R --treatment HFC_S.pB10
+        (command exited with non-zero exit code)
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 80:
+Command 'set -euo pipefail;  Rscript src/process_simrun.R --treatment LFC_S.pB10-A' returned non-zero exit status 1.
+[Fri Feb 20 16:52:38 2026]
+Error in rule process_case_study_sims:
+    message: None
+    jobid: 8
+    input: src/process_simrun.R, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_data.csv, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_data_long.csv
+    output: results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_density_plot_df.csv, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_frequency_plot_df.csv, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_phases_plot_df.csv
+    shell:
+        Rscript src/process_simrun.R --treatment LFC_S.pB10-A
+        (command exited with non-zero exit code)
+RuleException:
+CalledProcessError in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 80:
+Command 'set -euo pipefail;  Rscript src/process_simrun.R --treatment DG_S.pB10' returned non-zero exit status 1.
+[Fri Feb 20 16:52:38 2026]
+Error in rule process_case_study_sims:
+    message: None
+    jobid: 2
+    input: src/process_simrun.R, results/case_study_sims/DG_S.pB10/DG_S.pB10_data.csv, results/case_study_sims/DG_S.pB10/DG_S.pB10_data_long.csv
+    output: results/case_study_sims/DG_S.pB10/DG_S.pB10_density_plot_df.csv, results/case_study_sims/DG_S.pB10/DG_S.pB10_frequency_plot_df.csv, results/case_study_sims/DG_S.pB10/DG_S.pB10_phases_plot_df.csv
+    shell:
+        Rscript src/process_simrun.R --treatment DG_S.pB10
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Fri Feb 20 16:52:38 2026]
+Error in rule process_case_study_sims:
+    message: None
+    jobid: 8
+    input: src/process_simrun.R, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_data.csv, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_data_long.csv
+    output: results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_density_plot_df.csv, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_frequency_plot_df.csv, results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_phases_plot_df.csv
+    shell:
+        Rscript src/process_simrun.R --treatment LFC_S.pB10-A
+        (command exited with non-zero exit code)
+[Fri Feb 20 16:52:38 2026]
+Error in rule process_case_study_sims:
+    message: None
+    jobid: 2
+    input: src/process_simrun.R, results/case_study_sims/DG_S.pB10/DG_S.pB10_data.csv, results/case_study_sims/DG_S.pB10/DG_S.pB10_data_long.csv
+    output: results/case_study_sims/DG_S.pB10/DG_S.pB10_density_plot_df.csv, results/case_study_sims/DG_S.pB10/DG_S.pB10_frequency_plot_df.csv, results/case_study_sims/DG_S.pB10/DG_S.pB10_phases_plot_df.csv
+    shell:
+        Rscript src/process_simrun.R --treatment DG_S.pB10
+        (command exited with non-zero exit code)
+[Fri Feb 20 16:52:38 2026]
+Error in rule process_case_study_sims:
+    message: None
+    jobid: 5
+    input: src/process_simrun.R, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_data.csv, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_data_long.csv
+    output: results/case_study_sims/HFC_S.pB10/HFC_S.pB10_density_plot_df.csv, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_frequency_plot_df.csv, results/case_study_sims/HFC_S.pB10/HFC_S.pB10_phases_plot_df.csv
+    shell:
+        Rscript src/process_simrun.R --treatment HFC_S.pB10
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2026-02-20T165232.813024.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.

@@ -1,0 +1,23 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job               count
+--------------  -------
+all                   1
+plot_psweep           5
+process_psweep        5
+psweep_sims           5
+total                16
+
+Select jobs to execute...
+Execute 2 jobs...
+RuleException in rule psweep_sims in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 117:
+AttributeError: 'int' object has no attribute 'threads', when formatting the following:
+
+    Rscript src/simrun_psweep.R       --psweepsetting {wildcards.psweep}       --threads {threads.threads}
+    

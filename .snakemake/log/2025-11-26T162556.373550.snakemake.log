@@ -1,0 +1,148 @@
+Assuming unrestricted shared filesystem usage.
+None
+host: Lizs-MacBook-Air-9.local
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 7
+Rules claiming more threads will be scaled down.
+Job stats:
+job               count
+--------------  -------
+all                   1
+plot_psweep           5
+process_psweep        5
+psweep_sims           5
+total                16
+
+Select jobs to execute...
+Execute 5 jobs...
+[Wed Nov 26 16:25:57 2025]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/O.LFC_test/O.LFC_test_out.csv
+    jobid: 18
+    reason: Missing output files: results/parameter_sweeps/O.LFC_test/O.LFC_test_out.csv
+    wildcards: psweep=O.LFC_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov 26 16:25:57 2025]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/HFC_test/HFC_test_out.csv
+    jobid: 21
+    reason: Missing output files: results/parameter_sweeps/HFC_test/HFC_test_out.csv
+    wildcards: psweep=HFC_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov 26 16:25:57 2025]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/LFC_test/LFC_test_out.csv
+    jobid: 24
+    reason: Missing output files: results/parameter_sweeps/LFC_test/LFC_test_out.csv
+    wildcards: psweep=LFC_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov 26 16:25:57 2025]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/E_test/E_test_out.csv
+    jobid: 27
+    reason: Missing output files: results/parameter_sweeps/E_test/E_test_out.csv
+    wildcards: psweep=E_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+[Wed Nov 26 16:25:57 2025]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/F_test/F_test_out.csv
+    jobid: 30
+    reason: Missing output files: results/parameter_sweeps/F_test/F_test_out.csv
+    wildcards: psweep=F_test
+    resources: tmpdir=/var/folders/dw/d0fxdqy942jc3trrhg2gvbnm0000gn/T
+
+Waiting at most 5 seconds for missing files:
+results/parameter_sweeps/HFC_test/HFC_test_out.csv (missing locally)
+MissingOutputException in rule psweep_sims in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 99:
+Job 21  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+results/parameter_sweeps/HFC_test/HFC_test_out.csv (missing locally, parent dir contents: HFC_test_psweep_out.csv)
+Waiting at most 5 seconds for missing files:
+results/parameter_sweeps/E_test/E_test_out.csv (missing locally)
+MissingOutputException in rule psweep_sims in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 99:
+Job 27  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+results/parameter_sweeps/E_test/E_test_out.csv (missing locally, parent dir contents: E_test_psweep_out.csv)
+Waiting at most 5 seconds for missing files:
+results/parameter_sweeps/LFC_test/LFC_test_out.csv (missing locally)
+MissingOutputException in rule psweep_sims in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 99:
+Job 24  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+results/parameter_sweeps/LFC_test/LFC_test_out.csv (missing locally, parent dir contents: LFC_test_psweep_out.csv)
+Waiting at most 5 seconds for missing files:
+results/parameter_sweeps/F_test/F_test_out.csv (missing locally)
+MissingOutputException in rule psweep_sims in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 99:
+Job 30  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+results/parameter_sweeps/F_test/F_test_out.csv (missing locally, parent dir contents: F_test_psweep_out.csv)
+Waiting at most 5 seconds for missing files:
+results/parameter_sweeps/O.LFC_test/O.LFC_test_out.csv (missing locally)
+MissingOutputException in rule psweep_sims in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 99:
+Job 18  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+results/parameter_sweeps/O.LFC_test/O.LFC_test_out.csv (missing locally, parent dir contents: O.LFC_test_inv_psweep_plot.pdf, O.LFC_test_change_psweep_plot.pdf, O.LFC_test_psweep_plot.csv, O.LFC_test_psweep_out.csv)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look below for error messages
+[Wed Nov 26 16:29:49 2025]
+Error in rule psweep_sims:
+    message: None
+    jobid: 18
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/O.LFC_test/O.LFC_test_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting O.LFC_test
+    
+        (command exited with non-zero exit code)
+[Wed Nov 26 16:29:49 2025]
+Error in rule psweep_sims:
+    message: None
+    jobid: 21
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/HFC_test/HFC_test_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting HFC_test
+    
+        (command exited with non-zero exit code)
+[Wed Nov 26 16:29:49 2025]
+Error in rule psweep_sims:
+    message: None
+    jobid: 24
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/LFC_test/LFC_test_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting LFC_test
+    
+        (command exited with non-zero exit code)
+[Wed Nov 26 16:29:49 2025]
+Error in rule psweep_sims:
+    message: None
+    jobid: 27
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/E_test/E_test_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting E_test
+    
+        (command exited with non-zero exit code)
+[Wed Nov 26 16:29:49 2025]
+Error in rule psweep_sims:
+    message: None
+    jobid: 30
+    input: src/simrun_psweep.R, input_data/Treatments_parameter_sweep.csv, input_data/Parameter_sweep_settings.csv
+    output: results/parameter_sweeps/F_test/F_test_out.csv
+    shell:
+        
+    Rscript src/simrun_psweep.R       --psweepsetting F_test
+    
+        (command exited with non-zero exit code)
+Complete log(s): /Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/.snakemake/log/2025-11-26T162556.373550.snakemake.log
+WorkflowError:
+At least one job did not complete successfully.
