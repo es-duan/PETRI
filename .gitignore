@@ -7,3 +7,6 @@
 prelim_experiments/*
 .positai
 figures/edited/*
+.snakemake/*
+!.snakemake/DAG.pdf
+!.snakemake/generate_DAG.bash

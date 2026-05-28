@@ -1,9 +1,0 @@
-Assuming unrestricted shared filesystem usage.
-None
-host: Lizs-MacBook-Air-7.local
-Building DAG of jobs...
-MissingInputException in rule case_study_sims in file "/Users/liz/Documents/UW_Bio_PhD/Kerr_Lab/Plasmid_evolution/PETRI/Snakefile", line 8:
-Missing input files for rule case_study_sims:
-    output: results/case_study_sims/T1/T1_plot.pdf
-    affected files:
-        Treatment.csv
