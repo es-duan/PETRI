@@ -34,9 +34,7 @@ plot_points <- jsonlite::fromJSON(args$points)
 psweep_point_size <- plot_points[["psweep_point_size"]]
 sh_Anc <- plot_points[["sh_Anc"]]
 sh_Mut <- plot_points[["sh_Mut"]]
-sh_R1 <- plot_points[["sh_R1"]]
-sh_copA <- plot_points[["sh_copA"]]
-sh_finO <- plot_points[["sh_finO"]]
+sh_MutB <- plot_points[["sh_MutB"]]
 
 ## Retrieve ggplot theme ----
 source("src/ggplot_theme.R")
@@ -71,10 +69,13 @@ sweep0_p1 <- p1_DG2 %>%
   filter(abs(log_Mut_freq_change2) < 0.1)
 
 plot1 <- ggplot() +
-  geom_raster(data = p1_DG2,
+  geom_raster(data = filter(p1_DG2, Mut_freq_inv == "Increase"),
               mapping = aes(log_gamma_M, psi_M, fill = log_Mut_freq_change2)) +
-  scale_fill_gradient2("Relative\nfrequency\nchange",
-                       low=p_highD, mid = p_mid, high=p_highI, midpoint = log(1)) +
+  geom_raster(data = filter(p1_DG2, Mut_freq_inv == "Decrease"),
+              mapping = aes(log_gamma_M, psi_M),
+              fill = p_highD) +
+  scale_fill_gradient("Relative\nfrequency\nchange",
+                       low = p_mid, high=p_highI) +
   geom_hline(yintercept = psi_ref, color = p_axes, linewidth = 1) +
   geom_vline(xintercept = log10(gamma_ref), color = p_axes, linewidth = 1) +
   geom_point(data = ph_s,
@@ -82,15 +83,30 @@ plot1 <- ggplot() +
              color = "black", size = psweep_point_size) +
   scale_shape_manual(values = c("S.pB10" = sh_Anc,
                                 "S.pB10-A" = sh_Mut,
-                                "S.pB10-B" = sh_finO)) +
+                                "S.pB10-B" = sh_MutB),
+                     labels = c("S.pB10" = "Anc",
+                                "S.pB10-A" = "Mut",
+                                "S.pB10-B" = "Syn"),
+                     name = "Genotype") +
+  # geom_contour(data = p1_DG2,
+  #              mapping = aes(x = log_gamma_M, psi_M, z = log_Mut_freq_change2),
+  #              breaks = 0, color = p_invline, linewidth = inv_width) +
   # geom_smooth(data = sweep0_p1,
   #             mapping = aes(log_gamma_M, psi_M),
   #             color = p_invline, method = "lm", se = FALSE, linewidth = inv_width) +
+  annotate(geom = "text", x = -14.75, y = 0.1,
+           label = "exclusion", color = "white", fontface = "italic",
+           size = 4) +
   scale_x_continuous(expand = c(0.01, 0.01)) +
   scale_y_continuous(expand = c(0.01, 0.01)) +
   labs(x = expression("log10(Conjugation Rate)"),
        y = expression("Growth Rate")) +
-  fig_aes 
+  fig_aes +
+  guides(shape = guide_legend(order = 1),
+         fill = guide_colourbar(display = "gradient",
+                                ticks = FALSE,
+                                theme = theme(legend.text = element_text(size = 6)),
+                                barwidth = unit(0.15, "in"), barheight = unit(0.6, "in")))
 
 
 ## P2 ----
@@ -107,10 +123,13 @@ sweep0_p2 <- p2_DGs2 %>%
   filter(abs(log_Mut_freq_change2) < 0.1)
 
 plot2 <- ggplot() +
-  geom_raster(data = p2_DGs2,
+  geom_raster(data = filter(p2_DGs2, Mut_freq_inv == "Increase"),
               mapping = aes(log_gamma_M, psi_M, fill = log_Mut_freq_change2)) +
-  scale_fill_gradient2("Relative\nfrequency\nchange",
-                       low=p_highD, mid = p_mid, high=p_highI, midpoint = log(1)) +
+  geom_raster(data = filter(p2_DGs2, Mut_freq_inv == "Decrease"),
+              mapping = aes(log_gamma_M, psi_M),
+              fill = p_highD) +
+  scale_fill_gradient("Relative\nfrequency\nchange",
+                       low = p_mid, high=p_highI) +
   geom_hline(yintercept = psi_ref, color = p_axes, linewidth = 1) +
   geom_vline(xintercept = log10(gamma_ref), color = p_axes, linewidth = 1) +
   geom_point(data = ph_s,
@@ -118,23 +137,34 @@ plot2 <- ggplot() +
              color = "black", size = psweep_point_size) +
   scale_shape_manual(values = c("S.pB10" = sh_Anc,
                                 "S.pB10-A" = sh_Mut,
-                                "S.pB10-B" = sh_finO)) +
+                                "S.pB10-B" = sh_MutB),
+                     labels = c("S.pB10" = "Anc",
+                                "S.pB10-A" = "Mut",
+                                "S.pB10-B" = "Syn"),
+                     name = "Genotype") +
   # geom_smooth(data = sweep0_p2,
   #             mapping = aes(log_gamma_M, psi_M),
   #             color = p_invline, method = "lm", se = FALSE, linewidth = inv_width) +
+  annotate(geom = "text", x = -14.75, y = 0.1,
+           label = "exclusion", color = "white", fontface = "italic",
+           size = 4) +
   scale_x_continuous(expand = c(0.01, 0.01)) +
   scale_y_continuous(expand = c(0.01, 0.01)) +
   labs(x = expression("log10(Conjugation Rate)"),
        y = expression("Growth Rate")) +
-  fig_aes 
+  fig_aes +
+  guides(shape = guide_legend(order = 1),
+         fill = guide_colourbar(display = "gradient",
+                                ticks = FALSE,
+                                theme = theme(legend.text = element_text(size = 6)),
+                                barwidth = unit(0.15, "in"), barheight = unit(0.6, "in")))
 
 
 final_plot <- plot1 + plot2 +
   plot_layout(nrow = 1,
               axes = "collect",
               axis_titles = "collect",
-              guides = "collect") +
-  plot_annotation(tag_levels = "a")
+              guides = "collect")
 
-ggsave("figures/fig_s1_DGsweeps.pdf",
-       final_plot, width = 10.5, height = 5, units = "in")
+ggsave("figures/figS2_DGsweeps.pdf",
+       final_plot, width = 7, height = 3.25, units = "in")

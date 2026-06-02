@@ -41,7 +41,7 @@ plot <- Dim90_R1 +
                                 "E.R1-copA" = sh_copA,
                                 "E.R1-finO" = sh_finO),
                      labels = c("E.R1" = "wt",
-                                "E.R1-copA" = expression(Delta * italic(copA)),
+                                "E.R1-copA" = expression(italic(copA)),
                                 "E.R1-finO" = expression(italic(finO)^"-")),
                      name = "Genotype") +
   theme(legend.title = element_text(size = 8),

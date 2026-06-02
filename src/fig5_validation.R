@@ -53,7 +53,8 @@ p2 <- LFC +
         legend.position = "top",
         legend.title = element_blank(),
         legend.text = element_text(size = 8),
-        legend.box.spacing = unit(0, "pt")) +
+        legend.box.spacing = unit(0, "pt"),
+        legend.spacing.y = unit(0, "pt")) +
   guides(color = "none",
          shape = "none")
 
@@ -79,7 +80,7 @@ final_plot <- p1 + free(p2) + p3 + p4 +
   ) +
   plot_annotation(tag_levels = "A") & 
   theme(
-    plot.margin = margin(8, 8, 8, 8),
+    #plot.margin = margin(8, 8, 8, 8),
     plot.tag = element_text(size = 10)
   ) 
 

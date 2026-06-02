@@ -30,4 +30,4 @@ final_plot <- pA + pB +
   plot_annotation(tag_levels = "A")
 
 ggsave("figures/fig4_DG_invasion.pdf",
-       final_plot, width = 7.5, height = 5, units = "in")
+       final_plot, width = 7, height = 5, units = "in")

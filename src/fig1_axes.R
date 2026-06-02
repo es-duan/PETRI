@@ -42,7 +42,7 @@ rect_df2 <- data.frame("Quadrant" = rep(c("Host-centric", "Synergistic", "Parasi
 p1 <- ggplot() +
   geom_rounded_rect(mapping = aes(xmin = -10, xmax = 10, ymin = -10, ymax = 10),
                     color = "gray70", fill = "white", radius = unit(3, "mm")) +
-  geom_rounded_rect(mapping = aes(xmin = -9.5, xmax = -1, ymin = -9.5, ymax = -5.5),
+  geom_rounded_rect(mapping = aes(xmin = -9.5, xmax = -1, ymin = -5.2, ymax = -1.2),
                     color = "gray70", fill = "white", radius = unit(3, "mm")) +
   geom_rect(data = rect_df2,
                     mapping = aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = Quadrant)) +
@@ -82,7 +82,7 @@ p1 <- ggplot() +
         axis.ticks.y = element_blank(),
         panel.grid = element_blank(),
         panel.border = element_blank(),
-        legend.position = c(0.25, 0.15),
+        legend.position = c(0.25, 0.35),
         legend.key.size = unit(0.1, "in"),
         legend.background = element_rect(fill = "transparent", color = NA))
 

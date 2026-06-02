@@ -88,8 +88,13 @@ sweep_plot2 <- sweep_plot %>%
                                        -log_Mut_freq_change/log_min_change))
 
 ## Identify points for invasion boundary line ----
-sweep0 <- sweep_plot2 %>% 
-  filter(abs(log_Mut_freq_change2) < 0.01)
+sweep0_d <- sweep_plot2 %>%
+  filter(Mut_freq_inv == "Decrease") %>%
+  slice_min(order_by = abs(log_Mut_freq_change2), n = 100)
+sweep0_i <- sweep_plot2 %>%
+  filter(Mut_freq_inv == "Increase") %>%
+  slice_min(order_by = abs(log_Mut_freq_change2), n = 100)
+sweep0 <- rbind(sweep0_d, sweep0_i)
 
 # Plot by relative frequency change ----
 ## Contour line ----

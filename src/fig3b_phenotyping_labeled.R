@@ -52,9 +52,12 @@ final <- plot +
   annotate("segment", linewidth = 0.3, 
            x = anc_conj + anc_conj_se + 5e-13, xend = anc_conj + anc_conj_se + 1e-12,
            y = mut_gr, yend = mut_gr) +
+  # annotate("text",
+  #          x = anc_conj + anc_conj_se + 4e-12, y = mean(c(anc_gr, mut_gr)),
+  #          label = paste0("p = ", round(p_growth, 2)), angle = 270) +
   annotate("text",
-           x = anc_conj + anc_conj_se + 4e-12, y = mean(c(anc_gr, mut_gr)),
-           label = paste0("p = ", round(p_growth, 2)), angle = 270) +
+           x = anc_conj + anc_conj_se + 2e-12, y = mean(c(anc_gr, mut_gr)),
+           label = "*", angle = 270) +
   # Conjugation rate brackets
   annotate("segment", linewidth = 0.3, 
            x = anc_conj, xend = mut_conj,
@@ -65,9 +68,12 @@ final <- plot +
   annotate("segment", linewidth = 0.3, 
            x = mut_conj, xend = mut_conj,
            y = mut_gr + mut_gr_se + 0.01, yend = mut_gr + mut_gr_se + 0.02) +
+  # annotate("text",
+  #          x = 10^mean(c(log10(anc_conj), log10(mut_conj))), y = mut_gr + mut_gr_se + 0.045,
+  #          label = paste0("p = ", round(p_conj, 2)))
   annotate("text",
-           x = 10^mean(c(log10(anc_conj), log10(mut_conj))), y = mut_gr + mut_gr_se + 0.045,
-           label = paste0("p = ", round(p_conj, 2)))
+           x = 10^mean(c(log10(anc_conj), log10(mut_conj))), y = mut_gr + mut_gr_se + 0.03,
+           label = "*")
 
 ggsave("figures/panels/fig3b_phenotyping.pdf",
        final, width = 3, height = 3, units = "in")

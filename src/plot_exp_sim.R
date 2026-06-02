@@ -34,6 +34,7 @@ nalR_l <- plot_lines[["nalR_l"]]
 exp_l <- plot_lines[["exp_l"]]
 sim_l <- plot_lines[["sim_l"]]
 plot_lw <- plot_lines[["plot_lw"]]
+invs_lw <- 0.25
 
 ## Points ----
 plot_points <- jsonlite::fromJSON(args$points)
@@ -131,7 +132,7 @@ h1 <- ggplot() +
                                "Growth" = p_growth)) +
   # annotate("segment",
   #          x = 2, xend = 4, y = hfc_s, yend = hfc_s,
-  #          color = "white", linewidth = 1) +
+  #          color = p_Anc, linewidth = invs_lw) +
   # annotate("segment",
   #          x = 4, xend = 4, y = hfc_s, yend = hfc_e,
   #          color = "white", linewidth = 1) +

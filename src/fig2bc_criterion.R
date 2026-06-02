@@ -31,7 +31,7 @@ inv_width <- 0.7
 # Blend colors for lighter shade
 color_blend_D <- colorRampPalette(c(p_mid, p_highD))
 seq_D <- color_blend_D(5)
-p_lhighD <- seq_D[4]
+p_lhighD <- seq_D[3]
 
 color_blend_I <- colorRampPalette(c(p_mid, p_highI))
 seq_I <- color_blend_I(5)
@@ -80,7 +80,7 @@ pv <- ggplot(data = df,
   annotate(geom = "text", x = -7, y = 9,
            label = "invasion", color = "white", fontface = "italic",
            size = 4) +
-  annotate(geom = "text", x = -7, y = -9,
+  annotate(geom = "text", x = -6.7, y = -9,
            label = "exclusion", color = "white", fontface = "italic",
            size = 4) +
   scale_y_continuous(name = expression(paste(Delta, "Growth Rate"))) +
@@ -124,5 +124,5 @@ final_plot <- pv + ph +
   plot_annotation(tag_levels = list(c("B","C")))
 
 ggsave("figures/panels/fig2bc_criterion.pdf",
-       final_plot, width = 5.5, height = 3, units = "in")
+       final_plot, width = 5, height = 2.75, units = "in")
 
