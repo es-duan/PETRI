@@ -9,8 +9,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=39
-#SBATCH --mem=200G
-#SBATCH --time=24:00:00
+#SBATCH --mem=300G
+#SBATCH --time=12:00:00
 
 #SBATCH --export=all
 #SBATCH --chdir=/mmfs1/gscratch/biology/kerrlab/ESD/PETRI

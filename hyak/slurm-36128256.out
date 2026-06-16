@@ -1,0 +1,35 @@
+________________________________________________________________________________
+Miniforge (conda) has been loaded.
+
+- Please create and work in your own conda environments:
+    conda create -n myenv python=3.12
+    conda activate myenv
+
+- To customize environment or package locations, edit your ~/.condarc:
+    envs_dirs:
+      - /path/to/your/envs
+    pkgs_dirs:
+      - /path/to/your/pkgs
+
+  For more information, see:
+    https://docs.conda.io/projects/conda/en/latest/configuration.html
+
+- If your personal Conda stops working after unloading this module, try:
+    source ~/.bashrc
+________________________________________________________________________________
+
+Lmod has detected the following error: Conda is already active (CONDA_PREFIX
+is set). Module conda/Miniforge3-25.9.1-0 not loaded. 
+While processing the following module(s):
+    Module fullname            Module Filename
+    ---------------            ---------------
+    conda/Miniforge3-25.9.1-0  /sw/klone/conda/Miniforge3-25.9.1-0.lua
+
+Injecting conda environment /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/PETRI_config.yaml.
+Assuming unrestricted shared filesystem usage.
+host: n3003
+Building DAG of jobs...
+LockException:
+Error: Directory cannot be locked. Please make sure that no other Snakemake process is trying to create the same files in the following directory:
+/mmfs1/gscratch/biology/kerrlab/ESD/PETRI
+If you are sure that no other instances of snakemake are running on this directory, the remaining lock was likely caused by a kill signal or a power loss. It can be removed with the --unlock argument.

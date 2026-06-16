@@ -2,9 +2,9 @@
 Notes,HFC liquid with pB10 anc
 Ref_gamma,2.30E-12
 Ref_psi,0.485
-Range_gamma,4
-Range_psi,0.4
-Resolution,150
+Range_gamma,6
+Range_psi,1
+Resolution,200
 psiF1,0.535
 psiF2,0.535
 gammaA1.F1_base,0.00E+00

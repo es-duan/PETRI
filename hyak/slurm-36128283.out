@@ -1,0 +1,820 @@
+________________________________________________________________________________
+Miniforge (conda) has been loaded.
+
+- Please create and work in your own conda environments:
+    conda create -n myenv python=3.12
+    conda activate myenv
+
+- To customize environment or package locations, edit your ~/.condarc:
+    envs_dirs:
+      - /path/to/your/envs
+    pkgs_dirs:
+      - /path/to/your/pkgs
+
+  For more information, see:
+    https://docs.conda.io/projects/conda/en/latest/configuration.html
+
+- If your personal Conda stops working after unloading this module, try:
+    source ~/.bashrc
+________________________________________________________________________________
+
+Lmod has detected the following error: Conda is already active (CONDA_PREFIX
+is set). Module conda/Miniforge3-25.9.1-0 not loaded. 
+While processing the following module(s):
+    Module fullname            Module Filename
+    ---------------            ---------------
+    conda/Miniforge3-25.9.1-0  /sw/klone/conda/Miniforge3-25.9.1-0.lua
+
+Injecting conda environment /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/PETRI_config.yaml.
+Assuming unrestricted shared filesystem usage.
+host: n3003
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 39
+Rules claiming more threads will be scaled down.
+Job stats:
+job               count
+--------------  -------
+process_psweep        5
+psweep_sims           4
+plot_psweep           5
+fig6                  1
+fig7                  1
+figS2                 1
+all                   1
+total                18
+
+Select jobs to execute...
+Execute 3 jobs...
+
+[Mon Jun 15 18:07:36 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_params.csv, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_settings.rds
+    output: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_out.csv
+    jobid: 30
+    reason: Missing output files: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_out.csv; Updated input files: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_params.csv, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_settings.rds
+    wildcards: psweep=pLFC_S.pB10
+    threads: 19
+    resources: tmpdir=/tmp
+[Mon Jun 15 18:07:37 2026]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_out.csv, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_settings.rds
+    output: results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_plot.csv
+    jobid: 33
+    reason: Updated input files: results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_out.csv, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_settings.rds
+    wildcards: psweep=pHFC_S.pB10-A
+    resources: tmpdir=/tmp
+[Mon Jun 15 18:07:37 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_params.csv, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_settings.rds
+    output: results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_out.csv
+    jobid: 38
+    reason: Updated input files: results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_settings.rds, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_params.csv
+    wildcards: psweep=pLFC_S.pB10-A
+    threads: 19
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘foreach’
+
+The following objects are masked from ‘package:purrr’:
+
+    accumulate, when
+
+Loading required package: iterators
+
+Attaching package: ‘foreach’
+
+The following objects are masked from ‘package:purrr’:
+
+    accumulate, when
+
+Loading required package: iterators
+Loading required package: parallel
+Loading required package: parallel
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+Rows: 40000 Columns: 4
+Rows: 40000 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SetID
+dbl (3): SweepID, gamma_M, psi_M
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SetID
+dbl (3): SweepID, gamma_M, psi_M
+Rows: 40000 Columns: 9
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SetID
+dbl (8): SweepID, gamma_M, psi_M, end_time, A1, M1, A2, M2
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+[Mon Jun 15 18:07:41 2026]
+Finished jobid: 33 (Rule: process_psweep)
+1 of 18 steps (6%) done
+Execute 1 jobs...
+
+[Mon Jun 15 18:07:41 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_plot.csv, src/ggplot_theme.R
+    output: results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot.rds, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot2.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot2.rds, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot_ns.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot_ns.rds, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot2_ns.pdf, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot2_ns.rds
+    jobid: 32
+    reason: Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_plot.csv
+    wildcards: psweep=pHFC_S.pB10-A
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+Rows: 40000 Columns: 19
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (2): SetID, Mut_freq_inv
+dbl (17): SweepID, gamma_M, psi_M, end_time, A1, M1, A2, M2, log_gamma_M, An...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 7 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): Strain, Source
+dbl (2): Growth_rate, Conjugation_rate
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+[Mon Jun 15 18:08:01 2026]
+Finished jobid: 32 (Rule: plot_psweep)
+2 of 18 steps (11%) done
+[Mon Jun 15 19:27:10 2026]
+Finished jobid: 30 (Rule: psweep_sims)
+3 of 18 steps (17%) done
+Execute 2 jobs...
+
+[Mon Jun 15 19:27:10 2026]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_out.csv, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_settings.rds
+    output: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_plot.csv
+    jobid: 29
+    reason: Input files updated by another job: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_out.csv
+    wildcards: psweep=pLFC_S.pB10
+    resources: tmpdir=/tmp
+[Mon Jun 15 19:27:10 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_params.csv, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_settings.rds
+    output: results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_out.csv
+    jobid: 43
+    reason: Updated input files: results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_settings.rds, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_params.csv
+    wildcards: psweep=pDim90_E.R1
+    threads: 19
+    resources: tmpdir=/tmp
+Select jobs to execute...
+[Mon Jun 15 19:27:12 2026]
+Finished jobid: 38 (Rule: psweep_sims)
+4 of 18 steps (22%) done
+Execute 1 jobs...
+
+[Mon Jun 15 19:27:12 2026]
+localrule psweep_sims:
+    input: src/simrun_psweep.R, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_params.csv, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_settings.rds
+    output: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_out.csv
+    jobid: 26
+    reason: Updated input files: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_params.csv, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_settings.rds
+    wildcards: psweep=pHFC_S.pB10
+    threads: 19
+    resources: tmpdir=/tmp
+Select jobs to execute...
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘foreach’
+
+The following objects are masked from ‘package:purrr’:
+
+    accumulate, when
+
+Loading required package: iterators
+Loading required package: parallel
+Rows: 40000 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SetID
+dbl (8): SweepID, gamma_M, psi_M, end_time, A1, M1, A2, M2
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 40000 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SetID
+dbl (3): SweepID, gamma_M, psi_M
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘foreach’
+
+The following objects are masked from ‘package:purrr’:
+
+    accumulate, when
+
+Loading required package: iterators
+Loading required package: parallel
+[Mon Jun 15 19:27:14 2026]
+Finished jobid: 29 (Rule: process_psweep)
+5 of 18 steps (28%) done
+Execute 1 jobs...
+
+[Mon Jun 15 19:27:14 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_plot.csv, src/ggplot_theme.R
+    output: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot.rds, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot2.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot2.rds, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot_ns.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot_ns.rds, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot2_ns.pdf, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot2_ns.rds
+    jobid: 28
+    reason: Input files updated by another job: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_plot.csv
+    wildcards: psweep=pLFC_S.pB10
+    resources: tmpdir=/tmp
+Select jobs to execute...
+Rows: 40000 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SetID
+dbl (3): SweepID, gamma_M, psi_M
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+Rows: 40000 Columns: 19
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (2): SetID, Mut_freq_inv
+dbl (17): SweepID, gamma_M, psi_M, end_time, A1, M1, A2, M2, log_gamma_M, An...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 7 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): Strain, Source
+dbl (2): Growth_rate, Conjugation_rate
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+[Mon Jun 15 19:27:59 2026]
+Finished jobid: 28 (Rule: plot_psweep)
+6 of 18 steps (33%) done
+Execute 1 jobs...
+
+[Mon Jun 15 19:27:59 2026]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_out.csv, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_settings.rds
+    output: results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_plot.csv
+    jobid: 37
+    reason: Input files updated by another job: results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_out.csv
+    wildcards: psweep=pLFC_S.pB10-A
+    resources: tmpdir=/tmp
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+Rows: 40000 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SetID
+dbl (8): SweepID, gamma_M, psi_M, end_time, A1, M1, A2, M2
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+[Mon Jun 15 19:28:03 2026]
+Finished jobid: 37 (Rule: process_psweep)
+7 of 18 steps (39%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Jun 15 19:28:03 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_plot.csv, src/ggplot_theme.R
+    output: results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot.rds, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2.rds, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot_ns.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot_ns.rds, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2_ns.pdf, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2_ns.rds
+    jobid: 36
+    reason: Input files updated by another job: results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_plot.csv
+    wildcards: psweep=pLFC_S.pB10-A
+    resources: tmpdir=/tmp
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+Rows: 40000 Columns: 19
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (2): SetID, Mut_freq_inv
+dbl (17): SweepID, gamma_M, psi_M, end_time, A1, M1, A2, M2, log_gamma_M, An...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 7 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): Strain, Source
+dbl (2): Growth_rate, Conjugation_rate
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+[Mon Jun 15 19:28:20 2026]
+Finished jobid: 36 (Rule: plot_psweep)
+8 of 18 steps (44%) done
+[Mon Jun 15 19:36:17 2026]
+Finished jobid: 26 (Rule: psweep_sims)
+9 of 18 steps (50%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Jun 15 19:36:17 2026]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_out.csv, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_settings.rds
+    output: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_plot.csv
+    jobid: 25
+    reason: Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_out.csv
+    wildcards: psweep=pHFC_S.pB10
+    resources: tmpdir=/tmp
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+Rows: 40000 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SetID
+dbl (8): SweepID, gamma_M, psi_M, end_time, A1, M1, A2, M2
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+[Mon Jun 15 19:36:20 2026]
+Finished jobid: 25 (Rule: process_psweep)
+10 of 18 steps (56%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Jun 15 19:36:20 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_plot.csv, src/ggplot_theme.R
+    output: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot.rds, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot2.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot2.rds, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot_ns.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot_ns.rds, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot2_ns.pdf, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot2_ns.rds
+    jobid: 24
+    reason: Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_plot.csv
+    wildcards: psweep=pHFC_S.pB10
+    resources: tmpdir=/tmp
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+Rows: 40000 Columns: 19
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (2): SetID, Mut_freq_inv
+dbl (17): SweepID, gamma_M, psi_M, end_time, A1, M1, A2, M2, log_gamma_M, An...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 7 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): Strain, Source
+dbl (2): Growth_rate, Conjugation_rate
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+[Mon Jun 15 19:36:34 2026]
+Finished jobid: 24 (Rule: plot_psweep)
+11 of 18 steps (61%) done
+Select jobs to execute...
+Execute 2 jobs...
+
+[Mon Jun 15 19:36:34 2026]
+localrule figS2:
+    input: src/figS2_psweep_ns.R, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot2_ns.rds, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot2_ns.rds, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot2_ns.rds, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2_ns.rds, input_data/strain_phenotypes.csv
+    output: figures/figS2_psweep_ns.pdf
+    jobid: 52
+    reason: Input files updated by another job: results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot2_ns.rds, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot2_ns.rds, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2_ns.rds, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot2_ns.rds
+    resources: tmpdir=/tmp
+[Mon Jun 15 19:36:34 2026]
+localrule fig6:
+    input: src/fig6_psweep.R, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot2.rds, results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot2.rds, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot2.rds, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2.rds, input_data/strain_phenotypes.csv
+    output: figures/fig6_psweep.pdf
+    jobid: 23
+    reason: Input files updated by another job: results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot2.rds, results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot2.rds, results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2.rds, results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot2.rds
+    resources: tmpdir=/tmp
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+Rows: 7 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): Strain, Source
+dbl (2): Growth_rate, Conjugation_rate
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 7 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): Strain, Source
+dbl (2): Growth_rate, Conjugation_rate
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Scale for x is already present.
+Adding another scale for x, which will replace the existing scale.
+Scale for y is already present.
+Adding another scale for y, which will replace the existing scale.
+Scale for x is already present.
+Adding another scale for x, which will replace the existing scale.
+Scale for x is already present.
+Adding another scale for x, which will replace the existing scale.
+Scale for y is already present.
+Adding another scale for y, which will replace the existing scale.
+Scale for y is already present.
+Adding another scale for y, which will replace the existing scale.
+Scale for x is already present.
+Adding another scale for x, which will replace the existing scale.
+Scale for x is already present.
+Adding another scale for x, which will replace the existing scale.
+Scale for y is already present.
+Adding another scale for y, which will replace the existing scale.
+Scale for y is already present.
+Adding another scale for y, which will replace the existing scale.
+Scale for x is already present.
+Adding another scale for x, which will replace the existing scale.
+Scale for x is already present.
+Adding another scale for x, which will replace the existing scale.
+Scale for y is already present.
+Adding another scale for y, which will replace the existing scale.
+Scale for y is already present.
+Adding another scale for y, which will replace the existing scale.
+Scale for x is already present.
+Adding another scale for x, which will replace the existing scale.
+Scale for y is already present.
+Adding another scale for y, which will replace the existing scale.
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+Warning messages:
+1: Removed 129 rows containing non-finite outside the scale range
+(`stat_smooth()`). 
+2: Removed 34218 rows containing missing values or values outside the scale range
+(`geom_raster()`). 
+3: Removed 107 rows containing non-finite outside the scale range
+(`stat_smooth()`). 
+4: Removed 34218 rows containing missing values or values outside the scale range
+(`geom_raster()`). 
+5: Removed 119 rows containing non-finite outside the scale range
+(`stat_smooth()`). 
+6: Removed 34218 rows containing missing values or values outside the scale range
+(`geom_raster()`). 
+7: Removed 1 row containing missing values or values outside the scale range
+(`geom_smooth()`). 
+8: Removed 118 rows containing non-finite outside the scale range
+(`stat_smooth()`). 
+9: Removed 34218 rows containing missing values or values outside the scale range
+(`geom_raster()`). 
+10: Removed 1 row containing missing values or values outside the scale range
+(`geom_smooth()`). 
+Warning messages:
+1: Removed 129 rows containing non-finite outside the scale range
+(`stat_smooth()`). 
+2: Removed 34218 rows containing missing values or values outside the scale range
+(`geom_raster()`). 
+3: Removed 107 rows containing non-finite outside the scale range
+(`stat_smooth()`). 
+4: Removed 34218 rows containing missing values or values outside the scale range
+(`geom_raster()`). 
+5: Removed 119 rows containing non-finite outside the scale range
+(`stat_smooth()`). 
+6: Removed 34218 rows containing missing values or values outside the scale range
+(`geom_raster()`). 
+7: Removed 1 row containing missing values or values outside the scale range
+(`geom_smooth()`). 
+8: Removed 118 rows containing non-finite outside the scale range
+(`stat_smooth()`). 
+9: Removed 34218 rows containing missing values or values outside the scale range
+(`geom_raster()`). 
+10: Removed 1 row containing missing values or values outside the scale range
+(`geom_smooth()`). 
+[Mon Jun 15 19:36:41 2026]
+Finished jobid: 23 (Rule: fig6)
+12 of 18 steps (67%) done
+[Mon Jun 15 19:36:41 2026]
+Finished jobid: 52 (Rule: figS2)
+13 of 18 steps (72%) done
+[Mon Jun 15 19:37:49 2026]
+Finished jobid: 43 (Rule: psweep_sims)
+14 of 18 steps (78%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Jun 15 19:37:49 2026]
+localrule process_psweep:
+    input: src/process_psweep.R, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_out.csv, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_settings.rds
+    output: results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_plot.csv
+    jobid: 42
+    reason: Input files updated by another job: results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_out.csv
+    wildcards: psweep=pDim90_E.R1
+    resources: tmpdir=/tmp
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+Rows: 40000 Columns: 9
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): SetID
+dbl (8): SweepID, gamma_M, psi_M, end_time, A1, M1, A2, M2
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+[Mon Jun 15 19:37:51 2026]
+Finished jobid: 42 (Rule: process_psweep)
+15 of 18 steps (83%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Jun 15 19:37:51 2026]
+localrule plot_psweep:
+    input: src/plot_psweep.R, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_plot.csv, src/ggplot_theme.R
+    output: results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_change_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.rds, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot2.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot2.rds, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot_ns.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot_ns.rds, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot2_ns.pdf, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot2_ns.rds
+    jobid: 41
+    reason: Input files updated by another job: results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_plot.csv
+    wildcards: psweep=pDim90_E.R1
+    resources: tmpdir=/tmp
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+Rows: 40000 Columns: 19
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (2): SetID, Mut_freq_inv
+dbl (17): SweepID, gamma_M, psi_M, end_time, A1, M1, A2, M2, log_gamma_M, An...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Rows: 7 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): Strain, Source
+dbl (2): Growth_rate, Conjugation_rate
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+`geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+[Mon Jun 15 19:38:03 2026]
+Finished jobid: 41 (Rule: plot_psweep)
+16 of 18 steps (89%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Jun 15 19:38:03 2026]
+localrule fig7:
+    input: src/fig7_Dim_psweep.R, input_data/strain_phenotypes.csv, results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.rds
+    output: figures/fig7_Dim_psweep.pdf
+    jobid: 40
+    reason: Input files updated by another job: results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.rds
+    resources: tmpdir=/tmp
+── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+
+Attaching package: ‘jsonlite’
+
+The following object is masked from ‘package:purrr’:
+
+    flatten
+
+Rows: 7 Columns: 4
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (2): Strain, Source
+dbl (2): Growth_rate, Conjugation_rate
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Scale for x is already present.
+Adding another scale for x, which will replace the existing scale.
+Scale for y is already present.
+Adding another scale for y, which will replace the existing scale.
+[Mon Jun 15 19:38:07 2026]
+Finished jobid: 40 (Rule: fig7)
+17 of 18 steps (94%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Mon Jun 15 19:38:07 2026]
+localrule all:
+    input: results/phenotyping/growth_rate/OD/growthrate_av.pdf, figures/panels/fig2bc_criterion.pdf, figures/panels/fig3b_phenotyping.pdf, figures/fig4_DG_invasion.pdf, figures/fig5_validation.pdf, figures/fig6_psweep.pdf, figures/fig7_Dim_psweep.pdf, figures/figS1_full_invasion.pdf, figures/figS2_psweep_ns.pdf, figures/figS3_DGsweeps.pdf
+    jobid: 0
+    reason: Input files updated by another job: figures/fig7_Dim_psweep.pdf, figures/figS2_psweep_ns.pdf, figures/fig6_psweep.pdf
+    resources: tmpdir=/tmp
+[Mon Jun 15 19:38:07 2026]
+Finished jobid: 0 (Rule: all)
+18 of 18 steps (100%) done
+Complete log(s): /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/.snakemake/log/2026-06-15T180734.960394.snakemake.log
