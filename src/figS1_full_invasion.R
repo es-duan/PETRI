@@ -3,9 +3,24 @@
 # Load packages ----
 library(tidyverse)
 library(patchwork)
+library(argparse)
+library(jsonlite)
 
-p_Anc <-  "#8A407A"
-p_Mut <- "#8394F6"
+# Set arguments parser inputs ----
+parser <- ArgumentParser()
+parser$add_argument("-c","--colors", help = "JSON string of plot colors")
+
+# Parse arguments
+args <- parser$parse_args()
+
+# Load global variables ----
+## Colors ----
+plot_colors <- fromJSON(args$colors)
+p_Anc <- plot_colors[["p_Anc"]]
+p_Mut <- plot_colors[["p_Mut"]]
+
+## Retrieve ggplot theme ----
+source("src/ggplot_theme.R")
 
 # Read in figures ----
 LFC_full <- readRDS("results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_frequency_plot.rds")
