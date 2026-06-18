@@ -10,3 +10,4 @@ prelim_experiments/*
 .snakemake/*
 !.snakemake/DAG.pdf
 !.snakemake/generate_DAG.bash
+!.snakemake/PETRI_DAG.svg

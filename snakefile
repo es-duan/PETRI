@@ -83,7 +83,7 @@ rule setup_r_environment:
     output:
         touch("results/.r_setup_complete.flag")
     conda:
-    "PETRI_env.yaml"
+        "PETRI_env.yaml"
     script:
         "src/install_cran_pkgs.R"
 
