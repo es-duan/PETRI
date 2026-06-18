@@ -30,12 +30,13 @@ sh_Mut <- plot_points[["sh_Mut"]]
 anc_name <- "X"
 mut_name <- "Y"
 label_size <- 5
+point_color <- "black" # overriding colors
 
 # Read in figures ----
-anc_HFC <- readRDS("results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot2.rds")
-anc_LFC <- readRDS("results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot2.rds")
-mut_HFC <- readRDS("results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot2.rds")
-mut_LFC <- readRDS("results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2.rds")
+anc_HFC <- readRDS("results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot2_crop.rds")
+anc_LFC <- readRDS("results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot2_crop.rds")
+mut_HFC <- readRDS("results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot2_crop.rds")
+mut_LFC <- readRDS("results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2_crop.rds")
 
 # Crop figures ----
 ## Determine range ----
@@ -56,12 +57,11 @@ mut_psi <- ph_plot$Growth_rate[ph_plot$Strain == mut_name]
 mid_gamma <- mean(c(anc_gamma, mut_gamma))
 mid_psi <- mean(c(anc_psi, mut_psi))
 
-max_gamma <- mid_gamma + 3
-min_gamma <- mid_gamma - 3
+max_gamma <- mid_gamma + 3.5
+min_gamma <- mid_gamma - 3.5
 
-max_psi <- mid_psi + 0.3
-min_psi <- mid_psi - 0.3
-
+max_psi <- mid_psi + 0.35
+min_psi <- mid_psi - 0.35
 
 
 ## Crop figures, remove legends and labels from inside plots
@@ -74,19 +74,15 @@ names(colors) <- c(anc_name, mut_name)
 names(shapes) <- c(anc_name, mut_name)
 
 pA <- anc_LFC +
-  scale_x_continuous(limits = c(min_gamma, max_gamma),
-                     expand = c(0.025, 0.025)) +
-  scale_y_continuous(limits = c(min_psi, max_psi),
-                     expand = c(0.01, 0.01)) +
   geom_point(data = ph_plot,
-             mapping = aes(log_Conj, Growth_rate, shape = Strain, color = Strain),
-             size = psweep_point_size) +
+             mapping = aes(log_Conj, Growth_rate, shape = Strain),
+             size = psweep_point_size, color = point_color) +
   annotate("text",
            x = min_gamma + 0.4, y = max_psi - 0.04,
            label = "A", color = "white", size = label_size) +
   labs(title = paste0(anc_name, " as resident")) +
   scale_shape_manual(values = shapes) +
-  scale_color_manual(values = colors) +
+  # scale_color_manual(values = colors) +
   theme(axis.title.x = element_blank(),
         axis.text.x  = element_blank(),
         axis.ticks.x = element_blank(),
@@ -97,20 +93,18 @@ pA <- anc_LFC +
          color = "none")
 
 pB <- mut_LFC +
-  scale_x_continuous(limits = c(min_gamma, max_gamma),
-                     expand = c(0.025, 0.025)) +
   scale_y_continuous(limits = c(min_psi, max_psi),
                      expand = c(0.01, 0.01),
                      name = "LFC", position = "right") +
   geom_point(data = ph_plot,
-             mapping = aes(log_Conj, Growth_rate, shape = Strain, color = Strain),
-             size = psweep_point_size) +
+             mapping = aes(log_Conj, Growth_rate, shape = Strain),
+             size = psweep_point_size, color = point_color) +
   annotate("text",
            x = min_gamma + 0.4, y = max_psi - 0.04,
            label = "B", color = "white", size = label_size) +
   labs(title = paste0(mut_name, " as resident")) +
   scale_shape_manual(values = shapes) +
-  scale_color_manual(values = colors) +
+  # scale_color_manual(values = colors) +
   theme(axis.title.x = element_blank(),
         axis.text.x  = element_blank(),
         axis.ticks.x = element_blank(),
@@ -122,37 +116,31 @@ pB <- mut_LFC +
          fill = "none")
 
 pC <- anc_HFC +
-  scale_x_continuous(limits = c(min_gamma, max_gamma),
-                     expand = c(0.025, 0.025)) +
-  scale_y_continuous(limits = c(min_psi, max_psi),
-                     expand = c(0.01, 0.01)) +
   geom_point(data = ph_plot,
-             mapping = aes(log_Conj, Growth_rate, shape = Strain, color = Strain),
-             size = psweep_point_size) +
+             mapping = aes(log_Conj, Growth_rate, shape = Strain),
+             size = psweep_point_size, color = point_color) +
   annotate("text",
            x = min_gamma + 0.4, y = max_psi - 0.04,
            label = "C", color = "black", size = label_size) +
   scale_shape_manual(values = shapes) +
-  scale_color_manual(values = colors) +
+  # scale_color_manual(values = colors) +
   theme(legend.position = "none") +
   guides(shape = "none",
          color = "none",
          fill = "none")
 
 pD <- mut_HFC +
-  scale_x_continuous(limits = c(min_gamma, max_gamma),
-                     expand = c(0.025, 0.025)) +
   scale_y_continuous(limits = c(min_psi, max_psi),
                      expand = c(0.01, 0.01),
                      name = "HFC", position = "right") +
   geom_point(data = ph_plot,
-             mapping = aes(log_Conj, Growth_rate, shape = Strain, color = Strain),
-             size = psweep_point_size) +
+             mapping = aes(log_Conj, Growth_rate, shape = Strain),
+             size = psweep_point_size, color = point_color) +
   annotate("text",
            x = min_gamma + 0.4, y = max_psi - 0.04,
            label = "D", color = "black", size = label_size) +
   scale_shape_manual(values = shapes) +
-  scale_color_manual(values = colors) +
+  # scale_color_manual(values = colors) +
   theme(axis.text.y  = element_blank(),
         axis.ticks.y = element_blank(),
         axis.title.x = element_blank(),

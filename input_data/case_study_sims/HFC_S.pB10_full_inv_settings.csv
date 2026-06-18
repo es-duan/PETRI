@@ -14,14 +14,6 @@ gammaA1.F2,2.30E-12
 gammaA2.F2,2.30E-12
 gammaM1.F2,1.63E-14
 gammaM2.F2,1.63E-14
-gammaA1.F1_base,0.00E+00
-gammaA2.F1_base,0.00E+00
-gammaM1.F1_base,0.00E+00
-gammaM2.F1_base,0.00E+00
-gammaA1.F2_base,0.00E+00
-gammaA2.F2_base,0.00E+00
-gammaM1.F2_base,0.00E+00
-gammaM2.F2_base,0.00E+00
 sigmaA1,0.00E+00
 sigmaM1,0.00E+00
 sigmaA2,0.00E+00
@@ -36,7 +28,7 @@ C,1.00E+09
 e,1.00E+00
 Q,1.00E+07
 Timestep,1.00E-02
-Cycles,9
+Cycles,12
 Volume,5
 Colony_selection,volume
 T_volume,0.5

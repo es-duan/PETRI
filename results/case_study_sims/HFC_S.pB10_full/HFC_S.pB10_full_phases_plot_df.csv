@@ -17,3 +17,9 @@ Cycle,Phase,T_start,T_end
 8,Transconjugant selection,544,616
 9,Conjugation,616,621
 9,Transconjugant selection,621,693
+10,Conjugation,693,698
+10,Transconjugant selection,698,770
+11,Conjugation,770,775
+11,Transconjugant selection,775,847
+12,Conjugation,847,852
+12,Transconjugant selection,852,924

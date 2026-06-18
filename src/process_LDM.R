@@ -10,6 +10,7 @@ library(jsonlite)
 # Set arguments parser inputs ----
 parser <- ArgumentParser()
 parser$add_argument("-c","--colors", help = "JSON string of plot colors")
+parser$add_argument("-o","--points", help = "JSON string of point aesthetics")
 
 # Parse arguments
 args <- parser$parse_args()
@@ -20,6 +21,13 @@ plot_colors <- fromJSON(args$colors)
 p_Anc <- plot_colors[["p_Anc"]]
 p_Mut <- plot_colors[["p_Mut"]]
 p_F <- plot_colors[["p_F"]]
+
+## Points ----
+plot_points <- jsonlite::fromJSON(args$points)
+exp_point_size <- plot_points[["exp_point_size"]]
+sh_Anc <- plot_points[["sh_Anc"]]
+sh_Mut <- plot_points[["sh_Mut"]]
+sh_F <- plot_points[["sh_F"]]
 
 ## Retrieve ggplot theme ----
 source("src/ggplot_theme.R")
@@ -47,15 +55,18 @@ density_plot <- density2 %>%
                               Plate.cell.type == "Recipient" ~ "F"))
 
 p1 <- ggplot(data = density_plot,
-       mapping = aes(Time, Density_mean, color = Strain)) +
+       mapping = aes(Time, Density_mean, color = Strain, shape = Strain)) +
   geom_line() +
   geom_errorbar(data = density_plot,
                 mapping = aes(ymin = Density_mean - Density_se, ymax = Density_mean + Density_se),
                 width = 0.1) +
-  geom_point() +
+  geom_point(size = exp_point_size) +
   scale_color_manual(values = c("F" = p_F,
                                 "Anc" = p_Anc,
                                 "Mut" = p_Mut)) +
+  scale_shape_manual(values = c("F" = sh_F,
+                                "Anc" = sh_Anc,
+                                "Mut" = sh_Mut)) +
   facet_grid(~Day) +
   fig_aes
 
@@ -84,20 +95,23 @@ LDM_av <- LDM %>%
 
 ## Plot final conjugation rates ----
 p2 <- ggplot(data = LDM_av,
-       mapping = aes(Strain, Conjugation_rate_mean, color = Strain)) +
+       mapping = aes(Strain, Conjugation_rate_mean, color = Strain, shape = Strain)) +
   geom_line() +
   geom_errorbar(data = LDM_av,
                 mapping = aes(ymin = Conjugation_rate_mean - Conjugation_rate_se, ymax = Conjugation_rate_mean + Conjugation_rate_se),
                 width = 0.1) +
-  geom_point() +
+  geom_point(size = exp_point_size) +
   scale_color_manual(values = c("F" = p_F,
                                 "Anc" = p_Anc,
                                 "Mut" = p_Mut)) +
+  scale_shape_manual(values = c("F" = sh_F,
+                                "Anc" = sh_Anc,
+                                "Mut" = sh_Mut)) +
   scale_y_continuous(trans = "log10") +
   fig_aes
 
 ggsave("results/phenotyping/LDM_conjugation/LDM_conj_rates.pdf",
-       p2, width = 5, height = 5, units = "in")
+       p2, width = 4, height = 3, units = "in")
 
 # Statistical analysis ----
 conj_tt <- t.test(log10(filter(LDM, Strain == "Anc")$LDM),

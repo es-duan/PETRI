@@ -8,12 +8,10 @@ import json
 ## Specify treatments
 TREATMENTS = ["DG_S.pB10", "HFC_S.pB10", "LFC_S.pB10-A", "HFC_S.pB10_full", "LFC_S.pB10-A_full"]
 PSWEEPS = ["pHFC_S.pB10","pLFC_S.pB10",
-           "pDim90_E.R1","pDim90_E.RP4",
+           "pDim90_E.R1",
            "pHFC_S.pB10-A","pLFC_S.pB10-A",
-           "pHFCi_S.pB10","pLFCi_S.pB10",
-           "pHFCi2_S.pB10","pLFCi2_S.pB10",
-           "pDG_S.pB10","pDGs_S.pB10",
-           "pHFC_S.pB10_max","pLFC_S.pB10_max","pDim90_E.R1_max"]
+           "pDG_S.pB10","pDGs_S.pB10"]
+PSWEEPS_crop = ["pHFC_S.pB10","pLFC_S.pB10","pHFC_S.pB10-A","pLFC_S.pB10-A"]
 
 ## Specify global variables
 ### Colors
@@ -21,16 +19,14 @@ plot_colors = {
   "p_Anc": "#8A407A",
   "p_Mut": "#8394F6",
   "p_F": "gray40",
+  "p_SynMut": "#397B83",
   "p_growth": "#e7e9fd",
   "p_conj": "#d8aace",
   "p_tselect": "#c4bbeb",
   "p_imm": "#d0ffeb",
   "p_hc": "#ffecbe",
   "p_syn": "#3ba9a5",
-  "p_par": "#ffa55a"
-}
-
-plot_colors_psweep = {
+  "p_par": "#ffa55a",
   "p_Exc": "gray95",
   "p_Dis": "#140433",
   "p_lowI": "#FFC2C2",
@@ -48,7 +44,8 @@ plot_lines = {
   "nalR_l": "22",
   "exp_l": "solid",
   "sim_l": "12",
-  "plot_lw": 1
+  "plot_lw": 1,
+  "inv_width": 0.7
 }
 
 ### Points
@@ -58,7 +55,8 @@ plot_points = {
   "ph_point_size": 3,
   "sh_Anc": 16,
   "sh_Mut": 17,
-  "sh_F": 18,
+  "sh_SynMut": 18,
+  "sh_F": 15,
   "sh_R1": 10,
   "sh_copA": 9,
   "sh_finO": 7
@@ -66,11 +64,10 @@ plot_points = {
 
 rule all:
   input:
-    # expand("results/parameter_sweeps/{psweep}/{psweep}_change_plot.pdf", psweep = PSWEEPS),
-    # expand("results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot.pdf", psweep = PSWEEPS),
     # expand("results/parameter_sweeps/{psweep}/{psweep}_inv_change_strain_plot.pdf", psweep = PSWEEPS),
+    # expand("results/parameter_sweeps/{psweep_crop}/{psweep_crop}_inv_change_plot2_crop.rds", psweep_crop = PSWEEPS_crop),
     "results/phenotyping/growth_rate/OD/growthrate_av.pdf",
-#    "figures/panels/fig1_axes.pdf",
+    "figures/panels/fig1_axes.pdf",
     "figures/panels/fig2bc_criterion.pdf",
     "figures/panels/fig3b_phenotyping.pdf",
     "figures/fig4_DG_invasion.pdf",
@@ -208,14 +205,16 @@ rule plot_psweep:
     "results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot2_ns.pdf",
     "results/parameter_sweeps/{psweep}/{psweep}_inv_change_plot2_ns.rds"
   params:
-    plot_colors_psweep = json.dumps(plot_colors_psweep)
+    plot_colors = json.dumps(plot_colors),
+    plot_lines = json.dumps(plot_lines)
   shell:
     """
     Rscript src/plot_psweep.R \
       --psweepsetting {wildcards.psweep} \
-      --colors '{params.plot_colors_psweep}'
+      --colors '{params.plot_colors}' \
+      --lines '{params.plot_lines}'
     """
-    
+
 # Define rule for plotting parameter sweeps with strains
 rule plot_psweep_strain:
   input:
@@ -234,6 +233,39 @@ rule plot_psweep_strain:
       --points '{params.plot_points}'
     """
 
+# # Define rule for calculating fill limits for cropped plots
+# rule plot_psweep_crop_limits:
+#   input:
+#     "src/plot_psweep_crop_limits.R",
+#     "results/parameter_sweeps/{psweep}/{psweep}_plot.csv"
+#   output:
+#     "figures/panels/fig6_limits.rds"
+#   shell:
+#     """
+#     Rscript src/plot_psweep_crop_limits.R 
+#     """
+
+# Define rule for plotting cropped parameter sweeps
+rule plot_psweep_crop:
+  input:
+    "src/plot_psweep_crop.R",
+    "results/parameter_sweeps/{psweep_crop}/{psweep_crop}_plot.csv",
+    "figures/panels/fig6_limits.rds",
+    "src/ggplot_theme.R"
+  output:
+    "results/parameter_sweeps/{psweep_crop}/{psweep_crop}_inv_change_plot2_crop.rds",
+    "results/parameter_sweeps/{psweep_crop}/{psweep_crop}_inv_change_plot2_ns_crop.rds"
+  params:
+    plot_colors = json.dumps(plot_colors),
+    plot_lines = json.dumps(plot_lines)
+  shell:
+    """
+    Rscript src/plot_psweep_crop.R \
+      --psweepsetting {wildcards.psweep_crop} \
+      --colors '{params.plot_colors}' \
+      --lines '{params.plot_lines}'
+    """
+    
 # Define rule for processing extinction and colony size data
 rule process_extinction:
   input:
@@ -336,11 +368,13 @@ rule process_growth_plating:
     "results/phenotyping/growth_rate/plating/growthrate_tt.csv",
     "results/phenotyping/growth_rate/plating/growthrate0-4_av.csv"
   params:
-    plot_colors = json.dumps(plot_colors)
+    plot_colors = json.dumps(plot_colors),
+    plot_points = json.dumps(plot_points)
   shell:
     """
     Rscript src/process_growth_plating.R \
-      --colors '{params.plot_colors}'
+      --colors '{params.plot_colors}'\
+      --points '{params.plot_points}'
     """
 
 # Define rule for processing conjugation rate data
@@ -354,11 +388,13 @@ rule process_conjugation:
     "results/phenotyping/LDM_conjugation/LDM_conjugation_tt.csv",
     "results/phenotyping/LDM_conjugation/LDM_density.pdf"
   params:
-    plot_colors = json.dumps(plot_colors)
+    plot_colors = json.dumps(plot_colors),
+    plot_points = json.dumps(plot_points)
   shell:
     """
     Rscript src/process_LDM.R \
-      --colors '{params.plot_colors}'
+      --colors '{params.plot_colors}'\
+      --points '{params.plot_points}'
     """
 
 # Define rule for processing phenotyping data
@@ -420,11 +456,11 @@ rule fig2bc:
   output:
     "figures/panels/fig2bc_criterion.pdf"
   params:
-    plot_colors_psweep = json.dumps(plot_colors_psweep)
+    plot_colors = json.dumps(plot_colors)
   shell:
     """
     Rscript src/fig2bc_criterion.R \
-      --colors '{params.plot_colors_psweep}'
+      --colors '{params.plot_colors}'
     """
 
 # Define rule for generating fig 3b: phenotyping annotated
@@ -510,10 +546,10 @@ rule fig5:
 rule fig6:
   input:
     "src/fig6_psweep.R",
-    "results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot2.rds",
-    "results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot2.rds",
-    "results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot2.rds",
-    "results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2.rds",
+    "results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot2_crop.rds",
+    "results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot2_crop.rds",
+    "results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot2_crop.rds",
+    "results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2_crop.rds",
     "input_data/strain_phenotypes.csv"
   output:
     "figures/fig6_psweep.pdf"
@@ -536,11 +572,15 @@ rule fig7:
   output:
     "figures/fig7_Dim_psweep.pdf"
   params:
-    plot_points = json.dumps(plot_points)
+    plot_colors = json.dumps(plot_colors),
+    plot_points = json.dumps(plot_points),
+    plot_lines = json.dumps(plot_lines)
   shell:
     """
     Rscript src/fig7_Dim_psweep.R \
-      --points '{params.plot_points}'
+      --colors '{params.plot_colors}'\
+      --points '{params.plot_points}'\
+      --lines '{params.plot_lines}'
     """
 
 # Define rule for generating fig S1: full invasion sims
@@ -563,10 +603,10 @@ rule figS1:
 rule figS2:
   input:
     "src/figS2_psweep_ns.R",
-    "results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot2_ns.rds",
-    "results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot2_ns.rds",
-    "results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot2_ns.rds",
-    "results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2_ns.rds",
+    "results/parameter_sweeps/pHFC_S.pB10/pHFC_S.pB10_inv_change_plot2_ns_crop.rds",
+    "results/parameter_sweeps/pLFC_S.pB10/pLFC_S.pB10_inv_change_plot2_ns_crop.rds",
+    "results/parameter_sweeps/pHFC_S.pB10-A/pHFC_S.pB10-A_inv_change_plot2_ns_crop.rds",
+    "results/parameter_sweeps/pLFC_S.pB10-A/pLFC_S.pB10-A_inv_change_plot2_ns_crop.rds",
     "input_data/strain_phenotypes.csv"
   output:
     "figures/figS2_psweep_ns.pdf"
@@ -590,11 +630,13 @@ rule figS3:
   output:
     "figures/figS3_DGsweeps.pdf"
   params:
-    plot_colors_psweep = json.dumps(plot_colors_psweep),
-    plot_points = json.dumps(plot_points)
+    plot_colors = json.dumps(plot_colors),
+    plot_points = json.dumps(plot_points),
+    plot_lines = json.dumps(plot_lines)
   shell:
     """
     Rscript src/figS3_DG_stochasticity.R \
-      --colors '{params.plot_colors_psweep}'\
-      --points '{params.plot_points}'
+      --colors '{params.plot_colors}'\
+      --points '{params.plot_points}'\
+      --lines '{params.plot_lines}'
     """

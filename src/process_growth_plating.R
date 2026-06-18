@@ -9,6 +9,7 @@ library(jsonlite)
 # Set arguments parser inputs ----
 parser <- ArgumentParser()
 parser$add_argument("-c","--colors", help = "JSON string of plot colors")
+parser$add_argument("-o","--points", help = "JSON string of point aesthetics")
 
 # Parse arguments
 args <- parser$parse_args()
@@ -19,6 +20,15 @@ plot_colors <- fromJSON(args$colors)
 p_Anc <- plot_colors[["p_Anc"]]
 p_Mut <- plot_colors[["p_Mut"]]
 p_F <- plot_colors[["p_F"]]
+p_SynMut <- plot_colors[["p_SynMut"]]
+
+## Points ----
+plot_points <- jsonlite::fromJSON(args$points)
+exp_point_size <- plot_points[["exp_point_size"]]
+sh_Anc <- plot_points[["sh_Anc"]]
+sh_Mut <- plot_points[["sh_Mut"]]
+sh_SynMut <- plot_points[["sh_SynMut"]]
+sh_F <- plot_points[["sh_F"]]
 
 ## Retrieve ggplot theme ----
 source("src/ggplot_theme.R")
@@ -29,22 +39,28 @@ output_dir <- "results/phenotyping/growth_rate/plating"
 
 # Select relevant data and recalculate density ----
 plating2 <- plating %>%
-  filter(Strain %in% c("TR44", "TR84", "TR85")) %>%
+  filter(Strain %in% c("TR44", "TR84", "TR85", "TR86")) %>%
   mutate(Density = Count * (1000/Volume_plated) * 10^Plate_Dilution) %>%
   mutate(Strain = case_when(Strain == "TR44" ~ "F",
                             Strain == "TR84" ~ "Anc",
-                            Strain == "TR85" ~ "Mut"))
+                            Strain == "TR85" ~ "Mut",
+                            Strain == "TR86" ~ "Syn Mut"))
 
 # Plot density over time ----
 p1 <- ggplot(data = plating2,
-       mapping = aes(Time, Density, color = Strain)) +
+       mapping = aes(Time, Density, color = Strain, shape = Strain)) +
   stat_summary(fun.data="mean_se",geom="errorbar",width=0.2) +
   stat_summary(fun = "mean", geom = "line") +
-  stat_summary(fun = "mean", geom = "point") +
+  stat_summary(fun = "mean", geom = "point", size = exp_point_size) +
   scale_y_continuous(trans = "log10") +
   scale_color_manual(values = c("F" = p_F,
                                 "Anc" = p_Anc,
-                                "Mut" = p_Mut)) +
+                                "Mut" = p_Mut,
+                                "Syn Mut" = p_SynMut)) +
+  scale_shape_manual(values = c("F" = sh_F,
+                                "Anc" = sh_Anc,
+                                "Mut" = sh_Mut,
+                                "Syn Mut" = sh_SynMut)) +
   fig_aes
 ggsave(paste(output_dir, "growth_density_av.pdf", sep = "/"),
        p1, width = 6, height = 4, units = "in")
@@ -58,16 +74,21 @@ growth <- plating2 %>%
 
 ## Growth rate plot ----
 p2 <- ggplot(data = growth,
-             mapping = aes(Strain, growth_rate, color = Strain)) +
+             mapping = aes(Strain, growth_rate, color = Strain, shape = Strain)) +
   stat_summary(fun.data="mean_se",geom="errorbar",width=0.2) +
   stat_summary(fun = "mean", geom = "line") +
-  stat_summary(fun = "mean", geom = "point") +
+  stat_summary(fun = "mean", geom = "point", shape = exp_point_size) +
   scale_color_manual(values = c("F" = p_F,
                                 "Anc" = p_Anc,
-                                "Mut" = p_Mut)) +
+                                "Mut" = p_Mut,
+                                "Syn Mut" = p_SynMut)) +
+  scale_shape_manual(values = c("F" = sh_F,
+                                "Anc" = sh_Anc,
+                                "Mut" = sh_Mut,
+                                "Syn Mut" = sh_SynMut)) +
   fig_aes
 ggsave(paste(output_dir, "growth_rate_av.pdf", sep = "/"),
-       p2, width = 5, height = 4, units = "in")
+       p2, width = 6, height = 4, units = "in")
 
 # Average data ----
 gr_out <- growth %>%

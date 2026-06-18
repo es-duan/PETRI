@@ -32,18 +32,15 @@ pA <- LFC_full +
                      labels = c("X", "Y")) +
   theme(legend.position = "top",
         legend.title = element_blank(),
-        legend.key.size = unit(0.15, "in"))
+        legend.key.size = unit(0.15, "in"),
+        axis.title.x = element_blank())
 
 pB <- HFC_full +
-  # theme(legend.position = "bottom",
-  #       legend.title = element_blank())
   theme(legend.position = "none")
 
 # Combine plots ----
 final_plot <- pA + pB +
-  plot_layout(nrow = 2,
-              axes = "collect",
-              axis_titles = "collect") +
+  plot_layout(nrow = 2) +
   plot_annotation(tag_levels = "A")
 
 ggsave("figures/figS1_full_invasion.pdf",

@@ -24,7 +24,7 @@ A1_0 = as.numeric(setting_list$A1_0)
 M1_0 = as.numeric(setting_list$M1_0)
 
 # Designate invasion status of mutations
-sweep_plot <- sweep_out %>%
+sweep_out2 <- sweep_out %>%
   mutate(log_gamma_M = log10(gamma_M)) %>%
   mutate(Anc = A1 + A2,
          Mut = M1 + M2) %>%
@@ -35,6 +35,14 @@ sweep_plot <- sweep_out %>%
          Mut_freq_inv = ifelse(Mut_freq > Mut_freq0, "Increase", "Decrease")) %>%
   mutate(log_Mut_freq0 = log10(M1_0/(A1_0 + M1_0)),
          log_Mut_freq_change = log10(Mut_freq) - log_Mut_freq0)
+
+# Relative scaling for frequency change
+log_max_change <- max(sweep_out2$log_Mut_freq_change)
+log_min_change <- min(sweep_out2$log_Mut_freq_change)
+
+sweep_plot <- sweep_out2 %>%
+  mutate(log_Mut_freq_change2 = ifelse(log_Mut_freq_change > 0, log_Mut_freq_change/log_max_change,
+                                       -log_Mut_freq_change/log_min_change))
 
 # Save file
 write_csv(sweep_plot, paste0(output_folder, "/", ps, "_plot.csv"))

@@ -14,14 +14,6 @@ gammaA1.F2,2.30E-12
 gammaA2.F2,2.30E-12
 gammaM1.F2,1.63E-14
 gammaM2.F2,1.63E-14
-gammaA1.F1_base,0.00E+00
-gammaA2.F1_base,0.00E+00
-gammaM1.F1_base,0.00E+00
-gammaM2.F1_base,0.00E+00
-gammaA1.F2_base,0.00E+00
-gammaA2.F2_base,0.00E+00
-gammaM1.F2_base,0.00E+00
-gammaM2.F2_base,0.00E+00
 sigmaA1,0.00E+00
 sigmaM1,0.00E+00
 sigmaA2,0.00E+00
@@ -51,7 +43,7 @@ A_colony,
 M_colony,
 Final_density_t_selection,1.00E+06
 Dilution_growth,0.001
-Dilution_conjugation,0.001
+Dilution_conjugation,0.01
 Dilution_t_selection,0.001
 A1_migrants,0
 M1_migrants,0

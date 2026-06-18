@@ -1,8 +1,7 @@
 Strain,Growth_rate,Conjugation_rate,Source
-S.pB10,0.485,2.30E-12,"Kosterlitz et al., this paper"
+S.pB10,0.485,2.30E-12,this paper
 S.pB10-A,0.68,1.63E-14,this paper
-S.pB10-B,0.63,9.90E-12,Kosterlitz et al.
+S.pB10-B,0.73,9.90E-12,"Kosterlitz et al. 2026, this paper"
 E.R1,0.754,2.19E-11,Matthews et al. 2025/Dimitriu et al. 2021
 E.R1-copA,0.738,1.60E-10,Matthews et al. 2025/Dimitriu et al. 2021
 E.R1-finO,0.562,9.51E-09,Matthews et al. 2025
-,,,

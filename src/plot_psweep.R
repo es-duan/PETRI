@@ -9,6 +9,7 @@ library(jsonlite)
 parser <- ArgumentParser()
 parser$add_argument("-p","--psweepsetting", type = "character", help = "Specify Treatment and parameter sweep setting")
 parser$add_argument("-c","--colors", help = "JSON string of plot colors")
+parser$add_argument("-l","--lines", help = "JSON string of plot lines")
 
 # Parse arguments
 args <- parser$parse_args()
@@ -39,7 +40,9 @@ p_axes <- plot_colors[["p_axes"]]
 p_mid <- plot_colors[["p_mid"]]
 p_invline <- plot_colors[["p_invline"]]
 
-inv_width <- 0.7
+## Lines ----
+plot_lines <- fromJSON(args$lines)
+inv_width <- plot_lines[["inv_width"]]
 
 ## Retrieve ggplot theme ----
 source("src/ggplot_theme.R")
@@ -79,19 +82,11 @@ axes_label <- rbind(axes1,axes2) %>%
                              psi == psi_ref & gamma != gamma_ref ~ as.character(round(log10(10^gamma/gamma_ref), 2)),
                              gamma == log10(gamma_ref) & psi != psi_ref ~ as.character(round(psi - psi_ref, 2))))
 
-## Transformations for color ----
-log_max_change <- max(sweep_plot$log_Mut_freq_change)
-log_min_change <- min(sweep_plot$log_Mut_freq_change)
-
-sweep_plot2 <- sweep_plot %>%
-  mutate(log_Mut_freq_change2 = ifelse(log_Mut_freq_change > 0, log_Mut_freq_change/log_max_change,
-                                       -log_Mut_freq_change/log_min_change))
-
 ## Identify points for invasion boundary line ----
-sweep0_d <- sweep_plot2 %>%
+sweep0_d <- sweep_plot %>%
   filter(Mut_freq_inv == "Decrease") %>%
   slice_min(order_by = abs(log_Mut_freq_change2), n = 100)
-sweep0_i <- sweep_plot2 %>%
+sweep0_i <- sweep_plot %>%
   filter(Mut_freq_inv == "Increase") %>%
   slice_min(order_by = abs(log_Mut_freq_change2), n = 100)
 sweep0 <- rbind(sweep0_d, sweep0_i)
@@ -99,13 +94,13 @@ sweep0 <- rbind(sweep0_d, sweep0_i)
 # Plot by relative frequency change ----
 ## Contour line ----
 i1 <- ggplot() +
-  geom_raster(data = sweep_plot2,
+  geom_raster(data = sweep_plot,
               mapping = aes(log_gamma_M, psi_M, fill = log_Mut_freq_change2)) +
   scale_fill_gradient2("Relative\nfrequency\nchange",
                        low=p_highD, mid = p_mid, high=p_highI, midpoint = log(1)) +
   geom_hline(yintercept = psi_ref, color = p_axes, linewidth = 1) +
   geom_vline(xintercept = log10(gamma_ref), color = p_axes, linewidth = 1) +
-  geom_contour(data = sweep_plot2,
+  geom_contour(data = sweep_plot,
                mapping = aes(x = log_gamma_M, psi_M, z = log_Mut_freq_change2),
                breaks = 0, color = p_invline, linewidth = inv_width) +
   # geom_text(data = axes_label,
@@ -124,13 +119,13 @@ saveRDS(i1, paste0(output_folder, "/", ps, "_inv_change_plot.rds"))
 
 ### Contour line with no scaling ----
 i1n <- ggplot() +
-  geom_raster(data = sweep_plot2,
+  geom_raster(data = sweep_plot,
               mapping = aes(log_gamma_M, psi_M, fill = log_Mut_freq_change)) +
   scale_fill_gradient2("log10\nFrequency\nchange",
                        low=p_highD, mid = p_mid, high=p_highI, midpoint = log(1)) +
   geom_hline(yintercept = psi_ref, color = p_axes, linewidth = 1) +
   geom_vline(xintercept = log10(gamma_ref), color = p_axes, linewidth = 1) +
-  geom_contour(data = sweep_plot2,
+  geom_contour(data = sweep_plot,
                mapping = aes(x = log_gamma_M, psi_M, z = log_Mut_freq_change2),
                breaks = 0, color = p_invline, linewidth = inv_width) +
   # geom_text(data = axes_label,
@@ -149,7 +144,7 @@ saveRDS(i1n, paste0(output_folder, "/", ps, "_inv_change_plot_ns.rds"))
 
 ## Geom smooth line ----
 i2 <- ggplot() +
-  geom_raster(data = sweep_plot2,
+  geom_raster(data = sweep_plot,
               mapping = aes(log_gamma_M, psi_M, fill = log_Mut_freq_change2)) +
   scale_fill_gradient2("Relative\nfrequency\nchange",
                        low=p_highD, mid = p_mid, high=p_highI, midpoint = log(1)) +
@@ -174,7 +169,7 @@ saveRDS(i2, paste0(output_folder, "/", ps, "_inv_change_plot2.rds"))
 
 ### Geom smooth line with no scaling ----
 i2n <- ggplot() +
-  geom_raster(data = sweep_plot2,
+  geom_raster(data = sweep_plot,
               mapping = aes(log_gamma_M, psi_M, fill = log_Mut_freq_change)) +
   scale_fill_gradient2("log10\nFrequency\nchange",
                        low=p_highD, mid = p_mid, high=p_highI, midpoint = log(1)) +

@@ -49,21 +49,13 @@ if (!dir.exists(treatment_folder)) {
 # Set values for parameters, experiment settings, and initial variables ----
 ## Parameters ----
 Gamma_A1.F1_max  = as.numeric(treatment_csv$gammaA1.F1[row_number])
-Gamma_A1.F1_base = as.numeric(treatment_csv$gammaA1.F1_base[row_number])
 Gamma_M1.F1_max  = as.numeric(treatment_csv$gammaM1.F1[row_number])
-Gamma_M1.F1_base = as.numeric(treatment_csv$gammaM1.F1_base[row_number])
 Gamma_A2.F2_max  = as.numeric(treatment_csv$gammaA2.F2[row_number])
-Gamma_A2.F2_base = as.numeric(treatment_csv$gammaA2.F2_base[row_number])
 Gamma_M2.F2_max  = as.numeric(treatment_csv$gammaM2.F2[row_number])
-Gamma_M2.F2_base = as.numeric(treatment_csv$gammaM2.F2_base[row_number])
 Gamma_A1.F2_max  = as.numeric(treatment_csv$gammaA1.F2[row_number])
-Gamma_A1.F2_base = as.numeric(treatment_csv$gammaA1.F2_base[row_number])
 Gamma_M1.F2_max  = as.numeric(treatment_csv$gammaM1.F2[row_number])
-Gamma_M1.F2_base = as.numeric(treatment_csv$gammaM1.F2_base[row_number])
 Gamma_A2.F1_max  = as.numeric(treatment_csv$gammaA2.F1[row_number])
-Gamma_A2.F1_base = as.numeric(treatment_csv$gammaA2.F1_base[row_number])
 Gamma_M2.F1_max  = as.numeric(treatment_csv$gammaM2.F1[row_number])
-Gamma_M2.F1_base = as.numeric(treatment_csv$gammaM2.F1_base[row_number])
 Psi_A1_max = as.numeric(treatment_csv$psiA1[row_number])
 Psi_M1_max = as.numeric(treatment_csv$psiM1[row_number])
 Psi_F1_max = as.numeric(treatment_csv$psiF1[row_number])
@@ -135,16 +127,16 @@ model <- function(time, state, parameters) {
     C  <- state["C"]
     
     # within.species resource.dependent conjugation equations
-    gamma_A1.F1_C <- gamma_A1.F1_base + ((gamma_A1.F1_max - gamma_A1.F1_base) * (C / (Q + C)))
-    gamma_M1.F1_C <- gamma_M1.F1_base + ((gamma_M1.F1_max - gamma_M1.F1_base) * (C / (Q + C)))
-    gamma_A2.F2_C <- gamma_A2.F2_base + ((gamma_A2.F2_max - gamma_A2.F2_base) * (C / (Q + C)))
-    gamma_M2.F2_C <- gamma_M2.F2_base + ((gamma_M2.F2_max - gamma_M2.F2_base) * (C / (Q + C)))
+    gamma_A1.F1_C <- ((gamma_A1.F1_max) * (C / (Q + C)))
+    gamma_M1.F1_C <- ((gamma_M1.F1_max) * (C / (Q + C)))
+    gamma_A2.F2_C <- ((gamma_A2.F2_max) * (C / (Q + C)))
+    gamma_M2.F2_C <- ((gamma_M2.F2_max) * (C / (Q + C)))
     
     # cross.species resource.dependent conjugation equations
-    gamma_A1.F2_C <- gamma_A1.F2_base + ((gamma_A1.F2_max - gamma_A1.F2_base) * (C / (Q + C)))
-    gamma_M1.F2_C <- gamma_M1.F2_base + ((gamma_M1.F2_max - gamma_M1.F2_base) * (C / (Q + C)))
-    gamma_A2.F1_C <- gamma_A2.F1_base + ((gamma_A2.F1_max - gamma_A2.F1_base) * (C / (Q + C)))
-    gamma_M2.F1_C <- gamma_M2.F1_base + ((gamma_M2.F1_max - gamma_M2.F1_base) * (C / (Q + C)))
+    gamma_A1.F2_C <- ((gamma_A1.F2_max) * (C / (Q + C)))
+    gamma_M1.F2_C <- ((gamma_M1.F2_max) * (C / (Q + C)))
+    gamma_A2.F1_C <- ((gamma_A2.F1_max) * (C / (Q + C)))
+    gamma_M2.F1_C <- ((gamma_M2.F1_max) * (C / (Q + C)))
     
     # resource-dependent growth equations
     psi_A1_C <- psi_A1_max * (C / (Q + C))
@@ -178,21 +170,13 @@ state <- c(A1 = A1_0,
 
 ## Parameters ----
 parameters <- c(gamma_A1.F1_max = Gamma_A1.F1_max,
-                gamma_A1.F1_base = Gamma_A1.F1_base,
                 gamma_M1.F1_max = Gamma_M1.F1_max,
-                gamma_M1.F1_base = Gamma_M1.F1_base,
                 gamma_A2.F2_max = Gamma_A2.F2_max,
-                gamma_A2.F2_base = Gamma_A2.F2_base,
                 gamma_M2.F2_max = Gamma_M2.F2_max,
-                gamma_M2.F2_base = Gamma_M2.F2_base,
                 gamma_A1.F2_max = Gamma_A1.F2_max,
-                gamma_A1.F2_base = Gamma_A1.F2_base,
                 gamma_M1.F2_max = Gamma_M1.F2_max,
-                gamma_M1.F2_base = Gamma_M1.F2_base,
                 gamma_A2.F1_max = Gamma_A2.F1_max,
-                gamma_A2.F1_base = Gamma_A2.F1_base,
                 gamma_M2.F1_max = Gamma_M2.F1_max,
-                gamma_M2.F1_base = Gamma_M2.F1_base,
                 psi_A1_max = Psi_A1_max,
                 psi_M1_max = Psi_M1_max,
                 psi_F1_max = Psi_F1_max,  

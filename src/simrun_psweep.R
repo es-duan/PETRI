@@ -74,16 +74,16 @@ model <- function(time, state, parameters) {
     # C  <- state["C"]
     
     # within.species resource.dependent conjugation equations
-    gamma_A1.F1_C <- gamma_A1.F1_base + ((gamma_A1.F1_max - gamma_A1.F1_base) * (C / (Q + C)))
-    gamma_M1.F1_C <- gamma_M1.F1_base + ((gamma_M1.F1_max - gamma_M1.F1_base) * (C / (Q + C)))
-    gamma_A2.F2_C <- gamma_A2.F2_base + ((gamma_A2.F2_max - gamma_A2.F2_base) * (C / (Q + C)))
-    gamma_M2.F2_C <- gamma_M2.F2_base + ((gamma_M2.F2_max - gamma_M2.F2_base) * (C / (Q + C)))
+    gamma_A1.F1_C <- ((gamma_A1.F1_max) * (C / (Q + C)))
+    gamma_M1.F1_C <- ((gamma_M1.F1_max) * (C / (Q + C)))
+    gamma_A2.F2_C <- ((gamma_A2.F2_max) * (C / (Q + C)))
+    gamma_M2.F2_C <- ((gamma_M2.F2_max) * (C / (Q + C)))
     
     # cross.species resource.dependent conjugation equations
-    gamma_A1.F2_C <- gamma_A1.F2_base + ((gamma_A1.F2_max - gamma_A1.F2_base) * (C / (Q + C)))
-    gamma_M1.F2_C <- gamma_M1.F2_base + ((gamma_M1.F2_max - gamma_M1.F2_base) * (C / (Q + C)))
-    gamma_A2.F1_C <- gamma_A2.F1_base + ((gamma_A2.F1_max - gamma_A2.F1_base) * (C / (Q + C)))
-    gamma_M2.F1_C <- gamma_M2.F1_base + ((gamma_M2.F1_max - gamma_M2.F1_base) * (C / (Q + C)))
+    gamma_A1.F2_C <- ((gamma_A1.F2_max) * (C / (Q + C)))
+    gamma_M1.F2_C <- ((gamma_M1.F2_max) * (C / (Q + C)))
+    gamma_A2.F1_C <- ((gamma_A2.F1_max) * (C / (Q + C)))
+    gamma_M2.F1_C <- ((gamma_M2.F1_max) * (C / (Q + C)))
     
     # resource-dependent growth equations
     psi_A1_C <- psi_A1_max * (C / (Q + C))
@@ -140,21 +140,13 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
         .combine = rbind) %dopar% {
   ## Set parameters ----
   Gamma_A1.F1_max  = as.numeric(setting_list$Ref_gamma)
-  Gamma_A1.F1_base = as.numeric(setting_list$gammaA1.F1_base)
   Gamma_M1.F1_max  = as.numeric(sweep_param$gamma_M[i])
-  Gamma_M1.F1_base = as.numeric(setting_list$gammaM1.F1_base)
   Gamma_A2.F2_max  = as.numeric(setting_list$Ref_gamma)
-  Gamma_A2.F2_base = as.numeric(setting_list$gammaA2.F2_base)
   Gamma_M2.F2_max  = as.numeric(sweep_param$gamma_M[i])
-  Gamma_M2.F2_base = as.numeric(setting_list$gammaM2.F2_base)
   Gamma_A1.F2_max  = as.numeric(setting_list$Ref_gamma)
-  Gamma_A1.F2_base = as.numeric(setting_list$gammaA1.F2_base)
   Gamma_M1.F2_max  = as.numeric(sweep_param$gamma_M[i])
-  Gamma_M1.F2_base = as.numeric(setting_list$gammaM1.F2_base)
   Gamma_A2.F1_max  = as.numeric(setting_list$Ref_gamma)
-  Gamma_A2.F1_base = as.numeric(setting_list$gammaA2.F1_base)
   Gamma_M2.F1_max  = as.numeric(sweep_param$gamma_M[i])
-  Gamma_M2.F1_base = as.numeric(setting_list$gammaM2.F1_base)
   Psi_A1_max = as.numeric(setting_list$Ref_psi)
   Psi_M1_max = as.numeric(sweep_param$psi_M[i])
   Psi_F1_max = as.numeric(setting_list$psiF1)
@@ -188,21 +180,13 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
   
   ## Parameters ----
   parameters <- c(gamma_A1.F1_max = Gamma_A1.F1_max,
-                  gamma_A1.F1_base = Gamma_A1.F1_base,
                   gamma_M1.F1_max = Gamma_M1.F1_max,
-                  gamma_M1.F1_base = Gamma_M1.F1_base,
                   gamma_A2.F2_max = Gamma_A2.F2_max,
-                  gamma_A2.F2_base = Gamma_A2.F2_base,
                   gamma_M2.F2_max = Gamma_M2.F2_max,
-                  gamma_M2.F2_base = Gamma_M2.F2_base,
                   gamma_A1.F2_max = Gamma_A1.F2_max,
-                  gamma_A1.F2_base = Gamma_A1.F2_base,
                   gamma_M1.F2_max = Gamma_M1.F2_max,
-                  gamma_M1.F2_base = Gamma_M1.F2_base,
                   gamma_A2.F1_max = Gamma_A2.F1_max,
-                  gamma_A2.F1_base = Gamma_A2.F1_base,
                   gamma_M2.F1_max = Gamma_M2.F1_max,
-                  gamma_M2.F1_base = Gamma_M2.F1_base,
                   psi_A1_max = Psi_A1_max,
                   psi_M1_max = Psi_M1_max,
                   psi_F1_max = Psi_F1_max,  

@@ -7,14 +7,6 @@ Range_psi,1
 Resolution,200
 psiF1,0.535
 psiF2,0.535
-gammaA1.F1_base,0.00E+00
-gammaA2.F1_base,0.00E+00
-gammaM1.F1_base,0.00E+00
-gammaM2.F1_base,0.00E+00
-gammaA1.F2_base,0.00E+00
-gammaA2.F2_base,0.00E+00
-gammaM1.F2_base,0.00E+00
-gammaM2.F2_base,0.00E+00
 sigmaA1,0.00E+00
 sigmaM1,0.00E+00
 sigmaA2,0.00E+00
