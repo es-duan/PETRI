@@ -19,9 +19,6 @@ plot_colors <- fromJSON(args$colors)
 p_Anc <- plot_colors[["p_Anc"]]
 p_Mut <- plot_colors[["p_Mut"]]
 
-## Retrieve ggplot theme ----
-source("src/ggplot_theme.R")
-
 # Read in figures ----
 LFC_full <- readRDS("results/case_study_sims/LFC_S.pB10-A_full/LFC_S.pB10-A_full_frequency_plot.rds")
 HFC_full <- readRDS("results/case_study_sims/HFC_S.pB10_full/HFC_S.pB10_full_frequency_plot.rds")

@@ -67,7 +67,8 @@ p3 <- anc_inv +
 
 p4 <- HFC +
   theme(legend.position = "none",
-        axis.ticks.x = element_blank()) +
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_text(color = "black")) +
   guides(color = "none",
          shape = "none",
          linetype = "none")

@@ -1,7 +1,7 @@
 # Snakemake file
 
 # Snakemake Configuration
-conda: "PETRI_config.yaml"
+conda: "PETRI_env.yaml"
 
 import json
 
@@ -21,8 +21,8 @@ plot_colors = {
   "p_F": "gray40",
   "p_SynMut": "#397B83",
   "p_growth": "#e7e9fd",
-  "p_conj": "#d8aace",
-  "p_tselect": "#c4bbeb",
+  "p_conj": "#f5c4f0",
+  "p_tselect": "#cfafed",
   "p_imm": "#d0ffeb",
   "p_hc": "#ffecbe",
   "p_syn": "#3ba9a5",
@@ -83,7 +83,7 @@ rule setup_r_environment:
     output:
         touch("results/.r_setup_complete.flag")
     conda:
-        "PETRI_config.yaml"
+    "PETRI_env.yaml"
     script:
         "src/install_cran_pkgs.R"
 
@@ -313,7 +313,8 @@ rule plot_experiments:
     "results/experimental_validation/HFC/HFC_plating_processed_av.csv",
     "results/experimental_validation/HFC/HFC_frequency_processed_av.csv",
     "results/experimental_validation/LFC/LFC_plating_processed_av.csv",
-    "results/experimental_validation/LFC/LFC_frequency_processed_av.csv"
+    "results/experimental_validation/LFC/LFC_frequency_processed_av.csv",
+    "src/ggplot_theme.R"
   output:
     "results/experimental_validation/HFC/HFC_density_plot.pdf",
     "results/experimental_validation/HFC/HFC_density_plot.rds",
@@ -339,7 +340,8 @@ rule plot_experiments:
 rule process_growth_OD:
   input:
     "src/process_growth_OD.R",
-    "input_data/experimental_data/2026-04-16_OD_growth_curve.xlsx"
+    "input_data/experimental_data/2026-04-16_OD_growth_curve.xlsx",
+    "src/ggplot_theme.R"
   output:
     "results/phenotyping/growth_rate/OD/growthratemax_av.csv",
     "results/phenotyping/growth_rate/OD/growthcurve_allrep.pdf",
@@ -361,7 +363,8 @@ rule process_growth_OD:
 rule process_growth_plating:
   input:
     "src/process_growth_plating.R",
-    "input_data/experimental_data/2026-04-02_growth_rate_plating.csv"
+    "input_data/experimental_data/2026-04-02_growth_rate_plating.csv",
+    "src/ggplot_theme.R"
   output:
     "results/phenotyping/growth_rate/plating/growth_density_av.pdf",
     "results/phenotyping/growth_rate/plating/growth_rate_av.pdf",
@@ -381,7 +384,8 @@ rule process_growth_plating:
 rule process_conjugation:
   input:
     "src/process_LDM.R",
-    "input_data/experimental_data/2026-02-18_compiled_LDM_plating.xlsx"
+    "input_data/experimental_data/2026-02-18_compiled_LDM_plating.xlsx",
+    "src/ggplot_theme.R"
   output:
     "results/phenotyping/LDM_conjugation/LDM_conj_rates.pdf",
     "results/phenotyping/LDM_conjugation/LDM_conjugation_av.csv",
@@ -414,7 +418,8 @@ rule process_phenotyping:
 rule plot_phenotyping:
   input:
     "src/plot_phenotyping.R",
-    "results/phenotyping/phenotyping_av.csv"
+    "results/phenotyping/phenotyping_av.csv",
+    "src/ggplot_theme.R"
   output:
     "results/phenotyping/pB10_phenotyping.pdf",
     "results/phenotyping/pB10_phenotyping.rds",
@@ -437,6 +442,7 @@ rule plot_phenotyping:
 rule fig1a:
   input:
     "src/fig1_axes.R",
+    "src/ggplot_theme.R",
     setup = "results/.r_setup_complete.flag"
   output:
     "figures/panels/fig1_axes.pdf",
@@ -452,7 +458,8 @@ rule fig1a:
 # Define rule for generating fig 2bc: criterion graphical representation
 rule fig2bc:
   input:
-    "src/fig2bc_criterion.R"
+    "src/fig2bc_criterion.R",
+    "src/ggplot_theme.R"
   output:
     "figures/panels/fig2bc_criterion.pdf"
   params:
@@ -470,7 +477,8 @@ rule fig3b:
     "results/phenotyping/pB10_phenotyping.rds",
     "results/phenotyping/phenotyping_av.csv",
     "results/phenotyping/growth_rate/plating/growthrate_tt.csv",
-    "results/phenotyping/LDM_conjugation/LDM_conjugation_tt.csv"
+    "results/phenotyping/LDM_conjugation/LDM_conjugation_tt.csv",
+    "src/ggplot_theme.R"
   output:
     "figures/panels/fig3b_phenotyping.pdf",
     "figures/panels/fig3b_phenotyping.rds"
@@ -568,7 +576,8 @@ rule fig7:
   input:
     "src/fig7_Dim_psweep.R",
     "input_data/strain_phenotypes.csv",
-    "results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.rds"
+    "results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.rds",
+    "src/ggplot_theme.R"
   output:
     "figures/fig7_Dim_psweep.pdf"
   params:
@@ -626,7 +635,8 @@ rule figS3:
     "src/figS3_DG_stochasticity.R",
     "results/parameter_sweeps/pDG_S.pB10/pDG_S.pB10_plot.csv",
     "results/parameter_sweeps/pDGs_S.pB10/pDGs_S.pB10_plot.csv",
-    "input_data/strain_phenotypes.csv"
+    "input_data/strain_phenotypes.csv",
+    "src/ggplot_theme.R"
   output:
     "figures/figS3_DGsweeps.pdf"
   params:

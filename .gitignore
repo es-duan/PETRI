@@ -2,6 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
+PETRI.Rproj
 **/.DS_Store
 *archive/
 prelim_experiments/*
