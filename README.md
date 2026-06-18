@@ -1,6 +1,6 @@
 # PETRI Project Repository
 This repository contains the raw data and code for running simulations and processing data for the PETRI (Plasmid Evolution of Transfer Rate Investigation) Project.
-The corresponding manuscript is currently available on bioRxiv: [Molecular pet or parasite? Exploring selection for vertical and horizontal plasmid transfer] (https://doi.org/10.64898/2026.06.02.729688)
+The corresponding manuscript is currently available on bioRxiv: [Molecular pet or parasite? Exploring selection for vertical and horizontal plasmid transfer](https://doi.org/10.64898/2026.06.02.729688)
 
 ## Project description
 This project aims to explore the environmental conditions that select for vertical and horizontal plasmid transfer. We use a dynamical model to run simulations of mutant plasmid invasion, and pair it with experimental data to validate simulations.
