@@ -20,7 +20,7 @@ Others:
 
 ## Snakemake pipeline usage
 The entire analysis pipeline (raw data -> figures) is executed using snakemake. The pipeline is as follows:
-
+![DAG](.snakemake/PETRI_DAG.svg)
 To execute the pipeline:
 ```
 conda env create -f PETRI_env.yaml
