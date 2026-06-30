@@ -1,4 +1,4 @@
-name: snakemake
+name: snakemake_env
 channels:
   - bioconda
   - conda-forge
@@ -168,4 +168,3 @@ dependencies:
   - zstd=1.5.7=h8210216_2
   - pip:
       - python-graphviz==0.20.3
-prefix: /Users/liz/anaconda3/envs/snakemake
