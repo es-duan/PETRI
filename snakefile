@@ -1,7 +1,7 @@
 # Snakemake file
 
 # Snakemake Configuration
-conda: "PETRI_env.yaml"
+conda: "PETRI_config.yaml"
 
 import json
 
@@ -83,7 +83,7 @@ rule setup_r_environment:
     output:
         touch("results/.r_setup_complete.flag")
     conda:
-        "PETRI_env.yaml"
+        "PETRI_config.yaml"
     script:
         "src/install_cran_pkgs.R"
 

@@ -1,4 +1,4 @@
-name: PETRI
+name: snakemake
 channels:
   - bioconda
   - conda-forge
@@ -166,23 +166,6 @@ dependencies:
   - zipp=3.21.0=pyhd8ed1ab_1
   - zstandard=0.23.0=py312h01d7ebd_2
   - zstd=1.5.7=h8210216_2
-  # R runtime and packages used by the workflow scripts.
-  - r-base>=4.4.0
-  - r-tidyverse=2.0.0
-  - r-argparse
-  - r-jsonlite
-  - r-desolve
-  - r-foreach
-  - r-doparallel
-  - r-broom
-  - r-patchwork
-  - r-colorspace
-  - r-ggnewscale
-  - r-openxlsx
-  - r-ggpubr
-  - r-ggpattern
-  - r-scales
   - pip:
       - python-graphviz==0.20.3
-  # Install this package after creating the env; it is not available as a conda package.
-  # R -q -e 'install.packages("funkyheatmap", repos="https://cloud.r-project.org")'
+prefix: /Users/liz/anaconda3/envs/snakemake
