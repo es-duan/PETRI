@@ -19,9 +19,12 @@ This project aims to explore the environmental conditions that select for vertic
 ## Snakemake pipeline usage
 The entire analysis pipeline (raw data -> figures) is executed using snakemake. The pipeline is as follows:
 ![DAG](.snakemake/PETRI_DAG.svg)
-To execute the pipeline:
+The pipeline can be run in any environment where snakemake is active using the following command:
 ```
-conda env create -f PETRI_env.yaml
-conda activate PETRI
 snakemake --cores 7 --use-conda
+```
+To create a snakemake environment with conda, use the following:
+```
+conda env create -f snakemake_env.yaml
+conda activate snakemake_env
 ```
