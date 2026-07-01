@@ -42,6 +42,10 @@ exp_point_size <- plot_points[["exp_point_size"]]
 sh_Anc <- plot_points[["sh_Anc"]]
 sh_Mut <- plot_points[["sh_Mut"]]
 
+## Common aesthetics ----
+anc_name <- "X"
+mut_name <- "Y"
+
 ## Retrieve ggplot theme ----
 source("src/ggplot_theme.R")
 
@@ -143,12 +147,11 @@ h1 <- ggplot() +
             mapping = aes(Phase_n, Frequency_mean, color = Phenotype, linetype = Data),
             linewidth = plot_lw) +
   geom_errorbar(data = HFC_f_plot,
-                mapping = aes(x = Phase_n, ymax = Frequency_mean + Frequency_se, ymin = Frequency_mean - Frequency_se,
-                              color = Phenotype),
-                width = 0.05) +
+                mapping = aes(x = Phase_n, ymax = Frequency_mean + Frequency_se, ymin = Frequency_mean - Frequency_se),
+                width = 0.05, color = "black") +
   geom_point(data = filter(HFC_f_plot, Data == "experiment"),
-             mapping = aes(Phase_n, Frequency_mean, color = Phenotype, shape = Phenotype),
-             size = exp_point_size) +
+             mapping = aes(Phase_n, Frequency_mean, shape = Phenotype),
+             size = exp_point_size, color = "black") +
   scale_y_continuous(limits = c(0.00001,1),
                      breaks=c(0, 0.0001, 0.01, 1),
                      labels=c(0,sapply(c(-4,-2),function(i){parse(text = sprintf("10^%d",i))}),1),
@@ -159,7 +162,13 @@ h1 <- ggplot() +
                      labels = axes_names,
                      limits = c(1, 4)) +
   scale_color_manual(values = c("Anc" = p_Anc,
-                                "Mut" = p_Mut)) +
+                                "Mut" = p_Mut),
+                     labels = c("Anc" = anc_name,
+                                "Mut" = mut_name)) +
+  scale_shape_manual(values = c("Anc" = sh_Anc,
+                                "Mut" = sh_Mut),
+                     labels = c("Anc" = anc_name,
+                                "Mut" = mut_name)) +
   scale_linetype_manual(values = c("simulation" = sim_l,
                                    "experiment" = exp_l)) +
   fig_aes +
@@ -190,12 +199,11 @@ l1 <- ggplot() +
             mapping = aes(Phase_n, Frequency_mean, color = Phenotype, linetype = Data),
             linewidth = plot_lw) +
   geom_errorbar(data = LFC_f_plot,
-                mapping = aes(x = Phase_n, ymax = Frequency_mean + Frequency_se, ymin = Frequency_mean - Frequency_se,
-                              color = Phenotype),
-                width = 0.05) +
+                mapping = aes(x = Phase_n, ymax = Frequency_mean + Frequency_se, ymin = Frequency_mean - Frequency_se),
+                width = 0.05, color = "black") +
   geom_point(data = filter(LFC_f_plot, Data == "experiment"),
-             mapping = aes(Phase_n, Frequency_mean, color = Phenotype, shape = Phenotype),
-             size = exp_point_size) +
+             mapping = aes(Phase_n, Frequency_mean, shape = Phenotype),
+             size = exp_point_size, color = "black") +
   scale_y_continuous(limits = c(0.00001,1),
                      breaks=c(0, 0.0001, 0.01, 1),
                      labels=c(0,sapply(c(-4,-2),function(i){parse(text = sprintf("10^%d",i))}),1),
@@ -206,7 +214,13 @@ l1 <- ggplot() +
                      labels = axes_names,
                      limits = c(1,4)) +
   scale_color_manual(values = c("Anc" = p_Anc,
-                                "Mut" = p_Mut)) +
+                                "Mut" = p_Mut),
+                     labels = c("Anc" = anc_name,
+                                "Mut" = mut_name)) +
+  scale_shape_manual(values = c("Anc" = sh_Anc,
+                                "Mut" = sh_Mut),
+                     labels = c("Anc" = anc_name,
+                                "Mut" = mut_name)) +
   scale_linetype_manual(values = c("simulation" = sim_l,
                                    "experiment" = exp_l)) +
   fig_aes +

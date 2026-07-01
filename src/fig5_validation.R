@@ -5,10 +5,10 @@ library(tidyverse)
 library(patchwork)
 
 # Read in figures ----
-HFC_sim <- readRDS("results/case_study_sims/HFC_S.pB10/HFC_S.pB10_frequency_plot.rds")
-LFC_sim <- readRDS("results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_frequency_plot.rds")
-HFC_v <- readRDS("results/experimental_validation/HFC/HFC_frequency_plot.rds")
-LFC_v <- readRDS("results/experimental_validation/LFC/LFC_frequency_plot.rds")
+# HFC_sim <- readRDS("results/case_study_sims/HFC_S.pB10/HFC_S.pB10_frequency_plot.rds")
+# LFC_sim <- readRDS("results/case_study_sims/LFC_S.pB10-A/LFC_S.pB10-A_frequency_plot.rds")
+# HFC_v <- readRDS("results/experimental_validation/HFC/HFC_frequency_plot.rds")
+# LFC_v <- readRDS("results/experimental_validation/LFC/LFC_frequency_plot.rds")
 
 # Condensed phases ----
 ## Read in plots ----
@@ -55,8 +55,8 @@ p2 <- LFC +
         legend.text = element_text(size = 8),
         legend.box.spacing = unit(0, "pt"),
         legend.spacing.y = unit(0, "pt")) +
-  guides(color = "none",
-         shape = "none")
+  guides(color = guide_legend(order = 1),
+         shape = guide_legend(order = 1))
 
 p3 <- anc_inv +
   labs(title = "X invades Y in HFC") +

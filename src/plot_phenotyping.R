@@ -25,7 +25,7 @@ p_par <- plot_colors[["p_par"]]
 
 ## Points ----
 plot_points <- jsonlite::fromJSON(args$points)
-point_size <- plot_points[["ph_point_size"]]
+ph_point_size <- plot_points[["ph_point_size"]]
 sh_Anc <- plot_points[["sh_Anc"]]
 sh_Mut <- plot_points[["sh_Mut"]]
 
@@ -65,7 +65,7 @@ p1 <- ggplot() +
   geom_point(data = phenotyping,
              mapping = aes(Conjugation_rate_mean, Growth_rate_mean, color = Genotype,
                            shape = Genotype),
-             size = point_size) +
+             size = ph_point_size) +
   scale_x_continuous(trans = "log10", 
                      name = "Conjugation rate",
                      limits = lim_conj,
@@ -105,9 +105,9 @@ c1 <- ggplot() +
   geom_segment(mapping = aes(x = a_x, xend = a_x, y = lim_growth[1], yend = lim_growth[2]),
                color = "black") +
   geom_point(data = phenotyping,
-             mapping = aes(Conjugation_rate_mean, Growth_rate_mean, color = Genotype,
+             mapping = aes(Conjugation_rate_mean, Growth_rate_mean,
                            shape = Genotype),
-             size = point_size) +
+             size = ph_point_size, color = "black") +
   scale_x_continuous(trans = "log10", 
                      name = "Conjugation rate",
                      limits = lim_conj,
@@ -115,8 +115,8 @@ c1 <- ggplot() +
   scale_y_continuous(name = "Growth Rate",
                      limits = lim_growth,
                      expand = c(0.001, 0.001)) + 
-  scale_color_manual(values = c("Anc" = p_Anc,
-                                "Mut" = p_Mut)) +
+  # scale_color_manual(values = c("Anc" = p_Anc,
+  #                               "Mut" = p_Mut)) +
   scale_shape_manual(values = c("Anc" = sh_Anc,
                                 "Mut" = sh_Mut)) +
   theme_void() +
@@ -145,9 +145,9 @@ c2 <- ggplot() +
   geom_segment(mapping = aes(x = m_x, xend = m_x, y = lim_growth[1], yend = lim_growth[2]),
                color = "black") +
   geom_point(data = phenotyping,
-             mapping = aes(Conjugation_rate_mean, Growth_rate_mean, color = Genotype,
+             mapping = aes(Conjugation_rate_mean, Growth_rate_mean,
                            shape = Genotype),
-             size = point_size) +
+             size = ph_point_size, color = "black") +
   scale_x_continuous(trans = "log10", 
                      name = "Conjugation rate",
                      limits = lim_conj,
@@ -155,8 +155,8 @@ c2 <- ggplot() +
   scale_y_continuous(name = "Growth Rate",
                      limits = lim_growth,
                      expand = c(0.001, 0.001)) + 
-  scale_color_manual(values = c("Anc" = p_Anc,
-                                "Mut" = p_Mut)) +
+  # scale_color_manual(values = c("Anc" = p_Anc,
+  #                               "Mut" = p_Mut)) +
   scale_shape_manual(values = c("Anc" = sh_Anc,
                                 "Mut" = sh_Mut)) +
   theme_void() +
