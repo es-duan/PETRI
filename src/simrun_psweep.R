@@ -644,8 +644,10 @@ sweep_out <- foreach(i = 1:nrow(sweep_param),
     mutate(end_time = tail(results,1)$time,
            A1 = tail(results,1)$A1,
            M1 = tail(results,1)$M1,
+           MF = tail(results,1)$F1,
            A2 = tail(results,1)$A2,
-           M2 = tail(results,1)$M2)
+           M2 = tail(results,1)$M2,
+           F2 = tail(results,1)$F2,)
   sw
   #sweep_out <- rbind(sweep_out,sw)
   
