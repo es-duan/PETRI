@@ -1,0 +1,22 @@
+________________________________________________________________________________
+Miniforge (conda) has been loaded.
+
+- Please create and work in your own conda environments:
+    conda create -n myenv python=3.12
+    conda activate myenv
+
+- To customize environment or package locations, edit your ~/.condarc:
+    envs_dirs:
+      - /path/to/your/envs
+    pkgs_dirs:
+      - /path/to/your/pkgs
+
+  For more information, see:
+    https://docs.conda.io/projects/conda/en/latest/configuration.html
+
+- If your personal Conda stops working after unloading this module, try:
+    source ~/.bashrc
+________________________________________________________________________________
+
+Injecting conda environment /mmfs1/gscratch/biology/kerrlab/ESD/PETRI/PETRI_config.yaml.
+[2026-07-02T17:17:16.660] error: *** JOB 36821954 ON g3119 CANCELLED AT 2026-07-02T17:17:16 DUE to SIGNAL Terminated ***

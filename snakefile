@@ -67,7 +67,7 @@ rule all:
     # expand("results/parameter_sweeps/{psweep}/{psweep}_inv_change_strain_plot.pdf", psweep = PSWEEPS),
     # expand("results/parameter_sweeps/{psweep_crop}/{psweep_crop}_inv_change_plot2_crop.rds", psweep_crop = PSWEEPS_crop),
     "results/phenotyping/growth_rate/OD/growthrate_av.pdf",
-    "figures/panels/fig1_axes.pdf",
+#    "figures/panels/fig1_axes.pdf",
     "figures/panels/fig2bc_criterion.pdf",
     "figures/panels/fig3b_phenotyping.pdf",
     "figures/fig4_DG_invasion.pdf",
