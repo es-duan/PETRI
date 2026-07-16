@@ -6,7 +6,7 @@ conda: "PETRI_config.yaml"
 import json
 
 ## Specify treatments
-TREATMENTS = ["DG_S.pB10", "HFC_S.pB10", "LFC_S.pB10-A", "HFC_S.pB10_full", "LFC_S.pB10-A_full"]
+TREATMENTS = ["DG_S.pB10", "HFC_S.pB10", "LFC_S.pB10-A", "HFC_S.pB10_full", "LFC_S.pB10-A_full", "Dim90_copA"]
 PSWEEPS = ["pHFC_S.pB10","pLFC_S.pB10",
            "pDim90_E.R1",
            "pHFC_S.pB10-A","pLFC_S.pB10-A",
@@ -66,8 +66,9 @@ rule all:
   input:
     # expand("results/parameter_sweeps/{psweep}/{psweep}_inv_change_strain_plot.pdf", psweep = PSWEEPS),
     # expand("results/parameter_sweeps/{psweep_crop}/{psweep_crop}_inv_change_plot2_crop.rds", psweep_crop = PSWEEPS_crop),
+    # expand("results/case_study_sims/{treatment}/{treatment}_density_plot.pdf", treatment = TREATMENTS),
     "results/phenotyping/growth_rate/OD/growthrate_av.pdf",
-#    "figures/panels/fig1_axes.pdf",
+    "figures/panels/fig1_axes.pdf",
     "figures/panels/fig2bc_criterion.pdf",
     "figures/panels/fig3b_phenotyping.pdf",
     "figures/fig4_DG_invasion.pdf",
@@ -76,7 +77,8 @@ rule all:
     "figures/fig7_Dim_psweep.pdf",
     "figures/figS1_full_invasion.pdf",
     "figures/figS2_psweep_ns.pdf",
-    "figures/figS3_DGsweeps.pdf"
+    "figures/figS3_DGsweeps.pdf",
+    "figures/figS4_copA_sim.pdf"
 
 # Download cran packages
 rule setup_r_environment:
@@ -648,5 +650,25 @@ rule figS3:
     Rscript src/figS3_DG_stochasticity.R \
       --colors '{params.plot_colors}'\
       --points '{params.plot_points}'\
+      --lines '{params.plot_lines}'
+    """
+
+# Define rule for generating fig S4: Dim copA invasion simulation
+rule figS4:
+  input:
+    "src/figS4_copA.R",
+    "results/case_study_sims/Dim90_copA/Dim90_copA_density_plot_df.csv",
+    "results/case_study_sims/Dim90_copA/Dim90_copA_frequency_plot_df.csv",
+    "results/case_study_sims/Dim90_copA/Dim90_copA_phases_plot_df.csv",
+    "src/ggplot_theme.R"
+  output:
+    "figures/figS4_copA_sim.pdf"
+  params:
+    plot_colors = json.dumps(plot_colors),
+    plot_lines = json.dumps(plot_lines)
+  shell:
+    """
+    Rscript src/figS4_copA.R \
+      --colors '{params.plot_colors}'\
       --lines '{params.plot_lines}'
     """

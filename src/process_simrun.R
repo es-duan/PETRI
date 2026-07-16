@@ -127,9 +127,16 @@ assign_mut <- function(Cycle, Phase, Type, M1, M2){
   return(mut_out)
 }
 
-sim_phases2 <- sim_phases %>%
-  mutate(Anc = assign_anc(Cycle, Phase, Type, A1, A2)) %>%
-  mutate(Mut = assign_mut(Cycle, Phase, Type, M1, M2))
+# Do not change host identities for protocols without a host switch
+if(str_detect(treatment, "Dim") == FALSE){
+    sim_phases2 <- sim_phases %>%
+      mutate(Anc = assign_anc(Cycle, Phase, Type, A1, A2)) %>%
+      mutate(Mut = assign_mut(Cycle, Phase, Type, M1, M2))
+  } else{
+    sim_phases2 <- sim_phases %>%
+      mutate(Anc = A1 + A2) %>%
+      mutate(Mut = M1 + M2)
+  }
 
 sim_phases3 <- sim_phases2 %>%
   mutate(A_M = Anc/Mut,

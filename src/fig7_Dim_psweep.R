@@ -57,29 +57,46 @@ psi_ref <- ph_plot$Growth_rate[ph_plot$Strain == "E.R1"]
 max_gamma <- gamma_ref + 4
 min_gamma <- gamma_ref - 4
 
-max_psi <- psi_ref + 0.4
-min_psi <- psi_ref - 0.4
+max_psi <- psi_ref + 0.42
+min_psi <- psi_ref - 0.42
 
 ## Filter plots ----
+# Initial densities
+A_0 <- 1e7 * (1 - 0.9)
+M_0 <- 1e5 * (1 - 0.9)
+F_0 <- 1e7 * 0.9
+
 sweep_plot2 <- sweep_plot %>% 
   filter(psi_M > min_psi & psi_M < max_psi) %>%
-  filter(log_gamma_M > min_gamma & log_gamma_M < max_gamma)
+  filter(log_gamma_M > min_gamma & log_gamma_M < max_gamma) %>%
+  # Recalculate frequencies
+  # mutate(Mut_freq0 = M_0 / (A_0 + M_0 + F_0),
+  #        Anc_freq0 = A_0 / (A_0 + M_0 + F_0),
+  #        F_freq0 = F_0 / (A_0 + M_0 + F_0)) %>%
+  mutate(Mut_freq0 = M_0 / (A_0 + M_0),
+         Anc_freq0 = A_0 / (A_0 + M_0)) %>%
+  mutate(final_dens = A1 + M1 + F1 + A2 + M2 + F2,
+         Mut_freq_a = (M1 + M2)/final_dens,
+         Anc_freq_a = (A1 + A2)/final_dens) %>%
+  mutate(Mut_freq_change_a = Mut_freq_a - Mut_freq0) %>%
+  mutate(log_Mut_freq0_a = log10(Mut_freq0),
+         log_Mut_freq_change_a = log10(Mut_freq_a) - log_Mut_freq0)
 
 # Re-calculate relative scaling
-log_max_change <- max(sweep_plot2$log_Mut_freq_change)
-log_min_change <- min(sweep_plot2$log_Mut_freq_change)
+log_max_change <- max(sweep_plot2$log_Mut_freq_change_a)
+log_min_change <- min(sweep_plot2$log_Mut_freq_change_a)
 
 sweep_plot_f <- sweep_plot2 %>%
-  mutate(log_Mut_freq_change2 = ifelse(log_Mut_freq_change > 0, log_Mut_freq_change/log_max_change,
-                                       -log_Mut_freq_change/log_min_change))
+  mutate(log_Mut_freq_change2_a = ifelse(log_Mut_freq_change_a > 0, log_Mut_freq_change_a/log_max_change,
+                                       -log_Mut_freq_change_a/log_min_change))
 
 ## Identify points for invasion boundary line ----
 sweep0_d <- sweep_plot_f %>%
   filter(Mut_freq_inv == "Decrease") %>%
-  slice_min(order_by = abs(log_Mut_freq_change2), n = 100)
+  slice_min(order_by = abs(log_Mut_freq_change2_a), n = 100)
 sweep0_i <- sweep_plot_f %>%
   filter(Mut_freq_inv == "Increase") %>%
-  slice_min(order_by = abs(log_Mut_freq_change2), n = 100)
+  slice_min(order_by = abs(log_Mut_freq_change2_a), n = 100)
 sweep0 <- rbind(sweep0_d, sweep0_i)
 
 
@@ -94,6 +111,9 @@ plot <- ggplot() +
   geom_contour(data = sweep_plot_f,
                mapping = aes(x = log_gamma_M, psi_M, z = log_Mut_freq_change2),
                breaks = 0, color = p_invline, linewidth = inv_width) +
+  geom_contour(data = sweep_plot_f,
+               mapping = aes(x = log_gamma_M, psi_M, z = log_Mut_freq_change2_a),
+               breaks = 0, color = p_invline, linewidth = inv_width, linetype = "dashed") +
   labs(x = expression("log10(Conjugation Rate)"),
        y = expression("Growth Rate")) +
   scale_x_continuous(expand = c(0.025, 0.025),

@@ -95,7 +95,7 @@ sweep0 <- rbind(sweep0_d, sweep0_i)
 i2 <- ggplot() +
   geom_raster(data = sweep_plot_f,
               mapping = aes(log_gamma_M, psi_M, fill = log_Mut_freq_change2)) +
-  scale_fill_gradient2("Relative\nfrequency\nchange",
+  scale_fill_gradient2("Normalized\nfrequency\nchange",
                        low=p_highD, mid = p_mid, high=p_highI, midpoint = log(1)) +
   geom_hline(yintercept = psi_ref, color = p_axes, linewidth = 1) +
   geom_vline(xintercept = log10(gamma_ref), color = p_axes, linewidth = 1) +

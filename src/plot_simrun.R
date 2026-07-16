@@ -133,12 +133,12 @@ saveRDS(p1, paste0(treatment_folder, "/", treatment, "_density_plot.rds"))
 
 # Plot frequencies over time ----
 # Use different scales for the plots
-if(min(sim_freq$Frequency) < 1e-5){
+if(min(sim_freq$Frequency, na.rm = TRUE) < 1e-5){
   f_limits <- c(1e-7, 1)
   f_breaks <- c(1e-6, 1e-4, 1e-2, 1)
   f_labels <- c(-6, -4, -2)
   
-} else if(min(sim_freq$Frequency) > 1e-5){
+} else if(min(sim_freq$Frequency, na.rm = TRUE) > 1e-5){
   f_limits <- c(1e-5, 1)
   f_breaks <- c(1e-4, 1e-2, 1)
   f_labels <- c(-4, -2)

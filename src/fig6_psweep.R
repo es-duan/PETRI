@@ -145,7 +145,7 @@ pD <- mut_HFC +
         axis.ticks.y = element_blank(),
         axis.title.x = element_blank(),
         legend.position = "inside",
-        legend.position.inside = c(0.852, 0.73),
+        legend.position.inside = c(0.835, 0.73),
         legend.background = element_rect(fill = "white", color = "gray30",
                                          linewidth = 0.3),
         legend.title = element_text(size = 8)) +
