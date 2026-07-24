@@ -113,7 +113,7 @@ plot <- ggplot() +
                breaks = 0, color = p_invline, linewidth = inv_width) +
   geom_contour(data = sweep_plot_f,
                mapping = aes(x = log_gamma_M, psi_M, z = log_Mut_freq_change2_a),
-               breaks = 0, color = p_invline, linewidth = inv_width, linetype = "dashed") +
+               breaks = 0, color = "gray40", linewidth = inv_width, linetype = "dashed") +
   labs(x = expression("log10(Conjugation Rate)"),
        y = expression("Growth Rate")) +
   scale_x_continuous(expand = c(0.025, 0.025),

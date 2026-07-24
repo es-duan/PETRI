@@ -657,6 +657,7 @@ rule figS3:
 rule figS4:
   input:
     "src/figS4_copA.R",
+    "results/case_study_sims/Dim90_copA/Dim90_copA_density_plot.rds",
     "results/case_study_sims/Dim90_copA/Dim90_copA_density_plot_df.csv",
     "results/case_study_sims/Dim90_copA/Dim90_copA_frequency_plot_df.csv",
     "results/case_study_sims/Dim90_copA/Dim90_copA_phases_plot_df.csv",

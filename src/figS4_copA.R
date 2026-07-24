@@ -53,8 +53,8 @@ pA <- ggplot() +
                           color = Genotype_plot, linetype = Host,
                           group = interaction(Cycle, Genotype_plot, Host)),
             linewidth = plot_lw) +
-  scale_color_manual(values = c("Ancestor" = p_Anc,
-                                "Mutant" = p_Mut,
+  scale_color_manual(values = c("Ancestor" = p_Mut,
+                                "Mutant" = p_Anc,
                                 "Plasmid-free" = p_F),
                      breaks = c("Ancestor", "Mutant", "Plasmid-free"),
                      labels = c("R1", "copA", "Plasmid-free")) +
@@ -97,8 +97,8 @@ pB <- ggplot() +
   geom_line(data = sim_freq2,
             mapping = aes(Time, Frequency, color = Genotype),
             linewidth = plot_lw) +
-  scale_color_manual(values = c("Ancestor" = p_Anc,
-                                "Mutant" = p_Mut)) +
+  scale_color_manual(values = c("Ancestor" = p_Mut,
+                                "Mutant" = p_Anc)) +
   scale_y_continuous(limits = f_limits,
                      breaks = f_breaks,
                      labels = c(sapply(f_labels,function(i){parse(text = sprintf("10^%d",i))}),1),
