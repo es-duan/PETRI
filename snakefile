@@ -8,7 +8,7 @@ import json
 ## Specify treatments
 TREATMENTS = ["DG_S.pB10", "HFC_S.pB10", "LFC_S.pB10-A", "HFC_S.pB10_full", "LFC_S.pB10-A_full", "Dim90_copA"]
 PSWEEPS = ["pHFC_S.pB10","pLFC_S.pB10",
-           "pDim90_E.R1",
+           "pDim68_E.R1","pDim90_E.R1",
            "pHFC_S.pB10-A","pLFC_S.pB10-A",
            "pDG_S.pB10","pDGs_S.pB10"]
 PSWEEPS_crop = ["pHFC_S.pB10","pLFC_S.pB10","pHFC_S.pB10-A","pLFC_S.pB10-A"]
@@ -64,7 +64,7 @@ plot_points = {
 
 rule all:
   input:
-    # expand("results/parameter_sweeps/{psweep}/{psweep}_inv_change_strain_plot.pdf", psweep = PSWEEPS),
+    expand("results/parameter_sweeps/{psweep}/{psweep}_inv_change_strain_plot.pdf", psweep = PSWEEPS),
     # expand("results/parameter_sweeps/{psweep_crop}/{psweep_crop}_inv_change_plot2_crop.rds", psweep_crop = PSWEEPS_crop),
     # expand("results/case_study_sims/{treatment}/{treatment}_density_plot.pdf", treatment = TREATMENTS),
     "results/phenotyping/growth_rate/OD/growthrate_av.pdf",
