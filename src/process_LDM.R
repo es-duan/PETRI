@@ -32,6 +32,15 @@ sh_F <- plot_points[["sh_F"]]
 ## Retrieve ggplot theme ----
 source("src/ggplot_theme.R")
 
+## Create folder to store results ----
+results_folder <- "results/phenotyping/LDM_conjugation"
+
+if (!dir.exists(results_folder)) {
+  dir.create(results_folder, recursive = TRUE)
+} else{
+  print(paste("Results folder exists."))
+}
+
 # Read in data ----
 density <- read.xlsx("input_data/experimental_data/2026-02-18_compiled_LDM_plating.xlsx",
                      sheet = "2026-02-18_compiled_LDM_plating", detectDates = TRUE)
@@ -94,28 +103,29 @@ LDM_av <- LDM %>%
   mutate(Conjugation_rate_se = Conjugation_rate_sd/sqrt(n))
 
 ## Plot final conjugation rates ----
-p2 <- ggplot(data = LDM_av,
-       mapping = aes(Strain, Conjugation_rate_mean, color = Strain, shape = Strain)) +
-  geom_line() +
+p2 <- ggplot() +
+  geom_point(data = LDM, mapping = aes(Strain, LDM, color = Strain, shape = Strain),
+             size = exp_point_size + 0.5, alpha = 0.75) +
   geom_errorbar(data = LDM_av,
-                mapping = aes(ymin = Conjugation_rate_mean - Conjugation_rate_se, ymax = Conjugation_rate_mean + Conjugation_rate_se),
-                width = 0.1) +
-  geom_point(size = exp_point_size) +
+                mapping = aes(x = Strain, ymin = Conjugation_rate_mean - Conjugation_rate_se, ymax = Conjugation_rate_mean + Conjugation_rate_se),
+                width = 0.1, color = "black") +
+  geom_point(data = LDM_av, mapping = aes(Strain, Conjugation_rate_mean, shape = Strain),
+             size = exp_point_size, color = "black") +
   scale_color_manual(values = c("F" = p_F,
                                 "Anc" = p_Anc,
                                 "Mut" = p_Mut)) +
   scale_shape_manual(values = c("F" = sh_F,
                                 "Anc" = sh_Anc,
                                 "Mut" = sh_Mut)) +
-  scale_y_continuous(trans = "log10") +
+  scale_y_continuous(trans = "log10", name = "Conjugation Rate") +
   fig_aes
 
 ggsave("results/phenotyping/LDM_conjugation/LDM_conj_rates.pdf",
        p2, width = 4, height = 3, units = "in")
 
 # Statistical analysis ----
-conj_tt <- t.test(log10(filter(LDM, Strain == "Anc")$LDM),
-                  log10(filter(LDM, Strain == "Mut")$LDM), 
+conj_tt <- t.test(log10(filter(LDM, Strain == "Mut")$LDM),
+                  log10(filter(LDM, Strain == "Anc")$LDM), 
                   alternative = "two.sided",
                   var.equal = FALSE,
                   paired = TRUE,

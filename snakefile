@@ -12,6 +12,7 @@ PSWEEPS = ["pHFC_S.pB10","pLFC_S.pB10",
            "pHFC_S.pB10-A","pLFC_S.pB10-A",
            "pDG_S.pB10","pDGs_S.pB10"]
 PSWEEPS_crop = ["pHFC_S.pB10","pLFC_S.pB10","pHFC_S.pB10-A","pLFC_S.pB10-A"]
+DIM_SWEEP = ["0", "10", "68", "90"]
 
 ## Specify global variables
 ### Colors
@@ -68,7 +69,7 @@ rule all:
     # expand("results/parameter_sweeps/{psweep_crop}/{psweep_crop}_inv_change_plot2_crop.rds", psweep_crop = PSWEEPS_crop),
     # expand("results/case_study_sims/{treatment}/{treatment}_density_plot.pdf", treatment = TREATMENTS),
     "results/phenotyping/growth_rate/OD/growthrate_av.pdf",
-#    "figures/panels/fig1_axes.pdf",
+    "figures/panels/fig1_axes.pdf",
     "figures/panels/fig2bc_criterion.pdf",
     "figures/panels/fig3b_phenotyping.pdf",
     "figures/fig4_DG_invasion.pdf",
@@ -78,7 +79,8 @@ rule all:
     "figures/figS1_full_invasion.pdf",
     "figures/figS2_psweep_ns.pdf",
     "figures/figS3_DGsweeps.pdf",
-    "figures/figS4_copA_sim.pdf"
+    "figures/figS4_copA_sim.pdf",
+    "figures/fig_Dim_psweeps.pdf"
 
 # Download cran packages
 rule setup_r_environment:
@@ -439,6 +441,28 @@ rule plot_phenotyping:
       --points '{params.plot_points}'
     """
 
+# Define rule for adding invasion/dilution borders on Dim simulation data
+rule plot_Dim_sweep:
+  input:
+    "src/plot_Dim_psweep.R",
+    "input_data/strain_phenotypes.csv",
+    "results/parameter_sweeps/pDim{immigration}_E.R1/pDim{immigration}_E.R1_inv_change_plot.rds",
+    "src/ggplot_theme.R"
+  output:
+    "figures/panels/Dim_psweep{immigration}.rds"
+  params:
+    plot_colors = json.dumps(plot_colors),
+    plot_points = json.dumps(plot_points),
+    plot_lines = json.dumps(plot_lines)
+  shell:
+    """
+    Rscript src/plot_Dim_psweep.R \
+      --immigration {wildcards.immigration} \
+      --colors '{params.plot_colors}'\
+      --points '{params.plot_points}'\
+      --lines '{params.plot_lines}'
+    """
+    
 # FIGURE SCRIPTS 
 # Define rule for generating fig 1a: phenotypic axes
 rule fig1a:
@@ -574,24 +598,16 @@ rule fig6:
     """
 
 # Define rule for generating fig 7: Dimitriu et al. parameter sweeps
+# Edits to also generate other sweep figures
 rule fig7:
   input:
     "src/fig7_Dim_psweep.R",
-    "input_data/strain_phenotypes.csv",
-    "results/parameter_sweeps/pDim90_E.R1/pDim90_E.R1_inv_change_plot.rds",
-    "src/ggplot_theme.R"
+    "figures/panels/Dim_psweep90.rds"
   output:
     "figures/fig7_Dim_psweep.pdf"
-  params:
-    plot_colors = json.dumps(plot_colors),
-    plot_points = json.dumps(plot_points),
-    plot_lines = json.dumps(plot_lines)
   shell:
     """
-    Rscript src/fig7_Dim_psweep.R \
-      --colors '{params.plot_colors}'\
-      --points '{params.plot_points}'\
-      --lines '{params.plot_lines}'
+    Rscript src/fig7_Dim_psweep.R 
     """
 
 # Define rule for generating fig S1: full invasion sims
@@ -672,4 +688,19 @@ rule figS4:
     Rscript src/figS4_copA.R \
       --colors '{params.plot_colors}'\
       --lines '{params.plot_lines}'
+    """
+
+# Define rule for generating review fig: Dim psweeps across immigration ratios
+rule fig_Dim:
+  input:
+    "src/fig_Dim_psweeps.R",
+    "figures/panels/Dim_psweep0.rds",
+    "figures/panels/Dim_psweep10.rds",
+    "figures/panels/Dim_psweep68.rds",
+    "figures/panels/Dim_psweep90.rds"
+  output:
+    "figures/fig_Dim_psweeps.pdf"
+  shell:
+    """
+    Rscript src/fig_Dim_psweeps.R 
     """

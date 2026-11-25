@@ -75,9 +75,9 @@ growth <- plating2 %>%
 ## Growth rate plot ----
 p2 <- ggplot(data = growth,
              mapping = aes(Strain, growth_rate, color = Strain, shape = Strain)) +
-  stat_summary(fun.data="mean_se",geom="errorbar",width=0.2) +
-  stat_summary(fun = "mean", geom = "line") +
-  stat_summary(fun = "mean", geom = "point", shape = exp_point_size) +
+  geom_point(size = exp_point_size + 0.5, alpha = 0.75) +
+  stat_summary(fun.data="mean_se",geom="errorbar",width=0.2, color = "black") +
+  stat_summary(fun = "mean", geom = "point", size = exp_point_size, color = "black") +
   scale_color_manual(values = c("F" = p_F,
                                 "Anc" = p_Anc,
                                 "Mut" = p_Mut,
@@ -101,7 +101,7 @@ gr_out <- growth %>%
 write_csv(gr_out, paste(output_dir, "growthrate0-4_av.csv", sep = "/"))
 
 ## Statistics ----
-gr_tt <- t.test(filter(growth, Strain == "Anc")$growth_rate, filter(growth, Strain == "Mut")$growth_rate, 
+gr_tt <- t.test(filter(growth, Strain == "Mut")$growth_rate, filter(growth, Strain == "Anc")$growth_rate, 
                 alternative = "two.sided",
                 paired = TRUE,
                 var.equal = FALSE,

@@ -1,0 +1,2 @@
+estimate,statistic,p.value,parameter,conf.low,conf.high,method,alternative
+1.3923839185136109,47.33619954832278,2.229937134580136e-4,2,1.3064931836601363,Inf,Paired t-test,greater

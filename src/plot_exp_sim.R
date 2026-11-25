@@ -8,7 +8,6 @@ library(jsonlite)
 
 # Set arguments parser inputs ----
 parser <- ArgumentParser()
-parser$add_argument("-t","--treatment", type = "character", help = "Specify Treatment ID")
 parser$add_argument("-c","--colors", help = "JSON string of plot colors")
 parser$add_argument("-l","--lines", help = "JSON string of plot lines")
 parser$add_argument("-o","--points", help = "JSON string of point aesthetics")
@@ -54,7 +53,9 @@ axes_names <- c("Growth", "Conjugation", "Transconjugant\nselection")
 
 # Read in data ----
 ## Read files ----
+HFC_f <- read_csv("results/experimental_validation/HFC/HFC_frequency_processed.csv")
 HFC_f_av <- read_csv("results/experimental_validation/HFC/HFC_frequency_processed_av.csv")
+LFC_f <- read_csv("results/experimental_validation/LFC/LFC_frequency_processed.csv")
 LFC_f_av <- read_csv("results/experimental_validation/LFC/LFC_frequency_processed_av.csv")
 
 HFC_tt <- read_csv("results/experimental_validation/HFC/HFC_ttest.csv")
@@ -90,6 +91,13 @@ HFC_f_plot <- HFC_f_av %>%
                              Phase == "tselect" ~ 4)) %>%
   mutate(Phenotype = factor(Phenotype, levels = ph_levels))
 
+HFC_f_plot2 <- HFC_f %>%
+  mutate(Phase_n = case_when(Phase == "growth" ~ 1,
+                             Phase == "conj" & Time == 0 ~ 2,
+                             Phase == "conj" & Time == 5 ~ 3,
+                             Phase == "tselect" ~ 4)) %>%
+  mutate(Phenotype = factor(Phenotype, levels = ph_levels))
+
 hfc_s <- HFC_f_plot$Frequency_mean[HFC_f_plot$Time == 0 & HFC_f_plot$Phenotype == "Anc"][1]
 hfc_e <- HFC_f_plot$Frequency_mean[HFC_f_plot$Time == 29 & HFC_f_plot$Phenotype == "Anc"][1]
 
@@ -108,6 +116,13 @@ LFC_f_plot <- LFC_f_av %>%
   filter(Phase != "growth" | Phase == "growth" & Time %in% c(0, 168)) %>%
   mutate(Data = "experiment") %>%
   bind_rows(LFC_f_sim2) %>%
+  mutate(Phase_n = case_when(Phase == "growth" & Time == 0 ~ 1,
+                             Phase == "growth" & Time == 168 ~ 2,
+                             Phase == "conj" ~ 3,
+                             Phase == "tselect" ~ 4)) %>%
+  mutate(Phenotype = factor(Phenotype, levels = ph_levels))
+
+LFC_f_plot2 <- LFC_f %>%
   mutate(Phase_n = case_when(Phase == "growth" & Time == 0 ~ 1,
                              Phase == "growth" & Time == 168 ~ 2,
                              Phase == "conj" ~ 3,
@@ -143,6 +158,9 @@ h1 <- ggplot() +
   # annotate("text", label = paste0("p = ", round(HFC_tt$p.value, 2)),
   #          x = 3, hfc_s - 0.001,
   #          color = "white") +
+  geom_point(data = HFC_f_plot2,
+             mapping = aes(Phase_n, Frequency, shape = Phenotype, color = Phenotype),
+             size = exp_point_size + 0.5, alpha = 0.75) +
   geom_line(data = HFC_f_plot,
             mapping = aes(Phase_n, Frequency_mean, color = Phenotype, linetype = Data),
             linewidth = plot_lw) +
@@ -195,6 +213,9 @@ l1 <- ggplot() +
   # annotate("text", label = "p < 0.01",
   #          x = 3, hfc_s - 0.001,
   #          color = "white") +
+  geom_point(data = LFC_f_plot2,
+             mapping = aes(Phase_n, Frequency, shape = Phenotype, color = Phenotype),
+             size = exp_point_size + 0.5, alpha = 0.75) +
   geom_line(data = LFC_f_plot,
             mapping = aes(Phase_n, Frequency_mean, color = Phenotype, linetype = Data),
             linewidth = plot_lw) +

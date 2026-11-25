@@ -45,11 +45,13 @@ source("src/ggplot_theme.R")
 ## VGT favoring parameters ----
 psiA_v <- 1
 sigma_v <- 0.05
-delta <- 0.2
+delta <- 0.5
 gammaA_v <- 0.01
-alphaN_v <- 0.01
+#alphaN_v <- -0.01
+psiN_v <- 0.51
+deltaN_v <- 0.5
 
-n_eq_v <- (psiA_v*sigma_v)/(psiA_v - delta + gammaA_v + alphaN_v)
+n_eq_v <- (psiA_v*sigma_v)/(psiA_v - delta + gammaA_v - psiN_v + deltaN_v)
 slope_v <- -(n_eq_v/(1 - sigma_v))
 
 ## HGT favoring parameters ----
@@ -57,9 +59,11 @@ psiA_h <- 1
 sigma_h <- 0.45
 delta <- 0.5
 gammaA_h <- 0.01
-alphaN_h <- 0.001
+#alphaN_h <- -0.01
+psiN_h <- 0.51
+deltaN_h <- 0.5
 
-n_eq_h <- (psiA_h*sigma_h)/(psiA_h - delta + gammaA_h + alphaN_h)
+n_eq_h <- (psiA_h*sigma_h)/(psiA_h - delta + gammaA_h - psiN_h + deltaN_h)
 slope_h <- -(n_eq_h/(1 - sigma_h))
 
 # Create data frame for plotting ----
